@@ -1,14 +1,14 @@
 package com.example.android.mmmrkn.infra.api;
 
-import io.reactivex.Observable;
-import retrofit2.Response;
+
+import io.reactivex.Completable;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.POST;
 
 public interface LoginService {
-    @POST("schools/login")
+    @POST("login")
     @FormUrlEncoded
-    Observable<Response<Void>> postTeacherLogin(@Field("SchoolId")String SchoolId,
-                                                @Field("pass")String pass);
+    Completable postTeacherLogin( @Field("userId")String SchoolId,
+                                  @Field("password")String pass);
 }

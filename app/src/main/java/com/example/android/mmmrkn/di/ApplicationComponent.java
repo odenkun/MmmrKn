@@ -1,4 +1,4 @@
-package com.example.android.mmmrkn.api;
+package com.example.android.mmmrkn.di;
 
 import javax.inject.Singleton;
 
