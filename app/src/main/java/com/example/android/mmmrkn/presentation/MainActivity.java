@@ -26,25 +26,29 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Con
 
         //全ての親である、アプリケーションコンポーネントを持ってくる
         ApplicationComponent appComponent = ((App)getApplication()).getComponent();
+
         //親コンポーネントから、このアクティビティ専用のコンポーネントを取得する
         MainComponent mainComponent = appComponent.plus(new MainModule(this));
+
         //このクラスのメンバ変数に、適切なインスタンスを代入させる
+        //今回はMainPresenterが自動で生成され、それがpresenterに代入される
+        //Activityはコンストラクタをオーバーライドできないので、MainPresenterとは方法が異なる
         mainComponent.inject(this);
 
-        findViewById(R.id.textView).setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        ((TextView)view).setText("これが古い書き方、長い");
-                    }
-                }
-        );
         findViewById(R.id.thisistext).setOnClickListener( view -> {
             ((TextView)view).setText("これがラムダ式");
             presenter.login ();
         } );
     }
 
+    @Override
+    protected void onDestroy () {
+        //通信の結果を受け取らなくする
+        presenter.dispose ();
+        super.onDestroy ();
+    }
+
+    //Contractインタフェースに定義されている
     @Override
     public void onLogin ( boolean result ) {
 

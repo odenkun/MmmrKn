@@ -8,17 +8,16 @@ import dagger.Provides;
 
 @Module
 public class MainModule {
-    //Contractとは、MVPにおけるビューとプレゼンターの結合度を低くするためのもの
+    //MVPにおけるビューとプレゼンターの結合度を低くするためのインタフェース
     //ビューであるMainActivityが実装している
+    private MainPresenter.Contract contract;
 
-    MainPresenter.Contract contract;
-
-
+    //MainActivity内で new MainModule(this)のようにインスタンス化される
     public MainModule ( MainPresenter.Contract contract ) {
         this.contract = contract;
     }
 
-    //Daggerにおける、変数を提供するためのアノテーション
+    //Activityは保持してはいけないので@Singletonはつけない
     @Provides
     public MainPresenter.Contract provideContract() {
         return contract;

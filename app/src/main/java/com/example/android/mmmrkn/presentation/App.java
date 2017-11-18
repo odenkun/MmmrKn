@@ -14,8 +14,15 @@ public class App extends Application {
     public ApplicationComponent getComponent() {
         if (applicationComponent == null) {
 
+            //DaggerApplicationComponentは、このプロジェクトをビルドすると、
+            //ApplicationComponentインタフェースをもとにDaggerが自動生成してくれる。
             applicationComponent = DaggerApplicationComponent.builder()
+
+                    //なぜthisが必要かというと、ApplicationModule側で、
+                    //Retrofitなどのインスタンスを生成するために、Contextが必要なため。
                     .applicationModule(new ApplicationModule(this))
+
+                    //設定が終わったのでDaggerApplicationComponentインスタンスを生成する。
                     .build();
         }
         return applicationComponent;
