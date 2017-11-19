@@ -6,6 +6,8 @@ import com.example.android.mmmrkn.di.ApplicationComponent;
 import com.example.android.mmmrkn.di.ApplicationModule;
 import com.example.android.mmmrkn.di.DaggerApplicationComponent;
 
+import timber.log.Timber;
+
 //アプリの起動中ずっと生存するクラス
 //Applicationクラスを継承して作るので、カスタムアプリケーションクラスと呼ばれる
 public class App extends Application {
@@ -26,5 +28,11 @@ public class App extends Application {
                     .build();
         }
         return applicationComponent;
+    }
+
+    @Override
+    public void onCreate () {
+        super.onCreate ();
+        Timber.plant( new Timber.DebugTree());
     }
 }

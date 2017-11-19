@@ -3,18 +3,35 @@ package com.example.android.mmmrkn.di;
 import android.content.Context;
 
 import com.example.android.mmmrkn.infra.api.LoginService;
+import com.example.android.mmmrkn.infra.api.TeacherService;
+import com.example.android.mmmrkn.infra.entity.OrmaDatabase;
+import com.franmontiel.persistentcookiejar.ClearableCookieJar;
+import com.franmontiel.persistentcookiejar.PersistentCookieJar;
+import com.franmontiel.persistentcookiejar.cache.SetCookieCache;
+import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersistor;
+import com.github.gfx.android.orma.AccessThreadConstraint;
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+
+
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import okhttp3.Cookie;
+import okhttp3.CookieJar;
+import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
+import timber.log.Timber;
+
 
 @Module
 public class ApplicationModule {
@@ -41,14 +58,36 @@ public class ApplicationModule {
         return applicationContext;
     }
 
+    @Singleton
+    @Provides
+    public SharedPrefsCookiePersistor provideSharedPrefsCookiePersistor (Context context) {
+        return new SharedPrefsCookiePersistor (context);
+    }
+
+
     //@Singletonははじめに生成したものを使いまわすことを意味する
     @Singleton
     @Provides
-    public OkHttpClient provideOkHttpClient () {
-        //Retrofitが内部で用いる、HTTP通信のクライアント
-        //Interceptorを追加することで、CookieなどHTTPヘッダに関わる処理を追加したり、ログ出力を便利に出来たりする。
+    //Retrofitが内部で用いる、HTTP通信のクライアント
+    public OkHttpClient provideOkHttpClient (SharedPrefsCookiePersistor sharedPrefsCookiePersistor) {
+
+
+        ClearableCookieJar cookieJar = new PersistentCookieJar (new SetCookieCache (), sharedPrefsCookiePersistor);
+
+
+        //Interceptorを追加することで、HTTPヘッダに関わる処理を追加したり、ログ出力を便利に出来たりする
+        //詳しくは http://yuki312.blogspot.jp/2016/03/okhttp-interceptor.html
+        HttpLoggingInterceptor logger = new HttpLoggingInterceptor ( log -> Timber.tag ( "OkHttp" ).v ( log ));
+
+        //ヘッダとボディのログを取得
+        logger.setLevel ( HttpLoggingInterceptor.Level.HEADERS );
+        logger.setLevel ( HttpLoggingInterceptor.Level.BODY );
+
         return new OkHttpClient.Builder ()
+                .cookieJar(cookieJar)
+                .addInterceptor ( logger )
                 .build ();
+
     }
 
     @Singleton
@@ -83,5 +122,23 @@ public class ApplicationModule {
         return retrofit.create ( LoginService.class );
     }
 
+    //このcreate()にはリフレクションを使用するが、
+    //リフレクションは重いため、一度限りで済むようにシングルトンにする
+    @Singleton
+    @Provides
+    public TeacherService provideTeacherService ( Retrofit retrofit ) {
+        //Retrofitがリフレクションを用いて、インタフェースから実装クラスを自動生成する
+        return retrofit.create ( TeacherService.class );
+    }
+
+    @Singleton
+    @Provides
+    public OrmaDatabase provideOrma(Context context) {
+        return OrmaDatabase.builder(context)
+                .writeOnMainThread( AccessThreadConstraint.FATAL)
+                .readOnMainThread(AccessThreadConstraint.FATAL)
+                .trace(true)
+                .build();
+    }
 }
 

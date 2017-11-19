@@ -1,3 +1,17 @@
 <resources>
     <string name="app_name">MmmrKn</string>
+    <string name="auth_token_name">sessionInfo</string>
+
+
+    <string name="title_activity_login">Sign in</string>
+
+    <string name="prompt_id">ID</string>
+    <string name="prompt_password">パスワード</string>
+    <string name="action_login">ログイン</string>
+
+    <string name="error_invalid_user_id">無効なIDです</string>
+    <string name="error_invalid_password">無効なパスワードです</string>
+
+    <string name="error_incorrect">IDまたはパスワードが違います</string>
+
 </resources>
