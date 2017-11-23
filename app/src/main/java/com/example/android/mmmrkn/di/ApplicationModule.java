@@ -135,8 +135,8 @@ public class ApplicationModule {
     @Provides
     public OrmaDatabase provideOrma(Context context) {
         return OrmaDatabase.builder(context)
-                .writeOnMainThread( AccessThreadConstraint.FATAL)
-                .readOnMainThread(AccessThreadConstraint.FATAL)
+                .writeOnMainThread( AccessThreadConstraint.WARNING)
+                .readOnMainThread(AccessThreadConstraint.WARNING)
                 .trace(true)
                 .build();
     }

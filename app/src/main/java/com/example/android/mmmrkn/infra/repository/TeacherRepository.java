@@ -5,11 +5,8 @@ import com.example.android.mmmrkn.infra.entity.OrmaDatabase;
 import com.example.android.mmmrkn.infra.entity.Teacher;
 import com.github.gfx.android.orma.Inserter;
 import com.github.gfx.android.orma.annotation.OnConflict;
-
 import java.util.List;
-
 import javax.inject.Inject;
-
 import io.reactivex.Single;
 import timber.log.Timber;
 
