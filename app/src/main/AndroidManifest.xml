@@ -17,6 +17,8 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+        android:largeHeap="true"
+
         android:theme="@style/AppTheme">
         <activity
             android:name=".presentation.login.LoginActivity"
@@ -32,6 +34,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".presentation.teacher.SelectTeacherActivity">
+        </activity>
+        <activity android:name=".presentation.attend.AttendActivity">
         </activity>
     </application>
 

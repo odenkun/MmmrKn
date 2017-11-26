@@ -1,5 +1,7 @@
 package com.example.android.mmmrkn.di;
 
+import com.example.android.mmmrkn.di.attend.AttendComponent;
+import com.example.android.mmmrkn.di.attend.AttendModule;
 import com.example.android.mmmrkn.di.login.LoginComponent;
 import com.example.android.mmmrkn.di.login.LoginModule;
 import com.example.android.mmmrkn.di.start.StartComponent;
@@ -19,4 +21,5 @@ public interface ApplicationComponent {
     LoginComponent plus( LoginModule m);
     StartComponent plus();
     TeacherComponent plus( TeacherModule t);
+    AttendComponent plus( AttendModule a);
 }

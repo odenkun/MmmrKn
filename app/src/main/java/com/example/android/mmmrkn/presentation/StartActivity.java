@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.example.android.mmmrkn.R;
+import com.example.android.mmmrkn.presentation.attend.AttendActivity;
 import com.example.android.mmmrkn.presentation.login.LoginActivity;
 import com.example.android.mmmrkn.presentation.teacher.SelectTeacherActivity;
 import com.franmontiel.persistentcookiejar.PersistentCookieJar;
@@ -48,7 +49,7 @@ public class StartActivity extends AppCompatActivity {
             activityIntent = new Intent(this,SelectTeacherActivity.class);
         } else {
             //認証できていないのでログイン画面に遷移
-            activityIntent = new Intent(this, LoginActivity.class);
+            activityIntent = new Intent(this, AttendActivity.class);
         }
 
         //遷移を開始
