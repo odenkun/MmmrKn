@@ -2,6 +2,8 @@ package com.example.android.mmmrkn.presentation.teacher;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+
 import com.example.android.mmmrkn.R;
 import com.example.android.mmmrkn.di.teacher.TeacherModule;
 import com.example.android.mmmrkn.infra.entity.Teacher;
@@ -19,6 +21,7 @@ public class SelectTeacherActivity extends AppCompatActivity implements SelectTe
     protected void onCreate ( Bundle savedInstanceState ) {
         super.onCreate ( savedInstanceState );
         setContentView ( R.layout.activity_select_teacher );
+
         ( (App) getApplication () )
                 .getComponent ()
                 .plus ( new TeacherModule ( this ) )

@@ -1,25 +1,25 @@
-package com.example.android.mmmrkn.di.login;
+package com.example.android.mmmrkn.di.student_profile;
 
-import com.example.android.mmmrkn.presentation.login.LoginPresenter;
+import com.example.android.mmmrkn.presentation.studentprofile.StudentProfilePresenter;
 
 import dagger.Module;
 import dagger.Provides;
 
 
 @Module
-public class LoginModule {
+public class ProfileModule {
     //MVPにおけるビューとプレゼンターの結合度を低くするためのインタフェース
     //ビューであるLoginActivityが実装している
-    private LoginPresenter.Contract contract;
+    private StudentProfilePresenter.Contract contract;
 
     //LoginActivity内で new ProfileModule(this)のようにインスタンス化される
-    public LoginModule ( LoginPresenter.Contract contract ) {
+    public ProfileModule(StudentProfilePresenter.Contract contract ) {
         this.contract = contract;
     }
 
     //Activityは保持してはいけないので@Singletonはつけない
     @Provides
-    public LoginPresenter.Contract provideContract() {
+    public StudentProfilePresenter.Contract provideContract() {
         return contract;
     }
 }

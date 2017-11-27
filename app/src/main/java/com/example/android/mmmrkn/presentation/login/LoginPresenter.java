@@ -55,6 +55,7 @@ public class LoginPresenter extends Presenter {
      * @param id ログインに利用する保育園のID
      * @param pass ログインに利用する保育園のパスワード
      */
+
     void attemptLogin ( String id, String pass ) {
         //まだ終わっていないログイン通信があるとき中断
        if (this.hasDisposables ()) {

@@ -37,7 +37,7 @@ public class SelectTeacherPresenter extends Presenter {
                         .subscribeOn ( Schedulers.io () )
                         .observeOn ( AndroidSchedulers.mainThread () )
                         .subscribe ( teacherList -> {
-                            Timber.d ( "sensei toretayo" );
+                            Timber.d ( "先生とれたよ" );
                             contract.onTeachersFetched ( teacherList );
                         }, e -> {
                             Timber.e ( e );
