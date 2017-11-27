@@ -32,10 +32,11 @@ public class LoginActivity extends AppCompatActivity implements LoginPresenter.C
 
     @Inject
     LoginPresenter presenter;
-
     @Override
     protected void onCreate ( Bundle savedInstanceState ) {
+
         super.onCreate ( savedInstanceState );
+
         setContentView ( R.layout.activity_login );
 
         //全ての親である、アプリケーションコンポーネントを持ってくる
