@@ -1,31 +1,48 @@
 package com.example.android.mmmrkn.presentation.teacher;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import com.example.android.mmmrkn.R;
 import com.example.android.mmmrkn.di.teacher.TeacherModule;
 import com.example.android.mmmrkn.infra.entity.Teacher;
 import com.example.android.mmmrkn.presentation.App;
+import com.example.android.mmmrkn.presentation.mode_select.ModeActivity;
+
 import java.util.List;
 import javax.inject.Inject;
 import timber.log.Timber;
 
 public class SelectTeacherActivity extends AppCompatActivity implements SelectTeacherPresenter.Contract {
-
+    Intent intent;
     @Inject
     SelectTeacherPresenter presenter;
+
 
     @Override
     protected void onCreate ( Bundle savedInstanceState ) {
         super.onCreate ( savedInstanceState );
         setContentView ( R.layout.activity_select_teacher );
+
+        findViewById(R.id.button).setOnClickListener(view->
+                moveScreen()
+        );
         ( (App) getApplication () )
                 .getComponent ()
                 .plus ( new TeacherModule ( this ) )
                 .inject ( this );
 
         presenter.fetchTeachers ();
+
     }
+
+    public void moveScreen(){
+        intent=new Intent(this,ModeActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
+
 
     @Override
     public void onTeachersFetched ( List<Teacher> t ) {

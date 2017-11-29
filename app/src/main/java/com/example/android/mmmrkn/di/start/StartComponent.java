@@ -1,10 +1,11 @@
 package com.example.android.mmmrkn.di.start;
 
-import com.example.android.mmmrkn.presentation.StartActivity;
+import com.example.android.mmmrkn.presentation.BeginActivity;
+
 import dagger.Subcomponent;
 
 @Subcomponent
 public interface StartComponent {
-    void inject(StartActivity m);
+    void inject(BeginActivity m);
 
 }

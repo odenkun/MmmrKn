@@ -22,6 +22,7 @@ import com.example.android.mmmrkn.di.login.LoginComponent;
 import com.example.android.mmmrkn.di.login.LoginModule;
 import com.example.android.mmmrkn.presentation.App;
 import com.example.android.mmmrkn.presentation.login.LoginPresenter;
+import com.example.android.mmmrkn.presentation.mode_select.ModeActivity;
 import com.example.android.mmmrkn.presentation.teacher.SelectTeacherActivity;
 
 import javax.inject.Inject;
@@ -36,7 +37,7 @@ public class LoginActivity extends AppCompatActivity implements LoginPresenter.C
     @Override
     protected void onCreate ( Bundle savedInstanceState ) {
         super.onCreate ( savedInstanceState );
-        setContentView ( R.layout.activity_login );
+        setContentView ( R.layout.activity_login);
 
         //全ての親である、アプリケーションコンポーネントを持ってくる
         ApplicationComponent appComponent = ( (App) getApplication () ).getComponent ();
@@ -160,4 +161,3 @@ public class LoginActivity extends AppCompatActivity implements LoginPresenter.C
         super.onDestroy ();
     }
 }
-
