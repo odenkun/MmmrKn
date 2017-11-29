@@ -1,4 +1,9 @@
 apply plugin: 'com.android.application'
+
+ext {
+    supportLibraryVersion = '25.4.0'
+    grpcVersion = '1.4.0'
+}
 android {
     compileSdkVersion 26
     defaultConfig {
@@ -24,6 +29,14 @@ android {
     dataBinding {
         enabled = true
     }
+    //バージョン競合エラー解決のため
+    configurations.all {
+        resolutionStrategy.force 'com.google.code.findbugs:jsr305:1.3.9'
+    }
+//    configurations.all {
+//        resolutionStrategy.force 'com.google.code.findbugs:jsr305:3.0.2'
+//        resolutionStrategy.force "com.android.support:support-annotations:$supportLibraryVersion"
+//    }
 }
 
 dependencies {
@@ -58,4 +71,10 @@ dependencies {
     annotationProcessor "com.google.dagger:dagger-compiler:$daggerVersion"
     compile 'com.jakewharton.timber:timber:4.6.0'
     compile 'com.squareup.picasso:picasso:2.5.2'
+    //google(音声通信) 2017/11/29
+    compile('com.google.auth:google-auth-library-oauth2-http:0.9.0') {
+        exclude module: 'httpclient'
+    }
+    compile group: 'com.google.cloud', name: 'google-cloud-speech', version: '0.17.1-alpha'
+    compile "io.grpc:grpc-okhttp:$grpcVersion"
 }
