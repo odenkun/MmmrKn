@@ -45,6 +45,7 @@ public class SelectTeacherPresenter extends Presenter {
                         } ) );
     }
 
+    //プレゼンターがビューにやって欲しいことリスト
     public interface Contract {
         /**
          *

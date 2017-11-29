@@ -8,6 +8,7 @@ import com.example.android.mmmrkn.R;
 import com.example.android.mmmrkn.di.teacher.TeacherModule;
 import com.example.android.mmmrkn.infra.entity.Teacher;
 import com.example.android.mmmrkn.presentation.App;
+
 import java.util.List;
 import javax.inject.Inject;
 import timber.log.Timber;
@@ -20,7 +21,7 @@ public class SelectTeacherActivity extends AppCompatActivity implements SelectTe
     @Override
     protected void onCreate ( Bundle savedInstanceState ) {
         super.onCreate ( savedInstanceState );
-        setContentView ( R.layout.activity_select_teacher );
+        setContentView ( R.layout.activity_teacher_recycler_base );
 
         ( (App) getApplication () )
                 .getComponent ()
@@ -30,9 +31,14 @@ public class SelectTeacherActivity extends AppCompatActivity implements SelectTe
         presenter.fetchTeachers ();
     }
 
+    //OrmaからのデータをListに代入
     @Override
-    public void onTeachersFetched ( List<Teacher> t ) {
-        for ( Teacher teacher : t ) {
+    public void onTeachersFetched ( List<Teacher> teacherList ) {
+        TeacherCardRecyclerView cardRecyclerView = (TeacherCardRecyclerView)findViewById(R.id.teacher_recycle);
+
+        cardRecyclerView.onListFetch(this,teacherList);
+        //データをlogとして出力
+        for ( Teacher teacher : teacherList ) {
             Timber.d(teacher.toString ());
         }
     }
