@@ -7,20 +7,24 @@ import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 
 import com.example.android.mmmrkn.R;
+import com.example.android.mmmrkn.infra.entity.Party;
+
+import java.util.List;
 
 //属性と親情報をRecyclerViewから持ってくる
 public class PartyCardRecyclerView extends RecyclerView {
+
     public PartyCardRecyclerView(Context context, AttributeSet attrs) {
         super(context, attrs);
         setRecyclerAdapter(context);
     }
-    /*valuesのstringsから都道府県の取得
-      Adapterのセット*/
+    /*setレイアウト*/
     public void setRecyclerAdapter(Context context){
         setLayoutManager(new LinearLayoutManager(context));
-        Resources resources = context.getResources();
-        String[] dummies = resources.getStringArray(R.array.dummy);
-        PartyCardRecyclerAdapter cra = new PartyCardRecyclerAdapter(context, dummies);
+    }
+
+    public void onListFetch(Context context, List<Party> parties){
+        PartyCardRecyclerAdapter cra = new PartyCardRecyclerAdapter(context,parties);
         this.setAdapter(cra);
     }
 }

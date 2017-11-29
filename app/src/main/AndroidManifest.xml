@@ -33,6 +33,8 @@
         </activity>
         <activity android:name=".presentation.teacher.SelectTeacherActivity">
         </activity>
+        <activity android:name=".presentation.party.SelectPartyActivity">
+        </activity>
     </application>
 
 </manifest>

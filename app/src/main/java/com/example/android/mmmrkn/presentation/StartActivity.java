@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import com.example.android.mmmrkn.R;
 import com.example.android.mmmrkn.presentation.login.LoginActivity;
+import com.example.android.mmmrkn.presentation.party.SelectPartyActivity;
 import com.example.android.mmmrkn.presentation.teacher.SelectTeacherActivity;
 import com.franmontiel.persistentcookiejar.PersistentCookieJar;
 import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersistor;
@@ -45,7 +46,7 @@ public class StartActivity extends AppCompatActivity {
         Intent activityIntent;
         //認証済みの場合は保育士の選択画面に遷移
         if ( hasToken ) {
-            activityIntent = new Intent(this,SelectTeacherActivity.class);
+            activityIntent = new Intent(this,SelectPartyActivity.class);
         } else {
             //認証できていないのでログイン画面に遷移
             activityIntent = new Intent(this, LoginActivity.class);

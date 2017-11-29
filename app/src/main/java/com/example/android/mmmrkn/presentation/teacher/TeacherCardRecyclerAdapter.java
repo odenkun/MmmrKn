@@ -38,6 +38,7 @@ public class TeacherCardRecyclerAdapter extends RecyclerView.Adapter<TeacherCard
             return 0;
         }
     }
+
     //Cardの中身表示
     @Override
     public void onBindViewHolder(ViewHolder vh, int position) {

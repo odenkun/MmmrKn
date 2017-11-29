@@ -31,7 +31,7 @@ public class SelectTeacherActivity extends AppCompatActivity implements SelectTe
     //OrmaからのデータをListに代入
     @Override
     public void onTeachersFetched ( List<Teacher> teacherList ) {
-        TeacherCardRecyclerView cardRecyclerView = (TeacherCardRecyclerView)findViewById(R.id.base_recycle);
+        TeacherCardRecyclerView cardRecyclerView = (TeacherCardRecyclerView)findViewById(R.id.teacher_recycle);
 
         cardRecyclerView.onListFetch(this,teacherList);
         //データをlogとして出力

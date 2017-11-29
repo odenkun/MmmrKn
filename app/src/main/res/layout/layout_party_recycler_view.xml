@@ -36,23 +36,13 @@
 
                 <TextView
                     android:id="@+id/textView_party"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_weight="10"
                     android:gravity="left|center"
                     android:textColor="@color/colorBlack"
                     android:textSize="24dp" />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:layout_weight="4"
-                    android:gravity="center"
-                    android:text="10/28"
-                    android:textColor="@color/colorBlack"
-                    android:textSize="19dp" />
 
             </LinearLayout>
 

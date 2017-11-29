@@ -3,6 +3,7 @@ package com.example.android.mmmrkn.di;
 import android.content.Context;
 
 import com.example.android.mmmrkn.infra.api.LoginService;
+import com.example.android.mmmrkn.infra.api.PartiesService;
 import com.example.android.mmmrkn.infra.api.TeacherService;
 import com.example.android.mmmrkn.infra.entity.OrmaDatabase;
 import com.franmontiel.persistentcookiejar.ClearableCookieJar;
@@ -129,6 +130,12 @@ public class ApplicationModule {
     public TeacherService provideTeacherService ( Retrofit retrofit ) {
         //Retrofitがリフレクションを用いて、インタフェースから実装クラスを自動生成する
         return retrofit.create ( TeacherService.class );
+    }
+
+    @Singleton
+    @Provides
+    public PartiesService providePartyService(Retrofit retrofit){
+        return  retrofit.create(PartiesService.class);
     }
 
     @Singleton
