@@ -17,6 +17,7 @@ import timber.log.Timber;
 public class StudentProfilePresenter extends Presenter{
 
     private Contract contract;
+    
     private StudentsService studentsService;
 
     @Inject
