@@ -12,9 +12,7 @@ android {
         targetSdkVersion 26
         versionCode 1
         versionName "1.0"
-        dataBinding {
-            enabled = true
-        }
+
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -28,7 +26,7 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-    //
+    //データバインディングのため
     dataBinding {
         enabled = true
     }
@@ -61,6 +59,7 @@ dependencies {
     compile "com.github.gfx.android.orma:orma:$ormaVersion"
     annotationProcessor "com.github.gfx.android.orma:orma-processor:$ormaVersion"
 
+
     // ReactiveX
     compile 'io.reactivex.rxjava2:rxjava:2.1.6'
     compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
@@ -92,4 +91,6 @@ dependencies {
     }
     compile group: 'com.google.cloud', name: 'google-cloud-speech', version: '0.17.1-alpha'
     compile "io.grpc:grpc-okhttp:$grpcVersion"
+
+    //annotationProcessor "com.google.auto.value:auto-value:1.2"
 }
