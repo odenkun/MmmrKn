@@ -7,6 +7,7 @@ import android.os.Bundle;
 import com.example.android.mmmrkn.R;
 import com.example.android.mmmrkn.presentation.login.LoginActivity;
 import com.example.android.mmmrkn.presentation.party.SelectPartyActivity;
+import com.example.android.mmmrkn.presentation.mode_select.ModeActivity;
 import com.example.android.mmmrkn.presentation.teacher.SelectTeacherActivity;
 import com.franmontiel.persistentcookiejar.PersistentCookieJar;
 import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersistor;
@@ -18,7 +19,7 @@ import okhttp3.Cookie;
 /**
  * セッション情報に合わせて起動画面を変更する
  */
-public class StartActivity extends AppCompatActivity {
+public class BeginActivity extends AppCompatActivity {
 
     //Cookieを保持する
     @Inject
@@ -51,6 +52,7 @@ public class StartActivity extends AppCompatActivity {
             //認証できていないのでログイン画面に遷移
             activityIntent = new Intent(this, LoginActivity.class);
         }
+
 
         //遷移を開始
         startActivity(activityIntent);

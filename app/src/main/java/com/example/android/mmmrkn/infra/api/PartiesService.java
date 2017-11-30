@@ -37,7 +37,7 @@ public interface PartiesService {
     //通信番号⑫
     @POST("parties/{partyId}student/assume")
     Single<List<SearchResult>>searchStudents(@Path("partyId") String PartyId,
-                                            @Field("SearchName")String SearchName);
+                                             @Field("SearchName") String SearchName);
 
 
 }

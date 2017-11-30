@@ -1,5 +1,6 @@
 package com.example.android.mmmrkn.presentation.teacher;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -8,20 +9,24 @@ import com.example.android.mmmrkn.R;
 import com.example.android.mmmrkn.di.teacher.TeacherModule;
 import com.example.android.mmmrkn.infra.entity.Teacher;
 import com.example.android.mmmrkn.presentation.App;
+import com.example.android.mmmrkn.presentation.mode_select.ModeActivity;
+
 
 import java.util.List;
 import javax.inject.Inject;
 import timber.log.Timber;
 
 public class SelectTeacherActivity extends AppCompatActivity implements SelectTeacherPresenter.Contract {
-
+    Intent intent;
     @Inject
     SelectTeacherPresenter presenter;
+
 
     @Override
     protected void onCreate ( Bundle savedInstanceState ) {
         super.onCreate ( savedInstanceState );
-        setContentView ( R.layout.activity_teacher_recycler_base );
+	    setContentView ( R.layout.activity_teacher_recycler_base );
+       
 
         ( (App) getApplication () )
                 .getComponent ()
@@ -29,6 +34,7 @@ public class SelectTeacherActivity extends AppCompatActivity implements SelectTe
                 .inject ( this );
 
         presenter.fetchTeachers ();
+
     }
 
     //OrmaからのデータをListに代入

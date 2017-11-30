@@ -1,6 +1,7 @@
 package com.example.android.mmmrkn.di.student_profile;
 
-import com.example.android.mmmrkn.presentation.studentprofile.StudentProfileActivity;
+import com.example.android.mmmrkn.presentation.login.LoginActivity;
+import com.example.android.mmmrkn.presentation.studioprofile.StudentProfileActivity;
 
 import dagger.Subcomponent;
 
