@@ -8,7 +8,6 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.android.mmmrkn.R;
-import com.example.android.mmmrkn.presentation.cardview_gohome_dialog.GoHomeDialogActivity;
 import com.example.android.mmmrkn.presentation.mode_select.ModeActivity;
 
 public class AttendancesActivity extends AppCompatActivity {

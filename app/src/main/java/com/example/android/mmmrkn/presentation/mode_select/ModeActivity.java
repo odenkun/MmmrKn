@@ -3,6 +3,7 @@ package com.example.android.mmmrkn.presentation.mode_select;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.Button;
 
 import com.example.android.mmmrkn.R;
 import com.example.android.mmmrkn.presentation.cardview_gohome_dialog.GoHomeDialogActivity;
@@ -11,15 +12,19 @@ import com.example.android.mmmrkn.presentation.attendances.AttendancesActivity;
 import com.example.android.mmmrkn.presentation.teacher.SelectTeacherActivity;
 
 public class ModeActivity extends AppCompatActivity {
-
+    
     
     Intent intent;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mode);
-
-
+        Intent insertIntent = this.getIntent();
+        String partyIntent = insertIntent.getStringExtra("party");
+        
+//        確認用
+//        Button btn=findViewById(R.id.logout);
+//        btn.setText(partyIntent);
         //職員選択ボタンを押された時の処理
         findViewById(R.id.logout).setOnClickListener(view ->{
                 intent=new Intent(this,SelectTeacherActivity.class);

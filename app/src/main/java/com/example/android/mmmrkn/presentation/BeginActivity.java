@@ -47,7 +47,7 @@ public class BeginActivity extends AppCompatActivity {
         Intent activityIntent;
         //認証済みの場合は保育士の選択画面に遷移
         if ( hasToken ) {
-            activityIntent = new Intent(this,SelectPartyActivity.class);
+            activityIntent = new Intent(this,SelectTeacherActivity.class);
         } else {
             //認証できていないのでログイン画面に遷移
             activityIntent = new Intent(this, LoginActivity.class);

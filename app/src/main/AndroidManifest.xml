@@ -28,12 +28,14 @@
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
+
             </intent-filter>
         </activity>
-        <activity android:name=".presentation.teacher.SelectTeacherActivity"></activity>
-        <activity android:name=".presentation.studentprofile.StudentProfileActivity"></activity>
 
+        <activity android:name=".presentation.teacher.SelectTeacherActivity"/>
+        <activity android:name=".presentation.studentprofile.StudentProfileActivity"/>
         <activity android:name=".presentation.mode_select.ModeActivity" />
+        <activity android:name=".presentation.party.SelectPartyActivity"/>
         <activity android:name=".presentation.attendances.AttendancesActivity" />
         <activity android:name=".presentation.cardview_gohome_dialog.GoHomeDialogActivity" />
         <activity android:name=".presentation.party_search.PartySearchActivity" />
