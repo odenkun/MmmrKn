@@ -1,4 +1,4 @@
-package com.example.android.mmmrkn.infra.entity.entry_list;
+package com.example.android.mmmrkn.infra.entity;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -10,7 +10,7 @@ import java.util.List;
  * Created by 15110016 on 2017/11/20.
  */
 
-public class Entry {
+public class Attendances {
     @SerializedName("studentId")
     @Expose
     private String studentId;
