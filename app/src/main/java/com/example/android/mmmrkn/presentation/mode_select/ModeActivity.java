@@ -12,7 +12,7 @@ import com.example.android.mmmrkn.presentation.teacher.SelectTeacherActivity;
 
 public class ModeActivity extends AppCompatActivity {
 
-    
+
     Intent intent;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +33,7 @@ public class ModeActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
-        //降園ボタンを押された時の処理(未実装)
+        //降園ボタンを押された時の処理
         findViewById(R.id.get_off).setOnClickListener(view -> {
             intent = new Intent(this, GoHomeDialogActivity.class);
             startActivity(intent);

@@ -32,7 +32,7 @@
         </activity>
         <activity android:name=".presentation.teacher.SelectTeacherActivity"></activity>
         <activity android:name=".presentation.studentprofile.StudentProfileActivity"></activity>
-
+        <activity android:name=".presentation.party.SelectPartyActivity"></activity>
         <activity android:name=".presentation.mode_select.ModeActivity" />
         <activity android:name=".presentation.attendances.AttendancesActivity" />
         <activity android:name=".presentation.cardview_gohome_dialog.GoHomeDialogActivity" />

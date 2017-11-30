@@ -31,7 +31,7 @@ public class GoHomeDialogActivity extends AppCompatActivity {
         //findViewById(R.id.btn_Next).setVisibility(View.INVISIBLE);
         //ボタンの作成、押下した動き
         findViewById(R.id.btn_Next).setOnClickListener(view ->
-                        showFragmentDialog(TEST_DIALOG)
+                showFragmentDialog(TEST_DIALOG)
                 //StartActivity(new Intent(this,GoHomeDialogActivity.class));
                 //finish();
         );
