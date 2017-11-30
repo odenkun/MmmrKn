@@ -7,7 +7,7 @@ import android.os.Bundle;
 import com.example.android.mmmrkn.R;
 import com.example.android.mmmrkn.presentation.cardview_gohome_dialog.GoHomeDialogActivity;
 import com.example.android.mmmrkn.presentation.party_search.PartySearchActivity;
-import com.example.android.mmmrkn.presentation.drop_off.DropOffActivity;
+import com.example.android.mmmrkn.presentation.attendances.AttendancesActivity;
 import com.example.android.mmmrkn.presentation.teacher.SelectTeacherActivity;
 
 public class ModeActivity extends AppCompatActivity {
@@ -28,7 +28,7 @@ public class ModeActivity extends AppCompatActivity {
 
         //登園ボタンを押された時の処理
         findViewById(R.id.dropp_off).setOnClickListener(view -> {
-            intent = new Intent(this, DropOffActivity.class);
+            intent = new Intent(this, AttendancesActivity.class);
             startActivity(intent);
         });
 
