@@ -12,14 +12,18 @@ import com.example.android.mmmrkn.presentation.teacher.SelectTeacherActivity;
 
 public class ModeActivity extends AppCompatActivity {
 
-
+    
     Intent intent;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mode);
+        Intent insertIntent = this.getIntent();
+        String partyIntent = insertIntent.getStringExtra("party");
 
-
+//        確認用
+//        Button btn=findViewById(R.id.logout);
+//        btn.setText(partyIntent);
         //職員選択ボタンを押された時の処理
         findViewById(R.id.logout).setOnClickListener(view ->{
                 intent=new Intent(this,SelectTeacherActivity.class);
