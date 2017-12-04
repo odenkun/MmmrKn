@@ -13,6 +13,7 @@
     <string name="error_invalid_password">無効なパスワードです</string>
 
     <string name="error_incorrect">IDまたはパスワードが違います</string>
+    <string name="button">Button</string>
     <string-array name="dummy">
         <item>北海道</item>
         <item>青森県</item>

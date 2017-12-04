@@ -2,6 +2,8 @@ package com.example.android.mmmrkn.di;
 
 import com.example.android.mmmrkn.di.login.LoginComponent;
 import com.example.android.mmmrkn.di.login.LoginModule;
+import com.example.android.mmmrkn.di.mode.ModeComponent;
+import com.example.android.mmmrkn.di.mode.ModeModule;
 import com.example.android.mmmrkn.di.party.PartyComponent;
 import com.example.android.mmmrkn.di.party.PartyModule;
 import com.example.android.mmmrkn.di.start.StartComponent;
@@ -25,4 +27,5 @@ public interface ApplicationComponent {
     TeacherComponent plus( TeacherModule t);
     ProfileComponent plus(ProfileModule p);
     PartyComponent plus(PartyModule p);
+    ModeComponent plus(ModeModule n);
 }

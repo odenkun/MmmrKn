@@ -38,7 +38,7 @@ public class SelectPartyPresenter  extends Presenter {
                         .subscribeOn ( Schedulers.io () )
                         .observeOn ( AndroidSchedulers.mainThread () )
                         .subscribe ( partyList -> {
-                            Timber.d ( "sensei toretayo" );
+                            Timber.d ( "組一覧 とれたよ" );
                             contract.onPartiesFetched ( partyList );
                         }, e -> {
                             Timber.e ( e );
