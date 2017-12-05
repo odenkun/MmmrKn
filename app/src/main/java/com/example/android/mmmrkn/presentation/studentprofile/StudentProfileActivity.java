@@ -27,6 +27,7 @@ public class StudentProfileActivity extends AppCompatActivity implements Student
         ApplicationComponent appComponent = ( (App) getApplication () ).getComponent ();
 
         ProfileComponent profileComponent =  appComponent.plus(new ProfileModule( this));
+        
         Intent intent = getIntent();
         //画面遷移時のstudentIdデータの受け取り処理
         String studentId = intent.getStringExtra("studentId");

@@ -52,4 +52,10 @@ public class SelectPartyPresenter  extends Presenter {
          */
         void onPartiesFetched ( List<Party> p );
     }
+    //参照の切断
+    @Override
+    public void dispose(){
+        super.dispose();
+        this.contract = null;
+    }
 }

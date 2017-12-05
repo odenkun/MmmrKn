@@ -1,4 +1,4 @@
-package com.example.android.mmmrkn.presentation.cardview_gohome_dialog;
+package com.example.android.mmmrkn.presentation.gohome;
 
 import android.content.Context;
 import android.content.Intent;
@@ -40,7 +40,7 @@ public class CardRecyclerAdapter extends RecyclerView.Adapter<CardRecyclerAdapte
         //クリックしたときに移動
         vh.layout.setOnClickListener(view-> {
                 // インテントの生成
-                Intent intent=new Intent(context,GoHomeDialogActivity.class);
+                Intent intent=new Intent(context,GoHomeActivity.class);
                 intent.putExtra("sendText",list[position]);
                 // 実行
                 context.startActivity(intent);

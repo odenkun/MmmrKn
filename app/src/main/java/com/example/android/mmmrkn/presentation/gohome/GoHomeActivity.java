@@ -1,10 +1,9 @@
-package com.example.android.mmmrkn.presentation.cardview_gohome_dialog;
+package com.example.android.mmmrkn.presentation.gohome;
 
 import android.content.Intent;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -12,9 +11,15 @@ import android.widget.TextView;
 import com.example.android.mmmrkn.R;
 import com.example.android.mmmrkn.presentation.mode_select.ModeActivity;
 
-public class GoHomeDialogActivity extends AppCompatActivity {
+import javax.inject.Inject;
+
+public class GoHomeActivity extends AppCompatActivity {
 
 
+    @Inject
+    GoHomePresenter presenter;
+    
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,7 +37,7 @@ public class GoHomeDialogActivity extends AppCompatActivity {
         //ボタンの作成、押下した動き
         findViewById(R.id.btn_Next).setOnClickListener(view ->
                         showFragmentDialog(TEST_DIALOG)
-                //StartActivity(new Intent(this,GoHomeDialogActivity.class));
+                //StartActivity(new Intent(this,GoHomeActivity.class));
                 //finish();
         );
 
@@ -83,7 +88,7 @@ public class GoHomeDialogActivity extends AppCompatActivity {
                 finish();
             }
             else{
-                startActivity(new Intent(this,GoHomeDialogActivity.class));
+                startActivity(new Intent(this,GoHomeActivity.class));
                 finish();
             }
         });
@@ -104,6 +109,11 @@ public class GoHomeDialogActivity extends AppCompatActivity {
     {
         Log.i("MainActivity : ", "OK clicked.");
     }*/
-
+    @Override
+    protected void onDestroy () {
+        //通信の結果を受け取らなくする
+        presenter.dispose ();
+        super.onDestroy ();
+    }
 
 }

@@ -8,7 +8,7 @@ import android.widget.Toast;
 import com.example.android.mmmrkn.R;
 import com.example.android.mmmrkn.di.mode.ModeModule;
 import com.example.android.mmmrkn.presentation.App;
-import com.example.android.mmmrkn.presentation.cardview_gohome_dialog.GoHomeDialogActivity;
+import com.example.android.mmmrkn.presentation.gohome.GoHomeActivity;
 import com.example.android.mmmrkn.presentation.login.LoginActivity;
 import com.example.android.mmmrkn.presentation.party_search.PartySearchActivity;
 import com.example.android.mmmrkn.presentation.attendances.AttendancesActivity;
@@ -60,7 +60,7 @@ public class ModeActivity extends AppCompatActivity implements ModePresenter.Con
 
         //降園ボタンを押された時の処理(未実装)
         findViewById(R.id.btn_goHome).setOnClickListener(view -> {
-            intent = new Intent(this, GoHomeDialogActivity.class);
+            intent = new Intent(this, GoHomeActivity.class);
             startActivity(intent);
         });
 

@@ -48,7 +48,12 @@ public class ModePresenter extends Presenter {
 				}));
 		
 	}
-	
+	//参照の切断
+	@Override
+	public void dispose(){
+		super.dispose();
+		this.contract = null;
+	}
 	
 	public interface Contract {
 		//void onAuthStart();
