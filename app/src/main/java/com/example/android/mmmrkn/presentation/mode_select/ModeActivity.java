@@ -6,8 +6,8 @@ import android.os.Bundle;
 import android.widget.Button;
 
 import com.example.android.mmmrkn.R;
+import com.example.android.mmmrkn.presentation.attendances_list.AttendancesListActivity;
 import com.example.android.mmmrkn.presentation.cardview_gohome_dialog.GoHomeDialogActivity;
-import com.example.android.mmmrkn.presentation.party_search.PartySearchActivity;
 import com.example.android.mmmrkn.presentation.attendances.AttendancesActivity;
 import com.example.android.mmmrkn.presentation.teacher.SelectTeacherActivity;
 
@@ -44,9 +44,9 @@ public class ModeActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
-        //登園リストボタンを押された時の処理(未実装)
+//        //登園リストボタンを押された時の処理(未実装)
         findViewById(R.id.dropp_off_list).setOnClickListener(view -> {
-            intent = new Intent(this, PartySearchActivity.class);
+            intent = new Intent(this, AttendancesListActivity.class);
             startActivity(intent);
         });
     }

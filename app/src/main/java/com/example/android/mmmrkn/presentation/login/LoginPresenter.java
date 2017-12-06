@@ -99,6 +99,12 @@ public class LoginPresenter extends Presenter {
         persistor.clear ();
     }
 
+    @Override
+    public  void dispose(){
+        super.dispose();
+        this.contract = null;
+    }
+
     /**
      * MVPにおけるビューとプレゼンターの結合度を低くするためのインタフェース
      * ビューであるMainActivityが実装する

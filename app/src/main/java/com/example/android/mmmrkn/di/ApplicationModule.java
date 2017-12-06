@@ -141,6 +141,7 @@ public class ApplicationModule {
         return  retrofit.create(PartiesService.class);
     }
 
+
     @Singleton
     @Provides
     public StudentsService provideStudentsService(Retrofit retrofit){
