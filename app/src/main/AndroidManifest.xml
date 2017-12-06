@@ -36,8 +36,6 @@
         <activity android:name=".presentation.attendances_list.AttendancesListActivity" />
         <activity android:name=".presentation.attendances.AttendancesActivity" />
         <activity android:name=".presentation.gohome.GoHomeActivity" />
-        <activity android:name=".presentation.party_search.PartySearchActivity" />
-        <activity android:name=".presentation.cardview_gohome_dialog.GoHomeDialogActivity" />
         <activity android:name=".presentation.student_search.StudentSearchActivity"/>
     </application>
 
