@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.example.android.mmmrkn.R;
 import com.example.android.mmmrkn.infra.entity.Teacher;
+import com.example.android.mmmrkn.presentation.mode_select.ModeActivity;
 
 import java.util.List;
 
@@ -58,7 +59,6 @@ public class TeacherCardRecyclerAdapter extends RecyclerView.Adapter<TeacherCard
                 context.startActivity(intent);
             }
         });
-        
 
     }
     //Viewを纏めたフォルダの作成

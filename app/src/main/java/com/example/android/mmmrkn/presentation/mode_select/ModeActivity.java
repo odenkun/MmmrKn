@@ -11,6 +11,8 @@ import com.example.android.mmmrkn.presentation.App;
 import com.example.android.mmmrkn.presentation.gohome.GoHomeActivity;
 import com.example.android.mmmrkn.presentation.login.LoginActivity;
 import com.example.android.mmmrkn.presentation.party_search.PartySearchActivity;
+import com.example.android.mmmrkn.presentation.attendances_list.AttendancesListActivity;
+import com.example.android.mmmrkn.presentation.cardview_gohome_dialog.GoHomeDialogActivity;
 import com.example.android.mmmrkn.presentation.attendances.AttendancesActivity;
 import com.example.android.mmmrkn.presentation.teacher.SelectTeacherActivity;
 
@@ -67,6 +69,9 @@ public class ModeActivity extends AppCompatActivity implements ModePresenter.Con
         //登園リストボタンを押された時の処理(未実装)
         findViewById(R.id.btn_attendancesList).setOnClickListener(view -> {
             intent = new Intent(this, PartySearchActivity.class);
+//        //登園リストボタンを押された時の処理(未実装)
+        findViewById(R.id.dropp_off_list).setOnClickListener(view -> {
+            intent = new Intent(this, AttendancesListActivity.class);
             startActivity(intent);
         });
     }

@@ -1,5 +1,7 @@
 package com.example.android.mmmrkn.infra.entity;
 
+import com.github.gfx.android.orma.annotation.PrimaryKey;
+import com.github.gfx.android.orma.annotation.Table;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -8,7 +10,6 @@ import com.google.gson.annotations.SerializedName;
  */
 
 public class EntryLog {
-
     @SerializedName("attendanceId")
     @Expose
     private String attendanceId;

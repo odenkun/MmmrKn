@@ -6,7 +6,6 @@ import android.os.Bundle;
 
 import com.example.android.mmmrkn.R;
 import com.example.android.mmmrkn.presentation.login.LoginActivity;
-import com.example.android.mmmrkn.presentation.party.SelectPartyActivity;
 import com.example.android.mmmrkn.presentation.mode_select.ModeActivity;
 import com.example.android.mmmrkn.presentation.teacher.SelectTeacherActivity;
 import com.franmontiel.persistentcookiejar.PersistentCookieJar;
