@@ -1,4 +1,4 @@
-package com.example.android.mmmrkn.presentation.cardview_gohome_dialog;
+package com.example.android.mmmrkn.presentation.gohome;
 
 import android.content.Context;
 import android.content.Intent;
@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -39,11 +40,13 @@ public class CardRecyclerAdapter extends RecyclerView.Adapter<CardRecyclerAdapte
         vh.imageView.setImageResource(R.mipmap.ic_launcher);
         //クリックしたときに移動
         vh.layout.setOnClickListener(view-> {
-                // インテントの生成
-                Intent intent=new Intent(context,GoHomeDialogActivity.class);
-                intent.putExtra("sendText",list[position]);
-                // 実行
-                context.startActivity(intent);
+            GoHomeActivity activity = (GoHomeActivity) view.getContext();
+            TextView name=activity.findViewById(R.id.Text_Name);
+            name.setText(list[position]);
+            Button back=activity.findViewById(R.id.button_Back);
+            back.setText("戻る");
+            TestDialogFragment fragment = (TestDialogFragment) activity.getSupportFragmentManager().findFragmentByTag(GoHomeActivity.TAG);
+            fragment.dismiss();
         });
     }
     //Viewを纏めたフォルダの作成

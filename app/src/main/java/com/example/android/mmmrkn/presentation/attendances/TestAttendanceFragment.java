@@ -1,4 +1,4 @@
-package com.example.android.mmmrkn.presentation.cardview_gohome_dialog;
+package com.example.android.mmmrkn.presentation.attendances;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -9,17 +9,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 
 import com.example.android.mmmrkn.R;
-
 /**
- * Created by 15110012 on 2017/11/21.
+ * Created by 15110012 on 2017/12/01.
  */
 
-public class TestDialogFragment extends DialogFragment
+public class TestAttendanceFragment  extends DialogFragment
 {
 
-    public static TestDialogFragment newInstance()
+    public static TestAttendanceFragment newInstance()
     {
-        return new TestDialogFragment();
+        return new TestAttendanceFragment();
     }
     //ダイアログの作成
     @Override
@@ -27,7 +26,7 @@ public class TestDialogFragment extends DialogFragment
     {
         final Activity activity = getActivity();
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-        final View dialogView = LayoutInflater.from(activity).inflate(R.layout.cardviewbase, null);
+        final View dialogView = LayoutInflater.from(activity).inflate(R.layout.attendances_viewbase, null);
 
         builder.setView(dialogView)
                 .setTitle("Fragment Dialog");

@@ -31,7 +31,6 @@ public class CardRecyclerAdapter extends RecyclerView.Adapter<CardRecyclerAdapte
     @Override
     public void onBindViewHolder(ViewHolder vh, final int position) {
         vh.textView_class.setText(list[position]);
-
     }
     //Viewを纏めたフォルダの作成
     @Override

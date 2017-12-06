@@ -5,7 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.example.android.mmmrkn.R;
-import com.example.android.mmmrkn.presentation.cardview_gohome_dialog.GoHomeDialogActivity;
+import com.example.android.mmmrkn.presentation.gohome.GoHomeActivity;
 import com.example.android.mmmrkn.presentation.party_search.PartySearchActivity;
 import com.example.android.mmmrkn.presentation.attendances.AttendancesActivity;
 import com.example.android.mmmrkn.presentation.teacher.SelectTeacherActivity;
@@ -39,7 +39,7 @@ public class ModeActivity extends AppCompatActivity {
 
         //降園ボタンを押された時の処理
         findViewById(R.id.get_off).setOnClickListener(view -> {
-            intent = new Intent(this, GoHomeDialogActivity.class);
+            intent = new Intent(this, GoHomeActivity.class);
             startActivity(intent);
         });
 
