@@ -12,18 +12,14 @@ import com.example.android.mmmrkn.R;
 import com.example.android.mmmrkn.presentation.mode_select.ModeActivity;
 
 import javax.inject.Inject;
-
 public class GoHomeActivity extends AppCompatActivity {
 
-
-    @Inject
-    GoHomePresenter presenter;
-    
-    
+    public static final String TAG = "fragment_dialog";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_gohome_dialog);
+        setContentView(R.layout.activity_gohome);
+
 
 
         Intent intent = this.getIntent();
@@ -37,7 +33,7 @@ public class GoHomeActivity extends AppCompatActivity {
         //ボタンの作成、押下した動き
         findViewById(R.id.btn_Next).setOnClickListener(view ->
                         showFragmentDialog(TEST_DIALOG)
-                //StartActivity(new Intent(this,GoHomeActivity.class));
+                //StartActivity(new Intent(this,GoHomeDialogActivity.class));
                 //finish();
         );
 
@@ -70,26 +66,26 @@ public class GoHomeActivity extends AppCompatActivity {
         TextCondition.setText("");
         ImageFace.setImage(""); //画像の大きさは自動で調整される、""内にファイルパスを入れる
         TextParty.setText("");
+        */
+        findViewById(R.id.btn_Next).setOnClickListener(view ->
+                        showFragmentDialog(TEST_DIALOG)
+        );
 
-         */
         TextName.setText(studentId);
         //受け取ったIDを名前に入れる　消してよし
         ImageFace.setImageResource(R.drawable.ic_launcher_background);
         //顔写真の挿入　消してよし。
 
-        //ボタンの状態変化
-        if(TextName.getText()!="") {
-            back.setText("戻る");
-        }
-
         back.setOnClickListener(view ->{
+            //空データ(=メニューに戻る状態)の時
             if(TextName.getText()==""){
                 startActivity(new Intent(this,ModeActivity.class));
                 finish();
             }
+            //データあるとき戻る
             else{
-                startActivity(new Intent(this,GoHomeActivity.class));
-                finish();
+               TextName.setText("");
+               back.setText("メニューに戻る");
             }
         });
     }
@@ -109,11 +105,11 @@ public class GoHomeActivity extends AppCompatActivity {
     {
         Log.i("MainActivity : ", "OK clicked.");
     }*/
-    @Override
-    protected void onDestroy () {
+    //@Override
+    //protected void onDestroy () {
         //通信の結果を受け取らなくする
-        presenter.dispose ();
-        super.onDestroy ();
-    }
+    //    presenter.dispose ();
+    //    super.onDestroy ();
+    //}
 
 }

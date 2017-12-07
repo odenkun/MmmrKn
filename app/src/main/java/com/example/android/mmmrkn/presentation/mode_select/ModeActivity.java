@@ -19,7 +19,7 @@ import javax.inject.Inject;
 import timber.log.Timber;
 
 public class ModeActivity extends AppCompatActivity implements ModePresenter.Contract{
-    
+
     @Inject
     ModePresenter presenter;
     
@@ -32,7 +32,7 @@ public class ModeActivity extends AppCompatActivity implements ModePresenter.Con
                 .getComponent()
                 .plus(new ModeModule(this))
                 .inject(this);
-        
+
         Intent insertIntent = this.getIntent();
         String partyIntent = insertIntent.getStringExtra("party");
         
@@ -66,11 +66,11 @@ public class ModeActivity extends AppCompatActivity implements ModePresenter.Con
 
         //登園リストボタンを押された時の処理(未実装)
         findViewById(R.id.btn_attendancesList).setOnClickListener(view -> {
-            intent = new Intent(this, AttendancesActivity.class);
+            intent = new Intent(this, AttendancesListActivity.class);
             startActivity(intent);
         });
     }
-    
+
     void attemptLogout () {
         presenter.attemptLogout();
     }
