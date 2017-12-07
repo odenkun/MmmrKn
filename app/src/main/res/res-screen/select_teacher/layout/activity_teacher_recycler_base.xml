@@ -9,10 +9,8 @@
 
     <com.example.android.mmmrkn.presentation.teacher.TeacherCardRecyclerView
         android:id="@+id/teacher_recycle"
-        android:layout_width="409dp"
-        android:layout_height="match_parent"
-        tools:layout_editor_absoluteX="384dp">
-
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
     </com.example.android.mmmrkn.presentation.teacher.TeacherCardRecyclerView>
 
 </LinearLayout>
