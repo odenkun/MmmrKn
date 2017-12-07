@@ -4,6 +4,8 @@
     android:layout_height="match_parent"
     >
     <com.example.android.mmmrkn.presentation.student_search.CardRecyclerView
+        android:id="@+id/attendances_recycle"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"></com.example.android.mmmrkn.presentation.student_search.CardRecyclerView>
+        android:layout_height="match_parent">
+    </com.example.android.mmmrkn.presentation.student_search.CardRecyclerView>
 </LinearLayout>

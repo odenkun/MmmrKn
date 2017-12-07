@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.example.android.mmmrkn.R;
 import com.example.android.mmmrkn.infra.entity.Teacher;
+import com.example.android.mmmrkn.presentation.mode_select.ModeActivity;
 
 import java.util.List;
 
@@ -53,7 +54,8 @@ public class TeacherCardRecyclerAdapter extends RecyclerView.Adapter<TeacherCard
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(context,com.example.android.mmmrkn.presentation.mode_select.ModeActivity.class);
-                intent.putExtra("party",teachers.get(position).getName());
+                intent.putExtra("teacherName",teachers.get(position).getName());
+                intent.putExtra("teacherId",teachers.get(position).getTeacherId());
                 context.startActivity(intent);
             }
         });

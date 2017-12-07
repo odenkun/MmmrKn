@@ -3,6 +3,7 @@ package com.example.android.mmmrkn.di;
 import android.content.Context;
 
 import com.example.android.mmmrkn.infra.api.LoginService;
+import com.example.android.mmmrkn.infra.api.LogoutService;
 import com.example.android.mmmrkn.infra.api.StudentsService;
 import com.example.android.mmmrkn.infra.api.PartiesService;
 import com.example.android.mmmrkn.infra.api.StudentsService;
@@ -125,7 +126,15 @@ public class ApplicationModule {
         //Retrofitがリフレクションを用いて、インタフェースから実装クラスを自動生成する
         return retrofit.create ( LoginService.class );
     }
-
+    
+    @Singleton
+    @Provides
+    public LogoutService provideLogoutService (Retrofit retrofit ) {
+        //Retrofitがリフレクションを用いて、インタフェースから実装クラスを自動生成する
+        return retrofit.create ( LogoutService.class );
+    }
+    
+    
     //このcreate()にはリフレクションを使用するが、
     //リフレクションは重いため、一度限りで済むようにシングルトンにする
     @Singleton
@@ -140,6 +149,7 @@ public class ApplicationModule {
     public PartiesService providePartyService(Retrofit retrofit){
         return  retrofit.create(PartiesService.class);
     }
+
 
     @Singleton
     @Provides

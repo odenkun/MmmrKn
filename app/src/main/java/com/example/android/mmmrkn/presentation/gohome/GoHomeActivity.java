@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.example.android.mmmrkn.R;
 import com.example.android.mmmrkn.presentation.mode_select.ModeActivity;
 
+import javax.inject.Inject;
 public class GoHomeActivity extends AppCompatActivity {
 
     public static final String TAG = "fragment_dialog";
@@ -18,6 +19,7 @@ public class GoHomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gohome);
+
 
 
         Intent intent = this.getIntent();
@@ -29,9 +31,15 @@ public class GoHomeActivity extends AppCompatActivity {
         //ボタンの可視化
         //findViewById(R.id.btn_Next).setVisibility(View.INVISIBLE);
         //ボタンの作成、押下した動き
+        findViewById(R.id.btn_Next).setOnClickListener(view ->
+                        showFragmentDialog(TEST_DIALOG)
+                //StartActivity(new Intent(this,GoHomeDialogActivity.class));
+                //finish();
+        );
 
         //int ZidoId = intent.getIntExtra("ZidouId",0);
         //受け取った児童IDを取得
+
 
 
         //Button sendButton =  findViewById(R.id.Button_Next);
@@ -97,6 +105,11 @@ public class GoHomeActivity extends AppCompatActivity {
     {
         Log.i("MainActivity : ", "OK clicked.");
     }*/
-
+    //@Override
+    //protected void onDestroy () {
+        //通信の結果を受け取らなくする
+    //    presenter.dispose ();
+    //    super.onDestroy ();
+    //}
 
 }

@@ -26,17 +26,17 @@
             android:theme="@android:style/Theme.NoDisplay">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity android:name=".presentation.teacher.SelectTeacherActivity"/>
         <activity android:name=".presentation.studentprofile.StudentProfileActivity"/>
-        <activity android:name=".presentation.party.SelectPartyActivity"/>
+
         <activity android:name=".presentation.mode_select.ModeActivity" />
+        <activity android:name=".presentation.attendances_list.AttendancesListActivity"/>
         <activity android:name=".presentation.attendances.AttendancesActivity" />
         <activity android:name=".presentation.gohome.GoHomeActivity" />
-        <activity android:name=".presentation.party_search.PartySearchActivity" />
         <activity android:name=".presentation.student_search.StudentSearchActivity"/>
     </application>
 

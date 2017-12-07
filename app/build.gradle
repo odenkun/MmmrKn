@@ -5,6 +5,7 @@ ext {
     grpcVersion = '1.4.0'
 }
 android {
+
     compileSdkVersion 26
     defaultConfig {
         applicationId "com.example.android.mmmrkn"

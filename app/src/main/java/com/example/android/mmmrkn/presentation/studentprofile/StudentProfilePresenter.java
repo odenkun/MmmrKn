@@ -45,7 +45,12 @@ public class StudentProfilePresenter extends Presenter{
             contract.onFetchComplete(null);
         }));
     }
-
+    //参照の切断
+    @Override
+    public void dispose(){
+        super.dispose();
+        this.contract = null;
+    }
 
 
     public interface Contract {

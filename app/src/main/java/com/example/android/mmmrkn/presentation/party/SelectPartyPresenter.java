@@ -38,7 +38,7 @@ public class SelectPartyPresenter  extends Presenter {
                         .subscribeOn ( Schedulers.io () )
                         .observeOn ( AndroidSchedulers.mainThread () )
                         .subscribe ( partyList -> {
-                            Timber.d ( "sensei toretayo" );
+                            Timber.d ( "組一覧 とれたよ" );
                             contract.onPartiesFetched ( partyList );
                         }, e -> {
                             Timber.e ( e );
@@ -51,5 +51,11 @@ public class SelectPartyPresenter  extends Presenter {
          * @param p 通信結果の保育士の一覧
          */
         void onPartiesFetched ( List<Party> p );
+    }
+    //参照の切断
+    @Override
+    public void dispose(){
+        super.dispose();
+        this.contract = null;
     }
 }
