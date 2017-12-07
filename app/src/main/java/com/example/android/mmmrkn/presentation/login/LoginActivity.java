@@ -163,4 +163,3 @@ public class LoginActivity extends AppCompatActivity implements LoginPresenter.C
     }
     
 }
-
