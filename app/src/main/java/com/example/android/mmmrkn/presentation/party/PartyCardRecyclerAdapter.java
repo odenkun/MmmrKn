@@ -51,19 +51,19 @@ public class PartyCardRecyclerAdapter extends RecyclerView.Adapter<PartyCardRecy
         // クリック時、モード選択画面に移動
         vh.layout.setOnClickListener(new View.OnClickListener() {
                     String partyId;
-
+                    String partyName;
                     @Override
                     public void onClick(View v) {
-                        dialogFragment.onSelectParty(partyId);
+                        dialogFragment.onSelectParty(partyId,partyName);
                         dialogFragment.dismiss();
                     }
 
-                    public View.OnClickListener setPartyId(String partyId) {
+                    public View.OnClickListener setPartyId(String partyId,String partyName) {
+                        this.partyName = partyName;
                         this.partyId = partyId;
                         return this;
                     }
-                }.setPartyId(parties.get(position).getPartyId())
-        );
+        }.setPartyId(parties.get(position).getPartyId(),parties.get(position).getName()) );
     }
 
     //Viewを纏めたフォルダの作成

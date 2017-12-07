@@ -90,11 +90,11 @@ public class AttendancesDialog extends DialogFragment {
         super.onDetach();
     }
 
-    public void onSelectParty (String partyId) {
-        contract.onSelectParty(partyId);
+    public void onSelectParty (String partyId, String partyName) {
+        contract.onSelectParty(partyId,partyName);
     }
 
     public interface Contract {
-        void onSelectParty(String partyId);
+        void onSelectParty(String partyId,String partyName);
     }
 }

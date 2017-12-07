@@ -39,6 +39,7 @@ public class StudentProfileActivity extends AppCompatActivity implements Student
 
         presenter.fetchProfile(studentId);
     }
+
     //画面への操作
     @Override
     public void onFetchComplete(StudentProfile studentProfile){
