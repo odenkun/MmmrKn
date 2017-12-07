@@ -53,4 +53,10 @@ public class SelectTeacherPresenter extends Presenter {
          */
         void onTeachersFetched ( List <Teacher> t );
     }
+    //参照の切断
+    @Override
+    public void dispose(){
+        super.dispose();
+        this.contract = null;
+    }
 }

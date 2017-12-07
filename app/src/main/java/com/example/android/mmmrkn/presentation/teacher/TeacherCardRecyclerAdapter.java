@@ -53,8 +53,9 @@ public class TeacherCardRecyclerAdapter extends RecyclerView.Adapter<TeacherCard
         vh.layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(context,ModeActivity.class);
-                intent.putExtra("party",teachers.get(position).getName());
+                Intent intent=new Intent(context,com.example.android.mmmrkn.presentation.mode_select.ModeActivity.class);
+                intent.putExtra("teacherName",teachers.get(position).getName());
+                intent.putExtra("teacherId",teachers.get(position).getTeacherId());
                 context.startActivity(intent);
             }
         });

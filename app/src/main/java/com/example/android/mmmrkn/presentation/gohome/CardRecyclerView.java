@@ -1,4 +1,4 @@
-package com.example.android.mmmrkn.presentation.cardview_gohome_dialog;
+package com.example.android.mmmrkn.presentation.gohome;
 
 import android.content.Context;
 import android.content.res.Resources;

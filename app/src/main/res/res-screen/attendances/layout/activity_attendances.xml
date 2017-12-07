@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     tools:context="com.example.android.mmmrkn.presentation.attendances.AttendancesActivity">
+<!-- Binding Objects -->
+<data>
+    <variable name="student" type="com.example.android.mmmrkn.infra.entity.AttendancesStudent" />
+</data>
+<android.support.constraint.ConstraintLayout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <TextView
         android:id="@+id/txt_class"
@@ -24,7 +29,7 @@
         android:layout_marginBottom="368dp"
         android:layout_marginRight="64dp"
         android:layout_marginTop="8dp"
-        android:text="北海道"
+        android:text="@{student.studentId}"
         android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -130,3 +135,4 @@
 
     </RadioGroup>
 </android.support.constraint.ConstraintLayout>
+</layout>

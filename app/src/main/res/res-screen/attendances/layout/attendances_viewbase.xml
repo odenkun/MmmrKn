@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.example.android.mmmrkn.presentation.cardview_gohome_dialog.CardRecyclerView
+    <com.example.android.mmmrkn.presentation.attendances.CardRecyclerView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"></com.example.android.mmmrkn.presentation.cardview_gohome_dialog.CardRecyclerView>
+        android:layout_height="match_parent"/>
 </LinearLayout>

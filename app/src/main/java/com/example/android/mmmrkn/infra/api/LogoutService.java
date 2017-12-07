@@ -12,7 +12,7 @@ public interface LogoutService {
     //ログアウト
     //通信番号②
     @POST("logout")
-    @FormUrlEncoded
+    //@FormUrlEncoded
     //ログアウトなので引数特になし
     Completable postSchoolLogout();
 

@@ -100,7 +100,7 @@ public class LoginPresenter extends Presenter {
     }
 
     @Override
-    public  void dispose(){
+    public void dispose() {
         super.dispose();
         this.contract = null;
     }
