@@ -88,6 +88,7 @@ public class AttendancesListActivity extends AppCompatActivity
         }
     }
 
+
     @Override
     protected void onDestroy() {
         //通信の結果を受け取らなくする
