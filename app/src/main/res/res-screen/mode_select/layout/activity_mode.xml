@@ -7,68 +7,97 @@
     tools:context="com.example.android.mmmrkn.presentation.mode_select.ModeActivity">
 
 
-    <Button
-        android:id="@+id/btn_attendancesList"
-        android:layout_width="180dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="52dp"
-        android:text="登園リスト"
-        android:textSize="17dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_goHome" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/btn_attendances"
-        android:layout_width="180dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="52dp"
-        android:text="登園"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <LinearLayout
+            android:id="@+id/Mode_Liner"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-    <Button
-        android:id="@+id/btn_goHome"
-        android:layout_width="180dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="52dp"
-        android:text="降園"
-        android:textSize="17dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_attendances" />
+            <Button
+                android:id="@+id/btn_goHome"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/button_layout"
+                android:text="降園"
+                android:textSize="30dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_attendances" />
 
-    <Button
-        android:id="@+id/btn_selectTeacher"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="44dp"
-        android:layout_marginTop="8dp"
-        android:text="教員選択"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.861" />
+            <Button
+                android:id="@+id/btn_attendances"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/button_layout"
+                android:gravity="center_vertical|center_horizontal"
+                android:text="登園"
+                android:textSize="30dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/btn_logout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="56dp"
-        android:layout_marginTop="8dp"
-        android:text="ログアウト"
-        app:layout_constraintBottom_toBottomOf="@+id/btn_selectTeacher"
-        app:layout_constraintEnd_toStartOf="@+id/btn_selectTeacher"
-        app:layout_constraintHorizontal_bias="0.455"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/btn_selectTeacher" />
+            <Button
+                android:id="@+id/btn_attendancesList"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/button_layout"
+                android:text="登園リスト"
+                android:textSize="30sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_goHome" />
+
+            <LinearLayout
+                android:id="@+id/Child_mode_liner"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btn_logout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_weight="1"
+                    android:text="ログアウト"
+                    app:layout_constraintBottom_toBottomOf="@+id/btn_selectTeacher"
+                    app:layout_constraintEnd_toStartOf="@+id/btn_selectTeacher"
+                    app:layout_constraintHorizontal_bias="0.455"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/btn_selectTeacher" />
+
+                <Button
+                    android:id="@+id/btn_selectTeacher"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_weight="1"
+                    android:text="教員選択"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.861" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
 </android.support.constraint.ConstraintLayout>

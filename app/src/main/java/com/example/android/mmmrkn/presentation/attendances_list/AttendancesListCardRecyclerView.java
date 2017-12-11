@@ -6,8 +6,6 @@ import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 
 import com.example.android.mmmrkn.infra.entity.Attendances;
-import com.example.android.mmmrkn.infra.entity.Party;
-import com.example.android.mmmrkn.presentation.party.PartyCardRecyclerAdapter;
 
 import java.util.List;
 

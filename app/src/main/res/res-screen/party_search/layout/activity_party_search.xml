@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.example.android.mmmrkn.presentation.party.PartyCardRecyclerView
+    <com.example.android.mmmrkn.presentation.attendances_list.PartyCardRecyclerView
         android:id="@+id/recycler_party"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

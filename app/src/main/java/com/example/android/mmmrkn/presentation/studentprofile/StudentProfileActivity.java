@@ -7,8 +7,6 @@ import android.os.Bundle;
 
 import com.example.android.mmmrkn.R;
 import com.example.android.mmmrkn.databinding.ActivityStudentProfileBinding;
-import com.example.android.mmmrkn.di.ApplicationComponent;
-import com.example.android.mmmrkn.di.student_profile.ProfileComponent;
 import com.example.android.mmmrkn.di.student_profile.ProfileModule;
 import com.example.android.mmmrkn.infra.entity.StudentProfile;
 import com.example.android.mmmrkn.presentation.App;

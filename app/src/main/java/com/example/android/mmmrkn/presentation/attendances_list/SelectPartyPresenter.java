@@ -1,4 +1,4 @@
-package com.example.android.mmmrkn.presentation.party;
+package com.example.android.mmmrkn.presentation.attendances_list;
 
 import com.example.android.mmmrkn.infra.api.PartiesService;
 import com.example.android.mmmrkn.infra.entity.Party;

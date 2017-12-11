@@ -11,7 +11,6 @@ import android.widget.TextView;
 
 import com.example.android.mmmrkn.R;
 import com.example.android.mmmrkn.infra.entity.Attendances;
-import com.example.android.mmmrkn.presentation.party.PartyCardRecyclerAdapter;
 import com.example.android.mmmrkn.presentation.studentprofile.StudentProfileActivity;
 
 import java.util.List;
