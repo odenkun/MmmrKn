@@ -18,14 +18,14 @@ import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
 
-public class AttendancesPresenter extends Presenter{
+public class AttendancesListPresenter extends Presenter{
     private Contract contract;
 
     private AttendancesListRepository attendRepo;
     private PartyRepository partyRepo;
 
     @Inject
-    public  AttendancesPresenter(Contract contract,AttendancesListRepository attendancesListRepository, PartyRepository partyRepository){
+    public AttendancesListPresenter(Contract contract, AttendancesListRepository attendancesListRepository, PartyRepository partyRepository){
         this.contract = contract;
         this.attendRepo = attendancesListRepository;
         this.partyRepo = partyRepository;

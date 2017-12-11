@@ -1,27 +1,33 @@
 package com.example.android.mmmrkn.infra.entity;
 
+import com.github.gfx.android.orma.annotation.Column;
 import com.github.gfx.android.orma.annotation.PrimaryKey;
 import com.github.gfx.android.orma.annotation.Table;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-/**
- * Created by 15110016 on 2017/11/21.
- */
 
-public class EntryLog {
+@Table
+public class AttendancesLog {
+    
+    @PrimaryKey(auto = false)
     @SerializedName("attendanceId")
     @Expose
     private String attendanceId;
+    
+    @Column
     @SerializedName("time")
     @Expose
     private String time;
+    
     @SerializedName("condition")
     @Expose
     private String condition;
+    
     @SerializedName("detail")
     @Expose
     private String detail;
+    
     @SerializedName("teacherId")
     @Expose
     private String teacherId;

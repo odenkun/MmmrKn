@@ -8,7 +8,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.android.mmmrkn.R;
-import com.example.android.mmmrkn.di.attendancesList.AttendancesModule;
+import com.example.android.mmmrkn.di.attendancesList.AttendancesListModule;
 import com.example.android.mmmrkn.infra.entity.Attendances;
 import com.example.android.mmmrkn.infra.entity.Party;
 import com.example.android.mmmrkn.presentation.App;
@@ -20,11 +20,11 @@ import javax.inject.Inject;
 
 
 public class AttendancesListActivity extends AppCompatActivity
-        implements AttendancesPresenter.Contract,AttendancesDialog.Contract {
+        implements AttendancesListPresenter.Contract,AttendancesDialog.Contract {
     static final int TEST_DIALOG = 0;
 
     @Inject
-    AttendancesPresenter presenter;
+    AttendancesListPresenter presenter;
 
     List<Party> partyList;
 
@@ -34,7 +34,7 @@ public class AttendancesListActivity extends AppCompatActivity
         setContentView(R.layout.layout_attendances_recycler);
         ((App) getApplication())
                 .getComponent()
-                .plus(new AttendancesModule(this))
+                .plus(new AttendancesListModule(this))
                 .inject(this);
         //クラス一覧取得の通信
         presenter.fetchParties();

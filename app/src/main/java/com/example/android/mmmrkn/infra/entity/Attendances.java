@@ -9,9 +9,7 @@ import com.google.gson.annotations.SerializedName;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by 15110016 on 2017/11/20.
- */
+
 @Table
 public class Attendances {
 

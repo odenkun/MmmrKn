@@ -6,9 +6,7 @@ import com.github.gfx.android.orma.annotation.Table;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-/**
- * Created by 15110016 on 2017/11/20.
- */
+
 @Table
 public class Party {
 

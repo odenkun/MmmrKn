@@ -3,9 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.example.android.mmmrkn.presentation.attendances.AttendancesActivity">
 <!-- Binding Objects -->
-<data>
-    <variable name="student" type="com.example.android.mmmrkn.infra.entity.AttendancesStudent" />
-</data>
 <android.support.constraint.ConstraintLayout
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
