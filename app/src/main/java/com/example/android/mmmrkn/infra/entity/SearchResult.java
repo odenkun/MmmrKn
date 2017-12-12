@@ -1,19 +1,24 @@
 package com.example.android.mmmrkn.infra.entity;
 
+import com.github.gfx.android.orma.annotation.Column;
+import com.github.gfx.android.orma.annotation.PrimaryKey;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-/**
- * Created by 15110016 on 2017/11/20.
- */
 
-public class SearchResult {@SerializedName("studentId")
-@Expose
-private String studentId;
+public class SearchResult {
+    
+    @PrimaryKey(auto = false)
+    @SerializedName("studentId")
+    @Expose
+    private String studentId;
+   
+   @Column
     @SerializedName("name")
     @Expose
     private String name;
-    @SerializedName("picturePath")
+    
+   @SerializedName("picturePath")
     @Expose
     private String picturePath;
 

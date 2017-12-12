@@ -90,7 +90,7 @@ public class LoginActivity extends AppCompatActivity implements LoginPresenter.C
         //英数字で構成されることのチェック
         return password.matches ( "[0-9a-zA-Z]+" );
     }
-
+    
     @Override
     public void onAuthStart () {
         showProgress ( true );
@@ -160,4 +160,5 @@ public class LoginActivity extends AppCompatActivity implements LoginPresenter.C
         presenter.dispose ();
         super.onDestroy ();
     }
+    
 }

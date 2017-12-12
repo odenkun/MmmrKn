@@ -16,15 +16,15 @@ import timber.log.Timber;
 public class TeacherRepository {
     private TeacherService teacherService;
     private OrmaDatabase ormaDatabase;
-
+    
     @Inject
     public TeacherRepository ( TeacherService teacherService, OrmaDatabase ormaDatabase ) {
         this.teacherService = teacherService;
         this.ormaDatabase = ormaDatabase;
     }
-
+    
     public Single <List <Teacher>> getTeachers () {
-
+        
         Single <List <Teacher>> single = Single.create ( e -> e.onSuccess ( ormaDatabase.selectFromTeacher ().toList () ) );
         single = single.flatMap ( cachedList -> {
             //キャッシュに存在しない

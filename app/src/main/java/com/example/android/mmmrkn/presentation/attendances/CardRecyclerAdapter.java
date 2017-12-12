@@ -11,7 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.android.mmmrkn.R;
-import com.example.android.mmmrkn.infra.entity.AttendancesStudent;
+
 
 /**
  * Created by 15110012 on 2017/11/21.
@@ -20,7 +20,8 @@ import com.example.android.mmmrkn.infra.entity.AttendancesStudent;
 public class CardRecyclerAdapter extends RecyclerView.Adapter<CardRecyclerAdapter.ViewHolder>{
     private String[] list;
     private Context context;
-
+    
+    
     //listの中にvaluesのstringsを挿入
     public CardRecyclerAdapter(Context context, String[] stringArray) {
         super();
@@ -40,11 +41,20 @@ public class CardRecyclerAdapter extends RecyclerView.Adapter<CardRecyclerAdapte
         vh.imageView.setImageResource(R.mipmap.ic_launcher);
         //クリックしたときに移動
         vh.layout.setOnClickListener(view-> {
+            
+            
+           
             //activity
             AttendancesActivity activity = (AttendancesActivity)view.getContext();
+            //生徒情取得の通信を行う
+            //↓本番
+//            activity.insertProfile(list[position]);
+            //↓テスト用 園児名 松岡 泰秀
+            activity.insertProfile("bcbdc394-f8ab-42ab-b4b6-e88a9a369cd0");
+            
             //園児名操作用
             TextView name=activity.findViewById(R.id.txt_name);
-            name.setText(list[position]);
+            name.setText("");
             activity.judgment();
             TestAttendanceFragment fragment = (TestAttendanceFragment) activity.getSupportFragmentManager().findFragmentByTag(AttendancesActivity.TAG);
             fragment.dismiss();

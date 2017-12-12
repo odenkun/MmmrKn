@@ -3,7 +3,6 @@ package com.example.android.mmmrkn.infra.repository;
 import com.example.android.mmmrkn.infra.api.PartiesService;
 import com.example.android.mmmrkn.infra.entity.Attendances;
 import com.example.android.mmmrkn.infra.entity.OrmaDatabase;
-import com.example.android.mmmrkn.infra.entity.Party;
 import com.github.gfx.android.orma.Inserter;
 import com.github.gfx.android.orma.annotation.OnConflict;
 

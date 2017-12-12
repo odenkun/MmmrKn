@@ -7,9 +7,8 @@ import android.os.Bundle;
 
 import com.example.android.mmmrkn.R;
 import com.example.android.mmmrkn.databinding.ActivityStudentProfileBinding;
-import com.example.android.mmmrkn.di.ApplicationComponent;
-import com.example.android.mmmrkn.di.student_profile.ProfileComponent;
 import com.example.android.mmmrkn.di.student_profile.ProfileModule;
+import com.example.android.mmmrkn.infra.entity.AttendancesLog;
 import com.example.android.mmmrkn.infra.entity.StudentProfile;
 import com.example.android.mmmrkn.presentation.App;
 
@@ -40,13 +39,22 @@ public class StudentProfileActivity extends AppCompatActivity implements Student
         presenter.fetchProfile(studentId);
     }
     //画面への操作
+    
+    
+    //StudentProfileのBinding
     @Override
-    public void onFetchComplete(StudentProfile studentProfile){
+    public void onFetchProfileComplete(StudentProfile studentProfile) {
         ActivityStudentProfileBinding binding = DataBindingUtil.setContentView(this,R.layout.activity_student_profile);
-        //2017/11/24
         binding.setStudentProfile(studentProfile);
     }
-
+    
+    //AttendancesLogのBinding
+    @Override
+    public void onFetchAttendancesLogComplete(AttendancesLog attendancesLog) {
+        ActivityStudentProfileBinding binding = DataBindingUtil.setContentView(this,R.layout.activity_student_profile);
+        binding.setAttendancesLog(attendancesLog);
+    }
+    
     @Override
     protected  void onDestroy(){
         presenter.dispose();

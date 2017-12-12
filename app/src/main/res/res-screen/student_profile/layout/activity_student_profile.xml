@@ -4,7 +4,7 @@
     tools:context="com.example.android.mmmrkn.presentation.studentprofile.StudentProfileActivity">
     <data>
        <variable name="studentProfile" type="com.example.android.mmmrkn.infra.entity.StudentProfile"/>
-        <variable name="entryLog" type="com.example.android.mmmrkn.infra.entity.EntryLog"/>
+        <variable name="AttendancesLog" type="com.example.android.mmmrkn.infra.entity.AttendancesLog"/>
     </data>
 <android.support.constraint.ConstraintLayout
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -43,7 +43,7 @@
         android:layout_marginStart="4dp"
         android:layout_marginTop="220dp"
         android:gravity="center"
-        android:text="@{entryLog.detail}"
+        android:text="@{AttendancesLog.detail}"
         android:textSize="20dp"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -57,7 +57,7 @@
         android:layout_marginRight="8dp"
         android:layout_marginTop="16dp"
         android:gravity="center"
-        android:text="@{studentProfile.partyId}"
+        android:text="@{studentProfile.party.name}"
         android:textSize="21dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"

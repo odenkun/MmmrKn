@@ -1,11 +1,7 @@
 package com.example.android.mmmrkn.infra.api;
 
-import com.example.android.mmmrkn.infra.entity.EntryLog;
+import com.example.android.mmmrkn.infra.entity.AttendancesLog;
 import com.example.android.mmmrkn.infra.entity.StudentProfile;
-
-import java.util.Date;
-import java.util.List;
-import java.util.concurrent.atomic.DoubleAccumulator;
 
 import io.reactivex.Completable;
 import io.reactivex.Single;
@@ -27,8 +23,8 @@ public interface StudentsService {
     // 園児の指定した日付の登園ログをすべて取得
     //通信番号⑨
     @GET("students/{studentId}/date/{date}")
-    Single<EntryLog>getEntryLog(@Path("studentId")String studentId,
-                                   @Path("date")String date);
+    Single<AttendancesLog> getAttendanceLog(@Path("studentId")String studentId,
+                                            @Path("date")String date);
 
 
     //園児の登園の登録

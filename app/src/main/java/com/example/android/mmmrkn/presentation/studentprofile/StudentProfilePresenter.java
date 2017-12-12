@@ -1,8 +1,12 @@
 package com.example.android.mmmrkn.presentation.studentprofile;
 
 import com.example.android.mmmrkn.infra.api.StudentsService;
+import com.example.android.mmmrkn.infra.entity.AttendancesLog;
 import com.example.android.mmmrkn.infra.entity.StudentProfile;
 import com.example.android.mmmrkn.presentation.Presenter;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.inject.Inject;
 
@@ -11,7 +15,8 @@ import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
 /**
- * Created by 15110016 on 2017/11/21.
+ * Created by 友末 on 2017/11/21.
+ *
  */
 
 public class StudentProfilePresenter extends Presenter{
@@ -33,17 +38,34 @@ public class StudentProfilePresenter extends Presenter{
         if (this.hasDisposables ()) {
             return;
         }
-
+        // 現在の時刻を取得
+        Date date = new Date();
+        // 表示形式を設定
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy'-'MM'-'dd");
+        String today = sdf.format(date);
+        
+        
         disposables.add(studentsService.getStudentProfile(studentId)
         .subscribeOn(Schedulers.io ())
         .observeOn(AndroidSchedulers.mainThread())
         .subscribe(studentProfile->{
             Timber.d("プロフィール取得");
-            contract.onFetchComplete(studentProfile);
+            contract.onFetchProfileComplete(studentProfile);
         },e->{
             Timber.e(e);
-            contract.onFetchComplete(null);
+            contract.onFetchProfileComplete(null);
         }));
+        
+        disposables.add(studentsService.getAttendanceLog(studentId,today)
+                .subscribeOn(Schedulers.io ())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(AttendanceLog->{
+                    Timber.d("登園ログ取得");
+                    contract.onFetchAttendancesLogComplete(AttendanceLog);
+                },e->{
+                    Timber.e(e);
+                    contract.onFetchAttendancesLogComplete(null);
+                }));
     }
     //参照の切断
     @Override
@@ -55,9 +77,15 @@ public class StudentProfilePresenter extends Presenter{
 
     public interface Contract {
         /**
-         *
-         * @param  sProfile
+         * 
+         * @param studentProfile
          */
-        void  onFetchComplete (StudentProfile sProfile);
+        void  onFetchProfileComplete (StudentProfile studentProfile);
+    
+        /**
+         *
+         * @param attendancesLog
+         */
+        void  onFetchAttendancesLogComplete(AttendancesLog attendancesLog);
     }
 }
