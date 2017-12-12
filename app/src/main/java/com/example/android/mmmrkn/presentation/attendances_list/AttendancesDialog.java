@@ -10,20 +10,12 @@ import android.view.View;
 
 import com.example.android.mmmrkn.R;
 
-import com.example.android.mmmrkn.infra.entity.Attendances;
 import com.example.android.mmmrkn.infra.entity.Party;
-import com.example.android.mmmrkn.infra.repository.PartyRepository;
 import com.example.android.mmmrkn.presentation.App;
 import com.example.android.mmmrkn.presentation.party.PartyCardRecyclerView;
 
 
 import java.util.List;
-
-import javax.inject.Inject;
-
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.schedulers.Schedulers;
-import timber.log.Timber;
 
 //クラスを選ぶダイアログ。出席リストの上に表示される
 public class AttendancesDialog extends DialogFragment {

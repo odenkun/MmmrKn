@@ -1,8 +1,6 @@
 package com.example.android.mmmrkn.presentation.attendances_list;
 
-import android.content.Context;
-
-import com.example.android.mmmrkn.infra.entity.Attendances;
+import com.example.android.mmmrkn.infra.entity.Attendance;
 import com.example.android.mmmrkn.infra.entity.Party;
 import com.example.android.mmmrkn.infra.repository.AttendancesListRepository;
 import com.example.android.mmmrkn.infra.repository.PartyRepository;
@@ -64,7 +62,7 @@ public class AttendancesListPresenter extends Presenter{
          *
          * @param a 通信結果の保育士の一覧
          */
-        void onEntryListFetched ( List<Attendances> a );
+        void onEntryListFetched ( List<Attendance> a );
         void onPartyListFetch ( List<Party> a );
     }
 }

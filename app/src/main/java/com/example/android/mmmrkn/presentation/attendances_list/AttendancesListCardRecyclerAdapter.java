@@ -10,24 +10,23 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.android.mmmrkn.R;
-import com.example.android.mmmrkn.infra.entity.Attendances;
-import com.example.android.mmmrkn.presentation.party.PartyCardRecyclerAdapter;
+import com.example.android.mmmrkn.infra.entity.Attendance;
 import com.example.android.mmmrkn.presentation.studentprofile.StudentProfileActivity;
 
 import java.util.List;
 
 public class AttendancesListCardRecyclerAdapter extends RecyclerView.Adapter<AttendancesListCardRecyclerAdapter.ViewHolder> {
     private Context context;
-    private List<Attendances> attendances;
-    public AttendancesListCardRecyclerAdapter(Context context,List<Attendances> attendancesArray){
+    private List<Attendance> attendance;
+    public AttendancesListCardRecyclerAdapter(Context context,List<Attendance> attendanceArray){
         super();
-        this.attendances = attendancesArray;
+        this.attendance = attendanceArray;
         this.context =context;
     }
     @Override
     public int getItemCount() {
-        if (attendances != null) {
-            return attendances.size();
+        if (attendance != null) {
+            return attendance.size();
         } else {
             return 0;
         }
@@ -37,16 +36,16 @@ public class AttendancesListCardRecyclerAdapter extends RecyclerView.Adapter<Att
     @Override
     public void onBindViewHolder(AttendancesListCardRecyclerAdapter.ViewHolder vh, final int position) {
         //サイズ、nullチェック
-        if (attendances != null && attendances.size() > position && attendances.get(position) != null) {
+        if (attendance != null && attendance.size() > position && attendance.get(position) != null) {
             //Ormaから持ってきたデータ代入
-            vh.name.setText(attendances.get(position).getName());
+            vh.name.setText(attendance.get(position).getName());
         }
         // クリック時、モード選択画面に移動
         vh.layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, StudentProfileActivity.class);
-                intent.putExtra("studentId",attendances.get(position).getStudentId());
+                intent.putExtra("studentId", attendance.get(position).getStudentId());
                 context.startActivity(intent);
             }
         });

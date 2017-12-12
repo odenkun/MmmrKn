@@ -11,7 +11,7 @@ import java.util.List;
 
 
 @Table
-public class Attendances {
+public class Attendance {
 
     @PrimaryKey(auto = false)
     @SerializedName("studentId")

@@ -9,7 +9,7 @@ import android.widget.Toast;
 
 import com.example.android.mmmrkn.R;
 import com.example.android.mmmrkn.di.attendancesList.AttendancesListModule;
-import com.example.android.mmmrkn.infra.entity.Attendances;
+import com.example.android.mmmrkn.infra.entity.Attendance;
 import com.example.android.mmmrkn.infra.entity.Party;
 import com.example.android.mmmrkn.presentation.App;
 
@@ -70,10 +70,10 @@ public class AttendancesListActivity extends AppCompatActivity
 
     //Ormaから生徒一覧をListに代入
     @Override
-    public void onEntryListFetched(List<Attendances> attendancesList) {
+    public void onEntryListFetched(List<Attendance> attendanceList) {
         AttendancesListCardRecyclerView cardRecyclerView = (AttendancesListCardRecyclerView) findViewById(R.id.recycler_attendances);
 
-        cardRecyclerView.onStudentListFetch(this, attendancesList);
+        cardRecyclerView.onStudentListFetch(this, attendanceList);
         //データとしてlog出力なし
     }
 

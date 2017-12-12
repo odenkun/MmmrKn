@@ -1,6 +1,6 @@
 package com.example.android.mmmrkn.infra.api;
 
-import com.example.android.mmmrkn.infra.entity.Attendances;
+import com.example.android.mmmrkn.infra.entity.Attendance;
 import com.example.android.mmmrkn.infra.entity.Party;
 import com.example.android.mmmrkn.infra.entity.SearchResult;
 
@@ -31,7 +31,7 @@ public interface PartiesService {
     //クラスごとの当日の園児たちの登降園記録の一覧取得
     //通信番号⑦
     @GET("parties/{partyId}/students")
-    Single<List<Attendances>>getEntryList(@Path("partyId") String PartyId);
+    Single<List<Attendance>>getEntryList(@Path("partyId") String PartyId);
 
     //あだ名・本名から推測される園児の一覧取得
     //通信番号⑫

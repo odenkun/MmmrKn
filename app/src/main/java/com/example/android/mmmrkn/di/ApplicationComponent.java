@@ -14,7 +14,6 @@ import com.example.android.mmmrkn.di.student_profile.ProfileComponent;
 import com.example.android.mmmrkn.di.student_profile.ProfileModule;
 import com.example.android.mmmrkn.di.teacher.TeacherComponent;
 import com.example.android.mmmrkn.di.teacher.TeacherModule;
-import com.example.android.mmmrkn.infra.entity.Attendances;
 import com.example.android.mmmrkn.presentation.attendances_list.AttendancesDialog;
 
 import javax.inject.Singleton;

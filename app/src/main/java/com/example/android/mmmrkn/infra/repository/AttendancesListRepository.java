@@ -1,7 +1,7 @@
 package com.example.android.mmmrkn.infra.repository;
 
 import com.example.android.mmmrkn.infra.api.PartiesService;
-import com.example.android.mmmrkn.infra.entity.Attendances;
+import com.example.android.mmmrkn.infra.entity.Attendance;
 import com.example.android.mmmrkn.infra.entity.OrmaDatabase;
 import com.github.gfx.android.orma.Inserter;
 import com.github.gfx.android.orma.annotation.OnConflict;
@@ -26,9 +26,9 @@ public class AttendancesListRepository {
     this.ormaDatabase = ormaDatabase;
     this.partiesService = partiesService;
     }
-    public  Single<List<Attendances>> getEntryList(String partyId){
+    public  Single<List<Attendance>> getEntryList(String partyId){
 
-        Single<List<Attendances>> single = Single.create(e -> e.onSuccess(ormaDatabase.selectFromAttendances().toList()));
+        Single<List<Attendance>> single = Single.create(e -> e.onSuccess(ormaDatabase.selectFromAttendance().toList()));
         single = single.flatMap( cachedList ->{
             //キャッシュに保存しない
             if(cachedList == null || cachedList.isEmpty()){
@@ -37,7 +37,7 @@ public class AttendancesListRepository {
                         //成功時はキャシュ
                         .doOnSuccess( attendances -> {
                             Timber.d("start insert");
-                            Inserter<Attendances> inserter = ormaDatabase.prepareInsertIntoAttendances(OnConflict.REPLACE);
+                            Inserter<Attendance> inserter = ormaDatabase.prepareInsertIntoAttendance(OnConflict.REPLACE);
                             inserter.executeAll(attendances);
                         }) ;
             } else{
