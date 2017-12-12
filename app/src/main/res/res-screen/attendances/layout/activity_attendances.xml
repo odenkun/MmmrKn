@@ -26,7 +26,7 @@
         android:layout_marginBottom="368dp"
         android:layout_marginRight="64dp"
         android:layout_marginTop="8dp"
-        android:text="@{student.studentId}"
+        android:text="園児名"
         android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
