@@ -1,4 +1,4 @@
-package com.example.android.mmmrkn.presentation.attendances;
+package com.example.android.mmmrkn.presentation.attendances.dialog;
 
 import android.content.Context;
 import android.content.res.Resources;
@@ -8,9 +8,6 @@ import android.util.AttributeSet;
 
 import com.example.android.mmmrkn.R;
 
-/**
- * Created by 15110012 on 2017/11/21.
- */
 
 public class CardRecyclerView extends RecyclerView {
     public CardRecyclerView(Context context, AttributeSet attrs) {

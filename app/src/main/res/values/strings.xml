@@ -14,6 +14,10 @@
 
     <string name="error_incorrect">IDまたはパスワードが違います</string>
     <string name="button">Button</string>
+    <string name="attend">登園</string>
+    <string name="decline">拒否</string>
+    <string name="condition_good">良好</string>
+    <string name="condition_bad">不調</string>
     <string-array name="dummy">
         <item>北海道</item>
         <item>青森県</item>

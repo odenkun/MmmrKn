@@ -107,6 +107,7 @@ public class ApplicationModule {
 
                 //WebAPIのFQDN
                 .baseUrl ( "https://mmmr-mock-api.mybluemix.net" )
+//                .baseUrl ( "https://192.168.20" )
 
                 //JSONとPOJOの相互変換を行うものに、gsonを指定
                 .addConverterFactory ( GsonConverterFactory.create ( gson ) )
