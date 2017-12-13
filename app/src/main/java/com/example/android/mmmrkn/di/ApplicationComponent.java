@@ -10,8 +10,6 @@ import com.example.android.mmmrkn.di.login.LoginModule;
 import com.example.android.mmmrkn.di.mode.ModeComponent;
 import com.example.android.mmmrkn.di.mode.ModeModule;
 import com.example.android.mmmrkn.di.start.StartComponent;
-import com.example.android.mmmrkn.di.student_profile.ProfileComponent;
-import com.example.android.mmmrkn.di.student_profile.ProfileModule;
 import com.example.android.mmmrkn.di.teacher.TeacherComponent;
 import com.example.android.mmmrkn.di.teacher.TeacherModule;
 import com.example.android.mmmrkn.presentation.attendances_list.AttendancesDialog;
@@ -29,7 +27,6 @@ public interface ApplicationComponent {
     LoginComponent plus( LoginModule m);
     StartComponent plus();
     TeacherComponent plus( TeacherModule t);
-    ProfileComponent plus(ProfileModule p);
     AttendancesListComponent plus(AttendancesListModule al);
     ModeComponent plus(ModeModule n);
     AttendancesComponent plus(AttendancesModule a);

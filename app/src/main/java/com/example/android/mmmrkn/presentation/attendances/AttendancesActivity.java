@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.example.android.mmmrkn.R;
 import com.example.android.mmmrkn.di.attendances.AttendancesModule;
-import com.example.android.mmmrkn.infra.entity.StudentProfile;
+import com.example.android.mmmrkn.infra.entity.Student;
 import com.example.android.mmmrkn.presentation.App;
 import com.example.android.mmmrkn.presentation.mode_select.ModeActivity;
 
@@ -113,7 +113,7 @@ public class AttendancesActivity extends AppCompatActivity implements Attendance
     }
     
     @Override
-    public void onFetchComplete(StudentProfile sProfile) {
+    public void onFetchComplete(Student sProfile) {
     textname.setText(sProfile.getName());
     textparty.setText(sProfile.getParty().getName());
     }

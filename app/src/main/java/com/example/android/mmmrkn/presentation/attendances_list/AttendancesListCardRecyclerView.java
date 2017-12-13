@@ -5,7 +5,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 
-import com.example.android.mmmrkn.infra.entity.Attendance;
+import com.example.android.mmmrkn.infra.entity.Student;
 
 import java.util.List;
 
@@ -23,8 +23,8 @@ public class AttendancesListCardRecyclerView extends RecyclerView{
         setLayoutManager(new LinearLayoutManager(context));
     }
 
-    public  void onStudentListFetch(Context context, List<Attendance> attendanceList){
-        AttendancesListCardRecyclerAdapter cra = new AttendancesListCardRecyclerAdapter(context, attendanceList);
+    public  void onStudentListFetch(Context context, List<Student> studentTList){
+        AttendancesListCardRecyclerAdapter cra = new AttendancesListCardRecyclerAdapter(context, studentTList);
         this.setAdapter(cra);
     }
 }

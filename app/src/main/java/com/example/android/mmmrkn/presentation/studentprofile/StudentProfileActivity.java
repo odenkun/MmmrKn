@@ -6,58 +6,29 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.example.android.mmmrkn.R;
+import com.example.android.mmmrkn.databinding.ActivityAttendancesBinding;
 import com.example.android.mmmrkn.databinding.ActivityStudentProfileBinding;
-import com.example.android.mmmrkn.di.student_profile.ProfileModule;
-import com.example.android.mmmrkn.infra.entity.AttendancesLog;
-import com.example.android.mmmrkn.infra.entity.StudentProfile;
+import com.example.android.mmmrkn.infra.entity.Attendance;
+import com.example.android.mmmrkn.infra.entity.Student;
 import com.example.android.mmmrkn.presentation.App;
 
 import javax.inject.Inject;
 
 import timber.log.Timber;
 
-public class StudentProfileActivity extends AppCompatActivity implements StudentProfilePresenter.Contract {
-
-    @Inject
-    StudentProfilePresenter presenter;
+public class StudentProfileActivity extends AppCompatActivity {
+    
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_student_profile);
-
-        ( (App) getApplication () )
-                .getComponent ()
-                .plus(new ProfileModule(this))
-                .inject(this);
+        ActivityStudentProfileBinding binding = DataBindingUtil.setContentView(this,R.layout.activity_student_profile);
 
         Intent intent = this.getIntent();
         //画面遷移時のstudentIdデータの受け取り処理
-        String studentId = intent.getStringExtra("studentId");
-        Timber.d("studentId"+studentId);
-
-        presenter.fetchProfile(studentId);
+        Student student = (Student) intent.getSerializableExtra("student");
+        Timber.d(student.toString());
+        binding.setStudent(student);
     }
     //画面への操作
-    
-    
-    //StudentProfileのBinding
-    @Override
-    public void onFetchProfileComplete(StudentProfile studentProfile) {
-        ActivityStudentProfileBinding binding = DataBindingUtil.setContentView(this,R.layout.activity_student_profile);
-        binding.setStudentProfile(studentProfile);
-    }
-    
-    //AttendancesLogのBinding
-    @Override
-    public void onFetchAttendancesLogComplete(AttendancesLog attendancesLog) {
-        ActivityStudentProfileBinding binding = DataBindingUtil.setContentView(this,R.layout.activity_student_profile);
-        binding.setAttendancesLog(attendancesLog);
-    }
-    
-    @Override
-    protected  void onDestroy(){
-        presenter.dispose();
-        super.onDestroy();
-    }
 }

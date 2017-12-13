@@ -3,8 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.example.android.mmmrkn.presentation.studentprofile.StudentProfileActivity">
     <data>
-       <variable name="studentProfile" type="com.example.android.mmmrkn.infra.entity.StudentProfile"/>
-        <variable name="AttendancesLog" type="com.example.android.mmmrkn.infra.entity.AttendancesLog"/>
+       <variable name="student" type="com.example.android.mmmrkn.infra.entity.Student"/>
     </data>
 <android.support.constraint.ConstraintLayout
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -17,7 +16,7 @@
         android:layout_height="40dp"
         android:layout_marginTop="8dp"
         android:gravity="center"
-        android:text="@{studentProfile.name}"
+        android:text="@{student.name}"
         android:textSize="30dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -43,7 +42,7 @@
         android:layout_marginStart="4dp"
         android:layout_marginTop="220dp"
         android:gravity="center"
-        android:text="@{AttendancesLog.detail}"
+        android:text="@{student.attendance.detail}"
         android:textSize="20dp"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -57,7 +56,7 @@
         android:layout_marginRight="8dp"
         android:layout_marginTop="16dp"
         android:gravity="center"
-        android:text="@{studentProfile.party.name}"
+        android:text="@{student.party.name}"
         android:textSize="21dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"

@@ -2,9 +2,7 @@ package com.example.android.mmmrkn.presentation.teacher;
 
 import com.example.android.mmmrkn.infra.api.TeacherService;
 import com.example.android.mmmrkn.infra.entity.Teacher;
-import com.example.android.mmmrkn.infra.repository.TeacherRepository;
 import com.example.android.mmmrkn.presentation.Presenter;
-import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersistor;
 
 import java.util.List;
 
@@ -12,20 +10,19 @@ import javax.inject.Inject;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
-import okhttp3.Cookie;
 import timber.log.Timber;
 
 public class SelectTeacherPresenter extends Presenter {
-
+    
+    private final TeacherService teacherService;
     private Contract contract;
 
-    private TeacherRepository teacherRepository;
 
 
     @Inject
-    public SelectTeacherPresenter ( Contract contract, TeacherRepository teacherRepository ) {
+    public SelectTeacherPresenter ( Contract contract, TeacherService teacherService ) {
         this.contract = contract;
-        this.teacherRepository = teacherRepository;
+        this.teacherService = teacherService;
     }
 
     /**
@@ -33,7 +30,7 @@ public class SelectTeacherPresenter extends Presenter {
      */
     public void fetchTeachers () {
         disposables.add (
-                teacherRepository.getTeachers ()
+                teacherService.getTeachers ()
                         .subscribeOn ( Schedulers.io () )
                         .observeOn ( AndroidSchedulers.mainThread () )
                         .subscribe ( teacherList -> {

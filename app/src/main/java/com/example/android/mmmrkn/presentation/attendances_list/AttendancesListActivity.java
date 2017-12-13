@@ -9,8 +9,8 @@ import android.widget.Toast;
 
 import com.example.android.mmmrkn.R;
 import com.example.android.mmmrkn.di.attendancesList.AttendancesListModule;
-import com.example.android.mmmrkn.infra.entity.Attendance;
 import com.example.android.mmmrkn.infra.entity.Party;
+import com.example.android.mmmrkn.infra.entity.Student;
 import com.example.android.mmmrkn.presentation.App;
 
 import java.util.List;
@@ -19,8 +19,7 @@ import javax.inject.Inject;
 
 
 
-public class AttendancesListActivity extends AppCompatActivity
-        implements AttendancesListPresenter.Contract,AttendancesDialog.Contract {
+public class AttendancesListActivity extends AppCompatActivity implements AttendancesListPresenter.Contract,AttendancesDialog.Contract {
     static final int TEST_DIALOG = 0;
 
     @Inject
@@ -70,13 +69,14 @@ public class AttendancesListActivity extends AppCompatActivity
 
     //Ormaから生徒一覧をListに代入
     @Override
-    public void onEntryListFetched(List<Attendance> attendanceList) {
+    public void onEntryListFetched(List<Student> studentTList) {
         AttendancesListCardRecyclerView cardRecyclerView = (AttendancesListCardRecyclerView) findViewById(R.id.recycler_attendances);
 
-        cardRecyclerView.onStudentListFetch(this, attendanceList);
+        cardRecyclerView.onStudentListFetch(this, studentTList);
         //データとしてlog出力なし
     }
-
+    
+    
     @Override
     public void onPartyListFetch(List<Party> partyList) {
         //ぐるぐるとめる

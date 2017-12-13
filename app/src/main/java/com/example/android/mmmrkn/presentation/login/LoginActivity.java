@@ -100,7 +100,7 @@ public class LoginActivity extends AppCompatActivity implements LoginPresenter.C
     public void onAuthFinish ( boolean result ) {
 
         showProgress ( result );
-        Timber.d("result is" + result);
+        Timber.d("result is%s", result);
         if (result) {
             Intent intent = new Intent ( this, SelectTeacherActivity.class );
             startActivity(intent);

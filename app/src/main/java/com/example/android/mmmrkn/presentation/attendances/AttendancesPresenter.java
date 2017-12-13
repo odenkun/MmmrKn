@@ -1,7 +1,7 @@
 package com.example.android.mmmrkn.presentation.attendances;
 
 import com.example.android.mmmrkn.infra.api.StudentsService;
-import com.example.android.mmmrkn.infra.entity.StudentProfile;
+import com.example.android.mmmrkn.infra.entity.Student;
 import com.example.android.mmmrkn.presentation.Presenter;
 
 import javax.inject.Inject;
@@ -50,6 +50,6 @@ public class AttendancesPresenter extends Presenter{
 	}
 	
 	public interface Contract{
-		void  onFetchComplete (StudentProfile sProfile);
+		void  onFetchComplete (Student sProfile);
 	}
 }
