@@ -6,14 +6,18 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.android.mmmrkn.R;
 import com.example.android.mmmrkn.infra.entity.Attendances;
 import com.example.android.mmmrkn.presentation.studentprofile.StudentProfileActivity;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
+
+import timber.log.Timber;
 
 public class AttendancesListCardRecyclerAdapter extends RecyclerView.Adapter<AttendancesListCardRecyclerAdapter.ViewHolder> {
     private Context context;
@@ -36,11 +40,18 @@ public class AttendancesListCardRecyclerAdapter extends RecyclerView.Adapter<Att
     @Override
     public void onBindViewHolder(AttendancesListCardRecyclerAdapter.ViewHolder vh, final int position) {
         //サイズ、nullチェック
+
         if (attendances != null && attendances.size() > position && attendances.get(position) != null) {
             //Ormaから持ってきたデータ代入
             vh.name.setText(attendances.get(position).getName());
+            String picPas = "https://mmmr-mock-api.mybluemix.net/images/students/" + attendances.get(position).getPicturePath();
+            Timber.d(picPas);
+//            Picasso.with(context)
+//                    .load(picPas)
+//                    .fit()
+//                    .into(vh.picture);
         }
-        // クリック時、モード選択画面に移動
+        // クリック時、園児詳細画面に移動
         vh.layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -55,18 +66,20 @@ public class AttendancesListCardRecyclerAdapter extends RecyclerView.Adapter<Att
     @Override
     public AttendancesListCardRecyclerAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(context);
-        View v = layoutInflater.inflate(R.layout.party_recycler, parent, false);
+        View v = layoutInflater.inflate(R.layout.student_recycler, parent, false);
         AttendancesListCardRecyclerAdapter.ViewHolder viewHolder = new AttendancesListCardRecyclerAdapter.ViewHolder(v);
         return viewHolder;
     }
     //Viewフォルダの初期化設定
     static class ViewHolder extends RecyclerView.ViewHolder {
         TextView name;
+        ImageView picture;
         LinearLayout layout;
 
         public ViewHolder(View v) {
             super(v);
-            name =v.findViewById(R.id.textView_party);
+            name =v.findViewById(R.id.textView_name);
+            picture =v.findViewById(R.id.imageview_picture);
             layout = v.findViewById(R.id.layout);
         }
     }

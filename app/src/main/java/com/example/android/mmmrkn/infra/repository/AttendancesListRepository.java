@@ -32,7 +32,7 @@ public class AttendancesListRepository {
         Single<List<Attendances>> single = Single.create(e -> e.onSuccess(ormaDatabase.selectFromAttendances().toList()));
         single = single.flatMap( cachedList ->{
             //キャッシュに保存しない
-            if(cachedList == null || cachedList.isEmpty()){
+            if(cachedList == null || cachedList.isEmpty()||cachedList!=ormaDatabase.selectFromAttendances().toList()){
                 Timber.d("attendancesList cache doesn't exist");
                 return partiesService.getEntryList(partyId)
                         //成功時はキャシュ

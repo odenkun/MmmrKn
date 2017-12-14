@@ -100,6 +100,6 @@ public class AttendancesListActivity extends AppCompatActivity
     public void onSelectParty(String partyId,String partyName) {
         presenter.fetchEntryList(partyId);
         TextView viewParty = this.findViewById(R.id.textView_party);
-        viewParty.setText(partyName);
+        viewParty.setText(partyName+"組");
     }
 }
