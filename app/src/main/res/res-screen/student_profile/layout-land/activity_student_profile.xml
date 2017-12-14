@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.example.android.mmmrkn.presentation.studentprofile.StudentProfileActivity">
     <data>
-       <variable name="studentProfile" type="com.example.android.mmmrkn.infra.entity.StudentProfile"/>
-        <variable name="entryLog" type="com.example.android.mmmrkn.infra.entity.EntryLog"/>
+       <variable name="studentProfile" type="com.example.android.mmmrkn.infra.entity.Student"/>
     </data>
 <android.support.constraint.ConstraintLayout
     android:layout_width="match_parent"

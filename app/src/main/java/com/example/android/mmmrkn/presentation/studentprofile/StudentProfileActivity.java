@@ -6,13 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.example.android.mmmrkn.R;
-import com.example.android.mmmrkn.databinding.ActivityAttendancesBinding;
 import com.example.android.mmmrkn.databinding.ActivityStudentProfileBinding;
-import com.example.android.mmmrkn.infra.entity.Attendance;
 import com.example.android.mmmrkn.infra.entity.Student;
-import com.example.android.mmmrkn.presentation.App;
-
-import javax.inject.Inject;
 
 import timber.log.Timber;
 
