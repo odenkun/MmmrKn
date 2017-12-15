@@ -91,8 +91,6 @@ public class LoginActivity extends AppCompatActivity implements LoginPresenter.C
         return password.matches ( "[0-9a-zA-Z]+" );
     }
 
-
-
     @Override
     public void onAuthStart () {
         showProgress ( true );
@@ -102,7 +100,7 @@ public class LoginActivity extends AppCompatActivity implements LoginPresenter.C
     public void onAuthFinish ( boolean result ) {
 
         showProgress ( result );
-        Timber.d("result is" + result);
+        Timber.d("result is%s", result);
         if (result) {
             Intent intent = new Intent ( this, SelectTeacherActivity.class );
             startActivity(intent);
@@ -162,4 +160,5 @@ public class LoginActivity extends AppCompatActivity implements LoginPresenter.C
         presenter.dispose ();
         super.onDestroy ();
     }
+
 }

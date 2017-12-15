@@ -48,7 +48,7 @@ public class GoHomeActivity extends AppCompatActivity {
         //顔写真
         //TextView TextParty = findViewById(R.id.Text_Party);
         //組の名前
-        TextView TextName = findViewById(R.id.Text_Name);
+        TextView TextName = findViewById(R.id.text_Name);
         //児童の名前
         //TextView TextCondition = findViewById(R.id.Text_Condition);
         //体調について

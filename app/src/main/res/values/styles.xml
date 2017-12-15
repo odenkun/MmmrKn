@@ -8,4 +8,8 @@
         <item name="colorAccent">@color/colorAccent</item>
 
     </style>
+    <style name="EditTextColor" >
+        <item name="colorControlActivated">@color/colorUnderLine</item>
+        <item name="colorControlNormal">@color/colorUnderLine</item>
+    </style>
 </resources>

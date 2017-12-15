@@ -1,15 +1,15 @@
 package com.example.android.mmmrkn.di;
 
 
-import com.example.android.mmmrkn.di.attendancesList.AttendancesComponent;
-import com.example.android.mmmrkn.di.attendancesList.AttendancesModule;
+import com.example.android.mmmrkn.di.attendances.AttendancesComponent;
+import com.example.android.mmmrkn.di.attendances.AttendancesModule;
+import com.example.android.mmmrkn.di.attendancesList.AttendancesListComponent;
+import com.example.android.mmmrkn.di.attendancesList.AttendancesListModule;
 import com.example.android.mmmrkn.di.login.LoginComponent;
 import com.example.android.mmmrkn.di.login.LoginModule;
 import com.example.android.mmmrkn.di.mode.ModeComponent;
 import com.example.android.mmmrkn.di.mode.ModeModule;
 import com.example.android.mmmrkn.di.start.StartComponent;
-import com.example.android.mmmrkn.di.student_profile.ProfileComponent;
-import com.example.android.mmmrkn.di.student_profile.ProfileModule;
 import com.example.android.mmmrkn.di.teacher.TeacherComponent;
 import com.example.android.mmmrkn.di.teacher.TeacherModule;
 import com.example.android.mmmrkn.presentation.attendances_list.AttendancesDialog;
@@ -27,8 +27,8 @@ public interface ApplicationComponent {
     LoginComponent plus( LoginModule m);
     StartComponent plus();
     TeacherComponent plus( TeacherModule t);
-    ProfileComponent plus(ProfileModule p);
-    AttendancesComponent plus(AttendancesModule a);
+    AttendancesListComponent plus(AttendancesListModule al);
     ModeComponent plus(ModeModule n);
+    AttendancesComponent plus(AttendancesModule a);
     void inject(AttendancesDialog d);
 }

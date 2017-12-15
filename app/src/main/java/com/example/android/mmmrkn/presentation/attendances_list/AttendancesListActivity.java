@@ -1,21 +1,17 @@
 package com.example.android.mmmrkn.presentation.attendances_list;
 
-import android.arch.lifecycle.ViewModelProvider;
-import android.arch.lifecycle.ViewModelProviders;
-import android.content.res.Configuration;
-import android.content.res.Resources;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.android.mmmrkn.R;
-import com.example.android.mmmrkn.di.attendancesList.AttendancesModule;
-import com.example.android.mmmrkn.infra.entity.Attendances;
+import com.example.android.mmmrkn.di.attendancesList.AttendancesListModule;
 import com.example.android.mmmrkn.infra.entity.Party;
+import com.example.android.mmmrkn.infra.entity.Student;
 import com.example.android.mmmrkn.infra.entity.StudentProfile;
 import com.example.android.mmmrkn.presentation.App;
 import com.example.android.mmmrkn.presentation.gohome.TestDialogFragment;
@@ -26,8 +22,7 @@ import javax.inject.Inject;
 
 
 
-public class AttendancesListActivity extends AppCompatActivity
-        implements AttendancesPresenter.Contract,AttendancesDialog.Contract {
+public class AttendancesListActivity extends AppCompatActivity implements AttendancesListPresenter.Contract,AttendancesDialog.Contract {
     static final int TEST_DIALOG = 0;
 
     private static final String STUDENT_KEY = "STUDENTKEY";
@@ -37,19 +32,17 @@ public class AttendancesListActivity extends AppCompatActivity
     private List<Party> parties;
 
     @Inject
-    AttendancesPresenter presenter;
+    AttendancesListPresenter presenter;
 
     List<Party> partyList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.layout_attendances_recycler);
-
         ((App) getApplication())
                 .getComponent()
-                .plus(new AttendancesModule(this))
+                .plus(new AttendancesListModule(this))
                 .inject(this);
         parties = (List<Party>) savedInstanceState.getSerializable(PARTY_KEY);
 
@@ -108,7 +101,7 @@ public class AttendancesListActivity extends AppCompatActivity
     public void onEntryListFetched(List<Attendances> attendancesList) {
         AttendancesListCardRecyclerView cardRecyclerView = findViewById(R.id.recycler_attendances);
 
-        cardRecyclerView.onStudentListFetch(this, attendancesList);
+        cardRecyclerView.onStudentListFetch(this, studentTList);
         //データとしてlog出力なし
     }
 
@@ -123,7 +116,6 @@ public class AttendancesListActivity extends AppCompatActivity
         }
     }
 
-
     @Override
     protected void onDestroy() {
         //通信の結果を受け取らなくする
@@ -132,7 +124,9 @@ public class AttendancesListActivity extends AppCompatActivity
     }
 
     @Override
-    public void onSelectParty(String partyId) {
+    public void onSelectParty(String partyId,String partyName) {
         presenter.fetchEntryList(partyId);
+        TextView viewParty = this.findViewById(R.id.textView_party);
+        viewParty.setText(partyName+"組");
     }
 }

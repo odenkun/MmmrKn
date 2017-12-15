@@ -17,7 +17,6 @@ import javax.inject.Inject;
 import timber.log.Timber;
 
 public class SelectTeacherActivity extends AppCompatActivity implements SelectTeacherPresenter.Contract {
-    Intent intent;
     @Inject
     SelectTeacherPresenter presenter;
 
@@ -26,7 +25,6 @@ public class SelectTeacherActivity extends AppCompatActivity implements SelectTe
     protected void onCreate ( Bundle savedInstanceState ) {
         super.onCreate ( savedInstanceState );
 	    setContentView ( R.layout.activity_teacher_recycler_base );
-       
 
         ( (App) getApplication () )
                 .getComponent ()

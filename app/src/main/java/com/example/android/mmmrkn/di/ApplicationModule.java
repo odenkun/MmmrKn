@@ -8,13 +8,11 @@ import com.example.android.mmmrkn.infra.api.StudentsService;
 import com.example.android.mmmrkn.infra.api.PartiesService;
 import com.example.android.mmmrkn.infra.api.StudentsService;
 import com.example.android.mmmrkn.infra.api.TeacherService;
-import com.example.android.mmmrkn.infra.entity.OrmaDatabase;
 import com.example.android.mmmrkn.infra.entity.Teacher;
 import com.franmontiel.persistentcookiejar.ClearableCookieJar;
 import com.franmontiel.persistentcookiejar.PersistentCookieJar;
 import com.franmontiel.persistentcookiejar.cache.SetCookieCache;
 import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersistor;
-import com.github.gfx.android.orma.AccessThreadConstraint;
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -156,15 +154,6 @@ public class ApplicationModule {
     public StudentsService provideStudentsService(Retrofit retrofit){
         return retrofit.create(StudentsService.class);
     }
-
-    @Singleton
-    @Provides
-    public OrmaDatabase provideOrma(Context context) {
-        return OrmaDatabase.builder(context)
-                .writeOnMainThread( AccessThreadConstraint.FATAL)
-                .readOnMainThread(AccessThreadConstraint.FATAL)
-                .trace(true)
-                .build();
-    }
+    
 }
 

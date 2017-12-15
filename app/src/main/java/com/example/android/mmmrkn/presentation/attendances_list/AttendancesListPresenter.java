@@ -1,11 +1,9 @@
 package com.example.android.mmmrkn.presentation.attendances_list;
 
-import android.content.Context;
-
-import com.example.android.mmmrkn.infra.entity.Attendances;
+import com.example.android.mmmrkn.infra.api.PartiesService;
+import com.example.android.mmmrkn.infra.api.StudentsService;
 import com.example.android.mmmrkn.infra.entity.Party;
-import com.example.android.mmmrkn.infra.repository.AttendancesListRepository;
-import com.example.android.mmmrkn.infra.repository.PartyRepository;
+import com.example.android.mmmrkn.infra.entity.Student;
 import com.example.android.mmmrkn.presentation.Presenter;
 import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersistor;
 
@@ -20,8 +18,10 @@ import okhttp3.Cookie;
 import timber.log.Timber;
 
 
-public class AttendancesPresenter extends Presenter{
+public class AttendancesListPresenter extends Presenter{
+    private final PartiesService partiesService;
     private Contract contract;
+
 
     private AttendancesListRepository attendRepo;
     private PartyRepository partyRepo;
@@ -29,15 +29,14 @@ public class AttendancesPresenter extends Presenter{
     private SharedPrefsCookiePersistor persistor;
 
     @Inject
-    public  AttendancesPresenter(Contract contract,AttendancesListRepository attendancesListRepository, PartyRepository partyRepository){
+    public AttendancesListPresenter(Contract contract, PartiesService partiesService){
         this.contract = contract;
-        this.attendRepo = attendancesListRepository;
-        this.partyRepo = partyRepository;
+        this.partiesService = partiesService;
     }
 
     public  void fetchParties(){
         disposables.add (
-                partyRepo.getParties ()
+                partiesService.getParties ()
                         .subscribeOn ( Schedulers.io () )
                         .observeOn ( AndroidSchedulers.mainThread () )
                         .subscribe ( partyList -> {
@@ -51,13 +50,14 @@ public class AttendancesPresenter extends Presenter{
 
     public  void fetchEntryList(String partyId){
         disposables.add (
-                attendRepo.getEntryList(partyId)
+                partiesService.getEntryList(partyId)
                         .subscribeOn ( Schedulers.io () )
                         .observeOn ( AndroidSchedulers.mainThread () )
-                        .subscribe ( attendancesList -> {
+                        .subscribe ( studentList -> {
                             Timber.d ( "attend とれたよ" );
-                            contract.onEntryListFetched ( attendancesList );
+                            contract.onEntryListFetched (studentList);
                         }, e -> {
+
                             Timber.e ( e );
                             contract.onEntryListFetched ( null );
                         } ) );
@@ -79,7 +79,7 @@ public class AttendancesPresenter extends Presenter{
          *
          * @param a 通信結果の保育士の一覧
          */
-        void onEntryListFetched ( List<Attendances> a );
+        void onEntryListFetched ( List<Student> a );
         void onPartyListFetch ( List<Party> a );
     }
 }
