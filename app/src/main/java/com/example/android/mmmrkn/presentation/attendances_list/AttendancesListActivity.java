@@ -1,5 +1,10 @@
 package com.example.android.mmmrkn.presentation.attendances_list;
 
+import android.arch.lifecycle.ViewModelProvider;
+import android.arch.lifecycle.ViewModelProviders;
+import android.content.res.Configuration;
+import android.content.res.Resources;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
@@ -11,7 +16,9 @@ import com.example.android.mmmrkn.R;
 import com.example.android.mmmrkn.di.attendancesList.AttendancesModule;
 import com.example.android.mmmrkn.infra.entity.Attendances;
 import com.example.android.mmmrkn.infra.entity.Party;
+import com.example.android.mmmrkn.infra.entity.StudentProfile;
 import com.example.android.mmmrkn.presentation.App;
+import com.example.android.mmmrkn.presentation.gohome.TestDialogFragment;
 
 import java.util.List;
 
@@ -23,6 +30,12 @@ public class AttendancesListActivity extends AppCompatActivity
         implements AttendancesPresenter.Contract,AttendancesDialog.Contract {
     static final int TEST_DIALOG = 0;
 
+    private static final String STUDENT_KEY = "STUDENTKEY";
+    private static final String PARTY_KEY = "PARTYKEY";
+
+    private List<StudentProfile> studentProfiles;
+    private List<Party> parties;
+
     @Inject
     AttendancesPresenter presenter;
 
@@ -31,30 +44,52 @@ public class AttendancesListActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.layout_attendances_recycler);
+
         ((App) getApplication())
                 .getComponent()
                 .plus(new AttendancesModule(this))
                 .inject(this);
-        //クラス一覧取得の通信
-        presenter.fetchParties();
-        //ぐるぐるはじめる
+        parties = (List<Party>) savedInstanceState.getSerializable(PARTY_KEY);
+
+        if (parties == null) {
+            //クラス一覧取得の通信
+            presenter.fetchParties();
+        }
+        //studentProfiles = (List<StudentProfile>) savedInstanceState.getSerializable(STUDENT_KEY);
+        studentProfiles = (List<StudentProfile>) savedInstanceState.getSerializable(STUDENT_KEY);
+        //Object oreMap = ((Object[]) savedInstanceState.getSerializable(STUDENT_KEY));
+
 
         //クラス一覧ボタンの押下処理
-        Button showDialogButton = (Button) findViewById(R.id.button_party);
-        showDialogButton.setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.button_party).setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View arg0) {
+            public void onClick(View arg) {
                 showFragmentDialog(TEST_DIALOG);
                 //ダイアログの表示
             }
         });
-
     }
 
-    /**
-     * フラグメントダイアログを表示する。
-     */
+    @Override
+    protected void onSaveInstanceState(Bundle outState)
+    {
+        super.onSaveInstanceState(outState);
+        //outState.putSerializable(STUDENT_KEY, studentProfiles);
+        //outState.putSerializable(PARTY_KEY, parties);
+    }
+
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        findViewById(R.id.button_party).callOnClick();
+    }
+
+        /**
+         * フラグメントダイアログを表示する。
+         */
 
     public void showFragmentDialog(int id) {
         if (partyList == null) {
@@ -71,7 +106,7 @@ public class AttendancesListActivity extends AppCompatActivity
     //Ormaから生徒一覧をListに代入
     @Override
     public void onEntryListFetched(List<Attendances> attendancesList) {
-        AttendancesListCardRecyclerView cardRecyclerView = (AttendancesListCardRecyclerView) findViewById(R.id.recycler_attendances);
+        AttendancesListCardRecyclerView cardRecyclerView = findViewById(R.id.recycler_attendances);
 
         cardRecyclerView.onStudentListFetch(this, attendancesList);
         //データとしてlog出力なし

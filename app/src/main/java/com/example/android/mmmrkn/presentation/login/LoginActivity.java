@@ -92,6 +92,7 @@ public class LoginActivity extends AppCompatActivity implements LoginPresenter.C
     }
 
 
+
     @Override
     public void onAuthStart () {
         showProgress ( true );
@@ -162,4 +163,3 @@ public class LoginActivity extends AppCompatActivity implements LoginPresenter.C
         super.onDestroy ();
     }
 }
-

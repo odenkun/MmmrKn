@@ -63,23 +63,6 @@ public class AttendancesDialog extends DialogFragment {
         builder.setView(dialogView)
                 .setTitle("クラス一覧");
 
-               /* .setPositiveButton("", new DialogInterface.OnClickListener()
-                {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which)
-                    {
-                        ((MainActivity)activity).onTestDialogOKClick();
-                    }
-                })
-                .setNegativeButton("", new DialogInterface.OnClickListener()
-                {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which)
-                    {
-                        TestDialogFragment.this.dismiss();
-                    }
-                });
-                */
         return builder.create();
     }
 

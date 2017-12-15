@@ -23,6 +23,7 @@ import timber.log.Timber;
 public class TeacherCardRecyclerAdapter extends RecyclerView.Adapter<TeacherCardRecyclerAdapter.ViewHolder>{
     private Context context;
     private List<Teacher> teachers;
+
     //listの中にvaluesのstringsを挿入
     public TeacherCardRecyclerAdapter(Context context, List<Teacher> teacherArrayList) {
         super();
