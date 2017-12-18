@@ -18,13 +18,13 @@ import java.util.List;
 public class AttendancesListCardRecyclerAdapter extends RecyclerView.Adapter<AttendancesListCardRecyclerAdapter.ViewHolder> {
 	private Context context;
 	private List<Student> studentList;
-	
+
 	public AttendancesListCardRecyclerAdapter(Context context, List<Student> attendanceTArray) {
 		super();
 		this.studentList = attendanceTArray;
 		this.context = context;
 	}
-	
+
 	@Override
 	public int getItemCount() {
 		if (studentList != null) {
@@ -33,7 +33,7 @@ public class AttendancesListCardRecyclerAdapter extends RecyclerView.Adapter<Att
 			return 0;
 		}
 	}
-	
+
 	//Cardの中身表示
 	@Override
 	public void onBindViewHolder(AttendancesListCardRecyclerAdapter.ViewHolder vh, final int position) {
@@ -49,7 +49,7 @@ public class AttendancesListCardRecyclerAdapter extends RecyclerView.Adapter<Att
 			context.startActivity(intent);
 		});
 	}
-	
+
 	//Viewを纏めたフォルダの作成
 	@Override
 	public AttendancesListCardRecyclerAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -58,17 +58,16 @@ public class AttendancesListCardRecyclerAdapter extends RecyclerView.Adapter<Att
 		AttendancesListCardRecyclerAdapter.ViewHolder viewHolder = new AttendancesListCardRecyclerAdapter.ViewHolder(v);
 		return viewHolder;
 	}
-	
+
 	//Viewフォルダの初期化設定
 	static class ViewHolder extends RecyclerView.ViewHolder {
 		TextView name;
 		LinearLayout layout;
-		
+
 		public ViewHolder(View v) {
 			super(v);
 			name = v.findViewById(R.id.textView_party);
 			layout = v.findViewById(R.id.layout);
 		}
 	}
-	
 }
