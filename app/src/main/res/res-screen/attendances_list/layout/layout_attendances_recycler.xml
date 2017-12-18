@@ -31,6 +31,5 @@
     <com.example.android.mmmrkn.presentation.attendances_list.AttendancesListCardRecyclerView
         android:id="@+id/recycler_attendances"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-    </com.example.android.mmmrkn.presentation.attendances_list.AttendancesListCardRecyclerView>
+        android:layout_height="match_parent"></com.example.android.mmmrkn.presentation.attendances_list.AttendancesListCardRecyclerView>
 </LinearLayout>

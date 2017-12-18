@@ -70,5 +70,4 @@ public class AttendancesListCardRecyclerAdapter extends RecyclerView.Adapter<Att
 			layout = v.findViewById(R.id.layout);
 		}
 	}
-
 }

@@ -23,8 +23,8 @@ public class AttendancesListPresenter extends Presenter{
     private Contract contract;
 
 
-    private AttendancesListRepository attendRepo;
-    private PartyRepository partyRepo;
+    //private AttendancesListRepository attendRepo;
+    //private PartyRepository partyRepo;
     //Cookieを保持する
     private SharedPrefsCookiePersistor persistor;
 

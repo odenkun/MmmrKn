@@ -4,8 +4,10 @@ package com.example.android.mmmrkn.infra.entity;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 
-public class Party {
+
+public class Party implements Serializable {
 
     @SerializedName("partyId")
     @Expose
