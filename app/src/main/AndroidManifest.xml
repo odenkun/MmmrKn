@@ -19,6 +19,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:screenOrientation="landscape"
             android:name=".presentation.login.LoginActivity"
             android:label="@string/title_activity_login" />
         <activity
