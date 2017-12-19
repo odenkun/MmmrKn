@@ -9,7 +9,10 @@ import android.util.Log;
 
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.Queue;
 
 import timber.log.Timber;
 
@@ -164,6 +167,7 @@ public class VoiceRecorder {
                     final int size = mAudioRecord.read ( mBuffer, 0, mBuffer.length );
                     //リトルエンディアンに変換
                     final byte[] byteArray = short2byte ( mBuffer );
+
                     final long now = System.currentTimeMillis ();
                     if ( isHearingVoice ( byteArray, size ) ) {
                         //音声入力が中断されていたら(=今が音声入力の始まりだったら)
@@ -187,7 +191,7 @@ public class VoiceRecorder {
                             end ();
                         }
                     } else {
-//                        Arrays.fill ( byteArray, (byte) 0 );
+                        Arrays.fill ( byteArray, (byte) 0 );
                         mCallback.onVoice ( byteArray, size );
                     }
                 }
@@ -200,12 +204,13 @@ public class VoiceRecorder {
         }
 
         private boolean isHearingVoice ( byte[] buffer, int size ) {
-            for ( int i = 0; i < size - 1; i += 2 ) {
-                int s = buffer[ i + 1 ];
-                if ( s < 0 ) s *= -1;
+            for (int i = 0; i < size - 1; i += 2) {
+                // The buffer has LINEAR16 in little endian.
+                int s = buffer[i + 1];
+                if (s < 0) s *= -1;
                 s <<= 8;
-                s += Math.abs ( buffer[ i ] );
-                if ( s > AMPLITUDE_THRESHOLD ) {
+                s += Math.abs(buffer[i]);
+                if (s > AMPLITUDE_THRESHOLD) {
                     return true;
                 }
             }
@@ -218,6 +223,7 @@ public class VoiceRecorder {
         ByteBuffer buffer = ByteBuffer.allocate ( sData.length * 2 );
         buffer.order ( ByteOrder.LITTLE_ENDIAN );
         buffer.asShortBuffer ().put ( sData );
+
         return buffer.array ();
     }
 

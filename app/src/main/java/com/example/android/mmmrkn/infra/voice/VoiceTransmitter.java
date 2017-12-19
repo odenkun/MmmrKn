@@ -6,6 +6,7 @@ import com.example.android.mmmrkn.infra.entity.StudentProfile;
 import com.example.android.mmmrkn.presentation.App;
 
 import java.util.List;
+import java.util.Queue;
 import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
@@ -43,7 +44,7 @@ public class VoiceTransmitter extends WebSocketListener {
     private static final int NORMAL_CLOSURE_STATUS = 1000;
     private WebSocket ws;
     private int sampleRate;
-    private static final String WS_URL = "http://192.168.10.58:6001";
+    private static final String WS_URL = "http://192.168.1.2:6001";
     private WebSocketState mState = WebSocketState.PREPARATION;
 
     private Callback callback;
@@ -91,7 +92,7 @@ public class VoiceTransmitter extends WebSocketListener {
         if (! checkState ( WebSocketState.OPENED )) {
             return false;
         }
-        boolean result = this.send ( "startRecognize" );
+        boolean result = this.send ( "RecoBegin" );
         if ( result ) {
             mState = WebSocketState.RECOGNIZING;
             Timber.d ( "recognizing started" );
@@ -108,7 +109,7 @@ public class VoiceTransmitter extends WebSocketListener {
         if (! checkState ( WebSocketState.RECOGNIZING )) {
             return false;
         }
-        boolean result = this.send ( "stopRecognize" );
+        boolean result = this.send ( "RecoEnd" );
         if ( result ) {
             Timber.d ( "recognizing has been successfully stopped" );
             mState = WebSocketState.OPENED;
