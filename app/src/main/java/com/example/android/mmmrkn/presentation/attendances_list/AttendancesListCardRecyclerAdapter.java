@@ -1,5 +1,6 @@
 package com.example.android.mmmrkn.presentation.attendances_list;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
@@ -10,16 +11,18 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.android.mmmrkn.R;
+import com.example.android.mmmrkn.infra.entity.Party;
 import com.example.android.mmmrkn.infra.entity.Student;
 import com.example.android.mmmrkn.presentation.studentprofile.StudentProfileActivity;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class AttendancesListCardRecyclerAdapter extends RecyclerView.Adapter<AttendancesListCardRecyclerAdapter.ViewHolder> {
 	private Context context;
-	private List<Student> studentList;
+	private Student[] studentList;
 
-	public AttendancesListCardRecyclerAdapter(Context context, List<Student> attendanceTArray) {
+	public AttendancesListCardRecyclerAdapter(Context context, Student[] attendanceTArray) {
 		super();
 		this.studentList = attendanceTArray;
 		this.context = context;
@@ -28,7 +31,7 @@ public class AttendancesListCardRecyclerAdapter extends RecyclerView.Adapter<Att
 	@Override
 	public int getItemCount() {
 		if (studentList != null) {
-			return studentList.size();
+			return studentList.length;
 		} else {
 			return 0;
 		}
@@ -38,14 +41,14 @@ public class AttendancesListCardRecyclerAdapter extends RecyclerView.Adapter<Att
 	@Override
 	public void onBindViewHolder(AttendancesListCardRecyclerAdapter.ViewHolder vh, final int position) {
 		//サイズ、nullチェック
-		if (studentList != null && studentList.size() > position && studentList.get(position) != null) {
+		if (studentList != null && studentList.length > position && studentList[position] != null) {
 			//Ormaから持ってきたデータ代入
-			vh.name.setText(studentList.get(position).getName());
+			vh.name.setText(studentList[position].getName());
 		}
 		// クリック時、モード選択画面に移動
 		vh.layout.setOnClickListener((v) -> {
 			Intent intent = new Intent(context, StudentProfileActivity.class);
-			intent.putExtra("student", studentList.get(position));
+			intent.putExtra("student", studentList[position]);
 			context.startActivity(intent);
 		});
 	}

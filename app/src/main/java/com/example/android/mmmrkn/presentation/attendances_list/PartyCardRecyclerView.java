@@ -23,7 +23,7 @@ public class PartyCardRecyclerView extends RecyclerView {
         setLayoutManager(new LinearLayoutManager(context));
     }
 
-    public void onPartyListFetch(AttendancesDialog dialogFragment, List<Party> parties){
+    public void onPartyListFetch(AttendancesDialog dialogFragment, Party[] parties){
         PartyCardRecyclerAdapter cra = new PartyCardRecyclerAdapter(dialogFragment,parties);
         this.setAdapter(cra);
     }

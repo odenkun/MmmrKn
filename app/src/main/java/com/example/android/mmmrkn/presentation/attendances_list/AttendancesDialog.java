@@ -22,21 +22,14 @@ import java.util.List;
 public class AttendancesDialog extends DialogFragment {
 
     Contract contract;
-    List<Party> partyList;
+    Party[] partyList;
     private static final String PARTY_KEY = "PARTYKEY";
 
-    private AttendancesDialog setContract(Contract contract) {
-        this.contract = contract;
-        return this;
-    }
-
-    private AttendancesDialog setPartyList(List<Party> partyList) {
-        this.partyList = partyList;
-        return this;
-    }
-
-    public static AttendancesDialog newInstance(List<Party> partyList,Contract contract) {
-        return new AttendancesDialog().setPartyList(partyList).setContract(contract);
+    public static AttendancesDialog newInstance(Party[] partyList,Contract contract) {
+        AttendancesDialog attendancesDialog = new AttendancesDialog();
+        attendancesDialog.partyList = partyList;
+        attendancesDialog.contract = contract;
+        return attendancesDialog;
     }
 
     //ダイアログの作成
@@ -53,7 +46,7 @@ public class AttendancesDialog extends DialogFragment {
         if (partyList == null) {
             Party[] parties = (Party[]) savedInstanceState.getSerializable(PARTY_KEY);
             if (parties != null) {
-                partyList = Arrays.asList(parties);
+                partyList = parties;
             }
         }
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
@@ -78,7 +71,7 @@ public class AttendancesDialog extends DialogFragment {
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putSerializable(PARTY_KEY,partyList.toArray(new Party[]{}));
+        outState.putSerializable(PARTY_KEY,partyList);
     }
 
     public void onSelectParty (String partyId, String partyName) {

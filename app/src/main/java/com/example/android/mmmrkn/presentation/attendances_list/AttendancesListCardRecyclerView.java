@@ -23,7 +23,7 @@ public class AttendancesListCardRecyclerView extends RecyclerView{
         setLayoutManager(new LinearLayoutManager(context));
     }
 
-    public  void onStudentListFetch(Context context, List<Student> studentTList){
+    public  void onStudentListFetch(Context context, Student[] studentTList){
         AttendancesListCardRecyclerAdapter cra = new AttendancesListCardRecyclerAdapter(context, studentTList);
         this.setAdapter(cra);
     }

@@ -40,8 +40,22 @@ public class Student implements Serializable {
     @SerializedName("goHome")
     @Expose
     private GoHome gohome;
-    
-    public String getStudentId() {
+
+
+	@Override
+	public String toString() {
+		return "Student{" +
+				"studentId='" + studentId + '\'' +
+				", name='" + name + '\'' +
+				", picturePath='" + picturePath + '\'' +
+				", gender='" + gender + '\'' +
+				", party=" + party +
+				", attendance=" + attendance +
+				", gohome=" + gohome +
+				'}';
+	}
+
+	public String getStudentId() {
         return studentId;
     }
     
@@ -96,6 +110,8 @@ public class Student implements Serializable {
     public void setGohome(GoHome gohome) {
         this.gohome = gohome;
     }
+
+
 }
 
 

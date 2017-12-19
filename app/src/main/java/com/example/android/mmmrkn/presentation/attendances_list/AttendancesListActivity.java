@@ -1,5 +1,6 @@
 package com.example.android.mmmrkn.presentation.attendances_list;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
@@ -22,6 +23,8 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import timber.log.Timber;
+
 
 public class AttendancesListActivity extends AppCompatActivity implements AttendancesListPresenter.Contract, AttendancesDialog.Contract {
     static final int TEST_DIALOG = 0;
@@ -31,8 +34,10 @@ public class AttendancesListActivity extends AppCompatActivity implements Attend
     @Inject
     AttendancesListPresenter presenter;
 
-    List<Party> partyList;
-    private List<Student> studentList;
+    Party[] partyList;
+    private Student[] studentList;
+
+    TextView textView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,22 +53,30 @@ public class AttendancesListActivity extends AppCompatActivity implements Attend
             showFragmentDialog(TEST_DIALOG);
             //ダイアログの表示
         });
+        textView=findViewById(R.id.textView_party);
+
     }
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         if (studentList != null) {
-            outState.putSerializable(STUDENT_KEY, studentList.toArray(new Student[]{}));
+            outState.putSerializable(STUDENT_KEY, studentList);
+            outState.putString("PARTY_NAME",textView.getText().toString());
         }
     }
 
 
     @Override
-    protected void onRestart() {
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestart();
-
-        findViewById(R.id.button_party).callOnClick();
+        Student[] students  =  (Student[]) savedInstanceState.getSerializable(STUDENT_KEY);
+        if (students != null) {
+            this.studentList = students;
+            AttendancesListCardRecyclerView cardRecyclerView = findViewById(R.id.recycler_attendances);
+            cardRecyclerView.onStudentListFetch(this, studentList);
+        }
+        textView.setText(savedInstanceState.getString("PARTY_NAME"));
     }
 
     /**
@@ -87,7 +100,7 @@ public class AttendancesListActivity extends AppCompatActivity implements Attend
     public void onPartyListFetch(List<Party> partyList) {
         //ぐるぐるとめる
         if (partyList != null) {
-            this.partyList = partyList;
+            this.partyList = partyList.toArray(new Party[]{});
         } else {
             Toast.makeText(this, "通信に失敗しました", Toast.LENGTH_LONG).show();
         }
@@ -96,11 +109,11 @@ public class AttendancesListActivity extends AppCompatActivity implements Attend
     //Ormaから生徒一覧をListに代入
     @Override
     public void onEntryListFetched(List<Student> attendancesList) {
+        studentList = attendancesList.toArray(new Student[]{});
         AttendancesListCardRecyclerView cardRecyclerView = findViewById(R.id.recycler_attendances);
-        cardRecyclerView.onStudentListFetch(this, attendancesList);
-        studentList = attendancesList;
-        //データとしてlog出力なし
+        cardRecyclerView.onStudentListFetch(this, studentList);
     }
+
 
 
     @Override

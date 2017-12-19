@@ -16,10 +16,10 @@ import java.util.List;
 
 public class PartyCardRecyclerAdapter extends RecyclerView.Adapter<PartyCardRecyclerAdapter.ViewHolder> {
     private AttendancesDialog dialogFragment;
-    private List<Party> parties;
+    private Party[] parties;
 
     //listの中にvaluesのstringsを挿入
-    public PartyCardRecyclerAdapter(AttendancesDialog dialogFragment, List<Party> partiesArrayList) {
+    public PartyCardRecyclerAdapter(AttendancesDialog dialogFragment,Party[] partiesArrayList) {
         super();
         this.dialogFragment = dialogFragment;
         this.parties = partiesArrayList;
@@ -29,7 +29,7 @@ public class PartyCardRecyclerAdapter extends RecyclerView.Adapter<PartyCardRecy
     @Override
     public int getItemCount() {
         if (parties != null) {
-            return parties.size();
+            return parties.length;
         } else {
             return 0;
         }
@@ -39,9 +39,9 @@ public class PartyCardRecyclerAdapter extends RecyclerView.Adapter<PartyCardRecy
     @Override
     public void onBindViewHolder(ViewHolder vh, final int position) {
         //サイズ、nullチェック
-        if (parties != null && parties.size() > position && parties.get(position) != null) {
+        if (parties != null && parties.length > position && parties[position] != null) {
             //Ormaから持ってきたデータ代入
-            vh.name.setText(parties.get(position).getName());
+            vh.name.setText(parties[position].getName());
         }
         // クリック時、モード選択画面に移動
         vh.layout.setOnClickListener(new View.OnClickListener() {
@@ -58,7 +58,7 @@ public class PartyCardRecyclerAdapter extends RecyclerView.Adapter<PartyCardRecy
                         this.partyId = partyId;
                         return this;
                     }
-        }.setPartyId(parties.get(position).getPartyId(),parties.get(position).getName()) );
+        }.setPartyId(parties[position].getPartyId(),parties[position].getName()) );
     }
 
     //Viewを纏めたフォルダの作成
