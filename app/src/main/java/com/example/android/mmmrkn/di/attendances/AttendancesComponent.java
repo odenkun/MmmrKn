@@ -1,5 +1,7 @@
 package com.example.android.mmmrkn.di.attendances;
 
+import com.example.android.mmmrkn.presentation.attendances.AttendFragment;
+import com.example.android.mmmrkn.presentation.attendances.AttendFragmentPresenter;
 import com.example.android.mmmrkn.presentation.attendances.AttendancesActivity;
 
 import dagger.Subcomponent;
@@ -9,5 +11,5 @@ import dagger.Subcomponent;
  */
 @Subcomponent(modules = {AttendancesModule.class})
 public interface AttendancesComponent {
-	void inject(AttendancesActivity a);
+	void inject(AttendFragment a);
 }

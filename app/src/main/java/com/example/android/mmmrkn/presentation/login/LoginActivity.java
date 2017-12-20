@@ -1,9 +1,14 @@
 package com.example.android.mmmrkn.presentation.login;
 
+import android.Manifest;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 
 import android.os.Build;
@@ -29,7 +34,9 @@ import javax.inject.Inject;
 
 import timber.log.Timber;
 
-public class LoginActivity extends AppCompatActivity implements LoginPresenter.Contract {
+public class LoginActivity extends AppCompatActivity implements LoginPresenter.Contract,ActivityCompat.OnRequestPermissionsResultCallback {
+    private static final int REQUEST_CODE = 3498;
+    private static final String[] PERMISSIONS = new String[] { Manifest.permission.RECORD_AUDIO, Manifest.permission.CAMERA };
 
     @Inject
     LoginPresenter presenter;
@@ -52,10 +59,35 @@ public class LoginActivity extends AppCompatActivity implements LoginPresenter.C
         loginComponent.inject ( this );
 
         //ボタンが押されたらログインを試みる
-         findViewById ( R.id.login_button ).setOnClickListener ( view -> attemptLogin () );
+        findViewById ( R.id.login_button ).setOnClickListener ( view -> attemptLogin () );
+
+        boolean allGranted = true;
+        for ( String permission : PERMISSIONS ) {
+            if ( ContextCompat.checkSelfPermission (
+                    this, permission ) != PackageManager.PERMISSION_GRANTED) {
+                allGranted = false;
+                break;
+            }
+        }
+        if ( ! allGranted ) {
+            ActivityCompat.requestPermissions ( this, PERMISSIONS , REQUEST_CODE );
+        }
 
     }
+    @Override
+    public void onRequestPermissionsResult (
+            int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults ) {
 
+        if ( requestCode != REQUEST_CODE ) return;
+
+        for ( int grantResult : grantResults ) {
+            if ( grantResult != PackageManager.PERMISSION_GRANTED ) {
+                //許可されていないものがあるとき
+                Toast.makeText ( this, "権限を許可してください。", Toast.LENGTH_SHORT ).show ();
+                finish ();
+            }
+        }
+    }
     void attemptLogin () {
         EditText idView = findViewById ( R.id.school_id );
         String id = idView.getText ().toString ();
@@ -90,7 +122,7 @@ public class LoginActivity extends AppCompatActivity implements LoginPresenter.C
         //英数字で構成されることのチェック
         return password.matches ( "[0-9a-zA-Z]+" );
     }
-    
+
     @Override
     public void onAuthStart () {
         showProgress ( true );
@@ -100,14 +132,14 @@ public class LoginActivity extends AppCompatActivity implements LoginPresenter.C
     public void onAuthFinish ( boolean result ) {
 
         showProgress ( result );
-        Timber.d("result is" + result);
-        if (result) {
+        Timber.d ( "result is" + result );
+        if ( result ) {
             Intent intent = new Intent ( this, SelectTeacherActivity.class );
-            startActivity(intent);
+            startActivity ( intent );
             finish ();
-        }else{
+        } else {
             // TODO: トーストからダイアログに変更する
-            Toast.makeText (this,getString ( R.string.error_incorrect ),Toast.LENGTH_LONG).show ();
+            Toast.makeText ( this, getString ( R.string.error_incorrect ), Toast.LENGTH_LONG ).show ();
         }
     }
 
@@ -140,7 +172,7 @@ public class LoginActivity extends AppCompatActivity implements LoginPresenter.C
         } );
 
         progressBar.setVisibility ( show ? View.VISIBLE : View.GONE );
-        ViewPropertyAnimator progressAnimator = progressBar.animate();
+        ViewPropertyAnimator progressAnimator = progressBar.animate ();
 
         progressAnimator.setDuration ( shortAnimTime )
                 .alpha ( show ? 1 : 0 );
@@ -160,5 +192,5 @@ public class LoginActivity extends AppCompatActivity implements LoginPresenter.C
         presenter.dispose ();
         super.onDestroy ();
     }
-    
+
 }

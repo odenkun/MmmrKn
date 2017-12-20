@@ -2,15 +2,19 @@ package com.example.android.mmmrkn.presentation.attendances;
 
 import android.app.Activity;
 
+import com.example.android.mmmrkn.infra.api.StudentsService;
 import com.example.android.mmmrkn.infra.entity.StudentProfile;
 import com.example.android.mmmrkn.infra.voice.VoiceRecorder;
 import com.example.android.mmmrkn.infra.voice.VoiceTransmitter;
 import com.example.android.mmmrkn.presentation.Presenter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
 
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 import okhttp3.OkHttpClient;
 import timber.log.Timber;
 
@@ -19,12 +23,14 @@ enum MicMode {
     BUILT_IN
 }
 
-public class AttendancesPresenter extends Presenter
-        implements BTListener.Callback,VoiceRecorder.Callback,VoiceTransmitter.Callback  {
+public class AttendFragmentPresenter extends Presenter
+        implements BTListener.Callback, VoiceRecorder.Callback, VoiceTransmitter.Callback {
 
     private static MicMode mMicMode = MicMode.BUILT_IN;
 
     private Contract contract;
+
+    private StudentsService studentsService;
 
     private BTListener mBTListener;
     private VoiceRecorder mVoiceRecorder;
@@ -34,9 +40,10 @@ public class AttendancesPresenter extends Presenter
     private OkHttpClient client;
 
     @Inject
-    public AttendancesPresenter ( Contract contract, OkHttpClient client) {
+    public AttendFragmentPresenter ( Contract contract, OkHttpClient client, StudentsService studentsService) {
         this.contract = contract;
         this.client = client;
+        this.studentsService = studentsService;
     }
 
     //Bluetoothデバイスが接続された時
@@ -49,17 +56,35 @@ public class AttendancesPresenter extends Presenter
 
     @Override
     public void onBTDeviceDisconnected () {
-        if (mMicMode == MicMode.BLUETOOTH) {
+        if ( mMicMode == MicMode.BLUETOOTH ) {
             contract.onBTDeviceDisconnected ();
         }
     }
 
+    void fetchStudent(String studentId) {
+        if (studentId == null) {
+            throw new RuntimeException ( "" );
+        }
+        disposables.add(
+                studentsService.getStudentProfile ( studentId ).subscribeOn ( Schedulers.io () )
+                .observeOn ( AndroidSchedulers.mainThread () )
+                .subscribe ( student -> {
+                    Timber.d ( "生徒とれたよ" );
+                    List<StudentProfile> list = new ArrayList<> ();
+                    list.add(student);
+                    contract.onNameRecognized ( list );
+                }, e -> {
+                    Timber.e ( e );
+                    contract.onNameRecognized ( null );
+                } ) );
+    }
+
 
     //録音の開始
-    private void startRec() {
-        mVoiceRecorder = new VoiceRecorder(this);
-        int sampleRate = mVoiceRecorder.start();
-        mTransmitter = new VoiceTransmitter(sampleRate,this,client);
+    private void startRec () {
+        mVoiceRecorder = new VoiceRecorder ( this );
+        int sampleRate = mVoiceRecorder.start ();
+        mTransmitter = new VoiceTransmitter ( sampleRate, this, client );
     }
 
     void readyMic ( Activity activity ) {
@@ -80,20 +105,20 @@ public class AttendancesPresenter extends Presenter
 
     //発話開始
     @Override
-    public void onVoiceStart() {
+    public void onVoiceStart () {
         mTransmitter.startRecognize ();
     }
 
     //発話中
     @Override
-    public void onVoice(byte[] data, int size) {
-        mTransmitter.sendVoice (data);
+    public void onVoice ( byte[] data, int size ) {
+        mTransmitter.sendVoice ( data );
     }
 
     //発話の終了
     @Override
-    public void onVoiceEnd() {
-        mTransmitter.stopRecognize();
+    public void onVoiceEnd () {
+        mTransmitter.stopRecognize ();
     }
 
     //園児リストの受信
@@ -101,11 +126,13 @@ public class AttendancesPresenter extends Presenter
     public void onStudentReceived ( List <StudentProfile> students ) {
         contract.onNameRecognized ( students );
     }
+
     //通信の失敗
     @Override
     public void onConnectionFailed () {
         contract.onConnectionFailed ();
     }
+
     @Override
     public void dispose () {
         super.dispose ();
@@ -120,6 +147,7 @@ public class AttendancesPresenter extends Presenter
             mBTListener.stop ();
         }
     }
+
     public interface Contract {
         /**
          * 生徒名が認識されAPIから生徒リストが届いた時
@@ -130,7 +158,8 @@ public class AttendancesPresenter extends Presenter
          * 接続に失敗した時
          */
         void onConnectionFailed ();
-        void onBTDeviceDisconnected();
+
+        void onBTDeviceDisconnected ();
     }
 
 

@@ -1,6 +1,6 @@
 package com.example.android.mmmrkn.di.attendances;
 
-import com.example.android.mmmrkn.presentation.attendances.AttendancesPresenter;
+import com.example.android.mmmrkn.presentation.attendances.AttendFragmentPresenter;
 
 import dagger.Module;
 import dagger.Provides;
@@ -10,14 +10,14 @@ import dagger.Provides;
  */
 @Module
 public class AttendancesModule {
-	private AttendancesPresenter.Contract contract;
+	private AttendFragmentPresenter.Contract contract;
 	
-	public AttendancesModule (AttendancesPresenter.Contract contract){
+	public AttendancesModule (AttendFragmentPresenter.Contract contract){
 		this.contract = contract;
 	}
 	
 	@Provides
-	public AttendancesPresenter.Contract provideContract() {
+	public AttendFragmentPresenter.Contract provideContract() {
 		return contract;
 	}
 }

@@ -1,125 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.example.android.mmmrkn.presentation.attendances.AttendancesActivity">
-    <data>
-        <variable name="student" type="com.example.android.mmmrkn.infra.entity.StudentProfile" />
-    </data>
-<android.support.constraint.ConstraintLayout
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="horizontal"
+              tools:context="com.example.android.mmmrkn.presentation.attendances.AttendancesActivity">
 
-    <TextView
-        android:id="@+id/txt_class"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="52dp"
-        android:layout_marginTop="16dp"
-        android:text="@{student.party.name}"
-        android:textSize="30sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <fragment
+        android:id="@+id/attend_fragment"
+        android:name="com.example.android.mmmrkn.presentation.attendances.AttendFragment"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        tools:layout="@layout/fragment_attend"/>
 
-    <TextView
-        android:id="@+id/txt_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="368dp"
-        android:layout_marginEnd="64dp"
-        android:layout_marginTop="8dp"
-        android:text="@{student.name}"
-        android:textSize="30sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_class"
-        app:layout_constraintVertical_bias="0.594" />
-
-    <ImageView
-        android:id="@+id/img_person"
-        android:layout_width="@android:dimen/thumbnail_width"
-        android:layout_height="@android:dimen/thumbnail_height"
-        android:layout_marginStart="4dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.006"
-        app:srcCompat="@color/colorPrimary"/>
-
-    <EditText
-        android:id="@+id/plain_content"
-        android:layout_width="330dp"
-        android:layout_height="130dp"
-        android:layout_marginEnd="36dp"
-        android:layout_marginTop="188dp"
-        android:editable="false"
-        android:ems="10"
-        android:enabled="false"
-        android:inputType="textPersonName"
-        android:text=""
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/btn_attend"
-        android:layout_width="100dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="8dp"
-        android:text="@string/attend"
-        android:textSize="21sp"
-        app:layout_constraintHorizontal_bias="0.056"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/grp_state" />
-
-    <Button
-        android:id="@+id/btn_denial"
-        android:layout_width="100dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="8dp"
-        android:text="@string/decline"
-        android:textSize="21sp"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintLeft_toRightOf="@+id/btn_attend"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/grp_state" />
-
-    <RadioGroup
-        android:id="@+id/grp_state"
-        android:layout_width="330dp"
-        android:layout_height="70dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginTop="5dp"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/plain_content"
-        app:layout_constraintVertical_bias="0.03">
-
-        <RadioButton
-            android:id="@+id/radio_healthy"
-            android:layout_width="160dp"
-            android:layout_height="70dp"
-            android:checked="true"
-            android:text="@string/condition_good"
-            android:textColor="@android:color/holo_blue_dark"
-            android:textSize="36sp"
-            app:layout_constraintLeft_toRightOf="@+id/radio_unhealthy"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/plain_content" />
-
-        <RadioButton
-            android:id="@+id/radio_unhealthy"
-            android:layout_width="160dp"
-            android:layout_height="70dp"
-            android:checked="false"
-            android:text="@string/condition_bad"
-            android:textColor="@android:color/holo_red_dark"
-            android:textSize="36sp"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/plain_content" />
-
-    </RadioGroup>
-</android.support.constraint.ConstraintLayout>
-</layout>
+    <fragment
+        android:id="@+id/qr_fragment"
+        android:name="com.example.android.mmmrkn.presentation.attendances.QRFragment"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        tools:layout="@layout/fragment_qr"/>
+</LinearLayout>
