@@ -18,6 +18,8 @@ import java.util.List;
 public class AttendancesListCardRecyclerAdapter extends RecyclerView.Adapter<AttendancesListCardRecyclerAdapter.ViewHolder> {
 	private Context context;
 	private List<Student> studentList;
+	private AttendancesFragment.onFragmentListClickedListener listener;
+
 
 	public AttendancesListCardRecyclerAdapter(Context context, List<Student> attendanceTArray) {
 		super();
@@ -39,11 +41,11 @@ public class AttendancesListCardRecyclerAdapter extends RecyclerView.Adapter<Att
 	public void onBindViewHolder(AttendancesListCardRecyclerAdapter.ViewHolder vh, final int position) {
 		//サイズ、nullチェック
 		if (studentList != null && studentList.size() > position && studentList.get(position) != null) {
-			//Ormaから持ってきたデータ代入
 			vh.name.setText(studentList.get(position).getName());
 		}
 		// クリック時、モード選択画面に移動
 		vh.layout.setOnClickListener((v) -> {
+			listener.onFragmentListClick(studentList.get(position).getName());
 			Intent intent = new Intent(context, StudentProfileActivity.class);
 			intent.putExtra("student", studentList.get(position));
 			context.startActivity(intent);
@@ -70,4 +72,5 @@ public class AttendancesListCardRecyclerAdapter extends RecyclerView.Adapter<Att
 			layout = v.findViewById(R.id.layout);
 		}
 	}
+
 }

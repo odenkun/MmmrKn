@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.example.android.mmmrkn.R;
@@ -40,7 +41,6 @@ public class AttendancesActivity extends AppCompatActivity implements Attendance
         setContentView(R.layout.activity_attendances);
         btnDenial = findViewById(R.id.btn_denial);
         btnAttend = findViewById(R.id.btn_attend);
-        btnMode = findViewById(R.id.btn_mode);
         textparty = findViewById(R.id.txt_class);
         textname = findViewById(R.id.txt_name);
 
@@ -57,23 +57,15 @@ public class AttendancesActivity extends AppCompatActivity implements Attendance
         //登園ボタン
         btnAttend.setOnClickListener(view -> reset());
 
-        btnMode.setOnClickListener(view -> {
-            if (textname.getText() == "") {
-                //モード選択画面へ
-                startActivity(new Intent(this, ModeActivity.class));
-                finish();
-            }
-            else{
-                reset();
+        //最下部に移動
+        ScrollView scrollview = ((ScrollView) findViewById(R.id.scrollView));
+        scrollview.post(new Runnable() {
+            @Override
+            public void run() {
+                scrollview.fullScroll(ScrollView.FOCUS_DOWN);
             }
         });
 
-        //本来は音声認識
-        //ボタンの作成、押下した動き
-        btnMode.setOnClickListener(view -> {
-            showFragmentDialog(TEST_DIALOG);
-            judgment();
-        });
     }
 
     /**
@@ -88,6 +80,7 @@ public class AttendancesActivity extends AppCompatActivity implements Attendance
                 dialogFragment.show(getSupportFragmentManager(), TAG);
         }
     }
+
 
     //空か判断してボタンの可視化又は不可視化する
     void judgment() {

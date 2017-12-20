@@ -1,149 +1,111 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-    <android.support.constraint.ConstraintLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".presentation.attendances.AttendancesActivity"
-        android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".presentation.attendances.AttendancesActivity">
 
-        <TextView
-            android:id="@+id/text_memo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginEnd="248dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
-            android:text="一言メモ"
-            android:textColor="@color/colorBlack"
-            android:textSize="18sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.572"
-            app:layout_constraintHorizontal_bias="0.0" />
+    <TextView
+        android:id="@+id/text_memo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="240dp"
+        android:layout_marginTop="8dp"
+        android:text="一言メモ"
+        android:textColor="@color/colorBlack"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_class" />
 
     <TextView
         android:id="@+id/txt_class"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:layout_marginStart="8dp"
+        android:layout_marginEnd="216dp"
         android:layout_marginTop="16dp"
         android:text="さくら組"
         android:textColor="@color/colorBlack"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.375"
-        app:layout_constraintStart_toEndOf="@+id/img_person"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.038" />
+        app:layout_constraintVertical_bias="0.031" />
 
     <TextView
         android:id="@+id/txt_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="368dp"
+        android:layout_width="142dp"
+        android:layout_height="45dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:textSize="30sp"
+        android:layout_marginTop="28dp"
+        android:text="登園太郎"
         android:textColor="@color/colorBlack"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:textSize="35sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/img_person"
-        app:layout_constraintTop_toBottomOf="@+id/txt_class"
-        app:layout_constraintVertical_bias="0.594" />
+        app:layout_constraintHorizontal_bias="0.242"
+        app:layout_constraintStart_toEndOf="@+id/txt_class"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/img_person"
-        android:layout_width="@android:dimen/thumbnail_width"
-        android:layout_height="@android:dimen/thumbnail_height"
-        android:layout_marginStart="4dp"
+        android:layout_width="264dp"
+        android:layout_height="263dp"
+        android:layout_marginBottom="4dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@color/colorPrimary" />
-
-    <EditText
-        android:id="@+id/plain_content"
-        android:layout_width="0dp"
-        android:layout_height="120dp"
-        android:layout_marginRight="40dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="484dp"
-        android:editable="false"
-        android:ems="10"
-        android:enabled="false"
-        android:inputType="textPersonName"
-        android:text="内容"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/btn_mode"
-        android:layout_width="162dp"
-        android:layout_height="42dp"
-        android:layout_marginBottom="4dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="60dp"
-        android:text="戻る"
-        android:textSize="19sp"
-        android:textColor="@color/colorBlack"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/grp_state"
-        app:layout_constraintVertical_bias="1.0" />
 
     <Button
         android:id="@+id/btn_attend"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="44dp"
-        android:layout_marginEnd="96dp"
+        android:layout_width="85dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="8dp"
         android:text="登園"
-        android:textSize="21sp"
         android:textColor="@color/colorBlack"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/btn_denial" />
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/scrollView" />
 
     <Button
         android:id="@+id/btn_denial"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="44dp"
-        android:layout_marginRight="52dp"
+        android:layout_width="85dp"
+        android:layout_height="40dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="8dp"
         android:text="拒否"
-        android:textSize="21sp"
         android:textColor="@color/colorBlack"
+        android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_attend"
+        app:layout_constraintVertical_bias="0.0" />
 
     <RadioGroup
         android:id="@+id/grp_state"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="96dp"
+        android:layout_width="237dp"
+        android:layout_height="61dp"
+        android:layout_marginBottom="24dp"
+        android:layout_marginTop="8dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toEndOf="@+id/img_person"
+        app:layout_constraintVertical_bias="0.0">
 
         <RadioButton
             android:id="@+id/radio_healthy"
-            android:layout_width="match_parent"
+            style="@style/GoodButton"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginLeft="40dp"
             android:layout_weight="1"
             android:checked="true"
             android:gravity="center_vertical"
-            android:text="良好"
             android:textColor="@android:color/holo_blue_dark"
             android:textSize="36sp"
             app:layout_constraintLeft_toRightOf="@+id/radio_unhealthy"
@@ -152,17 +114,36 @@
 
         <RadioButton
             android:id="@+id/radio_unhealthy"
-            android:layout_width="match_parent"
+            style="@style/BadButton"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
             android:layout_weight="1"
             android:checked="false"
-            android:text="不調"
             android:textColor="@android:color/holo_red_dark"
             android:textSize="36sp"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/plain_content" />
 
     </RadioGroup>
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="300dp"
+        android:layout_height="100dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="4dp"
+        android:background="@drawable/scrool_border"
+        app:layout_constraintBottom_toTopOf="@+id/grp_state"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_memo">
+
+        <EditText
+            android:id="@+id/edit_deteail"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#00000000"
+            android:text="あああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああ" />
+    </ScrollView>
 </android.support.constraint.ConstraintLayout>

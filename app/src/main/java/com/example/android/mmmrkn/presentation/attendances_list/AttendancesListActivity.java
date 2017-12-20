@@ -1,11 +1,12 @@
 package com.example.android.mmmrkn.presentation.attendances_list;
 
+import android.app.FragmentTransaction;
+import android.content.Context;
+import android.content.res.Configuration;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.RecyclerView;
-import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -14,16 +15,13 @@ import com.example.android.mmmrkn.di.attendancesList.AttendancesListModule;
 import com.example.android.mmmrkn.infra.entity.Party;
 import com.example.android.mmmrkn.infra.entity.Student;
 import com.example.android.mmmrkn.presentation.App;
-import com.example.android.mmmrkn.presentation.gohome.TestDialogFragment;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import javax.inject.Inject;
 
 
-public class AttendancesListActivity extends AppCompatActivity implements AttendancesListPresenter.Contract, AttendancesDialog.Contract {
+public class AttendancesListActivity extends AppCompatActivity implements AttendancesListPresenter.Contract, AttendancesDialog.Contract{
     static final int TEST_DIALOG = 0;
 
     private static final String STUDENT_KEY = "STUDENTKEY";
@@ -37,7 +35,11 @@ public class AttendancesListActivity extends AppCompatActivity implements Attend
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.layout_attendances_recycler);
+        if (isHoneycombTablet(this)) {
+            setContentView(R.layout.activity_main_tab);
+        } else {
+            setContentView(R.layout.layout_attendances_recycler);
+        }
         ((App) getApplication())
                 .getComponent()
                 .plus(new AttendancesListModule(this))
@@ -48,8 +50,38 @@ public class AttendancesListActivity extends AppCompatActivity implements Attend
             showFragmentDialog(TEST_DIALOG);
             //ダイアログの表示
         });
+
     }
 
+
+//    @Override
+//    public void onFragmentListClick(String select) {
+//        FragmentTransaction ft = getFragmentManager().beginTransaction();
+//        StudentProfileFragment fragment = new StudentProfileFragment();
+//        Bundle bundle = new Bundle();
+//        bundle.putString("name", select);
+//        fragment.setArguments(bundle);
+//        if(isHoneycombTablet(this)){
+//            ft.add(R.id.ft_student_profile,fragment);
+//        }else{
+//            ft.add(R.id.ft_student_profile,fragment);
+//        }
+//        ft.addToBackStack(null);
+//        ft.commit();
+//    }
+
+
+    //タブレットかスマホの確認
+    public static boolean isHoneycomb() {
+        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB;
+    }
+    public static boolean isTablet(Context context) {
+        return (context.getResources().getConfiguration().screenLayout &
+                Configuration.SCREENLAYOUT_SIZE_MASK) >= Configuration.SCREENLAYOUT_SIZE_LARGE;
+    }
+    public static boolean isHoneycombTablet(Context context) {
+        return isHoneycomb() && isTablet(context);
+    }
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
