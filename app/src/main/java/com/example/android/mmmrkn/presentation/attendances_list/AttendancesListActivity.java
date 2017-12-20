@@ -27,7 +27,7 @@ import timber.log.Timber;
 
 
 public class AttendancesListActivity extends AppCompatActivity implements AttendancesListPresenter.Contract, AttendancesDialog.Contract {
-    static final int TEST_DIALOG = 0;
+    static final int TEST_DIALOG= 0;
     //横に保存したときに使うkey
     private static final String STUDENT_KEY = "STUDENTKEY";
 
@@ -55,7 +55,6 @@ public class AttendancesListActivity extends AppCompatActivity implements Attend
             //ダイアログの表示
         });
         textView=findViewById(R.id.textView_party);
-
     }
 
     //Activityの保存(ライフサイクル)
