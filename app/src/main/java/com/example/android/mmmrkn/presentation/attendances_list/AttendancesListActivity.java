@@ -28,7 +28,7 @@ import timber.log.Timber;
 
 public class AttendancesListActivity extends AppCompatActivity implements AttendancesListPresenter.Contract, AttendancesDialog.Contract {
     static final int TEST_DIALOG = 0;
-
+    //横に保存したときに使うkey
     private static final String STUDENT_KEY = "STUDENTKEY";
 
     @Inject
@@ -47,6 +47,7 @@ public class AttendancesListActivity extends AppCompatActivity implements Attend
                 .getComponent()
                 .plus(new AttendancesListModule(this))
                 .inject(this);
+        //クラス取得の通信
         presenter.fetchParties();
         //クラス一覧ボタンの押下処理
         findViewById(R.id.button_party).setOnClickListener(arg -> {
@@ -57,6 +58,7 @@ public class AttendancesListActivity extends AppCompatActivity implements Attend
 
     }
 
+    //Activityの保存(ライフサイクル)
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
@@ -66,7 +68,7 @@ public class AttendancesListActivity extends AppCompatActivity implements Attend
         }
     }
 
-
+    //Activity破棄後に動くメソッド(回転時にも)
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestart();
