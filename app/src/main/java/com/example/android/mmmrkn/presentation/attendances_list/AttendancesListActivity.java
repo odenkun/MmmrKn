@@ -5,12 +5,13 @@ import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.android.mmmrkn.R;
 import com.example.android.mmmrkn.di.attendancesList.AttendancesListModule;
-import com.example.android.mmmrkn.infra.entity.Attendances;
 import com.example.android.mmmrkn.infra.entity.Party;
+import com.example.android.mmmrkn.infra.entity.Student;
 import com.example.android.mmmrkn.presentation.App;
 
 import java.util.List;
@@ -19,8 +20,7 @@ import javax.inject.Inject;
 
 
 
-public class AttendancesListActivity extends AppCompatActivity
-        implements AttendancesListPresenter.Contract,AttendancesDialog.Contract {
+public class AttendancesListActivity extends AppCompatActivity implements AttendancesListPresenter.Contract,AttendancesDialog.Contract {
     static final int TEST_DIALOG = 0;
 
     @Inject
@@ -70,13 +70,14 @@ public class AttendancesListActivity extends AppCompatActivity
 
     //Ormaから生徒一覧をListに代入
     @Override
-    public void onEntryListFetched(List<Attendances> attendancesList) {
+    public void onEntryListFetched(List<Student> studentTList) {
         AttendancesListCardRecyclerView cardRecyclerView = (AttendancesListCardRecyclerView) findViewById(R.id.recycler_attendances);
 
-        cardRecyclerView.onStudentListFetch(this, attendancesList);
+        cardRecyclerView.onStudentListFetch(this, studentTList);
         //データとしてlog出力なし
     }
-
+    
+    
     @Override
     public void onPartyListFetch(List<Party> partyList) {
         //ぐるぐるとめる
@@ -96,7 +97,9 @@ public class AttendancesListActivity extends AppCompatActivity
     }
 
     @Override
-    public void onSelectParty(String partyId) {
+    public void onSelectParty(String partyId,String partyName) {
         presenter.fetchEntryList(partyId);
+        TextView viewParty = this.findViewById(R.id.textView_party);
+        viewParty.setText(partyName+"組");
     }
 }

@@ -1,9 +1,6 @@
-package com.example.android.mmmrkn.presentation.party;
+package com.example.android.mmmrkn.presentation.attendances_list;
 
 
-import android.support.v4.app.DialogFragment;
-import android.content.Context;
-import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,8 +10,6 @@ import android.widget.TextView;
 
 import com.example.android.mmmrkn.R;
 import com.example.android.mmmrkn.infra.entity.Party;
-import com.example.android.mmmrkn.presentation.attendances.AttendancesActivity;
-import com.example.android.mmmrkn.presentation.attendances_list.AttendancesDialog;
 
 import java.util.List;
 
@@ -51,19 +46,19 @@ public class PartyCardRecyclerAdapter extends RecyclerView.Adapter<PartyCardRecy
         // クリック時、モード選択画面に移動
         vh.layout.setOnClickListener(new View.OnClickListener() {
                     String partyId;
-
+                    String partyName;
                     @Override
                     public void onClick(View v) {
-                        dialogFragment.onSelectParty(partyId);
+                        dialogFragment.onSelectParty(partyId,partyName);
                         dialogFragment.dismiss();
                     }
 
-                    public View.OnClickListener setPartyId(String partyId) {
+                    public View.OnClickListener setPartyId(String partyId,String partyName) {
+                        this.partyName = partyName;
                         this.partyId = partyId;
                         return this;
                     }
-                }.setPartyId(parties.get(position).getPartyId())
-        );
+        }.setPartyId(parties.get(position).getPartyId(),parties.get(position).getName()) );
     }
 
     //Viewを纏めたフォルダの作成

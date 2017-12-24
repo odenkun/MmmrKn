@@ -57,14 +57,9 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
 
-    final ormaVersion = "4.2.5"
     final retrofitVersion = "2.3.0"
     final okHttpVersion = "3.6.0"
     final daggerVersion = "2.13"
-
-    // Orma
-    compile "com.github.gfx.android.orma:orma:$ormaVersion"
-    annotationProcessor "com.github.gfx.android.orma:orma-processor:$ormaVersion"
 
     // ReactiveX
     compile 'io.reactivex.rxjava2:rxjava:2.1.6'

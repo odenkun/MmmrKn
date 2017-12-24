@@ -1,8 +1,7 @@
 package com.example.android.mmmrkn.infra.api;
 
-import com.example.android.mmmrkn.infra.entity.Attendances;
 import com.example.android.mmmrkn.infra.entity.Party;
-import com.example.android.mmmrkn.infra.entity.SearchResult;
+import com.example.android.mmmrkn.infra.entity.Student;
 
 import java.util.List;
 
@@ -31,12 +30,12 @@ public interface PartiesService {
     //クラスごとの当日の園児たちの登降園記録の一覧取得
     //通信番号⑦
     @GET("parties/{partyId}/students")
-    Single<List<Attendances>>getEntryList(@Path("partyId") String PartyId);
+    Single<List<Student>>getEntryList(@Path("partyId") String PartyId);
 
     //あだ名・本名から推測される園児の一覧取得
     //通信番号⑫
     @POST("parties/{partyId}student/assume")
-    Single<List<SearchResult>>searchStudents(@Path("partyId") String PartyId,
+    Single<List<Student>>searchStudents(@Path("partyId") String PartyId,
                                              @Field("SearchName") String SearchName);
 
 

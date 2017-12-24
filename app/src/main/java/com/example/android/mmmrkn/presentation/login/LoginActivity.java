@@ -122,7 +122,7 @@ public class LoginActivity extends AppCompatActivity implements LoginPresenter.C
         //英数字で構成されることのチェック
         return password.matches ( "[0-9a-zA-Z]+" );
     }
-
+    
     @Override
     public void onAuthStart () {
         showProgress ( true );
@@ -132,14 +132,14 @@ public class LoginActivity extends AppCompatActivity implements LoginPresenter.C
     public void onAuthFinish ( boolean result ) {
 
         showProgress ( result );
-        Timber.d ( "result is" + result );
-        if ( result ) {
+        Timber.d("result is" + result);
+        if (result) {
             Intent intent = new Intent ( this, SelectTeacherActivity.class );
-            startActivity ( intent );
+            startActivity(intent);
             finish ();
-        } else {
+        }else{
             // TODO: トーストからダイアログに変更する
-            Toast.makeText ( this, getString ( R.string.error_incorrect ), Toast.LENGTH_LONG ).show ();
+            Toast.makeText (this,getString ( R.string.error_incorrect ),Toast.LENGTH_LONG).show ();
         }
     }
 
@@ -172,7 +172,7 @@ public class LoginActivity extends AppCompatActivity implements LoginPresenter.C
         } );
 
         progressBar.setVisibility ( show ? View.VISIBLE : View.GONE );
-        ViewPropertyAnimator progressAnimator = progressBar.animate ();
+        ViewPropertyAnimator progressAnimator = progressBar.animate();
 
         progressAnimator.setDuration ( shortAnimTime )
                 .alpha ( show ? 1 : 0 );
@@ -192,5 +192,5 @@ public class LoginActivity extends AppCompatActivity implements LoginPresenter.C
         presenter.dispose ();
         super.onDestroy ();
     }
-
+    
 }
