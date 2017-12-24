@@ -38,7 +38,7 @@ public class AttendFragment extends Fragment implements AttendFragmentPresenter.
     public View onCreateView ( LayoutInflater inflater, ViewGroup container,
                                Bundle savedInstanceState ) {
         // Inflate the layout for this fragment
-        FragmentAttendBinding binding = DataBindingUtil.inflate (inflater, R.layout.fragment_attend ,container,false);
+        FragmentAttendBinding binding = DataBindingUtil.inflate (inflater, R.layout.fragment_attend ,container,true);
         StudentProfile profile = new StudentProfile ();
         profile.setName ( "aaaaaaa" );
         binding.setStudent ( profile );

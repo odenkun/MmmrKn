@@ -4,13 +4,22 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.android.mmmrkn.R;
+import com.google.zxing.ResultPoint;
 import com.google.zxing.integration.android.IntentIntegrator;
+import com.journeyapps.barcodescanner.BarcodeCallback;
+import com.journeyapps.barcodescanner.BarcodeResult;
+import com.journeyapps.barcodescanner.DecoratedBarcodeView;
+
+import java.util.List;
+
+import timber.log.Timber;
 
 public class QRFragment extends Fragment {
 //    private static final String ARG_PARAM1 = "param1";
@@ -20,7 +29,7 @@ public class QRFragment extends Fragment {
 //    private String mParam2;
 
     private QRFragmentListener mListener;
-
+    DecoratedBarcodeView barcodeView;
     public QRFragment () {
         // Required empty public constructor
     }
@@ -49,7 +58,7 @@ public class QRFragment extends Fragment {
     public View onCreateView ( LayoutInflater inflater, ViewGroup container,
                                Bundle savedInstanceState ) {
         // Inflate the layout for this fragment
-        return inflater.inflate ( R.layout.fragment_qr, container, false );
+        return inflater.inflate ( R.layout.fragment_qr, container);
     }
 
     @Override
@@ -57,13 +66,36 @@ public class QRFragment extends Fragment {
         super.onAttach ( context );
         if ( context instanceof QRFragmentListener ) {
             mListener = (QRFragmentListener) context;
-            IntentIntegrator integrator = IntentIntegrator.forSupportFragment(this);
-
-            integrator.initiateScan();
+//            IntentIntegrator integrator = IntentIntegrator.forSupportFragment(this);
+//
+//            integrator.initiateScan();
         } else {
             throw new RuntimeException ( context.toString ()
                     + " must implement OnFragmentInteractionListener" );
         }
+    }
+
+    @Override
+    public void onViewCreated ( View view, @Nullable Bundle savedInstanceState ) {
+        super.onViewCreated ( view, savedInstanceState );
+        barcodeView = view.findViewById ( R.id.decoratedBarcodeView );
+        barcodeView.decodeContinuous ( new BarcodeCallback () {
+            @Override
+            public void barcodeResult ( BarcodeResult result ) {
+                Timber.d(result.toString ());
+            }
+
+            @Override
+            public void possibleResultPoints ( List<ResultPoint> resultPoints ) {
+
+            }
+        } );
+    }
+
+    @Override
+    public void onResume () {
+        super.onResume ();
+        barcodeView.resume ();
     }
 
     @Override
