@@ -27,24 +27,8 @@ public class AttendancesActivity extends AppCompatActivity implements QRFragment
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
-        //このイベントはzxing以外も実行するため
-        if(result != null) {
-            if(result.getContents() == null) {
-                Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show();
-            } else {
-                AttendFragment attendFragment = (AttendFragment) getSupportFragmentManager ().findFragmentById ( R.id.attend_fragment );
-                attendFragment.onScanQR ( result.getContents() );
-                Toast.makeText(this, "Scanned: " + result.getContents(), Toast.LENGTH_LONG).show();
-            }
-        } else {
-            super.onActivityResult(requestCode, resultCode, data);
-        }
-    }
-
-    @Override
     public void onScanQR ( String studentId ) {
-
+        AttendFragment attendFragment = (AttendFragment) getSupportFragmentManager ().findFragmentById ( R.id.attend_fragment );
+        attendFragment.onScanQR ( studentId );
     }
 }

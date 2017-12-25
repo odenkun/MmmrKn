@@ -9,6 +9,8 @@ import com.example.android.mmmrkn.infra.voice.VoiceTransmitter;
 import com.example.android.mmmrkn.presentation.Presenter;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -40,7 +42,7 @@ public class AttendFragmentPresenter extends Presenter
     private OkHttpClient client;
 
     @Inject
-    public AttendFragmentPresenter ( Contract contract, OkHttpClient client, StudentsService studentsService) {
+    public AttendFragmentPresenter ( Contract contract, OkHttpClient client, StudentsService studentsService ) {
         this.contract = contract;
         this.client = client;
         this.studentsService = studentsService;
@@ -61,22 +63,24 @@ public class AttendFragmentPresenter extends Presenter
         }
     }
 
-    void fetchStudent(String studentId) {
-        if (studentId == null) {
+    void fetchStudent ( String studentId ) {
+        if ( studentId == null ) {
             throw new RuntimeException ( "" );
         }
-        disposables.add(
+
+        disposables.add (
                 studentsService.getStudent ( studentId ).subscribeOn ( Schedulers.io () )
-                .observeOn ( AndroidSchedulers.mainThread () )
-                .subscribe ( student -> {
-                    Timber.d ( "生徒とれたよ" );
-                    List<Student> list = new ArrayList<> ();
-                    list.add(student);
-                    contract.onNameRecognized ( list );
-                }, e -> {
-                    Timber.e ( e );
-                    contract.onNameRecognized ( null );
-                } ) );
+                        .observeOn ( AndroidSchedulers.mainThread () )
+                        .subscribe ( student -> {
+                            Timber.d ( "生徒とれたよ" );
+                            List <Student> list = new ArrayList <> ();
+                            list.add ( student );
+                            contract.onNameRecognized ( list );
+                        }, e -> {
+                            Timber.e ( e );
+                            contract.onNameRecognized ( null );
+                        } ) );
+
     }
 
 

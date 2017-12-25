@@ -8,4 +8,6 @@
     <color name="colorGray">#dcdcdc</color>
     <color name="colorTrans">#00000000</color>
     <color name="colorUnderLine">#74FF29</color>
+    <color name="manFrame">#bce2e8</color>
+    <color name="womanFrame">#e8bccc</color>
 </resources>

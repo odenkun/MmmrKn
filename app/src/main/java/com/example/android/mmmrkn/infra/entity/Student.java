@@ -1,102 +1,152 @@
 package com.example.android.mmmrkn.infra.entity;
 
 
+import android.databinding.BaseObservable;
+import android.databinding.Bindable;
+import android.databinding.BindingAdapter;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.widget.ImageView;
+
+import com.example.android.mmmrkn.BR;
+import com.example.android.mmmrkn.R;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.makeramen.roundedimageview.RoundedTransformationBuilder;
+import com.squareup.picasso.Picasso;
 
 import java.io.Serializable;
 
 import io.reactivex.annotations.Nullable;
+import timber.log.Timber;
 
 
 public class Student implements Serializable {
     private static final long serialVersionUID = 1L;
-    @SerializedName("studentId")
+    @SerializedName ("studentId")
     @Expose
     private String studentId;
-    
-    @SerializedName("name")
+
+    @SerializedName ("name")
     @Expose
     private String name;
-    
-    @SerializedName("picturePath")
+
+    @SerializedName ("picturePath")
     @Expose
     private String picturePath;
-    
-    @SerializedName("gender")
+
+    @SerializedName ("gender")
     @Expose
     private String gender;
-    
-    @SerializedName("party")
+
+    @SerializedName ("party")
     @Expose
     private Party party;
-    
+
     @Nullable
-    @SerializedName("attendance")
+    @SerializedName ("attendance")
     @Expose
     private Attendance attendance;
-    
+
     @Nullable
-    @SerializedName("goHome")
+    @SerializedName ("goHome")
     @Expose
     private GoHome gohome;
-    
-    public String getStudentId() {
+
+    public String getStudentId () {
         return studentId;
     }
-    
-    public void setStudentId(String studentId) {
+
+    public void setStudentId ( String studentId ) {
         this.studentId = studentId;
     }
-    
-    public String getName() {
+
+    public String getName () {
         return name;
     }
-    
-    public void setName(String name) {
+
+    public void setName ( String name ) {
         this.name = name;
     }
-    
-    public String getPicturePath() {
+
+    public String getPicturePath () {
         return picturePath;
     }
-    
-    public void setPicturePath(String picturePath) {
+
+    public void setPicturePath ( String picturePath ) {
         this.picturePath = picturePath;
     }
-    
-    public String getGender() {
+
+    public String getGender () {
         return gender;
     }
-    
-    public void setGender(String gender) {
+
+    public void setGender ( String gender ) {
         this.gender = gender;
     }
-    
-    public Party getParty() {
+
+    public Party getParty () {
         return party;
     }
-    
-    public void setParty(Party party) {
+
+    public void setParty ( Party party ) {
         this.party = party;
     }
-    
-    public Attendance getAttendance() {
+
+    public Attendance getAttendance () {
         return attendance;
     }
-    
-    public void setAttendance(Attendance attendance) {
+
+    public void setAttendance ( Attendance attendance ) {
         this.attendance = attendance;
     }
-    
-    public GoHome getGohome() {
+
+    public GoHome getGohome () {
         return gohome;
     }
-    
-    public void setGohome(GoHome gohome) {
+
+    public void setGohome ( GoHome gohome ) {
         this.gohome = gohome;
     }
+
+    //チンパンコード
+    public static class Holder extends BaseObservable {
+        private Student student;
+
+        @Bindable
+        public Student getStudent () {
+            return student;
+        }
+
+        public void setStudent ( Student student ) {
+            this.student = student;
+            notifyPropertyChanged ( BR.student );
+        }
+    }
+
+    @BindingAdapter ( { "picturePath", "gender" })
+    public static void loadImage ( ImageView view, String picturePath, String gender ) {
+
+        int frameColor = R.color.manFrame;
+        int placeHolderID = R.drawable.boy_happy;
+        if ( gender != null && gender.equals ( "woman" ) ) {
+            frameColor = R.color.womanFrame;
+            placeHolderID = R.drawable.girl_happy;
+        }
+        Picasso.with ( view.getContext () ).setLoggingEnabled ( true );
+
+        Picasso.with ( view.getContext () )
+                .load ( "https://mmmr-mock-api.mybluemix.net/images/students/" + picturePath )
+                .placeholder ( placeHolderID )
+                .fit ()
+                .transform ( new RoundedTransformationBuilder ()
+                        .borderColor ( frameColor )
+                        .borderWidthDp ( 6 )
+                        .oval ( true )
+                        .build () )
+                .into ( view );
+    }
+
 }
-
-
-

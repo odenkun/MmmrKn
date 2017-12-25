@@ -17,48 +17,32 @@ import com.journeyapps.barcodescanner.BarcodeCallback;
 import com.journeyapps.barcodescanner.BarcodeResult;
 import com.journeyapps.barcodescanner.DecoratedBarcodeView;
 
+import java.util.Calendar;
 import java.util.List;
 
 import timber.log.Timber;
 
 public class QRFragment extends Fragment {
-//    private static final String ARG_PARAM1 = "param1";
-//    private static final String ARG_PARAM2 = "param2";
-//
-//    private String mParam1;
-//    private String mParam2;
+    private Calendar lastAddedTime;
 
+    private static final int SCAN_INTERVAL = 2;
     private QRFragmentListener mListener;
     DecoratedBarcodeView barcodeView;
+
     public QRFragment () {
-        // Required empty public constructor
     }
 
-    // TODO: Rename and change types and number of parameters
-//    public static QRFragment newInstance ( String param1, String param2 ) {
-//        QRFragment fragment = new QRFragment ();
-//        Bundle args = new Bundle ();
-//        args.putString ( ARG_PARAM1, param1 );
-//        args.putString ( ARG_PARAM2, param2 );
-//        fragment.setArguments ( args );
-//        return fragment;
-//    }
 
     @Override
     public void onCreate ( Bundle savedInstanceState ) {
         super.onCreate ( savedInstanceState );
-        if ( getArguments () != null ) {
-//            mParam1 = getArguments ().getString ( ARG_PARAM1 );
-//            mParam2 = getArguments ().getString ( ARG_PARAM2 );
-        }
-
     }
 
     @Override
     public View onCreateView ( LayoutInflater inflater, ViewGroup container,
                                Bundle savedInstanceState ) {
         // Inflate the layout for this fragment
-        return inflater.inflate ( R.layout.fragment_qr, container);
+        return inflater.inflate ( R.layout.fragment_qr, container );
     }
 
     @Override
@@ -66,9 +50,6 @@ public class QRFragment extends Fragment {
         super.onAttach ( context );
         if ( context instanceof QRFragmentListener ) {
             mListener = (QRFragmentListener) context;
-//            IntentIntegrator integrator = IntentIntegrator.forSupportFragment(this);
-//
-//            integrator.initiateScan();
         } else {
             throw new RuntimeException ( context.toString ()
                     + " must implement OnFragmentInteractionListener" );
@@ -82,11 +63,25 @@ public class QRFragment extends Fragment {
         barcodeView.decodeContinuous ( new BarcodeCallback () {
             @Override
             public void barcodeResult ( BarcodeResult result ) {
-                Timber.d(result.toString ());
+                Timber.d ( result.toString () );
+                Calendar now = Calendar.getInstance ();
+                if ( lastAddedTime != null ) {
+                    //破壊的メソッドなのでclone
+                    Calendar added = (Calendar) lastAddedTime.clone ();
+                    added.add ( Calendar.SECOND, SCAN_INTERVAL );
+                    //現在の時間
+                    if ( now.before ( added ) ) {
+                        Timber.d("前回から2秒以内の読み込み");
+                        return;
+                    }
+                }
+                //まだスキャンされていないor前より2秒後
+                lastAddedTime = now;
+                mListener.onScanQR ( result.toString () );
             }
 
             @Override
-            public void possibleResultPoints ( List<ResultPoint> resultPoints ) {
+            public void possibleResultPoints ( List <ResultPoint> resultPoints ) {
 
             }
         } );

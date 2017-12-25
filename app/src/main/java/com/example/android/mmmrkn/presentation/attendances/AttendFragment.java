@@ -24,6 +24,7 @@ import javax.inject.Inject;
 public class AttendFragment extends Fragment implements AttendFragmentPresenter.Contract{
     @Inject
     AttendFragmentPresenter presenter;
+    Student.Holder studentHolder = new Student.Holder ();
 
     public AttendFragment () {
         // Required empty public constructor
@@ -39,9 +40,12 @@ public class AttendFragment extends Fragment implements AttendFragmentPresenter.
                                Bundle savedInstanceState ) {
         // Inflate the layout for this fragment
         FragmentAttendBinding binding = DataBindingUtil.inflate (inflater, R.layout.fragment_attend ,container,true);
+
+        binding.setHolder ( studentHolder );
         Student profile = new Student ();
         profile.setName ( "aaaaaaa" );
-        binding.setStudent ( profile );
+        profile.setPicturePath ( "c_kuroki.jpg" );
+        studentHolder.setStudent ( profile );
         return binding.getRoot ();
     }
 
@@ -83,7 +87,7 @@ public class AttendFragment extends Fragment implements AttendFragmentPresenter.
         }
         if (profiles.size () == 1) {
             // TODO: 2017/12/20 バインディングに設定
-
+            studentHolder.setStudent ( profiles.get(0) );
         }else {
             // TODO: 2017/12/20 ダイアログ表示
 
