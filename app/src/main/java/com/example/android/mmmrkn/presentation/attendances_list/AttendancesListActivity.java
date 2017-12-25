@@ -7,6 +7,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,6 +36,7 @@ public class AttendancesListActivity extends AppCompatActivity implements Attend
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //タブレット、スマホの確認してレイアウトset
         if (isHoneycombTablet(this)) {
             setContentView(R.layout.activity_main_tab);
         } else {

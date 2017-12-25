@@ -51,7 +51,8 @@
 
         <activity
             android:name=".presentation.attendances.AttendancesActivity"
-            android:screenOrientation="landscape" />
+            android:screenOrientation="landscape"
+            android:windowSoftInputMode="adjustPan|stateHidden"/>
 
         <activity
             android:name=".presentation.gohome.GoHomeActivity"

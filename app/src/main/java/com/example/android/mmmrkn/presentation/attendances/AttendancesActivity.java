@@ -1,10 +1,12 @@
 package com.example.android.mmmrkn.presentation.attendances;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -44,8 +46,9 @@ public class AttendancesActivity extends AppCompatActivity implements Attendance
         textparty = findViewById(R.id.txt_class);
         textname = findViewById(R.id.txt_name);
 
+        onEvaluateFullscreenMode();
+
         judgment();
-        
         ((App) getApplication())
                 .getComponent()
                 .plus(new AttendancesModule(this))
@@ -57,7 +60,7 @@ public class AttendancesActivity extends AppCompatActivity implements Attendance
         //登園ボタン
         btnAttend.setOnClickListener(view -> reset());
 
-        //最下部に移動
+        //Scrollを最下部に移動
         ScrollView scrollview = ((ScrollView) findViewById(R.id.scrollView));
         scrollview.post(new Runnable() {
             @Override
@@ -67,6 +70,13 @@ public class AttendancesActivity extends AppCompatActivity implements Attendance
         });
 
     }
+    public boolean onEvaluateFullscreenMode() {
+        return false;
+    }
+
+
+
+
 
     /**
      * フラグメントダイアログを表示する。
