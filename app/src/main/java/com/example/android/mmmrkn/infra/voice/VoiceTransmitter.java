@@ -2,7 +2,7 @@ package com.example.android.mmmrkn.infra.voice;
 
 import android.util.Log;
 
-import com.example.android.mmmrkn.infra.entity.StudentProfile;
+import com.example.android.mmmrkn.infra.entity.Student;
 import com.example.android.mmmrkn.presentation.App;
 
 import java.util.List;
@@ -175,7 +175,7 @@ public class VoiceTransmitter extends WebSocketListener {
     }
 
     public interface Callback {
-        void onStudentReceived( List<StudentProfile> students);
+        void onStudentReceived( List<Student> students);
         void onConnectionFailed();
     }
 }

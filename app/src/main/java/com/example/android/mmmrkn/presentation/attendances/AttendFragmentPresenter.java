@@ -3,7 +3,7 @@ package com.example.android.mmmrkn.presentation.attendances;
 import android.app.Activity;
 
 import com.example.android.mmmrkn.infra.api.StudentsService;
-import com.example.android.mmmrkn.infra.entity.StudentProfile;
+import com.example.android.mmmrkn.infra.entity.Student;
 import com.example.android.mmmrkn.infra.voice.VoiceRecorder;
 import com.example.android.mmmrkn.infra.voice.VoiceTransmitter;
 import com.example.android.mmmrkn.presentation.Presenter;
@@ -66,11 +66,11 @@ public class AttendFragmentPresenter extends Presenter
             throw new RuntimeException ( "" );
         }
         disposables.add(
-                studentsService.getStudentProfile ( studentId ).subscribeOn ( Schedulers.io () )
+                studentsService.getStudent ( studentId ).subscribeOn ( Schedulers.io () )
                 .observeOn ( AndroidSchedulers.mainThread () )
                 .subscribe ( student -> {
                     Timber.d ( "生徒とれたよ" );
-                    List<StudentProfile> list = new ArrayList<> ();
+                    List<Student> list = new ArrayList<> ();
                     list.add(student);
                     contract.onNameRecognized ( list );
                 }, e -> {
@@ -123,7 +123,7 @@ public class AttendFragmentPresenter extends Presenter
 
     //園児リストの受信
     @Override
-    public void onStudentReceived ( List <StudentProfile> students ) {
+    public void onStudentReceived ( List <Student> students ) {
         contract.onNameRecognized ( students );
     }
 
@@ -152,7 +152,7 @@ public class AttendFragmentPresenter extends Presenter
         /**
          * 生徒名が認識されAPIから生徒リストが届いた時
          */
-        void onNameRecognized ( List <StudentProfile> profiles );
+        void onNameRecognized ( List <Student> profiles );
 
         /**
          * 接続に失敗した時

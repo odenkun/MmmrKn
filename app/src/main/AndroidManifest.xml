@@ -17,6 +17,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".presentation.login.LoginActivity"
+            android:screenOrientation="landscape"
             android:label="@string/title_activity_login" />
         <activity
             android:name=".presentation.BeginActivity"
@@ -27,13 +28,25 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".presentation.teacher.SelectTeacherActivity"/>
-        <activity android:name=".presentation.studentprofile.StudentProfileActivity"/>
+        <activity android:name=".presentation.teacher.SelectTeacherActivity"
+                  android:screenOrientation="landscape"
+            />
+        <activity android:name=".presentation.studentprofile.StudentProfileActivity"
+                  android:screenOrientation="landscape"
+            />
 
-        <activity android:name=".presentation.mode_select.ModeActivity" />
-        <activity android:name=".presentation.attendances_list.AttendancesListActivity"/>
-        <activity android:name=".presentation.attendances.AttendancesActivity" />
-        <activity android:name=".presentation.gohome.GoHomeActivity" />
+        <activity android:name=".presentation.mode_select.ModeActivity"
+                  android:screenOrientation="landscape"
+            />
+        <activity android:name=".presentation.attendances_list.AttendancesListActivity"
+                  android:screenOrientation="landscape"
+            />
+        <activity android:name=".presentation.attendances.AttendancesActivity"
+                  android:screenOrientation="landscape"
+            />
+        <activity android:name=".presentation.gohome.GoHomeActivity"
+                  android:screenOrientation="landscape"
+            />
     </application>
 
 </manifest>

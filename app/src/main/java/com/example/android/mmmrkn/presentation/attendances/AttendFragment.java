@@ -13,7 +13,7 @@ import android.widget.Toast;
 import com.example.android.mmmrkn.R;
 import com.example.android.mmmrkn.databinding.FragmentAttendBinding;
 import com.example.android.mmmrkn.di.attendances.AttendancesModule;
-import com.example.android.mmmrkn.infra.entity.StudentProfile;
+import com.example.android.mmmrkn.infra.entity.Student;
 import com.example.android.mmmrkn.presentation.App;
 
 import java.util.List;
@@ -39,7 +39,7 @@ public class AttendFragment extends Fragment implements AttendFragmentPresenter.
                                Bundle savedInstanceState ) {
         // Inflate the layout for this fragment
         FragmentAttendBinding binding = DataBindingUtil.inflate (inflater, R.layout.fragment_attend ,container,true);
-        StudentProfile profile = new StudentProfile ();
+        Student profile = new Student ();
         profile.setName ( "aaaaaaa" );
         binding.setStudent ( profile );
         return binding.getRoot ();
@@ -77,7 +77,7 @@ public class AttendFragment extends Fragment implements AttendFragmentPresenter.
     }
 
     @Override
-    public void onNameRecognized ( List<StudentProfile> profiles ) {
+    public void onNameRecognized ( List<Student> profiles ) {
         if (profiles == null || profiles.size () < 1) {
             throw new RuntimeException ( "リストが不正" );
         }

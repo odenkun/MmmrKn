@@ -9,7 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 
 import com.example.android.mmmrkn.R;
-import com.example.android.mmmrkn.infra.entity.StudentProfile;
+import com.example.android.mmmrkn.infra.entity.Student;
 
 import java.util.List;
 
@@ -17,14 +17,14 @@ import java.util.List;
 public class TestAttendanceFragment  extends DialogFragment
 {
 
-    List<StudentProfile> students;
+    List<Student> students;
 
-    public TestAttendanceFragment setStudents ( List <StudentProfile> students ) {
+    public TestAttendanceFragment setStudents ( List <Student> students ) {
         this.students = students;
         return this;
     }
 
-    public static TestAttendanceFragment newInstance( List<StudentProfile> students)
+    public static TestAttendanceFragment newInstance( List<Student> students)
     {
         return new TestAttendanceFragment().setStudents ( students );
     }

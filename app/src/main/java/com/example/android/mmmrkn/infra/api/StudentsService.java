@@ -18,7 +18,7 @@ public interface StudentsService {
     //園児のプロフィール取得
     //通信番号⑧
     @GET("students/{studentId}")
-    Single<Student> getStudentProfile(@Path("studentId")String StudentId);
+    Single<Student> getStudent(@Path("studentId")String StudentId);
 
     // 園児の指定した日付の登園ログをすべて取得
     //通信番号⑨
