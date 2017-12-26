@@ -18,6 +18,7 @@ public class StudentProfileFragment extends Fragment {
 //    protected void onCreate(Bundle savedInstanceState){
 //        super.onCreate(savedInstanceState);
 //        String name = getArguments().getString("name");
+//        Student aa = (Student) name;
 //        ActivityStudentProfileBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_student_profile);
 //        binding.setStudent(name);
 //    }

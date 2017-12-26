@@ -58,7 +58,7 @@
         android:id="@+id/txt_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="164dp"
+        android:layout_marginEnd="120dp"
         android:layout_marginTop="72dp"
         android:text="登園太郎"
         android:textColor="@color/colorBlack"

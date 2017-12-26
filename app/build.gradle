@@ -10,6 +10,7 @@ android {
     defaultConfig {
         applicationId "com.example.android.mmmrkn"
         minSdkVersion 22
+
         targetSdkVersion 26
         versionCode 1
         versionName "1.0"
@@ -21,6 +22,11 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    repositories {
+        mavenCentral()
+    }
+
     //追加
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -85,5 +91,9 @@ dependencies {
 
     //RecyclerView
     compile "com.android.support:cardview-v7:26.1.0"
+
+    //Libraries
+    compile 'com.makeramen:roundedimageview:2.3.0'
+
 
 }
