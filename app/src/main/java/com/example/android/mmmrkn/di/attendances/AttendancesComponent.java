@@ -1,8 +1,6 @@
 package com.example.android.mmmrkn.di.attendances;
 
-import com.example.android.mmmrkn.presentation.attendances.AttendFragment;
-import com.example.android.mmmrkn.presentation.attendances.AttendFragmentPresenter;
-import com.example.android.mmmrkn.presentation.attendances.AttendancesActivity;
+import com.example.android.mmmrkn.presentation.attendances.attend.AttendFragment;
 
 import dagger.Subcomponent;
 

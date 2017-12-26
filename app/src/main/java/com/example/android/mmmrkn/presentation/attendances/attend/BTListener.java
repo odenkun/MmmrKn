@@ -1,4 +1,4 @@
-package com.example.android.mmmrkn.presentation.attendances;
+package com.example.android.mmmrkn.presentation.attendances.attend;
 
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
@@ -9,18 +9,18 @@ import android.bluetooth.BluetoothProfile;
 import android.content.Context;
 import android.content.Intent;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.util.List;
 
 import timber.log.Timber;
-
 public class BTListener implements BluetoothProfile.ServiceListener {
     private static final int REQUEST_ENABLE_BT = 53126;
+    public static final int CONNECTED =0, DISCONNECTED = 1;
 
     private BluetoothHeadset mBluetoothHeadset;
-    private Callback mCallback;
 
-    BTListener ( Activity activity, Callback callback ) {
-        this.mCallback = callback;
+    BTListener ( Activity activity) {
         if ( checkBTState ( activity ) ) {
             BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter ();
             bluetoothAdapter.getProfileProxy ( activity, this, BluetoothProfile.HEADSET );
@@ -50,7 +50,7 @@ public class BTListener implements BluetoothProfile.ServiceListener {
         List <BluetoothDevice> devices = mBluetoothHeadset.getConnectedDevices ();
         for ( BluetoothDevice device : devices ) {
             if ( mBluetoothHeadset.startVoiceRecognition ( device ) ) {
-                mCallback.onBTDeviceConnected ();
+                EventBus.getDefault().post(new BTEvent (CONNECTED));
                 break;
             }
         }
@@ -64,12 +64,10 @@ public class BTListener implements BluetoothProfile.ServiceListener {
         }
         Timber.e ( "device disconnected" );
         mBluetoothHeadset = null;
-        mCallback.onBTDeviceDisconnected ();
+        EventBus.getDefault().post(new BTEvent (DISCONNECTED));
     }
 
     void stop () {
-
-        mCallback = null;
         if ( mBluetoothHeadset == null ) {
             throw new RuntimeException ( "connected devices don't exist" );
         }
@@ -85,9 +83,18 @@ public class BTListener implements BluetoothProfile.ServiceListener {
         }
         throw new RuntimeException ( "used device don't exist" );
     }
+    public static class BTEvent {
+        public final int state;
 
-    interface Callback {
-        void onBTDeviceConnected ();
-        void onBTDeviceDisconnected ();
+        public BTEvent ( int state ) {
+
+            this.state = state;
+        }
+        public boolean isConnect () {
+            return this.state == CONNECTED;
+        }
+        public boolean isDisconnect () {
+            return this.state == DISCONNECTED;
+        }
     }
 }

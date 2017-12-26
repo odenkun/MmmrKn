@@ -1,4 +1,4 @@
-package com.example.android.mmmrkn.presentation.attendances;
+package com.example.android.mmmrkn.presentation.attendances.attend;
 
 import android.app.Activity;
 
@@ -8,9 +8,10 @@ import com.example.android.mmmrkn.infra.voice.VoiceRecorder;
 import com.example.android.mmmrkn.infra.voice.VoiceTransmitter;
 import com.example.android.mmmrkn.presentation.Presenter;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -26,7 +27,7 @@ enum MicMode {
 }
 
 public class AttendFragmentPresenter extends Presenter
-        implements BTListener.Callback, VoiceRecorder.Callback, VoiceTransmitter.Callback {
+        implements VoiceRecorder.Callback, VoiceTransmitter.Callback {
 
     private static MicMode mMicMode = MicMode.BUILT_IN;
 
@@ -48,41 +49,21 @@ public class AttendFragmentPresenter extends Presenter
         this.studentsService = studentsService;
     }
 
+    void onStart() {
+        EventBus.getDefault().register(this);
+    }
+
+    void onStop() {
+        EventBus.getDefault().unregister(this);
+    }
+
     //Bluetoothデバイスが接続された時
-    @Override
-    public void onBTDeviceConnected () {
-        if ( mMicMode == MicMode.BLUETOOTH ) {
+    @Subscribe
+    public void onBTStateChanged ( BTListener.BTEvent btEvent ) {
+        if ( mMicMode == MicMode.BLUETOOTH && btEvent.isConnect () ) {
             startRec ();
         }
     }
-
-    @Override
-    public void onBTDeviceDisconnected () {
-        if ( mMicMode == MicMode.BLUETOOTH ) {
-            contract.onBTDeviceDisconnected ();
-        }
-    }
-
-    void fetchStudent ( String studentId ) {
-        if ( studentId == null ) {
-            throw new RuntimeException ( "" );
-        }
-
-        disposables.add (
-                studentsService.getStudent ( studentId ).subscribeOn ( Schedulers.io () )
-                        .observeOn ( AndroidSchedulers.mainThread () )
-                        .subscribe ( student -> {
-                            Timber.d ( "生徒とれたよ" );
-                            List <Student> list = new ArrayList <> ();
-                            list.add ( student );
-                            contract.onNameRecognized ( list );
-                        }, e -> {
-                            Timber.e ( e );
-                            contract.onNameRecognized ( null );
-                        } ) );
-
-    }
-
 
     //録音の開始
     private void startRec () {
@@ -99,7 +80,7 @@ public class AttendFragmentPresenter extends Presenter
             case BLUETOOTH:
                 //ブルートゥースで録音するには、
                 //ブルートゥースマイクを接続、認識開始してから録音する
-                mBTListener = new BTListener ( activity, this );
+                mBTListener = new BTListener ( activity );
                 break;
             default:
                 Timber.e ( "MicMode is not assigned." );
@@ -137,6 +118,27 @@ public class AttendFragmentPresenter extends Presenter
         contract.onConnectionFailed ();
     }
 
+    void fetchStudent ( String studentId ) {
+        if ( studentId == null ) {
+            throw new RuntimeException ( "" );
+        }
+
+        disposables.add (
+                studentsService.getStudent ( studentId ).subscribeOn ( Schedulers.io () )
+                        .observeOn ( AndroidSchedulers.mainThread () )
+                        .subscribe ( student -> {
+                            Timber.d ( "生徒とれたよ" );
+                            List <Student> list = new ArrayList <> ();
+                            list.add ( student );
+                            contract.onNameRecognized ( list );
+                        }, e -> {
+                            Timber.e ( e );
+                            contract.onNameRecognized ( null );
+                        } )
+        );
+
+    }
+
     @Override
     public void dispose () {
         super.dispose ();
@@ -163,8 +165,5 @@ public class AttendFragmentPresenter extends Presenter
          */
         void onConnectionFailed ();
 
-        void onBTDeviceDisconnected ();
     }
-
-
 }

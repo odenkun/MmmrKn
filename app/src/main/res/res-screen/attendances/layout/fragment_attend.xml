@@ -1,9 +1,9 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
-             tools:context="com.example.android.mmmrkn.presentation.attendances.AttendFragment">
+             tools:context="com.example.android.mmmrkn.presentation.attendances.attend.AttendFragment">
     <data>
-        <variable name="holder" type="com.example.android.mmmrkn.infra.entity.Student.Holder" />
+        <variable name="holder" type="com.example.android.mmmrkn.presentation.attendances.attend.AttendFragment.ViewModel" />
     </data>
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
@@ -69,6 +69,7 @@
             android:layout_marginBottom="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
+            android:letterSpacing="1.9"
             android:text="@string/attend"
             android:textSize="21sp"
             app:layout_constraintBottom_toBottomOf="parent"

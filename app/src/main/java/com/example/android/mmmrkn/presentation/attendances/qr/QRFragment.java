@@ -1,4 +1,4 @@
-package com.example.android.mmmrkn.presentation.attendances;
+package com.example.android.mmmrkn.presentation.attendances.qr;
 
 import android.content.Context;
 import android.content.Intent;
@@ -17,6 +17,8 @@ import com.journeyapps.barcodescanner.BarcodeCallback;
 import com.journeyapps.barcodescanner.BarcodeResult;
 import com.journeyapps.barcodescanner.DecoratedBarcodeView;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.util.Calendar;
 import java.util.List;
 
@@ -26,7 +28,6 @@ public class QRFragment extends Fragment {
     private Calendar lastAddedTime;
 
     private static final int SCAN_INTERVAL = 2;
-    private QRFragmentListener mListener;
     DecoratedBarcodeView barcodeView;
 
     public QRFragment () {
@@ -43,17 +44,6 @@ public class QRFragment extends Fragment {
                                Bundle savedInstanceState ) {
         // Inflate the layout for this fragment
         return inflater.inflate ( R.layout.fragment_qr, container );
-    }
-
-    @Override
-    public void onAttach ( Context context ) {
-        super.onAttach ( context );
-        if ( context instanceof QRFragmentListener ) {
-            mListener = (QRFragmentListener) context;
-        } else {
-            throw new RuntimeException ( context.toString ()
-                    + " must implement OnFragmentInteractionListener" );
-        }
     }
 
     @Override
@@ -75,9 +65,10 @@ public class QRFragment extends Fragment {
                         return;
                     }
                 }
-                //まだスキャンされていないor前より2秒後
+                //最初のスキャンor前より2秒後
                 lastAddedTime = now;
-                mListener.onScanQR ( result.toString () );
+
+                EventBus.getDefault().post(new QREvent (result.toString ()));
             }
 
             @Override
@@ -93,16 +84,11 @@ public class QRFragment extends Fragment {
         barcodeView.resume ();
     }
 
-    @Override
-    public void onDetach () {
-        super.onDetach ();
-        mListener = null;
-    }
+    public class QREvent {
+        public final String studentId;
 
-    /**
-     * アクティビティが実装する
-     */
-    public interface QRFragmentListener {
-        void onScanQR ( String studentId );
+        public QREvent(String studentId) {
+            this.studentId = studentId;
+        }
     }
 }

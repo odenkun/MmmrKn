@@ -1,6 +1,6 @@
 package com.example.android.mmmrkn.di.attendances;
 
-import com.example.android.mmmrkn.presentation.attendances.AttendFragmentPresenter;
+import com.example.android.mmmrkn.presentation.attendances.attend.AttendFragmentPresenter;
 
 import dagger.Module;
 import dagger.Provides;

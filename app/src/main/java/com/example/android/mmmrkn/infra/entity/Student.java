@@ -111,42 +111,7 @@ public class Student implements Serializable {
         this.gohome = gohome;
     }
 
-    //チンパンコード
-    public static class Holder extends BaseObservable {
-        private Student student;
 
-        @Bindable
-        public Student getStudent () {
-            return student;
-        }
 
-        public void setStudent ( Student student ) {
-            this.student = student;
-            notifyPropertyChanged ( BR.student );
-        }
-    }
-
-    @BindingAdapter ( { "picturePath", "gender" })
-    public static void loadImage ( ImageView view, String picturePath, String gender ) {
-
-        int frameColor = R.color.manFrame;
-        int placeHolderID = R.drawable.boy_happy;
-        if ( gender != null && gender.equals ( "woman" ) ) {
-            frameColor = R.color.womanFrame;
-            placeHolderID = R.drawable.girl_happy;
-        }
-        Picasso.with ( view.getContext () ).setLoggingEnabled ( true );
-
-        Picasso.with ( view.getContext () )
-                .load ( "https://mmmr-mock-api.mybluemix.net/images/students/" + picturePath )
-                .placeholder ( placeHolderID )
-                .fit ()
-                .transform ( new RoundedTransformationBuilder ()
-                        .borderColor ( frameColor )
-                        .borderWidthDp ( 6 )
-                        .oval ( true )
-                        .build () )
-                .into ( view );
-    }
 
 }

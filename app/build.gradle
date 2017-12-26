@@ -79,11 +79,17 @@ dependencies {
     compile "com.google.dagger:dagger:$daggerVersion"
     annotationProcessor "com.google.dagger:dagger-compiler:$daggerVersion"
 
+    //Timber
     compile 'com.jakewharton.timber:timber:4.6.0'
+    //Picasso
     compile 'com.squareup.picasso:picasso:2.5.2'
+    //ImageViewを丸にしたり枠つけたり
     compile 'com.makeramen:roundedimageview:2.3.0'
     //RecyclerView
     compile "com.android.support:cardview-v7:26.1.0"
+
+    //EventBus
+    compile 'org.greenrobot:eventbus:3.1.1'
 
     //QR
     implementation 'com.journeyapps:zxing-android-embedded:3.5.0'
