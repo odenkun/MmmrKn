@@ -23,6 +23,8 @@ import io.reactivex.annotations.Nullable;
 import timber.log.Timber;
 
 
+
+
 public class Student implements Serializable {
     private static final long serialVersionUID = 1L;
     @SerializedName ("studentId")
@@ -110,8 +112,5 @@ public class Student implements Serializable {
     public void setGohome ( GoHome gohome ) {
         this.gohome = gohome;
     }
-
-
-
 
 }

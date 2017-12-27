@@ -40,7 +40,6 @@ public class PartyCardRecyclerAdapter extends RecyclerView.Adapter<PartyCardRecy
     public void onBindViewHolder(ViewHolder vh, final int position) {
         //サイズ、nullチェック
         if (parties != null && parties.size() > position && parties.get(position) != null) {
-            //Ormaから持ってきたデータ代入
             vh.name.setText(parties.get(position).getName());
         }
         // クリック時、モード選択画面に移動

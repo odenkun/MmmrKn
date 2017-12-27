@@ -3,13 +3,16 @@
         xmlns:tools="http://schemas.android.com/tools"
              tools:context="com.example.android.mmmrkn.presentation.attendances.attend.AttendFragment">
     <data>
-        <variable name="holder" type="com.example.android.mmmrkn.presentation.attendances.attend.AttendFragment.ViewModel" />
+        <variable name="viewModel" type="com.example.android.mmmrkn.presentation.attendances.attend.ViewModel" />
     </data>
+
     <android.support.constraint.ConstraintLayout
+        android:id="@+id/attend_outer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/attend_outer"
-        >
+        android:padding="16dp">
+
+        <!--クラス名-->
 
         <TextView
             android:id="@+id/txt_party"
@@ -17,50 +20,83 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
             android:layout_marginTop="16dp"
-            android:text="@{holder.student.party.name}"
+            android:text="@{viewModel.student.party.name}"
             android:textColor="@color/colorBlack"
             android:textSize="30sp"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
 
+        <!--生徒名-->
         <TextView
             android:id="@+id/txt_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{holder.student.name}"
+            android:text="@{viewModel.student.name}"
             android:textColor="@color/colorBlack"
             android:textSize="30sp"
+
             app:layout_constraintEnd_toEndOf="@+id/txt_party"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txt_party"
             />
 
+        <!--生徒の写真-->
         <ImageView
             android:id="@+id/img_person"
-            android:layout_width="140dp"
-            android:layout_height="135dp"
-            app:picturePath="@{holder.student.picturePath}"
-            app:gender="@{holder.student.gender}"
-            android:layout_marginLeft="24dp"
-            android:layout_marginTop="16dp"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            app:gender="@{viewModel.student.gender}"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:picturePath="@{viewModel.student.picturePath}"
             app:srcCompat="@color/colorPrimary"/>
+
+        <!--音声入力する内容-->
 
         <EditText
             android:id="@+id/plain_content"
             android:layout_width="330dp"
-            android:layout_height="130dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:editable="false"
             android:ems="10"
             android:enabled="false"
             android:inputType="textPersonName"
-            android:text=""
-            app:layout_constraintRight_toRightOf="parent"
+            android:text="@{viewModel.student.attendance.detail}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/img_person"/>
+
+        <!--登園ボタン-->
+        <RadioGroup
+            android:id="@+id/grp_state"
+            android:layout_width="330dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:checkedButton="@={viewModel.checkedBtn}"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/plain_content">
+
+            <RadioButton
+                android:id="@+id/radio_healthy"
+                android:layout_width="160dp"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="@string/condition_good"
+                android:textColor="@android:color/holo_blue_dark"
+                android:textSize="36sp"/>
+
+            <RadioButton
+                android:id="@+id/radio_unhealthy"
+                android:layout_width="160dp"
+                android:layout_height="wrap_content"
+                android:checked="false"
+                android:text="@string/condition_bad"
+                android:textColor="@android:color/holo_red_dark"
+                android:textSize="36sp"/>
+
+        </RadioGroup>
 
         <Button
             android:id="@+id/btn_attend"
@@ -73,59 +109,42 @@
             android:text="@string/attend"
             android:textSize="21sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/grp_state"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/grp_state"/>
+
+        <!--降園ボタン-->
 
         <Button
             android:id="@+id/btn_denial"
             android:layout_width="100dp"
             android:layout_height="50dp"
-            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
             android:text="@string/decline"
             android:textSize="21sp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/btn_attend"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintStart_toEndOf="@+id/btn_attend"
-            app:layout_constraintTop_toBottomOf="@+id/grp_state"
+            app:layout_constraintTop_toTopOf="@+id/btn_attend"
             app:layout_constraintVertical_bias="0.542"/>
 
-        <RadioGroup
-            android:id="@+id/grp_state"
-            android:layout_width="330dp"
-            android:layout_height="70dp"
-            android:layout_marginEnd="8dp"
-            android:orientation="horizontal"
-            app:layout_constraintEnd_toEndOf="@+id/plain_content"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/plain_content"
-            app:layout_constraintTop_toBottomOf="@+id/plain_content">
+        <!--<android.support.constraint.Guideline-->
+        <!--android:id="@+id/gl_left"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="0dp"-->
+        <!--android:orientation="vertical"-->
+        <!--app:layout_constraintGuide_percent="0.05"/>-->
 
-            <RadioButton
-                android:id="@+id/radio_healthy"
-                android:layout_width="160dp"
-                android:layout_height="70dp"
-                android:checked="true"
-                android:text="@string/condition_good"
-                android:textColor="@android:color/holo_blue_dark"
-                android:textSize="36sp"
-                app:layout_constraintLeft_toRightOf="@+id/radio_unhealthy"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/plain_content"/>
+        <!--<android.support.constraint.Guideline-->
+        <!--android:id="@+id/gl_right"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="0dp"-->
+        <!--android:orientation="vertical"-->
+        <!--app:layout_constraintGuide_end="20dp"/>-->
 
-            <RadioButton
-                android:id="@+id/radio_unhealthy"
-                android:layout_width="160dp"
-                android:layout_height="70dp"
-                android:checked="false"
-                android:text="@string/condition_bad"
-                android:textColor="@android:color/holo_red_dark"
-                android:textSize="36sp"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/plain_content"/>
-
-        </RadioGroup>
+        <!--体調-->
     </android.support.constraint.ConstraintLayout>
 </layout>

@@ -22,8 +22,7 @@ public class ModeActivity extends AppCompatActivity implements ModePresenter.Con
 
     @Inject
     ModePresenter presenter;
-    
-    Intent intent;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,62 +32,36 @@ public class ModeActivity extends AppCompatActivity implements ModePresenter.Con
                 .plus(new ModeModule(this))
                 .inject(this);
 
-        Intent insertIntent = this.getIntent();
-        String partyIntent = insertIntent.getStringExtra("party");
-        
-//        確認用
-//        Button btn=findViewById(R.id.logout);
-//        btn.setText(partyIntent);
         //職員選択ボタンを押された時の処理
         findViewById(R.id.btn_selectTeacher).setOnClickListener(view ->{
-                intent=new Intent(this,SelectTeacherActivity.class);
-            startActivity(intent);
-    });
+            startActivity( new Intent(this,SelectTeacherActivity.class) );
+        });
         //ログアウトボタンを押された時の処理
         findViewById(R.id.btn_logout).setOnClickListener(view -> attemptLogout());
-//        {
-//
-//            startActivity(new Intent(this, LoginActivity.class));
-//        });
-
 
         //登園ボタンを押された時の処理
-        findViewById(R.id.btn_attendances).setOnClickListener(view -> {
-            intent = new Intent(this, AttendancesActivity.class);
-            startActivity(intent);
-        });
+        findViewById(R.id.btn_attendances).setOnClickListener(view -> startActivity( new Intent(this,AttendancesActivity.class) ) );
 
-        //降園ボタンを押された時の処理(未実装)
-        findViewById(R.id.btn_goHome).setOnClickListener(view -> {
-            intent = new Intent(this, GoHomeActivity.class);
-            startActivity(intent);
-        });
+        //降園ボタンを押された時の処理
+        findViewById(R.id.btn_goHome).setOnClickListener(view -> startActivity( new Intent(this,GoHomeActivity.class) ) );
 
-        //登園リストボタンを押された時の処理(未実装)
-        findViewById(R.id.btn_attendancesList).setOnClickListener(view -> {
-            intent = new Intent(this, AttendancesListActivity.class);
-            startActivity(intent);
-        });
+        //登園リストボタンを押された時の処理
+        findViewById(R.id.btn_attendancesList).setOnClickListener(view -> startActivity( new Intent(this,AttendancesListActivity.class) ) );
     }
 
     void attemptLogout () {
         presenter.attemptLogout();
     }
-//    @Override
-//    public void onAuthStart () {
-//        showProgress ( true );
-//    }
+
     @Override
-    public void onAuthFinish ( boolean result ) {
-//        showProgress ( result );
-        Timber.d("result is" + result);
+    public void onLogoutFinish ( boolean result ) {
         if (result) {
             Intent intent = new Intent ( this, LoginActivity.class );
             startActivity(intent);
             finish ();
         }else{
             // TODO: トーストからダイアログに変更する
-            Toast.makeText (this,getString ( R.string.error_incorrect ),Toast.LENGTH_LONG).show ();
+            Toast.makeText (this,getString ( R.string.failed_logout ),Toast.LENGTH_LONG).show ();
         }
     }
     @Override

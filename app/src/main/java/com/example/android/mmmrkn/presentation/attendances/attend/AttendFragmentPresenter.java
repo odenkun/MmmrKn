@@ -3,6 +3,7 @@ package com.example.android.mmmrkn.presentation.attendances.attend;
 import android.app.Activity;
 
 import com.example.android.mmmrkn.infra.api.StudentsService;
+import com.example.android.mmmrkn.infra.entity.Attendance;
 import com.example.android.mmmrkn.infra.entity.Student;
 import com.example.android.mmmrkn.infra.voice.VoiceRecorder;
 import com.example.android.mmmrkn.infra.voice.VoiceTransmitter;
@@ -12,6 +13,8 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -49,12 +52,12 @@ public class AttendFragmentPresenter extends Presenter
         this.studentsService = studentsService;
     }
 
-    void onStart() {
-        EventBus.getDefault().register(this);
+    void onStart () {
+        EventBus.getDefault ().register ( this );
     }
 
-    void onStop() {
-        EventBus.getDefault().unregister(this);
+    void onStop () {
+        EventBus.getDefault ().unregister ( this );
     }
 
     //Bluetoothデバイスが接続された時
@@ -120,7 +123,7 @@ public class AttendFragmentPresenter extends Presenter
 
     void fetchStudent ( String studentId ) {
         if ( studentId == null ) {
-            throw new RuntimeException ( "" );
+            throw new RuntimeException ( "studentId is null" );
         }
 
         disposables.add (
@@ -137,6 +140,26 @@ public class AttendFragmentPresenter extends Presenter
                         } )
         );
 
+    }
+
+    void registerAttend ( Student student, String teacherId) {
+        disposables.add (
+                studentsService.setStudentAttendance (
+                        student.getStudentId (),
+                        teacherId,
+                        new Date ().toString (),
+                        student.getAttendance ().getCondition (),
+                        student.getAttendance ().getDetail () )
+                        .subscribeOn ( Schedulers.io () )
+                        .observeOn ( AndroidSchedulers.mainThread () )
+                        .subscribe ( () -> {
+                            Timber.d ( "登録完了。" );
+                            contract.onAttendRegistered ( true );
+                        }, e -> {
+                            Timber.e ( e );
+                            contract.onAttendRegistered ( false );
+                        } )
+        );
     }
 
     @Override
@@ -159,6 +182,8 @@ public class AttendFragmentPresenter extends Presenter
          * 生徒名が認識されAPIから生徒リストが届いた時
          */
         void onNameRecognized ( List <Student> profiles );
+
+        void onAttendRegistered ( boolean result );
 
         /**
          * 接続に失敗した時

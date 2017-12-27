@@ -4,14 +4,22 @@ package com.example.android.mmmrkn.infra.entity;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-
 public class Attendance{
-    
-//    @PrimaryKey(auto = false)
-//    @SerializedName("attendanceId")
-//    @Expose
-//    private String attendanceId;
-    
+
+    public enum Condition {
+        GOOD("good"),
+        SUBTLE("subtle"),
+        BAD("bad");
+        Condition(String name) {
+            this.name = name;
+        }
+        private String name;
+
+        @Override
+        public String toString () {
+            return name;
+        }
+    }
     @SerializedName("time")
     @Expose
     private String time;
@@ -23,18 +31,6 @@ public class Attendance{
     @SerializedName("detail")
     @Expose
     private String detail;
-    
-//    @SerializedName("teacherId")
-//    @Expose
-//    private String teacherId;
-//
-//    public String getAttendanceId() {
-//        return attendanceId;
-//    }
-//
-//    public void setAttendanceId(String attendanceId) {
-//        this.attendanceId = attendanceId;
-//    }
 
     public String getTime() {
         return time;
@@ -49,7 +45,14 @@ public class Attendance{
     }
 
     public void setCondition(String condition) {
-        this.condition = condition;
+        for ( Condition c : Condition.values () ) {
+            if (c.toString ().equals ( condition )) {
+                this.condition = condition;
+                return;
+            }
+        }
+        throw new RuntimeException ( "Illegal condition" );
+
     }
 
     public String getDetail() {
@@ -59,13 +62,5 @@ public class Attendance{
     public void setDetail(String detail) {
         this.detail = detail;
     }
-
-//    public String getTeacherId() {
-//        return teacherId;
-//    }
-//
-//    public void setTeacherId(String teacherId) {
-//        this.teacherId = teacherId;
-//    }
 
 }

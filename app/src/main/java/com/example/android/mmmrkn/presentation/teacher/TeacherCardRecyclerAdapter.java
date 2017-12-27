@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.example.android.mmmrkn.R;
 import com.example.android.mmmrkn.infra.entity.Teacher;
+import com.example.android.mmmrkn.presentation.App;
 import com.example.android.mmmrkn.presentation.mode_select.ModeActivity;
 
 import java.util.List;
@@ -46,19 +47,20 @@ public class TeacherCardRecyclerAdapter extends RecyclerView.Adapter<TeacherCard
     public void onBindViewHolder(ViewHolder vh, int position) {
         //サイズ、nullチェック
         if (teachers != null && teachers.size() > position && teachers.get(position) != null) {
-            //Ormaから持ってきたデータ代入
             vh.name.setText(teachers.get(position).getName());
         }
         // クリック時、モード選択画面に移動
-        vh.layout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent=new Intent(context,com.example.android.mmmrkn.presentation.mode_select.ModeActivity.class);
-                intent.putExtra("teacherName",teachers.get(position).getName());
-                intent.putExtra("teacherId",teachers.get(position).getTeacherId());
-                context.startActivity(intent);
+        vh.layout.setOnClickListener( v -> {
+            Intent intent=new Intent(context,ModeActivity.class);
+            App app;
+            if (context instanceof App) {
+                app = (App) context;
+            }else{
+                app = (App)context.getApplicationContext ();
             }
-        });
+            app.setTeacher ( new Teacher (teachers.get(position).getTeacherId(),teachers.get(position).getName()) );
+            context.startActivity(intent);
+        } );
 
     }
     //Viewを纏めたフォルダの作成
@@ -66,8 +68,7 @@ public class TeacherCardRecyclerAdapter extends RecyclerView.Adapter<TeacherCard
     public TeacherCardRecyclerAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(context);
         View v = layoutInflater.inflate(R.layout.layout_teacher_recycler_view, parent, false);
-        ViewHolder viewHolder = new ViewHolder(v);
-        return viewHolder;
+        return new ViewHolder(v);
     }
 
     //Viewフォルダの初期化設定

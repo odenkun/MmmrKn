@@ -39,7 +39,6 @@ public class AttendancesListCardRecyclerAdapter extends RecyclerView.Adapter<Att
 	public void onBindViewHolder(AttendancesListCardRecyclerAdapter.ViewHolder vh, final int position) {
 		//サイズ、nullチェック
 		if (studentList != null && studentList.size() > position && studentList.get(position) != null) {
-			//Ormaから持ってきたデータ代入
 			vh.name.setText(studentList.get(position).getName());
 		}
 		// クリック時、モード選択画面に移動

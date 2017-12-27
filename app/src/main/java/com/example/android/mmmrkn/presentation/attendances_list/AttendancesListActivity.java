@@ -68,7 +68,6 @@ public class AttendancesListActivity extends AppCompatActivity implements Attend
         }
     }
 
-    //Ormaから生徒一覧をListに代入
     @Override
     public void onEntryListFetched(List<Student> studentTList) {
         AttendancesListCardRecyclerView cardRecyclerView = (AttendancesListCardRecyclerView) findViewById(R.id.recycler_attendances);

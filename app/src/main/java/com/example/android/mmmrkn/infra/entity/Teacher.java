@@ -3,7 +3,10 @@ package com.example.android.mmmrkn.infra.entity;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Teacher {
+import java.io.Serializable;
+
+public class Teacher implements Serializable{
+    private static final long serialVersionUID = 1L;
 
     @SerializedName("teacherId")
     @Expose
@@ -12,6 +15,14 @@ public class Teacher {
     @SerializedName ("name")
     @Expose
     private String name;
+
+    public Teacher () {
+    }
+
+    public Teacher ( String teacherId, String name ) {
+        this.teacherId = teacherId;
+        this.name = name;
+    }
 
     public String getTeacherId() {
         return teacherId;

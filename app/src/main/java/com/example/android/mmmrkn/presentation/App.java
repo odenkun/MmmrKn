@@ -5,6 +5,7 @@ import android.app.Application;
 import com.example.android.mmmrkn.di.ApplicationComponent;
 import com.example.android.mmmrkn.di.ApplicationModule;
 import com.example.android.mmmrkn.di.DaggerApplicationComponent;
+import com.example.android.mmmrkn.infra.entity.Teacher;
 
 import timber.log.Timber;
 
@@ -12,6 +13,7 @@ import timber.log.Timber;
 //Applicationクラスを継承して作るので、カスタムアプリケーションクラスと呼ばれる
 public class App extends Application {
     ApplicationComponent applicationComponent;
+    Teacher teacher;
 
     public ApplicationComponent getComponent() {
         if (applicationComponent == null) {
@@ -34,5 +36,16 @@ public class App extends Application {
     public void onCreate () {
         super.onCreate ();
         Timber.plant( new Timber.DebugTree());
+    }
+
+    public Teacher getTeacher () {
+        return teacher;
+    }
+
+    public void setTeacher ( Teacher teacher ) {
+        if (teacher == null) {
+            throw new NullPointerException ( "selectedTeacher is null" );
+        }
+        this.teacher = teacher;
     }
 }
