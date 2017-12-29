@@ -20,6 +20,7 @@ import com.google.gson.GsonBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import javax.inject.Singleton;
 
@@ -88,6 +89,7 @@ public class ApplicationModule {
 
         return new OkHttpClient.Builder ()
                 .cookieJar(cookieJar)
+                .connectTimeout ( 2, TimeUnit.SECONDS )
                 .addInterceptor ( logger )
                 .build ();
 
@@ -104,8 +106,8 @@ public class ApplicationModule {
                 .client ( okHttpClient )
 
                 //WebAPIのFQDN
-                .baseUrl ( "https://mmmr-mock-api.mybluemix.net" )
-//                .baseUrl ( "https://192.168.20" )
+//                .baseUrl ( "https://mmmr-mock-api.mybluemix.net" )
+                .baseUrl ( "http://192.168.1.3:6001" )
 
                 //JSONとPOJOの相互変換を行うものに、gsonを指定
                 .addConverterFactory ( GsonConverterFactory.create ( gson ) )

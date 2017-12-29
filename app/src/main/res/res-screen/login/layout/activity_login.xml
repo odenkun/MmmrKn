@@ -50,7 +50,8 @@
                     android:hint="@string/prompt_id"
                     android:inputType="textPersonName"
                     android:singleLine="true"
-                    android:theme="@style/EditTextColor" />
+                    android:text="guriko"
+                    android:theme="@style/EditTextColor"/>
 
             </android.support.design.widget.TextInputLayout>
 
@@ -69,8 +70,8 @@
                     android:inputType="textPassword"
                     android:maxLines="1"
                     android:singleLine="true"
-                    android:theme="@style/EditTextColor"
-                    />
+                    android:text="guriko"
+                    android:theme="@style/EditTextColor"/>
 
             </android.support.design.widget.TextInputLayout>
 

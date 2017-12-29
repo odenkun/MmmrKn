@@ -9,6 +9,7 @@ import com.example.android.mmmrkn.R;
 import com.example.android.mmmrkn.di.teacher.TeacherModule;
 import com.example.android.mmmrkn.infra.entity.Teacher;
 import com.example.android.mmmrkn.presentation.App;
+import com.example.android.mmmrkn.presentation.login.LoginActivity;
 import com.example.android.mmmrkn.presentation.mode_select.ModeActivity;
 
 
@@ -37,8 +38,12 @@ public class SelectTeacherActivity extends AppCompatActivity implements SelectTe
 
     @Override
     public void onTeachersFetched ( List<Teacher> teacherList ) {
+        if (teacherList == null) {
+            startActivity(new Intent(this, LoginActivity.class));
+            finish ();
+            return;
+        }
         TeacherCardRecyclerView cardRecyclerView = (TeacherCardRecyclerView)findViewById(R.id.teacher_recycle);
-
         cardRecyclerView.onListFetch(this,teacherList);
         //データをlogとして出力
         for ( Teacher teacher : teacherList ) {

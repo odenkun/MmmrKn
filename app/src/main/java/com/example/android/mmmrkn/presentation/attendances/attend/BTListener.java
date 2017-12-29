@@ -16,7 +16,7 @@ import java.util.List;
 import timber.log.Timber;
 public class BTListener implements BluetoothProfile.ServiceListener {
     private static final int REQUEST_ENABLE_BT = 53126;
-    public static final int CONNECTED =0, DISCONNECTED = 1;
+    static final int CONNECTED =0, DISCONNECTED = 1;
 
     private BluetoothHeadset mBluetoothHeadset;
 

@@ -33,13 +33,14 @@ public class SelectTeacherPresenter extends Presenter {
                 teacherService.getTeachers ()
                         .subscribeOn ( Schedulers.io () )
                         .observeOn ( AndroidSchedulers.mainThread () )
-                        .subscribe ( teacherList -> {
+                        .subscribe(teacherList -> {
                             Timber.d ( "先生とれたよ" );
                             contract.onTeachersFetched ( teacherList );
                         }, e -> {
+                            Timber.e("teacher fetch failed");
                             Timber.e ( e );
                             contract.onTeachersFetched ( null );
-                        } ) );
+                        } ));
     }
 
     //プレゼンターがビューにやって欲しいことリスト

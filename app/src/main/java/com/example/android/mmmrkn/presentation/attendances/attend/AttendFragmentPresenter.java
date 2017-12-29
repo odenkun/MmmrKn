@@ -52,8 +52,9 @@ public class AttendFragmentPresenter extends Presenter
         this.studentsService = studentsService;
     }
 
-    void onStart () {
+    void onStart (Activity activity) {
         EventBus.getDefault ().register ( this );
+        readyMic ( activity );
     }
 
     void onStop () {
@@ -127,7 +128,8 @@ public class AttendFragmentPresenter extends Presenter
         }
 
         disposables.add (
-                studentsService.getStudent ( studentId ).subscribeOn ( Schedulers.io () )
+                studentsService.getStudent ( studentId )
+                        .subscribeOn ( Schedulers.io () )
                         .observeOn ( AndroidSchedulers.mainThread () )
                         .subscribe ( student -> {
                             Timber.d ( "生徒とれたよ" );
@@ -142,7 +144,7 @@ public class AttendFragmentPresenter extends Presenter
 
     }
 
-    void registerAttend ( Student student, String teacherId) {
+    void registerAttend ( Student student, String teacherId ) {
         disposables.add (
                 studentsService.setStudentAttendance (
                         student.getStudentId (),

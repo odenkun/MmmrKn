@@ -72,8 +72,7 @@ public class AttendFragment extends Fragment implements AttendFragmentPresenter.
     public void onStart () {
         super.onStart ();
         EventBus.getDefault ().register ( this );
-        presenter.onStart ();
-
+        presenter.onStart (getActivity ());
     }
 
     @Override
@@ -123,7 +122,7 @@ public class AttendFragment extends Fragment implements AttendFragmentPresenter.
 
     @Override
     public void onConnectionFailed () {
-        Toast.makeText ( getActivity (), "接続に失敗しました。", Toast.LENGTH_SHORT ).show ();
+//        Toast.makeText ( getActivity (), "接続に失敗しました。", Toast.LENGTH_SHORT ).show ();
         getActivity ().finish ();
     }
 

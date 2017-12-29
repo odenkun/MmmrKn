@@ -5,6 +5,7 @@ import android.util.Log;
 import com.example.android.mmmrkn.infra.entity.Student;
 import com.example.android.mmmrkn.presentation.App;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Queue;
 import java.util.concurrent.TimeUnit;
@@ -44,7 +45,7 @@ public class VoiceTransmitter extends WebSocketListener {
     private static final int NORMAL_CLOSURE_STATUS = 1000;
     private WebSocket ws;
     private int sampleRate;
-    private static final String WS_URL = "http://192.168.1.2:6001";
+    private static final String WS_URL = "http://192.168.1.3:6001";
     private WebSocketState mState = WebSocketState.PREPARATION;
 
     private Callback callback;
@@ -55,7 +56,7 @@ public class VoiceTransmitter extends WebSocketListener {
         this.callback = callback;
 
         Request request = new Request.Builder ()
-                .addHeader ( SUB_PROTOCOL_HEADER, Header.RECOGNIZE.getName () )
+//                .addHeader ( SUB_PROTOCOL_HEADER, Header.RECOGNIZE.getName () )
                 .url ( WS_URL )
                 .build ();
 
@@ -140,9 +141,12 @@ public class VoiceTransmitter extends WebSocketListener {
         callback.onConnectionFailed ();
     }
 
-    public boolean sendVoice ( final byte[] data ) throws IllegalStateException {
+    public boolean sendVoice ( byte[] data ) throws IllegalStateException {
         if (! (checkState ( WebSocketState.OPENED,WebSocketState.RECOGNIZING ))) {
             return false;
+        }
+        if (mState == WebSocketState.OPENED) {
+            Arrays.fill(data, (byte)0);
         }
         boolean result = ws.send ( ByteString.of ( data ) );
         if ( !result ) {

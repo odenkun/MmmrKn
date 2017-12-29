@@ -78,11 +78,12 @@ public class LoginPresenter extends Presenter {
                 //LoginServiceでの返り値がCompletableなので引数は無し
                 //詳しくは https://qiita.com/takahirom/items/f3e576e91b219c7239e7
                 .subscribe ( () -> { //成功時
-
+                    disposables.clear ();
                     //画面に反映
                     contract.onAuthFinish ( true );
                 }, e -> { //エラー時
                     Timber.e ( e );
+                    disposables.clear ();
                     //画面に反映
                     contract.onAuthFinish ( false );
                 } ) );
