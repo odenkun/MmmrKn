@@ -25,9 +25,6 @@ import java.util.List;
 import timber.log.Timber;
 
 public class QRFragment extends Fragment {
-    private Calendar lastAddedTime;
-
-    private static final int SCAN_INTERVAL = 2;
     DecoratedBarcodeView barcodeView;
 
     public QRFragment () {
@@ -42,7 +39,6 @@ public class QRFragment extends Fragment {
     @Override
     public View onCreateView ( LayoutInflater inflater, ViewGroup container,
                                Bundle savedInstanceState ) {
-        // Inflate the layout for this fragment
         return inflater.inflate ( R.layout.fragment_qr, container );
     }
 
@@ -54,20 +50,6 @@ public class QRFragment extends Fragment {
             @Override
             public void barcodeResult ( BarcodeResult result ) {
                 Timber.d ( result.toString () );
-                Calendar now = Calendar.getInstance ();
-                if ( lastAddedTime != null ) {
-                    //破壊的メソッドなのでclone
-                    Calendar added = (Calendar) lastAddedTime.clone ();
-                    added.add ( Calendar.SECOND, SCAN_INTERVAL );
-                    //現在の時間
-                    if ( now.before ( added ) ) {
-                        Timber.d("前回から2秒以内の読み込み");
-                        return;
-                    }
-                }
-                //最初のスキャンor前より2秒後
-                lastAddedTime = now;
-
                 EventBus.getDefault().post(new QREvent (result.toString ()));
             }
 
@@ -82,6 +64,11 @@ public class QRFragment extends Fragment {
     public void onResume () {
         super.onResume ();
         barcodeView.resume ();
+    }
+    @Override
+    public void onPause () {
+        super.onPause();
+        barcodeView.pause ();
     }
 
     public class QREvent {

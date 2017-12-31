@@ -6,6 +6,7 @@ import com.example.android.mmmrkn.di.ApplicationComponent;
 import com.example.android.mmmrkn.di.ApplicationModule;
 import com.example.android.mmmrkn.di.DaggerApplicationComponent;
 import com.example.android.mmmrkn.infra.entity.Teacher;
+import com.squareup.picasso.Picasso;
 
 import timber.log.Timber;
 
@@ -36,6 +37,8 @@ public class App extends Application {
     public void onCreate () {
         super.onCreate ();
         Timber.plant( new Timber.DebugTree());
+        Picasso.with ( this ).setLoggingEnabled ( true );
+
     }
 
     public Teacher getTeacher () {

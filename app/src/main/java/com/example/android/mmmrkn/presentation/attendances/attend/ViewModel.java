@@ -3,6 +3,7 @@ package com.example.android.mmmrkn.presentation.attendances.attend;
 import android.databinding.BaseObservable;
 import android.databinding.Bindable;
 import android.databinding.BindingAdapter;
+import android.databinding.ObservableBoolean;
 import android.databinding.ObservableInt;
 import android.widget.ImageView;
 
@@ -17,23 +18,26 @@ public class ViewModel extends BaseObservable {
     private Student student;
     public ObservableInt checkedBtn;
 
+    public ViewModel () {
+        checkedBtn = new ObservableInt ( R.id.radio_healthy );
+    }
+
     @Bindable
     public Student getStudent () {
         return student;
     }
 
     public void setStudent ( Student student ) {
-        if (student.getAttendance () == null) {
-            Attendance attendance = new Attendance ();
-            student.setAttendance ( attendance );
-        }
-        checkedBtn = new ObservableInt ( R.id.radio_healthy );
+
         this.student = student;
+        if ( student != null && student.getAttendance () == null ) {
+            student.setAttendance ( new Attendance () );
+        }
         notifyPropertyChanged ( BR.student );
     }
 
     public boolean getCondition () {
-        return checkedBtn.get() == R.id.radio_healthy;
+        return checkedBtn.get () == R.id.radio_healthy;
     }
 
     @BindingAdapter ( { "picturePath", "gender" })
@@ -45,10 +49,14 @@ public class ViewModel extends BaseObservable {
             frameColor = R.color.womanFrame;
             placeHolderID = R.drawable.girl_happy;
         }
-        Picasso.with ( view.getContext () ).setLoggingEnabled ( true );
+
+        String imageUrl = null;
+        if (picturePath != null) {
+            imageUrl = "https://mmmr-mock-api.mybluemix.net/images/students/" + picturePath;
+        }
 
         Picasso.with ( view.getContext () )
-                .load ( "https://mmmr-mock-api.mybluemix.net/images/students/" + picturePath )
+                .load ( imageUrl )
                 .placeholder ( placeHolderID )
                 .fit ()
                 .transform ( new RoundedTransformationBuilder ()

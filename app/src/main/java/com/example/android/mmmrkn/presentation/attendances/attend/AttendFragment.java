@@ -47,11 +47,11 @@ public class AttendFragment extends Fragment implements AttendFragmentPresenter.
         // Inflate the layout for this fragment
         FragmentAttendBinding binding = DataBindingUtil.inflate ( inflater, R.layout.fragment_attend, container, true );
         binding.setViewModel ( viewModel );
-        Student profile = new Student ();
-        profile.setName ( "aaaaaaa" );
-        profile.setPicturePath ( "c_kuroki.jpg" );
-
-        viewModel.setStudent ( profile );
+//        Student profile = new Student ();
+//        profile.setName ( "aaaaaaa" );
+//        profile.setPicturePath ( "c_kuroki.jpg" );
+//
+//        viewModel.setStudent ( profile );
         binding.btnAttend.setOnClickListener ( view -> onClick ( true ) );
         binding.btnDenial.setOnClickListener ( view -> onClick ( false ) );
         return binding.getRoot ();
@@ -79,6 +79,7 @@ public class AttendFragment extends Fragment implements AttendFragmentPresenter.
     public void onAttendRegistered ( boolean result ) {
         if (result) {
             Toast.makeText ( this.getContext (), "登園を記録できました。", Toast.LENGTH_SHORT ).show ();
+            viewModel.setStudent ( null );
         }else{
             Toast.makeText ( this.getContext (), "登園の記録に失敗しました。", Toast.LENGTH_SHORT ).show ();
         }
@@ -86,7 +87,15 @@ public class AttendFragment extends Fragment implements AttendFragmentPresenter.
 
     @Subscribe
     public void onScanQR ( QRFragment.QREvent qrEvent ) {
-        // TODO: 2017/12/26 くるくるの表示 
+        Student old = viewModel.getStudent ();
+        if (old != null) {
+            if ( qrEvent.studentId.equals ( old.getStudentId () ) ) {
+                return;
+            }
+        }
+
+        // TODO: 2017/12/26 くるくるの表示
+
         presenter.fetchStudent ( qrEvent.studentId );
     }
 

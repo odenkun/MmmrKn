@@ -80,6 +80,7 @@
 
             <RadioButton
                 android:id="@+id/radio_healthy"
+                android:enabled="@{viewModel.student != null}"
                 android:layout_width="160dp"
                 android:layout_height="wrap_content"
                 android:checked="true"
@@ -89,6 +90,7 @@
 
             <RadioButton
                 android:id="@+id/radio_unhealthy"
+                android:enabled="@{viewModel.student != null}"
                 android:layout_width="160dp"
                 android:layout_height="wrap_content"
                 android:checked="false"
@@ -100,6 +102,7 @@
 
         <Button
             android:id="@+id/btn_attend"
+            android:enabled="@{viewModel.student != null}"
             android:layout_width="100dp"
             android:layout_height="50dp"
             android:layout_marginBottom="8dp"
@@ -116,6 +119,7 @@
 
         <Button
             android:id="@+id/btn_denial"
+            android:enabled="@{viewModel.student != null}"
             android:layout_width="100dp"
             android:layout_height="50dp"
             android:layout_marginEnd="8dp"

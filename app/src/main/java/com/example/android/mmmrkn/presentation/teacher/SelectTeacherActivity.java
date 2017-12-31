@@ -45,6 +45,7 @@ public class SelectTeacherActivity extends AppCompatActivity implements SelectTe
         }
         TeacherCardRecyclerView cardRecyclerView = (TeacherCardRecyclerView)findViewById(R.id.teacher_recycle);
         cardRecyclerView.onListFetch(this,teacherList);
+
         //データをlogとして出力
         for ( Teacher teacher : teacherList ) {
             Timber.d(teacher.toString ());

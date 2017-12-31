@@ -32,7 +32,8 @@ enum MicMode {
 public class AttendFragmentPresenter extends Presenter
         implements VoiceRecorder.Callback, VoiceTransmitter.Callback {
 
-    private static MicMode mMicMode = MicMode.BUILT_IN;
+    private static final boolean MIC_ENABLED = false;
+    private static final MicMode mMicMode = MicMode.BUILT_IN;
 
     private Contract contract;
 
@@ -54,26 +55,13 @@ public class AttendFragmentPresenter extends Presenter
 
     void onStart (Activity activity) {
         EventBus.getDefault ().register ( this );
-        readyMic ( activity );
+        if (MIC_ENABLED) {
+            readyMic ( activity );
+        }
     }
 
     void onStop () {
         EventBus.getDefault ().unregister ( this );
-    }
-
-    //Bluetoothデバイスが接続された時
-    @Subscribe
-    public void onBTStateChanged ( BTListener.BTEvent btEvent ) {
-        if ( mMicMode == MicMode.BLUETOOTH && btEvent.isConnect () ) {
-            startRec ();
-        }
-    }
-
-    //録音の開始
-    private void startRec () {
-        mVoiceRecorder = new VoiceRecorder ( this );
-        int sampleRate = mVoiceRecorder.start ();
-        mTransmitter = new VoiceTransmitter ( sampleRate, this, client );
     }
 
     void readyMic ( Activity activity ) {
@@ -91,7 +79,20 @@ public class AttendFragmentPresenter extends Presenter
         }
     }
 
+    //Bluetoothデバイスが接続された時
+    @Subscribe
+    public void onBTStateChanged ( BTListener.BTEvent btEvent ) {
+        if ( mMicMode == MicMode.BLUETOOTH && btEvent.isConnect () ) {
+            startRec ();
+        }
+    }
 
+    //録音の開始
+    private void startRec () {
+        mVoiceRecorder = new VoiceRecorder ( this );
+        int sampleRate = mVoiceRecorder.start ();
+        mTransmitter = new VoiceTransmitter ( sampleRate, this, client );
+    }
     //発話開始
     @Override
     public void onVoiceStart () {
