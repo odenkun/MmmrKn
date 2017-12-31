@@ -92,4 +92,7 @@ dependencies {
 
     //QR
     implementation 'com.journeyapps:zxing-android-embedded:3.5.0'
+    //メモリリーク検出
+    debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5.4'
+    releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.4'
 }

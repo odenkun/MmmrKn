@@ -6,6 +6,7 @@ import com.example.android.mmmrkn.di.ApplicationComponent;
 import com.example.android.mmmrkn.di.ApplicationModule;
 import com.example.android.mmmrkn.di.DaggerApplicationComponent;
 import com.example.android.mmmrkn.infra.entity.Teacher;
+import com.squareup.leakcanary.LeakCanary;
 import com.squareup.picasso.Picasso;
 
 import timber.log.Timber;
@@ -38,7 +39,10 @@ public class App extends Application {
         super.onCreate ();
         Timber.plant( new Timber.DebugTree());
         Picasso.with ( this ).setLoggingEnabled ( true );
-
+        if (LeakCanary.isInAnalyzerProcess(this)) {
+            return;
+        }
+        LeakCanary.install(this);
     }
 
     public Teacher getTeacher () {

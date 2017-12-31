@@ -25,6 +25,8 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import timber.log.Timber;
+
 
 public class AttendFragment extends Fragment implements AttendFragmentPresenter.Contract {
     @Inject
@@ -93,9 +95,10 @@ public class AttendFragment extends Fragment implements AttendFragmentPresenter.
                 return;
             }
         }
-
+        Student student = new Student ();
+        student.setStudentId ( qrEvent.studentId );
+        viewModel.setStudent ( student );
         // TODO: 2017/12/26 くるくるの表示
-
         presenter.fetchStudent ( qrEvent.studentId );
     }
 
@@ -157,6 +160,4 @@ public class AttendFragment extends Fragment implements AttendFragmentPresenter.
             viewModel.setStudent ( students.get ( 0 ) );
         }
     }
-
-
 }
