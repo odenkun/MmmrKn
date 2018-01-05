@@ -1,0 +1,823 @@
+Index: app/src/main/java/com/example/android/mmmrkn/presentation/attendances_list/StudentProfileFragment.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/example/android/mmmrkn/presentation/attendances_list/StudentProfileFragment.java	(revision )
++++ app/src/main/java/com/example/android/mmmrkn/presentation/attendances_list/StudentProfileFragment.java	(revision )
+@@ -0,0 +1,28 @@
++package com.example.android.mmmrkn.presentation.attendances_list;
++
++import android.app.Fragment;
++import android.databinding.DataBindingUtil;
++import android.os.Bundle;
++import android.support.annotation.Nullable;
++import android.support.v4.app.FragmentActivity;
++
++import com.example.android.mmmrkn.R;
++import com.example.android.mmmrkn.databinding.ActivityStudentProfileBinding;
++import com.example.android.mmmrkn.infra.entity.Student;
++
++/**
++ * Created by 15110009 on 2017/12/19.
++ */
++
++public class StudentProfileFragment extends Fragment {
++//    @Override
++//    protected void onCreate(Bundle savedInstanceState){
++//        super.onCreate(savedInstanceState);
++//        String name = getArguments().getString("name");
++//        ActivityStudentProfileBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_student_profile);
++//        binding.setStudent(name);
++//    }
++
++
++
++}
+Index: app/src/main/res/res-screen/attendances_list/layout-sw720dp/activity_main_tab.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/res-screen/attendances_list/layout-sw720dp/activity_main_tab.xml	(revision )
++++ app/src/main/res/res-screen/attendances_list/layout-sw720dp/activity_main_tab.xml	(revision )
+@@ -0,0 +1,20 @@
++<?xml version="1.0" encoding="utf-8"?>
++<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
++    xmlns:tools="http://schemas.android.com/tools"
++    android:layout_width="match_parent"
++    android:layout_height="match_parent" >
++
++    <fragment
++        android:id="@+id/ft_attendances_list"
++        android:name="com.example.android.mmmrkn.presentation.attendances_list.AttendancesFragment"
++        android:layout_width="match_parent"
++        android:layout_height="match_parent"
++        android:layout_weight="2" />
++
++    <fragment
++        android:id="@+id/ft_student_profile"
++        android:name="com.example.android.mmmrkn.presentation.attendances_list.StudentProfileFragment"
++        android:layout_width="match_parent"
++        android:layout_height="match_parent"
++        android:layout_weight="1" />
++</LinearLayout>
+\ No newline at end of file
+Index: app/src/main/res/drawable/scrool_border.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/drawable/scrool_border.xml	(revision )
++++ app/src/main/res/drawable/scrool_border.xml	(revision )
+@@ -0,0 +1,17 @@
++<?xml version="1.0" encoding="utf-8"?>
++<layer-list xmlns:android="http://schemas.android.com/apk/res/android" >
++    <!-- 枠線付き長方形 -->
++    <item>
++        <shape android:shape="rectangle">
++            <solid android:color="#FFFFFF"/>
++            <stroke android:width="2dp" android:color="#AAAAAA" />
++        </shape>
++    </item>
++
++    <!-- 2dp分の padding を設定した枠線なし長方形 -->
++    <item android:bottom="2dp">
++        <shape android:shape="rectangle">
++            <solid android:color="#FFFFFF"/>
++        </shape>
++    </item>
++</layer-list>
+\ No newline at end of file
+Index: app/src/main/java/com/example/android/mmmrkn/presentation/attendances_list/AttendancesFragment.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/example/android/mmmrkn/presentation/attendances_list/AttendancesFragment.java	(revision )
++++ app/src/main/java/com/example/android/mmmrkn/presentation/attendances_list/AttendancesFragment.java	(revision )
+@@ -0,0 +1,70 @@
++package com.example.android.mmmrkn.presentation.attendances_list;
++
++import android.app.Activity;
++import android.app.Fragment;
++import android.content.Context;
++import android.os.Bundle;
++import android.support.v7.widget.LinearLayoutManager;
++import android.support.v7.widget.RecyclerView;
++import android.util.AttributeSet;
++import android.view.LayoutInflater;
++import android.view.View;
++import android.view.ViewGroup;
++import android.widget.ListView;
++
++import com.example.android.mmmrkn.R;
++import com.example.android.mmmrkn.infra.entity.Student;
++
++import java.util.List;
++
++/**
++ * Created by 15110009 on 2017/12/19.
++ */
++
++public class AttendancesFragment extends Fragment{
++
++    private onFragmentListClickedListener listener;
++    private Activity mActivity = null;
++    private View mView;
++
++
++    // RecyclerViewとAdapter
++    private RecyclerView mRecyclerView = null;
++    private AttendancesListCardRecyclerAdapter atteAda = null;
++
++
++
++
++
++
++    @Override
++    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
++        mView = inflater.inflate(R.layout.attendances_viewbase, container, false);
++
++        // RecyclerViewの参照を取得
++        mRecyclerView = (RecyclerView) mView.findViewById(R.id.recycler_attendances);
++        // レイアウトマネージャを設定(ここで縦方向の標準リストであることを指定)
++        mRecyclerView.setLayoutManager(new LinearLayoutManager(mActivity));
++
++        return mView;
++    }
++
++
++    public void onActivityCreated(Bundle savedInstanceState,List<Student> studentTList) {
++        super.onActivityCreated(savedInstanceState);
++
++        atteAda = new AttendancesListCardRecyclerAdapter(mActivity, studentTList);
++        mRecyclerView.setAdapter(atteAda);
++    }
++    //ListのClick情報を通知するListener
++    public interface onFragmentListClickedListener {
++        public void onFragmentListClick(String select);
++    }
++
++    //Interfaceを登録する
++    @Override
++    public void onAttach(Activity activity) {
++        super.onAttach(activity);
++        listener = (onFragmentListClickedListener)activity;
++    }
++}
+Index: app/src/main/res/res-screen/attendances/layout-land/activity_attendances.xml
+===================================================================
+--- app/src/main/res/res-screen/attendances/layout-land/activity_attendances.xml	(date 1513571274000)
++++ app/src/main/res/res-screen/attendances/layout-sw720dp/activity_attendances.xml	(revision )
+@@ -7,8 +7,28 @@
+         android:layout_width="match_parent"
+         android:layout_height="match_parent">
+ 
+-        <TextView
+-            android:id="@+id/text_memo2"
++        <ScrollView
++            android:id="@+id/scrollView"
++            android:layout_width="688dp"
++            android:layout_height="237dp"
++            android:layout_marginBottom="8dp"
++            android:layout_marginEnd="28dp"
++            android:background="@drawable/scrool_border"
++            app:layout_constraintBottom_toTopOf="@+id/grp_state"
++            app:layout_constraintEnd_toEndOf="parent"
++            app:layout_constraintTop_toBottomOf="@+id/text_memo"
++            app:layout_constraintVertical_bias="0.0">
++
++            <EditText
++                android:layout_width="match_parent"
++                android:layout_height="match_parent"
++                android:background="#00000000"
++                android:text="あああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああ"
++                android:textSize="28sp" />
++        </ScrollView>
++
++    <TextView
++            android:id="@+id/text_memo"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_marginEnd="248dp"
+@@ -17,10 +37,10 @@
+             android:textColor="@color/colorBlack"
+             android:textSize="35sp"
+             app:layout_constraintEnd_toEndOf="parent"
+-            app:layout_constraintHorizontal_bias="0.045"
++            app:layout_constraintHorizontal_bias="0.017"
+             app:layout_constraintStart_toEndOf="@+id/img_person"
+             app:layout_constraintTop_toTopOf="parent"
+-            android:layout_marginTop="172dp" />
++            android:layout_marginTop="168dp" />
+ 
+     <TextView
+         android:id="@+id/txt_class"
+@@ -28,12 +48,12 @@
+         android:layout_height="wrap_content"
+         android:layout_marginEnd="8dp"
+         android:layout_marginStart="8dp"
+-        android:layout_marginTop="84dp"
++        android:layout_marginTop="72dp"
+         android:text="さくら組"
+         android:textColor="@color/colorBlack"
+         android:textSize="40sp"
+         app:layout_constraintEnd_toStartOf="@+id/txt_name"
+-        app:layout_constraintHorizontal_bias="0.075"
++        app:layout_constraintHorizontal_bias="0.071"
+         app:layout_constraintStart_toEndOf="@+id/img_person"
+         app:layout_constraintTop_toTopOf="parent" />
+ 
+@@ -62,40 +82,6 @@
+         app:layout_constraintVertical_bias="0.457"
+         app:srcCompat="@color/colorPrimary" />
+ 
+-    <EditText
+-        android:id="@+id/plain_content"
+-        android:layout_width="700dp"
+-        android:layout_height="189dp"
+-        android:layout_marginRight="40dp"
+-        android:layout_marginStart="28dp"
+-        android:layout_marginTop="36dp"
+-        android:editable="false"
+-        android:ems="10"
+-        android:enabled="false"
+-        android:inputType="textMultiLine"
+-        android:text="ああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああ"
+-        android:textColor="#000000"
+-        android:textSize="30dp"
+-        android:theme="@style/EditTextColor"
+-        app:layout_constraintRight_toRightOf="parent"
+-        app:layout_constraintStart_toEndOf="@+id/img_person"
+-        app:layout_constraintTop_toBottomOf="@+id/txt_name" />
+-
+-    <Button
+-        android:id="@+id/btn_mode"
+-        android:layout_width="162dp"
+-        android:layout_height="wrap_content"
+-        android:layout_marginBottom="8dp"
+-        android:layout_marginStart="24dp"
+-        android:layout_marginTop="228dp"
+-        android:text="戻る"
+-        android:textColor="@color/colorBlack"
+-        android:textSize="25sp"
+-        app:layout_constraintBottom_toBottomOf="parent"
+-        app:layout_constraintStart_toEndOf="@+id/img_person"
+-        app:layout_constraintTop_toTopOf="parent"
+-        app:layout_constraintVertical_bias="0.815" />
+-
+     <Button
+         android:id="@+id/btn_attend"
+         android:layout_width="150dp"
+@@ -106,7 +92,8 @@
+         app:layout_constraintBottom_toTopOf="@+id/btn_denial"
+         app:layout_constraintHorizontal_bias="0.985"
+         app:layout_constraintLeft_toLeftOf="parent"
+-        app:layout_constraintRight_toRightOf="parent" />
++        app:layout_constraintRight_toRightOf="parent"
++        app:layout_constraintTop_toBottomOf="@+id/scrollView" />
+ 
+     <Button
+         android:id="@+id/btn_denial"
+@@ -125,13 +112,10 @@
+         android:layout_width="547dp"
+         android:layout_height="110dp"
+         android:layout_marginBottom="76dp"
+-        android:layout_marginEnd="256dp"
+-        android:layout_marginTop="8dp"
++        android:layout_marginEnd="272dp"
+         android:orientation="horizontal"
+         app:layout_constraintBottom_toBottomOf="parent"
+-        app:layout_constraintEnd_toEndOf="parent"
+-        app:layout_constraintTop_toBottomOf="@+id/plain_content"
+-        app:layout_constraintVertical_bias="0.0">
++        app:layout_constraintEnd_toEndOf="parent">
+ 
+         <RadioButton
+             android:id="@+id/radio_healthy"
+Index: app/src/main/java/com/example/android/mmmrkn/presentation/attendances_list/AttendancesListCardRecyclerAdapter.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/example/android/mmmrkn/presentation/attendances_list/AttendancesListCardRecyclerAdapter.java	(date 1513571274000)
++++ app/src/main/java/com/example/android/mmmrkn/presentation/attendances_list/AttendancesListCardRecyclerAdapter.java	(revision )
+@@ -18,6 +18,8 @@
+ public class AttendancesListCardRecyclerAdapter extends RecyclerView.Adapter<AttendancesListCardRecyclerAdapter.ViewHolder> {
+ 	private Context context;
+ 	private List<Student> studentList;
++	private AttendancesFragment.onFragmentListClickedListener listener;
++
+ 
+ 	public AttendancesListCardRecyclerAdapter(Context context, List<Student> attendanceTArray) {
+ 		super();
+@@ -39,11 +41,11 @@
+ 	public void onBindViewHolder(AttendancesListCardRecyclerAdapter.ViewHolder vh, final int position) {
+ 		//サイズ、nullチェック
+ 		if (studentList != null && studentList.size() > position && studentList.get(position) != null) {
+-			//Ormaから持ってきたデータ代入
+ 			vh.name.setText(studentList.get(position).getName());
+ 		}
+ 		// クリック時、モード選択画面に移動
+ 		vh.layout.setOnClickListener((v) -> {
++			listener.onFragmentListClick(studentList.get(position).getName());
+ 			Intent intent = new Intent(context, StudentProfileActivity.class);
+ 			intent.putExtra("student", studentList.get(position));
+ 			context.startActivity(intent);
+@@ -70,4 +72,5 @@
+ 			layout = v.findViewById(R.id.layout);
+ 		}
+ 	}
++
+ }
+\ No newline at end of file
+Index: app/src/main/java/com/example/android/mmmrkn/presentation/mode_select/ModeActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/example/android/mmmrkn/presentation/mode_select/ModeActivity.java	(date 1513571274000)
++++ app/src/main/java/com/example/android/mmmrkn/presentation/mode_select/ModeActivity.java	(revision )
+@@ -58,13 +58,13 @@
+             startActivity(intent);
+         });
+ 
+-        //降園ボタンを押された時の処理(未実装)
++        //降園ボタンを押された時の処理
+         findViewById(R.id.btn_goHome).setOnClickListener(view -> {
+             intent = new Intent(this, GoHomeActivity.class);
+             startActivity(intent);
+         });
+ 
+-        //登園リストボタンを押された時の処理(未実装)
++        //登園リストボタンを押された時の処理
+         findViewById(R.id.btn_attendancesList).setOnClickListener(view -> {
+             intent = new Intent(this, AttendancesListActivity.class);
+             startActivity(intent);
+Index: app/src/main/java/com/example/android/mmmrkn/presentation/attendances_list/SelectPartyPresenter.java
+===================================================================
+--- app/src/main/java/com/example/android/mmmrkn/presentation/attendances_list/SelectPartyPresenter.java	(date 1513571274000)
++++ app/src/main/java/com/example/android/mmmrkn/presentation/attendances_list/SelectPartyPresenter.java	(date 1513571274000)
+@@ -1,0 +0,0 @@
+Index: app/src/main/AndroidManifest.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/AndroidManifest.xml	(date 1513571274000)
++++ app/src/main/AndroidManifest.xml	(revision )
+@@ -22,7 +22,9 @@
+             android:screenOrientation="landscape"
+             android:name=".presentation.login.LoginActivity"
+             android:label="@string/title_activity_login" />
++
+         <activity
++            android:screenOrientation="landscape"
+             android:name=".presentation.BeginActivity"
+             android:theme="@android:style/Theme.NoDisplay">
+             <intent-filter>
+@@ -31,13 +33,30 @@
+             </intent-filter>
+         </activity>
+ 
+-        <activity android:name=".presentation.teacher.SelectTeacherActivity"/>
+-        <activity android:name=".presentation.studentprofile.StudentProfileActivity"/>
++        <activity
++            android:name=".presentation.teacher.SelectTeacherActivity"
++            android:screenOrientation="landscape" />
+ 
+-        <activity android:name=".presentation.mode_select.ModeActivity" />
+-        <activity android:name=".presentation.attendances_list.AttendancesListActivity"/>
+-        <activity android:name=".presentation.attendances.AttendancesActivity" />
+-        <activity android:name=".presentation.gohome.GoHomeActivity" />
++        <activity
++            android:screenOrientation="landscape"
++            android:name=".presentation.studentprofile.StudentProfileActivity" />
++
++        <activity
++            android:name=".presentation.mode_select.ModeActivity"
++            android:screenOrientation="landscape" />
++
++        <activity
++            android:name=".presentation.attendances_list.AttendancesListActivity"
++            android:screenOrientation="landscape" />
++
++        <activity
++            android:name=".presentation.attendances.AttendancesActivity"
++            android:screenOrientation="landscape" />
++
++        <activity
++            android:name=".presentation.gohome.GoHomeActivity"
++            android:screenOrientation="landscape" />
++
+     </application>
+ 
+ </manifest>
+\ No newline at end of file
+Index: app/src/main/java/com/example/android/mmmrkn/presentation/attendances_list/AttendancesListActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/example/android/mmmrkn/presentation/attendances_list/AttendancesListActivity.java	(date 1513571274000)
++++ app/src/main/java/com/example/android/mmmrkn/presentation/attendances_list/AttendancesListActivity.java	(revision )
+@@ -1,11 +1,12 @@
+ package com.example.android.mmmrkn.presentation.attendances_list;
+ 
++import android.app.FragmentTransaction;
++import android.content.Context;
++import android.content.res.Configuration;
++import android.os.Build;
+ import android.os.Bundle;
+ import android.support.v4.app.DialogFragment;
+ import android.support.v7.app.AppCompatActivity;
+-import android.support.v7.widget.RecyclerView;
+-import android.view.View;
+-import android.widget.Button;
+ import android.widget.TextView;
+ import android.widget.Toast;
+ 
+@@ -14,16 +15,13 @@
+ import com.example.android.mmmrkn.infra.entity.Party;
+ import com.example.android.mmmrkn.infra.entity.Student;
+ import com.example.android.mmmrkn.presentation.App;
+-import com.example.android.mmmrkn.presentation.gohome.TestDialogFragment;
+ 
+-import java.util.ArrayList;
+-import java.util.Arrays;
+ import java.util.List;
+ 
+ import javax.inject.Inject;
+ 
+ 
+-public class AttendancesListActivity extends AppCompatActivity implements AttendancesListPresenter.Contract, AttendancesDialog.Contract {
++public class AttendancesListActivity extends AppCompatActivity implements AttendancesListPresenter.Contract, AttendancesDialog.Contract{
+     static final int TEST_DIALOG = 0;
+ 
+     private static final String STUDENT_KEY = "STUDENTKEY";
+@@ -37,7 +35,11 @@
+     @Override
+     protected void onCreate(Bundle savedInstanceState) {
+         super.onCreate(savedInstanceState);
+-        setContentView(R.layout.layout_attendances_recycler);
++        if (isHoneycombTablet(this)) {
++            setContentView(R.layout.activity_main_tab);
++        } else {
++            setContentView(R.layout.layout_attendances_recycler);
++        }
+         ((App) getApplication())
+                 .getComponent()
+                 .plus(new AttendancesListModule(this))
+@@ -48,8 +50,38 @@
+             showFragmentDialog(TEST_DIALOG);
+             //ダイアログの表示
+         });
++
+     }
+ 
++
++//    @Override
++//    public void onFragmentListClick(String select) {
++//        FragmentTransaction ft = getFragmentManager().beginTransaction();
++//        StudentProfileFragment fragment = new StudentProfileFragment();
++//        Bundle bundle = new Bundle();
++//        bundle.putString("name", select);
++//        fragment.setArguments(bundle);
++//        if(isHoneycombTablet(this)){
++//            ft.add(R.id.ft_student_profile,fragment);
++//        }else{
++//            ft.add(R.id.ft_student_profile,fragment);
++//        }
++//        ft.addToBackStack(null);
++//        ft.commit();
++//    }
++
++
++    //タブレットかスマホの確認
++    public static boolean isHoneycomb() {
++        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB;
++    }
++    public static boolean isTablet(Context context) {
++        return (context.getResources().getConfiguration().screenLayout &
++                Configuration.SCREENLAYOUT_SIZE_MASK) >= Configuration.SCREENLAYOUT_SIZE_LARGE;
++    }
++    public static boolean isHoneycombTablet(Context context) {
++        return isHoneycomb() && isTablet(context);
++    }
+     @Override
+     protected void onSaveInstanceState(Bundle outState) {
+         super.onSaveInstanceState(outState);
+Index: app/src/main/java/com/example/android/mmmrkn/presentation/attendances/AttendancesActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/example/android/mmmrkn/presentation/attendances/AttendancesActivity.java	(date 1513571274000)
++++ app/src/main/java/com/example/android/mmmrkn/presentation/attendances/AttendancesActivity.java	(revision )
+@@ -6,6 +6,7 @@
+ import android.os.Bundle;
+ import android.view.View;
+ import android.widget.Button;
++import android.widget.ScrollView;
+ import android.widget.TextView;
+ 
+ import com.example.android.mmmrkn.R;
+@@ -40,7 +41,6 @@
+         setContentView(R.layout.activity_attendances);
+         btnDenial = findViewById(R.id.btn_denial);
+         btnAttend = findViewById(R.id.btn_attend);
+-        btnMode = findViewById(R.id.btn_mode);
+         textparty = findViewById(R.id.txt_class);
+         textname = findViewById(R.id.txt_name);
+ 
+@@ -57,23 +57,15 @@
+         //登園ボタン
+         btnAttend.setOnClickListener(view -> reset());
+ 
+-        btnMode.setOnClickListener(view -> {
+-            if (textname.getText() == "") {
+-                //モード選択画面へ
+-                startActivity(new Intent(this, ModeActivity.class));
+-                finish();
+-            }
+-            else{
+-                reset();
++        //最下部に移動
++        ScrollView scrollview = ((ScrollView) findViewById(R.id.scrollView));
++        scrollview.post(new Runnable() {
++            @Override
++            public void run() {
++                scrollview.fullScroll(ScrollView.FOCUS_DOWN);
+             }
+         });
+ 
+-        //本来は音声認識
+-        //ボタンの作成、押下した動き
+-        btnMode.setOnClickListener(view -> {
+-            showFragmentDialog(TEST_DIALOG);
+-            judgment();
+-        });
+     }
+ 
+     /**
+@@ -89,6 +81,7 @@
+         }
+     }
+ 
++
+     //空か判断してボタンの可視化又は不可視化する
+     void judgment() {
+         if (textname.getText() == "") {
+Index: app/src/main/res/res-screen/attendances/layout/activity_attendances.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/res-screen/attendances/layout/activity_attendances.xml	(date 1513571274000)
++++ app/src/main/res/res-screen/attendances/layout/activity_attendances.xml	(revision )
+@@ -1,149 +1,111 @@
+ <?xml version="1.0" encoding="utf-8"?>
+ 
+-    <android.support.constraint.ConstraintLayout
+-        xmlns:android="http://schemas.android.com/apk/res/android"
+-        xmlns:app="http://schemas.android.com/apk/res-auto"
+-        xmlns:tools="http://schemas.android.com/tools"
+-    tools:context=".presentation.attendances.AttendancesActivity"
+-        android:layout_width="match_parent"
+-    android:layout_height="match_parent">
++<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
++    xmlns:app="http://schemas.android.com/apk/res-auto"
++    xmlns:tools="http://schemas.android.com/tools"
++    android:layout_width="match_parent"
++    android:layout_height="match_parent"
++    tools:context=".presentation.attendances.AttendancesActivity">
+ 
+-        <TextView
+-            android:id="@+id/text_memo"
+-            android:layout_width="wrap_content"
+-            android:layout_height="wrap_content"
+-            android:layout_marginBottom="8dp"
+-            android:layout_marginEnd="248dp"
+-            android:layout_marginStart="8dp"
+-            android:layout_marginTop="16dp"
+-            android:text="一言メモ"
+-            android:textColor="@color/colorBlack"
+-            android:textSize="18sp"
+-            app:layout_constraintBottom_toBottomOf="parent"
+-            app:layout_constraintEnd_toEndOf="parent"
+-            app:layout_constraintStart_toStartOf="parent"
+-            app:layout_constraintTop_toTopOf="parent"
+-            app:layout_constraintVertical_bias="0.572"
+-            app:layout_constraintHorizontal_bias="0.0" />
++    <TextView
++        android:id="@+id/text_memo"
++        android:layout_width="wrap_content"
++        android:layout_height="wrap_content"
++        android:layout_marginEnd="240dp"
++        android:layout_marginTop="8dp"
++        android:text="一言メモ"
++        android:textColor="@color/colorBlack"
++        android:textSize="18sp"
++        app:layout_constraintEnd_toEndOf="parent"
++        app:layout_constraintTop_toBottomOf="@+id/txt_class" />
+ 
+     <TextView
+         android:id="@+id/txt_class"
+         android:layout_width="0dp"
+         android:layout_height="wrap_content"
+         android:layout_marginBottom="8dp"
+-        android:layout_marginStart="8dp"
++        android:layout_marginEnd="216dp"
+         android:layout_marginTop="16dp"
+         android:text="さくら組"
+         android:textColor="@color/colorBlack"
+         android:textSize="24sp"
+         app:layout_constraintBottom_toBottomOf="parent"
+         app:layout_constraintEnd_toEndOf="parent"
+-        app:layout_constraintHorizontal_bias="0.375"
+-        app:layout_constraintStart_toEndOf="@+id/img_person"
+         app:layout_constraintTop_toTopOf="parent"
+-        app:layout_constraintVertical_bias="0.038" />
++        app:layout_constraintVertical_bias="0.031" />
+ 
+     <TextView
+         android:id="@+id/txt_name"
+-        android:layout_width="wrap_content"
+-        android:layout_height="wrap_content"
+-        android:layout_marginBottom="368dp"
++        android:layout_width="142dp"
++        android:layout_height="45dp"
+         android:layout_marginStart="8dp"
+-        android:layout_marginTop="8dp"
+-        android:textSize="30sp"
++        android:layout_marginTop="28dp"
++        android:text="登園太郎"
+         android:textColor="@color/colorBlack"
+-        app:layout_constraintBottom_toBottomOf="parent"
++        android:textSize="35sp"
+         app:layout_constraintEnd_toEndOf="parent"
+-        app:layout_constraintStart_toEndOf="@+id/img_person"
+-        app:layout_constraintTop_toBottomOf="@+id/txt_class"
+-        app:layout_constraintVertical_bias="0.594" />
++        app:layout_constraintHorizontal_bias="0.242"
++        app:layout_constraintStart_toEndOf="@+id/txt_class"
++        app:layout_constraintTop_toTopOf="parent" />
+ 
+     <ImageView
+         android:id="@+id/img_person"
+-        android:layout_width="@android:dimen/thumbnail_width"
+-        android:layout_height="@android:dimen/thumbnail_height"
+-        android:layout_marginStart="4dp"
++        android:layout_width="264dp"
++        android:layout_height="263dp"
++        android:layout_marginBottom="4dp"
++        android:layout_marginStart="8dp"
+         android:layout_marginTop="4dp"
+         app:layout_constraintBottom_toBottomOf="parent"
+         app:layout_constraintStart_toStartOf="parent"
+         app:layout_constraintTop_toTopOf="parent"
+-        app:layout_constraintVertical_bias="0.0"
+         app:srcCompat="@color/colorPrimary" />
+ 
+-    <EditText
+-        android:id="@+id/plain_content"
+-        android:layout_width="0dp"
+-        android:layout_height="120dp"
+-        android:layout_marginRight="40dp"
+-        android:layout_marginStart="8dp"
+-        android:layout_marginTop="484dp"
+-        android:editable="false"
+-        android:ems="10"
+-        android:enabled="false"
+-        android:inputType="textPersonName"
+-        android:text="内容"
+-        app:layout_constraintRight_toRightOf="parent"
+-        app:layout_constraintStart_toStartOf="parent"
+-        app:layout_constraintTop_toTopOf="parent" />
+-
+-    <Button
+-        android:id="@+id/btn_mode"
+-        android:layout_width="162dp"
+-        android:layout_height="42dp"
+-        android:layout_marginBottom="4dp"
+-        android:layout_marginStart="4dp"
+-        android:layout_marginTop="60dp"
+-        android:text="戻る"
+-        android:textSize="19sp"
+-        android:textColor="@color/colorBlack"
+-        app:layout_constraintBottom_toBottomOf="parent"
+-        app:layout_constraintStart_toStartOf="parent"
+-        app:layout_constraintTop_toBottomOf="@+id/grp_state"
+-        app:layout_constraintVertical_bias="1.0" />
+-
+     <Button
+         android:id="@+id/btn_attend"
+-        android:layout_width="wrap_content"
+-        android:layout_height="wrap_content"
+-        android:layout_marginBottom="44dp"
+-        android:layout_marginEnd="96dp"
++        android:layout_width="85dp"
++        android:layout_height="40dp"
++        android:layout_marginEnd="16dp"
++        android:layout_marginTop="8dp"
+         android:text="登園"
+-        android:textSize="21sp"
+         android:textColor="@color/colorBlack"
+-        app:layout_constraintBottom_toBottomOf="parent"
+-        app:layout_constraintEnd_toStartOf="@+id/btn_denial" />
++        android:textSize="15sp"
++        app:layout_constraintEnd_toEndOf="parent"
++        app:layout_constraintTop_toBottomOf="@+id/scrollView" />
+ 
+     <Button
+         android:id="@+id/btn_denial"
+-        android:layout_width="wrap_content"
+-        android:layout_height="wrap_content"
+-        android:layout_marginBottom="44dp"
+-        android:layout_marginRight="52dp"
++        android:layout_width="85dp"
++        android:layout_height="40dp"
++        android:layout_marginRight="16dp"
++        android:layout_marginTop="8dp"
+         android:text="拒否"
+-        android:textSize="21sp"
+         android:textColor="@color/colorBlack"
++        android:textSize="15sp"
+         app:layout_constraintBottom_toBottomOf="parent"
+-        app:layout_constraintRight_toRightOf="parent" />
++        app:layout_constraintRight_toRightOf="parent"
++        app:layout_constraintTop_toBottomOf="@+id/btn_attend"
++        app:layout_constraintVertical_bias="0.0" />
+ 
+     <RadioGroup
+         android:id="@+id/grp_state"
+-        android:layout_width="0dp"
+-        android:layout_height="wrap_content"
+-        android:layout_marginBottom="96dp"
++        android:layout_width="237dp"
++        android:layout_height="61dp"
++        android:layout_marginBottom="24dp"
++        android:layout_marginTop="8dp"
+         android:orientation="horizontal"
+         app:layout_constraintBottom_toBottomOf="parent"
+-        app:layout_constraintRight_toRightOf="parent"
+-        app:layout_constraintStart_toStartOf="parent">
++        app:layout_constraintStart_toEndOf="@+id/img_person"
++        app:layout_constraintVertical_bias="0.0">
+ 
+         <RadioButton
+             android:id="@+id/radio_healthy"
+-            android:layout_width="match_parent"
++            style="@style/GoodButton"
++            android:layout_width="wrap_content"
+             android:layout_height="match_parent"
+             android:layout_marginLeft="40dp"
+             android:layout_weight="1"
+             android:checked="true"
+             android:gravity="center_vertical"
+-            android:text="良好"
+             android:textColor="@android:color/holo_blue_dark"
+             android:textSize="36sp"
+             app:layout_constraintLeft_toRightOf="@+id/radio_unhealthy"
+@@ -152,17 +114,36 @@
+ 
+         <RadioButton
+             android:id="@+id/radio_unhealthy"
+-            android:layout_width="match_parent"
++            style="@style/BadButton"
++            android:layout_width="wrap_content"
+             android:layout_height="match_parent"
+             android:layout_marginLeft="30dp"
+             android:layout_marginRight="30dp"
+             android:layout_weight="1"
+             android:checked="false"
+-            android:text="不調"
+             android:textColor="@android:color/holo_red_dark"
+             android:textSize="36sp"
+             app:layout_constraintRight_toRightOf="parent"
+             app:layout_constraintTop_toBottomOf="@+id/plain_content" />
+ 
+     </RadioGroup>
++
++    <ScrollView
++        android:id="@+id/scrollView"
++        android:layout_width="300dp"
++        android:layout_height="100dp"
++        android:layout_marginBottom="8dp"
++        android:layout_marginEnd="4dp"
++        android:background="@drawable/scrool_border"
++        app:layout_constraintBottom_toTopOf="@+id/grp_state"
++        app:layout_constraintEnd_toEndOf="parent"
++        app:layout_constraintTop_toBottomOf="@+id/text_memo">
++
++        <EditText
++            android:id="@+id/edit_deteail"
++            android:layout_width="match_parent"
++            android:layout_height="match_parent"
++            android:background="#00000000"
++            android:text="あああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああ" />
++    </ScrollView>
+ </android.support.constraint.ConstraintLayout>
+\ No newline at end of file
