@@ -7,49 +7,30 @@ import android.os.Bundle;
 
 import com.example.android.mmmrkn.R;
 import com.example.android.mmmrkn.databinding.ActivityStudentProfileBinding;
-import com.example.android.mmmrkn.di.ApplicationComponent;
-import com.example.android.mmmrkn.di.student_profile.ProfileComponent;
-import com.example.android.mmmrkn.di.student_profile.ProfileModule;
-import com.example.android.mmmrkn.infra.entity.StudentProfile;
-import com.example.android.mmmrkn.presentation.App;
-
-import javax.inject.Inject;
+import com.example.android.mmmrkn.infra.entity.Student;
+import com.example.android.mmmrkn.presentation.attendances_list.AttendancesListActivity;
 
 import timber.log.Timber;
 
-public class StudentProfileActivity extends AppCompatActivity implements StudentProfilePresenter.Contract {
-
-    @Inject
-    StudentProfilePresenter presenter;
+public class StudentProfileActivity extends AppCompatActivity {
+    
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_student_profile);
-
-        ( (App) getApplication () )
-                .getComponent ()
-                .plus(new ProfileModule(this))
-                .inject(this);
+        ActivityStudentProfileBinding binding = DataBindingUtil.setContentView(this,R.layout.activity_student_profile);
 
         Intent intent = this.getIntent();
         //画面遷移時のstudentIdデータの受け取り処理
-        String studentId = intent.getStringExtra("studentId");
-        Timber.d("studentId"+studentId);
+        Student student = (Student) intent.getSerializableExtra("student");
+        Timber.d(student.toString());
+        binding.setStudent(student);
 
-        presenter.fetchProfile(studentId);
+        //クラス一覧に戻る
+        findViewById(R.id.btn_back).setOnClickListener(view->{
+            startActivity(new Intent(this, AttendancesListActivity.class));
+            finish();
+        });
     }
     //画面への操作
-    @Override
-    public void onFetchComplete(StudentProfile studentProfile){
-        ActivityStudentProfileBinding binding = DataBindingUtil.setContentView(this,R.layout.activity_student_profile);
-        //2017/11/24
-        binding.setStudentProfile(studentProfile);
-    }
-
-    @Override
-    protected  void onDestroy(){
-        presenter.dispose();
-        super.onDestroy();
-    }
 }

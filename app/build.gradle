@@ -9,7 +9,8 @@ android {
     compileSdkVersion 26
     defaultConfig {
         applicationId "com.example.android.mmmrkn"
-        minSdkVersion 23
+        minSdkVersion 22
+
         targetSdkVersion 26
         versionCode 1
         versionName "1.0"
@@ -21,6 +22,11 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    repositories {
+        mavenCentral()
+    }
+
     //追加
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -58,14 +64,9 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
 
-    final ormaVersion = "4.2.5"
     final retrofitVersion = "2.3.0"
     final okHttpVersion = "3.6.0"
     final daggerVersion = "2.13"
-
-    // Orma
-    compile "com.github.gfx.android.orma:orma:$ormaVersion"
-    annotationProcessor "com.github.gfx.android.orma:orma-processor:$ormaVersion"
 
     // ReactiveX
     compile 'io.reactivex.rxjava2:rxjava:2.1.6'
@@ -90,13 +91,9 @@ dependencies {
 
     //RecyclerView
     compile "com.android.support:cardview-v7:26.1.0"
-    compile 'com.android.support:recyclerview-v7:26.1.0'
-    //google(音声通信) 2017/11/29
-//    compile('com.google.auth:google-auth-library-oauth2-http:0.9.0') {
-//        exclude module: 'httpclient'
-//    }
-//    compile group: 'com.google.cloud', name: 'google-cloud-speech', version: '0.17.1-alpha'
-//    compile "io.grpc:grpc-okhttp:$grpcVersion"
 
-    //annotationProcessor "com.google.auto.value:auto-value:1.2"
+    //Libraries
+    compile 'com.makeramen:roundedimageview:2.3.0'
+
+
 }

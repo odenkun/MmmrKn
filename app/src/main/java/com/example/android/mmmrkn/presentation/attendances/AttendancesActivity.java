@@ -1,20 +1,28 @@
 package com.example.android.mmmrkn.presentation.attendances;
 
 import android.content.Intent;
-import android.databinding.DataBindingUtil;
+import android.content.res.Configuration;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.example.android.mmmrkn.R;
-import com.example.android.mmmrkn.databinding.ActivityAttendancesBinding;
-import com.example.android.mmmrkn.infra.entity.AttendancesStudent;
+import com.example.android.mmmrkn.di.attendances.AttendancesModule;
+import com.example.android.mmmrkn.infra.entity.Student;
+import com.example.android.mmmrkn.presentation.App;
 import com.example.android.mmmrkn.presentation.mode_select.ModeActivity;
 
-public class AttendancesActivity extends AppCompatActivity {
+import javax.inject.Inject;
+
+public class AttendancesActivity extends AppCompatActivity implements AttendancesPresenter.Contract {
+    @Inject
+    AttendancesPresenter presenter;
+    
     Intent intent;
     //組変更用
     TextView textparty;
@@ -33,41 +41,42 @@ public class AttendancesActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_attendances);
-        //ActivityAttendancesBinding ats = DataBindingUtil.setContentView(this, R.layout.activity_attendances);
-        //AttendancesStudent attendancesStudent = new AttendancesStudent("");
         btnDenial = findViewById(R.id.btn_denial);
         btnAttend = findViewById(R.id.btn_attend);
-        btnMode = findViewById(R.id.btn_mode);
         textparty = findViewById(R.id.txt_class);
         textname = findViewById(R.id.txt_name);
 
+        onEvaluateFullscreenMode();
 
         judgment();
-
+        ((App) getApplication())
+                .getComponent()
+                .plus(new AttendancesModule(this))
+                .inject(this);
+        
         //拒否ボタン
         btnDenial.setOnClickListener(view -> reset());
 
         //登園ボタン
         btnAttend.setOnClickListener(view -> reset());
 
-        btnMode.setOnClickListener(view -> {
-            if (textname.getText() == "") {
-                //モード選択画面へ
-                startActivity(new Intent(this, ModeActivity.class));
-                finish();
-            }
-            else{
-                reset();
+        //Scrollを最下部に移動
+        ScrollView scrollview = ((ScrollView) findViewById(R.id.scrollView));
+        scrollview.post(new Runnable() {
+            @Override
+            public void run() {
+                scrollview.fullScroll(ScrollView.FOCUS_DOWN);
             }
         });
 
-        //本来は音声認識
-        //ボタンの作成、押下した動き
-        btnMode.setOnClickListener(view -> {
-            showFragmentDialog(TEST_DIALOG);
-            judgment();
-        });
     }
+    public boolean onEvaluateFullscreenMode() {
+        return false;
+    }
+
+
+
+
 
     /**
      * フラグメントダイアログを表示する。
@@ -81,6 +90,7 @@ public class AttendancesActivity extends AppCompatActivity {
                 dialogFragment.show(getSupportFragmentManager(), TAG);
         }
     }
+
 
     //空か判断してボタンの可視化又は不可視化する
     void judgment() {
@@ -98,5 +108,16 @@ public class AttendancesActivity extends AppCompatActivity {
         textname.setText("");
         textparty.setText("");
         judgment();
+    }
+    
+    //生徒データの挿入
+    void insertProfile(String studentId){
+        presenter.fetchProfile(studentId);
+    }
+    
+    @Override
+    public void onFetchComplete(Student sProfile) {
+    textname.setText(sProfile.getName());
+    textparty.setText(sProfile.getParty().getName());
     }
 }

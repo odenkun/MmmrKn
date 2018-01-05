@@ -8,4 +8,18 @@
         <item name="colorAccent">@color/colorAccent</item>
 
     </style>
+    <style name="EditTextColor" >
+        <item name="colorControlActivated">@color/colorUnderLine</item>
+        <item name="colorControlNormal">@color/colorUnderLine</item>
+    </style>
+
+    <style name="GoodButton" parent="android:Widget.CompoundButton.RadioButton">
+        <item name="android:background">@drawable/good_condition_layout</item>
+        <item name="android:button">@null</item>
+    </style>
+    <style name="BadButton" parent="android:Widget.CompoundButton.RadioButton">
+        <item name="android:background">@drawable/bad_condition_layout</item>
+        <item name="android:button">@null</item>
+    </style>
+
 </resources>

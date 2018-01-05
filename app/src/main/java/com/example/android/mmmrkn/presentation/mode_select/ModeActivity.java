@@ -58,13 +58,13 @@ public class ModeActivity extends AppCompatActivity implements ModePresenter.Con
             startActivity(intent);
         });
 
-        //降園ボタンを押された時の処理(未実装)
+        //降園ボタンを押された時の処理
         findViewById(R.id.btn_goHome).setOnClickListener(view -> {
             intent = new Intent(this, GoHomeActivity.class);
             startActivity(intent);
         });
 
-        //登園リストボタンを押された時の処理(未実装)
+        //登園リストボタンを押された時の処理
         findViewById(R.id.btn_attendancesList).setOnClickListener(view -> {
             intent = new Intent(this, AttendancesListActivity.class);
             startActivity(intent);

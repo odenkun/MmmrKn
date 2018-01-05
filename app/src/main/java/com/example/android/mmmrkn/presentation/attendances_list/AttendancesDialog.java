@@ -10,26 +10,20 @@ import android.view.View;
 
 import com.example.android.mmmrkn.R;
 
-import com.example.android.mmmrkn.infra.entity.Attendances;
 import com.example.android.mmmrkn.infra.entity.Party;
-import com.example.android.mmmrkn.infra.repository.PartyRepository;
 import com.example.android.mmmrkn.presentation.App;
-import com.example.android.mmmrkn.presentation.party.PartyCardRecyclerView;
+import com.example.android.mmmrkn.presentation.attendances.AttendancesActivity;
 
 
+import java.util.Arrays;
 import java.util.List;
-
-import javax.inject.Inject;
-
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.schedulers.Schedulers;
-import timber.log.Timber;
 
 //クラスを選ぶダイアログ。出席リストの上に表示される
 public class AttendancesDialog extends DialogFragment {
 
     Contract contract;
     List<Party> partyList;
+    private static final String PARTY_KEY = "PARTYKEY";
 
     private AttendancesDialog setContract(Contract contract) {
         this.contract = contract;
@@ -52,34 +46,25 @@ public class AttendancesDialog extends DialogFragment {
         ((App) getContext().getApplicationContext())
                 .getComponent()
                 .inject(this);
-        Activity activity = getActivity();
+        Activity activity =  getActivity();
+        if (activity instanceof AttendancesListActivity) {
+            contract = (AttendancesListActivity) activity;
+        }
+        if (partyList == null) {
+            Party[] parties = (Party[]) savedInstanceState.getSerializable(PARTY_KEY);
+            if (parties != null) {
+                partyList = Arrays.asList(parties);
+            }
+        }
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
         final View dialogView = LayoutInflater.from(activity).inflate(R.layout.activity_party_search, null);
         PartyCardRecyclerView recyclerView = dialogView.findViewById(R.id.recycler_party);
         recyclerView.onPartyListFetch(this,partyList);
 
-
         //ダイアログ表示
         builder.setView(dialogView)
                 .setTitle("クラス一覧");
 
-               /* .setPositiveButton("", new DialogInterface.OnClickListener()
-                {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which)
-                    {
-                        ((MainActivity)activity).onTestDialogOKClick();
-                    }
-                })
-                .setNegativeButton("", new DialogInterface.OnClickListener()
-                {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which)
-                    {
-                        TestDialogFragment.this.dismiss();
-                    }
-                });
-                */
         return builder.create();
     }
 
@@ -90,11 +75,17 @@ public class AttendancesDialog extends DialogFragment {
         super.onDetach();
     }
 
-    public void onSelectParty (String partyId) {
-        contract.onSelectParty(partyId);
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putSerializable(PARTY_KEY,partyList.toArray(new Party[]{}));
+    }
+
+    public void onSelectParty (String partyId, String partyName) {
+        contract.onSelectParty(partyId,partyName);
     }
 
     public interface Contract {
-        void onSelectParty(String partyId);
+        void onSelectParty(String partyId,String partyName);
     }
 }

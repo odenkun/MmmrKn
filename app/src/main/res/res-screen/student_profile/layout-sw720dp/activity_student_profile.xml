@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.android.mmmrkn.presentation.studentprofile.StudentProfileActivity">
+
+    <data>
+
+        <variable
+            name="studentProfile"
+            type="com.example.android.mmmrkn.infra.entity.Student" />
+    </data>
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ScrollView
+            android:id="@+id/scrollView"
+            android:layout_width="688dp"
+            android:layout_height="237dp"
+            android:layout_marginStart="20dp"
+            android:background="@drawable/scrool_border"
+            app:layout_constraintStart_toEndOf="@+id/image_picture"
+            app:layout_constraintTop_toBottomOf="@+id/text_memo">
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#00000000"
+                android:imeOptions="actionDone|flagNoFullscreen"
+                android:text="あああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああいいい"
+                android:textSize="28sp" />
+        </ScrollView>
+
+        <TextView
+            android:id="@+id/text_timer"
+            android:layout_width="277dp"
+            android:layout_height="37dp"
+            android:layout_marginStart="20dp"
+            android:gravity="center"
+            android:text="20XX年AA月BB日CC時DD分"
+            android:textColor="@color/colorBlack"
+            android:textSize="28sp"
+            app:layout_constraintStart_toEndOf="@+id/image_picture"
+            app:layout_constraintTop_toBottomOf="@+id/text_time" />
+
+        <TextView
+            android:id="@+id/text_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="52dp"
+            android:gravity="center"
+            android:text="登園時間"
+            android:textColor="@color/colorBlack"
+            android:textSize="30dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/image_picture"
+            app:layout_constraintTop_toBottomOf="@+id/text_party" />
+
+        <TextView
+            android:id="@+id/text_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="120dp"
+            android:layout_marginTop="72dp"
+            android:gravity="center"
+            android:text="三四郎田宮"
+            android:textColor="@color/colorBlack"
+            android:textSize="80dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/text_memo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:text="一言メモ"
+            android:textColor="@color/colorBlack"
+            android:textSize="30dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/image_picture"
+            app:layout_constraintTop_toBottomOf="@+id/text_timer" />
+
+        <ImageView
+            android:id="@+id/image_picture"
+            android:layout_width="520dp"
+            android:layout_height="520dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.49"
+            app:srcCompat="@color/colorPrimary" />
+
+        <TextView
+            android:id="@+id/text_party"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="68dp"
+            android:gravity="center"
+            android:text="さくら組"
+            android:textColor="@color/colorBlack"
+            android:textSize="40dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/btn_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="76dp"
+            android:layout_marginEnd="28dp"
+            android:layout_marginTop="8dp"
+            android:text="クラス一覧へ戻る"
+            android:textSize="17dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/scrollView" />
+
+    </android.support.constraint.ConstraintLayout>
+</layout>

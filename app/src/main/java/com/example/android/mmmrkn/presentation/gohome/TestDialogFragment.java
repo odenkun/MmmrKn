@@ -39,6 +39,8 @@ public class TestDialogFragment extends DialogFragment
                         ((MainActivity)activity).onTestDialogOKClick();
                     }
                 })
+
+
                 .setNegativeButton("", new DialogInterface.OnClickListener()
                 {
                     @Override

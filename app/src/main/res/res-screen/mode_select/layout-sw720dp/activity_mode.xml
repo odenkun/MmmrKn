@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.android.mmmrkn.presentation.mode_select.ModeActivity">
+
+
+    <Button
+        android:id="@+id/btn_attendancesList"
+        android:layout_width="900dp"
+        android:layout_height="150dp"
+        android:layout_marginBottom="32dp"
+        android:layout_marginStart="64dp"
+        android:background="@drawable/button_main_layout"
+        android:paddingLeft="20dp"
+        android:text="登園した生徒の一覧"
+        android:textSize="55sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/btn_attendances"
+        android:layout_width="900dp"
+        android:layout_height="150dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/button_main_layout"
+        android:gravity="center_vertical|center_horizontal"
+        android:letterSpacing="0.5"
+        android:paddingLeft="20dp"
+        android:text="生徒の登園を記録"
+        android:textSize="55sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btn_goHome"
+        android:layout_width="900dp"
+        android:layout_height="150dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/button_main_layout"
+        android:lineSpacingExtra="10px"
+        android:paddingLeft="20dp"
+        android:text="園児の降園を記録"
+        android:textColor="#000000"
+        android:textSize="55sp"
+        app:layout_constraintBottom_toTopOf="@+id/btn_attendancesList"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_attendances" />
+
+    <Button
+        android:id="@+id/btn_selectTeacher"
+        android:layout_width="240dp"
+        android:layout_height="60dp"
+        android:layout_marginBottom="28dp"
+        android:layout_marginEnd="48dp"
+        android:layout_marginStart="8dp"
+        android:layout_weight="1"
+        android:background="@drawable/button_sub_layout"
+        android:text="教員選択"
+        android:textColor="#FFFFFF"
+        android:textSize="35sp"
+        app:layout_constraintBottom_toTopOf="@+id/btn_logout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btn_attendancesList" />
+
+    <Button
+        android:id="@+id/btn_logout"
+        android:layout_width="240dp"
+        android:layout_height="60dp"
+        android:layout_marginBottom="32dp"
+        android:layout_marginEnd="48dp"
+        android:layout_marginStart="8dp"
+        android:layout_weight="1"
+        android:background="@drawable/button_sub_layout"
+        android:text="ログアウト"
+        android:textColor="#FFFFFF"
+        android:textSize="35sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btn_attendancesList" />
+
+    <com.makeramen.roundedimageview.RoundedImageView
+        android:id="@+id/image_home"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        android:layout_marginStart="8dp"
+        android:background="#CC00FF6F"
+        android:scaleType="center"
+        android:src="@drawable/home"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_goHome"
+        app:layout_constraintStart_toStartOf="@+id/btn_goHome"
+        app:layout_constraintTop_toTopOf="@+id/btn_goHome"
+        app:layout_constraintVertical_bias="0.45"
+        app:riv_border_color="#0080FF"
+        app:riv_border_width="3dip"
+        app:riv_mutate_background="true"
+        app:riv_oval="true" />
+
+    <com.makeramen.roundedimageview.RoundedImageView
+        android:id="@+id/image_school"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:background="#CC00FF6F"
+        android:scaleType="center"
+        android:src="@drawable/shcool"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_attendances"
+        app:layout_constraintStart_toStartOf="@+id/btn_attendances"
+        app:layout_constraintTop_toTopOf="@+id/btn_attendances"
+        app:layout_constraintVertical_bias="0.0"
+        app:riv_border_color="#0080FF"
+        app:riv_border_width="3dip"
+        app:riv_mutate_background="true"
+        app:riv_oval="true" />
+
+    <com.makeramen.roundedimageview.RoundedImageView
+        android:id="@+id/image_list"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="10dp"
+        android:background="#CC00FF6F"
+        android:scaleType="center"
+        android:src="@drawable/list"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_attendancesList"
+        app:layout_constraintStart_toStartOf="@+id/btn_attendancesList"
+        app:layout_constraintTop_toTopOf="@+id/btn_attendancesList"
+        app:layout_constraintVertical_bias="1.0"
+        app:riv_border_color="#0080FF"
+        app:riv_border_width="3dip"
+        app:riv_mutate_background="true"
+        app:riv_oval="true" />
+
+
+</android.support.constraint.ConstraintLayout>

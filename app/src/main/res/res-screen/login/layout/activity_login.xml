@@ -1,5 +1,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:gravity="center_horizontal"
@@ -29,6 +30,13 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                app:srcCompat="@drawable/mmmrkn" />
+
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -42,7 +50,7 @@
                     android:hint="@string/prompt_id"
                     android:inputType="textPersonName"
                     android:singleLine="true"
-                    />
+                    android:theme="@style/EditTextColor" />
 
             </android.support.design.widget.TextInputLayout>
 
@@ -60,7 +68,9 @@
                     android:imeOptions="actionUnspecified"
                     android:inputType="textPassword"
                     android:maxLines="1"
-                    android:singleLine="true"/>
+                    android:singleLine="true"
+                    android:theme="@style/EditTextColor"
+                    />
 
             </android.support.design.widget.TextInputLayout>
 
@@ -70,7 +80,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="@string/action_login"
-                android:textStyle="bold"/>
+                android:textStyle="bold" />
 
         </LinearLayout>
     </ScrollView>
