@@ -59,11 +59,11 @@
         android:layout_marginBottom="4dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="4dp"
+        android:background="@android:color/holo_green_light"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.49"
-        app:srcCompat="@color/colorPrimary" />
+        app:layout_constraintVertical_bias="0.49" />
 
     <TextView
         android:id="@+id/Text_Kumi"
@@ -88,8 +88,9 @@
         android:layout_marginBottom="72dp"
         android:layout_marginRight="28dp"
         android:text="降園"
-        android:textColor="@color/colorBlack"
+        android:textColor="#ffffff"
         android:textSize="32sp"
+        android:background="@drawable/button_sub_layout"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent" />
 

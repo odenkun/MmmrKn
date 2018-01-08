@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layer-list xmlns:android="http://schemas.android.com/apk/res/android" >
-
-
-    <!-- 2dp分の padding を設定した枠線なし長方形 -->
-    <item android:bottom="2dp">
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
         <shape android:shape="rectangle">
-            <solid android:color="#FFFFFF"/>
+            <stroke
+                android:color="#FFB837"
+                android:width="2dp"/>
         </shape>
     </item>
-</layer-list>
+</selector>

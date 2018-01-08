@@ -37,9 +37,6 @@ public class GoHomeActivity extends AppCompatActivity {
                 //finish();
         );
 
-        //int ZidoId = intent.getIntExtra("ZidouId",0);
-        //受け取った児童IDを取得
-
 
 
         //Button sendButton =  findViewById(R.id.Button_Next);
