@@ -79,32 +79,34 @@
         app:layout_constraintVertical_bias="0.496"
         app:srcCompat="@color/colorPrimary" />
 
-        <Button
-            android:id="@+id/btn_attend"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="登園"
-            android:textColor="@color/colorBlack"
-            android:textSize="32sp"
-            app:layout_constraintHorizontal_bias="0.975"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/scrollView" />
+    <Button
+        android:id="@+id/btn_attend"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/button_sub_layout"
+        android:text="登園"
+        android:textColor="@color/colorWhite"
+        android:textSize="32sp"
+        app:layout_constraintHorizontal_bias="0.975"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/scrollView" />
 
-        <Button
-            android:id="@+id/btn_denial"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="32dp"
-            android:layout_marginRight="28dp"
-            android:text="拒否"
-            android:textColor="@color/colorBlack"
-            android:textSize="32sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btn_attend"
-            app:layout_constraintVertical_bias="0.045" />
+    <Button
+        android:id="@+id/btn_denial"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
+        android:layout_marginRight="28dp"
+        android:background="@drawable/button_sub_layout"
+        android:text="拒否"
+        android:textColor="@color/colorWhite"
+        android:textSize="32sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_attend"
+        app:layout_constraintVertical_bias="0.365" />
 
     <RadioGroup
         android:id="@+id/grp_state"

@@ -4,8 +4,9 @@
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/layout"
-    android:layout_width="match_parent"
+    android:layout_width="400dp"
     android:layout_height="wrap_content"
+    android:layout_marginLeft="440dp"
     android:orientation="vertical"
     android:weightSum="1">
 
@@ -43,7 +44,7 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:layout_marginLeft="10dp"
-                android:gravity="center_vertical"
+                android:gravity="center_vertical|center"
                 android:textColor="@color/colorBlack"
                 android:textSize="@dimen/view_cardview_textsize_main" />
 

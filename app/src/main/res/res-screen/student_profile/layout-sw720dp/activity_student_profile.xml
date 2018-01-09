@@ -116,12 +116,14 @@
 
         <Button
             android:id="@+id/btn_back"
-            android:layout_width="wrap_content"
+            android:layout_width="190dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="76dp"
             android:layout_marginEnd="28dp"
             android:layout_marginTop="8dp"
+            android:background="@drawable/button_sub_layout"
             android:text="クラス一覧へ戻る"
+            android:textColor="#FFFFFF"
             android:textSize="17dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
