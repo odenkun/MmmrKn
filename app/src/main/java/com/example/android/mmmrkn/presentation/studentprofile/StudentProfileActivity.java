@@ -33,4 +33,5 @@ public class StudentProfileActivity extends AppCompatActivity {
         });
     }
     //画面への操作
+
 }

@@ -38,7 +38,7 @@ public class AttendancesListActivity extends AppCompatActivity implements Attend
         super.onCreate(savedInstanceState);
         //タブレット、スマホの確認してレイアウトset
         if (isHoneycombTablet(this)) {
-            setContentView(R.layout.activity_main_tab);
+            setContentView(R.layout.layout_attendances_recycler);
         } else {
             setContentView(R.layout.layout_attendances_recycler);
         }

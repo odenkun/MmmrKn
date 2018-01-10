@@ -3,12 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/back_color">
 
     <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:id="@+id/image_teacher_icon"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
         android:layout_marginLeft="260dp"
         android:layout_marginTop="210dp"
         android:layout_weight="0"
@@ -18,14 +19,18 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="323dp"
         android:layout_weight="0"
-        android:text="TextView" />
+        android:text="教員確認"
+        android:textColor="#FFFFFF"
+        android:background="@drawable/textview_stroke"
+        android:textSize="28sp" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginLeft="460dp"
-        android:layout_marginRight="100dp"
+        android:layout_marginLeft="140dp"
+        android:layout_marginRight="170dp"
         android:layout_marginTop="200dp"
         android:layout_weight="2">
 
