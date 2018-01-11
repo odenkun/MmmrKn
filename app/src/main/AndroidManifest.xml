@@ -21,7 +21,8 @@
         <activity
             android:screenOrientation="landscape"
             android:name=".presentation.login.LoginActivity"
-            android:label="@string/title_activity_login" />
+            android:label="@string/title_activity_login"
+            android:windowSoftInputMode="stateHidden"/>
 
         <activity
             android:screenOrientation="landscape"
@@ -58,6 +59,6 @@
             android:name=".presentation.gohome.GoHomeActivity"
             android:screenOrientation="landscape" />
 
-    </application>
+    </application>　　　　　　
 
 </manifest>

@@ -1,11 +1,13 @@
 package com.example.android.mmmrkn.presentation.attendances_list;
 
-import android.app.FragmentTransaction;
+
 import android.content.Context;
 import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -32,6 +34,7 @@ public class AttendancesListActivity extends AppCompatActivity implements Attend
 
     List<Party> partyList;
     private List<Student> studentList;
+    private Party party;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -112,7 +115,10 @@ public class AttendancesListActivity extends AppCompatActivity implements Attend
         switch (id) {
             case TEST_DIALOG:
                 DialogFragment dialogFragment = AttendancesDialog.newInstance(partyList, this);
-                dialogFragment.show(getSupportFragmentManager(), "fragment_dialog");
+                FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                ft.add(dialogFragment, null);
+                ft.commitAllowingStateLoss();
+
         }
     }
 
@@ -130,8 +136,14 @@ public class AttendancesListActivity extends AppCompatActivity implements Attend
     //Ormaから生徒一覧をListに代入
     @Override
     public void onEntryListFetched(List<Student> attendancesList) {
+        if (attendancesList == null) {
+            DialogFragment newFragment = new AttendancesListCardRecyclerAdapter.AlertDialogFragment();
+            FragmentManager manager = getSupportFragmentManager();
+            newFragment.show(manager,"該当児童は0人です");
+            return;
+        }
         AttendancesListCardRecyclerView cardRecyclerView = findViewById(R.id.recycler_attendances);
-        cardRecyclerView.onStudentListFetch(this, attendancesList);
+        cardRecyclerView.onStudentListFetch(this, attendancesList,this.party);
         studentList = attendancesList;
         //データとしてlog出力なし
     }
@@ -147,6 +159,10 @@ public class AttendancesListActivity extends AppCompatActivity implements Attend
     @Override
     public void onSelectParty(String partyId, String partyName) {
         presenter.fetchEntryList(partyId);
+        Party party = new Party();
+        party.setPartyId(partyId);
+        party.setName(partyName);
+        this.party = party;
         TextView viewParty = this.findViewById(R.id.textView_party);
         viewParty.setText(partyName + "組");
     }

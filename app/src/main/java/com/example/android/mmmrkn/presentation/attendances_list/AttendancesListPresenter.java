@@ -8,6 +8,7 @@ import com.example.android.mmmrkn.presentation.Presenter;
 import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersistor;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -55,7 +56,17 @@ public class AttendancesListPresenter extends Presenter{
                         .observeOn ( AndroidSchedulers.mainThread () )
                         .subscribe ( studentList -> {
                             Timber.d ( "attend とれたよ" );
-                            contract.onEntryListFetched (studentList);
+                            List<Student> attendList = new ArrayList<>();
+                            for (Student student : studentList) {
+                                if (student.getAttendance() != null) {
+                                    attendList.add(student);
+                                }
+                            }
+                            if (attendList.size() > 0) {
+                                contract.onEntryListFetched(attendList);
+                            }else{
+                                contract.onEntryListFetched(null);
+                            }
                         }, e -> {
 
                             Timber.e ( e );

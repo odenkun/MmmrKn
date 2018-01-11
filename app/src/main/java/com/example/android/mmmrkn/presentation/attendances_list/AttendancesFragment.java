@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 
 import com.example.android.mmmrkn.R;
+import com.example.android.mmmrkn.infra.entity.Party;
 import com.example.android.mmmrkn.infra.entity.Student;
 
 import java.util.List;
@@ -21,21 +22,15 @@ import java.util.List;
  * Created by 15110009 on 2017/12/19.
  */
 
-public class AttendancesFragment extends Fragment{
+public class AttendancesFragment extends Fragment {
 
     private onFragmentListClickedListener listener;
     private Activity mActivity = null;
     private View mView;
 
-
     // RecyclerViewとAdapter
     private RecyclerView mRecyclerView = null;
     private AttendancesListCardRecyclerAdapter atteAda = null;
-
-
-
-
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -50,12 +45,16 @@ public class AttendancesFragment extends Fragment{
     }
 
 
-    public void onActivityCreated(Bundle savedInstanceState,List<Student> studentTList) {
+    public void onActivityCreated(Bundle savedInstanceState, List<Student> studentTList) {
         super.onActivityCreated(savedInstanceState);
+        Party party = new Party();
+        party.setName("test");
+        party.setPartyId("test");
 
-        atteAda = new AttendancesListCardRecyclerAdapter(mActivity, studentTList);
+        atteAda = new AttendancesListCardRecyclerAdapter(mActivity, studentTList, party);
         mRecyclerView.setAdapter(atteAda);
     }
+
     //ListのClick情報を通知するListener
     public interface onFragmentListClickedListener {
         public void onFragmentListClick(String select);
@@ -65,6 +64,6 @@ public class AttendancesFragment extends Fragment{
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        listener = (onFragmentListClickedListener)activity;
+        listener = (onFragmentListClickedListener) activity;
     }
 }

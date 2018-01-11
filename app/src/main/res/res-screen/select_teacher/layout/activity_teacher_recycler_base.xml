@@ -23,7 +23,6 @@
         android:layout_weight="0"
         android:text="教員確認"
         android:textColor="#FFFFFF"
-        android:background="@drawable/textview_stroke"
         android:textSize="28sp" />
 
     <LinearLayout

@@ -38,8 +38,8 @@
             android:layout_width="277dp"
             android:layout_height="37dp"
             android:layout_marginStart="20dp"
-            android:gravity="center"
-            android:text="@{student.attendance.time}"
+            android:gravity="left"
+            android:text="@{student.humanTime}"
             android:textColor="@color/colorBlack"
             android:textSize="28sp"
             app:layout_constraintStart_toEndOf="@+id/image_picture"
@@ -113,21 +113,6 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
-        <Button
-            android:id="@+id/btn_back"
-            android:layout_width="190dp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="76dp"
-            android:layout_marginEnd="28dp"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/button_sub_layout"
-            android:text="クラス一覧へ戻る"
-            android:textColor="#FFFFFF"
-            android:textSize="17dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/scrollView" />
 
     </android.support.constraint.ConstraintLayout>
 </layout>

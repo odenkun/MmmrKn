@@ -3,7 +3,9 @@ package com.example.android.mmmrkn.infra.entity;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Teacher {
+import java.io.Serializable;
+
+public class Teacher implements Serializable{
 
     @SerializedName("teacherId")
     @Expose

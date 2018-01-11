@@ -5,8 +5,14 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.util.Date;
 
 import io.reactivex.annotations.Nullable;
+
+import static java.lang.Long.parseLong;
 
 
 public class Student implements Serializable {
@@ -95,6 +101,14 @@ public class Student implements Serializable {
     
     public void setGohome(GoHome gohome) {
         this.gohome = gohome;
+    }
+
+    public String getHumanTime() {
+        DateFormat format = new SimpleDateFormat("HH:mm:ss");
+        long stringToValue = parseLong(this.attendance.getTime());
+        String time = format.format(new Date(stringToValue));
+        return  time;
+
     }
 }
 
