@@ -15,6 +15,7 @@ import com.example.android.mmmrkn.di.attendances.AttendancesModule;
 import com.example.android.mmmrkn.infra.entity.Attendance;
 import com.example.android.mmmrkn.infra.entity.Student;
 import com.example.android.mmmrkn.infra.entity.Teacher;
+import com.example.android.mmmrkn.infra.voice.VoiceTransmitter;
 import com.example.android.mmmrkn.presentation.App;
 import com.example.android.mmmrkn.presentation.attendances.qr.QRFragment;
 
@@ -100,6 +101,10 @@ public class AttendFragment extends Fragment implements AttendFragmentPresenter.
         viewModel.setStudent ( student );
         // TODO: 2017/12/26 くるくるの表示
         presenter.fetchStudent ( qrEvent.studentId );
+    }
+    @Subscribe
+    public void onSpeechRecognized ( VoiceTransmitter.SpeechRecognizeEvent event ) {
+
     }
 
     public void onClick ( boolean isAttend ) {

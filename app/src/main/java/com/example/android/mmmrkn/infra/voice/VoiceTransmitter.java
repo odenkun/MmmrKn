@@ -4,8 +4,12 @@ import android.util.Log;
 
 import com.example.android.mmmrkn.infra.entity.Student;
 import com.example.android.mmmrkn.presentation.App;
+import com.google.gson.Gson;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import java.util.Queue;
 import java.util.concurrent.TimeUnit;
@@ -45,16 +49,15 @@ public class VoiceTransmitter extends WebSocketListener {
     private static final int NORMAL_CLOSURE_STATUS = 1000;
     private WebSocket ws;
     private int sampleRate;
-    private static final String WS_URL = "http://192.168.1.3:6001";
+    private static final String WS_URL = "http://192.168.10.47:6001";
     private WebSocketState mState = WebSocketState.PREPARATION;
 
     private Callback callback;
 
     public VoiceTransmitter ( int sampleRate, Callback callback, OkHttpClient client) {
-
+        Timber.d("created");
         this.sampleRate = sampleRate;
         this.callback = callback;
-
         Request request = new Request.Builder ()
 //                .addHeader ( SUB_PROTOCOL_HEADER, Header.RECOGNIZE.getName () )
                 .url ( WS_URL )
@@ -77,7 +80,8 @@ public class VoiceTransmitter extends WebSocketListener {
     @Override
     public void onMessage ( WebSocket webSocket, String text ) {
         Timber.d ( "Receiving : %s", text );
-
+        Gson gson = new Gson ();
+        EventBus.getDefault ().post ( new SpeechRecognizeEvent ( gson.fromJson(text,Result.class) ) );
     }
 
     @Override
@@ -181,5 +185,18 @@ public class VoiceTransmitter extends WebSocketListener {
     public interface Callback {
         void onStudentReceived( List<Student> students);
         void onConnectionFailed();
+    }
+
+    public class SpeechRecognizeEvent {
+        Result result;
+
+        public SpeechRecognizeEvent ( Result result ) {
+            Timber.d(result.toString ());
+            this.result = result;
+        }
+
+        public Result getResult () {
+            return result;
+        }
     }
 }

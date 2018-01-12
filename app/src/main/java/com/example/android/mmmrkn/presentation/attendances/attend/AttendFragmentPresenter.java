@@ -32,7 +32,7 @@ enum MicMode {
 public class AttendFragmentPresenter extends Presenter
         implements VoiceRecorder.Callback, VoiceTransmitter.Callback {
 
-    private static final boolean MIC_ENABLED = false;
+    private static final boolean MIC_ENABLED = true;
     private static final MicMode mMicMode = MicMode.BUILT_IN;
 
     private Contract contract;
