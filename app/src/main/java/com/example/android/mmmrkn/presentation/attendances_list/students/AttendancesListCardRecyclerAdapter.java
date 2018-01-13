@@ -1,19 +1,14 @@
-package com.example.android.mmmrkn.presentation.attendances_list;
+package com.example.android.mmmrkn.presentation.attendances_list.students;
 
 
-import android.app.Activity;
 import android.app.Dialog;
 
 import android.content.res.ColorStateList;
 import android.support.annotation.NonNull;
-import android.support.v4.app.FragmentManager;
 import android.content.Context;
 
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.databinding.BindingAdapter;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
@@ -32,56 +27,57 @@ import com.example.android.mmmrkn.presentation.studentprofile.StudentProfileActi
 import com.makeramen.roundedimageview.RoundedTransformationBuilder;
 import com.squareup.picasso.Picasso;
 
+import org.greenrobot.eventbus.EventBus;
+
+import java.util.ArrayList;
 import java.util.List;
 
 import timber.log.Timber;
 
 public class AttendancesListCardRecyclerAdapter extends RecyclerView.Adapter<AttendancesListCardRecyclerAdapter.ViewHolder> {
     private final Context context;
-    private final List<Student> studentList;
-//    private AttendancesFragment.onFragmentListClickedListener listener;
-    private final Party party;
+    private final List<Student> studentList = new ArrayList <> (  );
+    private  String party;
 
 
-    public AttendancesListCardRecyclerAdapter(Context context, List<Student> attendanceTArray, Party party) {
+    public AttendancesListCardRecyclerAdapter(Context context) {
         super();
-        this.studentList = attendanceTArray;
         this.context = context;
-        this.party = party;
     }
 
     @Override
     public int getItemCount() {
-        if (studentList != null) {
-            return studentList.size();
-        } else {
-            return 0;
-        }
+        return studentList.size();
     }
 
+    public void swap( List<Student> studentList, String party)
+    {
+        this.studentList.clear ();
+        if(studentList == null ) {
+            return;
+        }
+        this.studentList.addAll(studentList);
+        this.party = party;
+        notifyDataSetChanged();
+    }
     //Cardの中身表示
     @Override
     public void onBindViewHolder(AttendancesListCardRecyclerAdapter.ViewHolder vh, final int position) {
         //サイズ、nullチェック
-        if (studentList != null && studentList.size() > position && studentList.get(position) != null) {
+        if (studentList.size() > position && studentList.get(position) != null) {
+            Student student = studentList.get(position);
             //値挿入
-            vh.name.setText(studentList.get(position).getName());
+            vh.name.setText(student.getName());
             //顔写真の挿入
-            loadImage(vh.face, studentList.get(position).getPicturePath(), studentList.get(position).getGender());
+            loadImage(vh.face, student.getPicturePath(), student.getGender());
             //体調の代入
-            if (studentList.get(position).getAttendance().getCondition().equals("good")) {
+            if (student.getAttendance().getCondition().equals("good")) {
                 vh.condition.setImageResource(R.drawable.smile);
             } else {
                 vh.condition.setImageResource(R.drawable.cray);
             }
             // クリック時、モード選択画面に移動
-            vh.layout.setOnClickListener((v) -> {
-//                listener.onFragmentListClick(studentList.get(position).getName());
-                Intent intent = new Intent(context, StudentProfileActivity.class);
-                intent.putExtra("student", studentList.get(position));
-                intent.putExtra("party", party);
-                context.startActivity(intent);
-            });
+            vh.layout.setOnClickListener((v) -> EventBus.getDefault ().post ( new StudentSelectedEvent ( student ) ) );
         }
     }
 
@@ -150,6 +146,16 @@ public class AttendancesListCardRecyclerAdapter extends RecyclerView.Adapter<Att
                         .build())
                 .into(view);
     }
+    public static class StudentSelectedEvent {
+        private final Student student;
 
+        public StudentSelectedEvent ( Student student ) {
+            this.student = student;
+        }
+
+        public Student getStudent () {
+            return student;
+        }
+    }
 }
 

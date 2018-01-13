@@ -125,6 +125,19 @@ public class Student implements Serializable {
         return format.format(new Date(stringToValue));
 
     }
+
+    @Override
+    public String toString () {
+        return "Student{" +
+                "studentId='" + studentId + '\'' +
+                ", name='" + name + '\'' +
+                ", picturePath='" + picturePath + '\'' +
+                ", gender='" + gender + '\'' +
+                ", party=" + party +
+                ", attendance=" + attendance +
+                ", gohome=" + gohome +
+                '}';
+    }
 }
 
 

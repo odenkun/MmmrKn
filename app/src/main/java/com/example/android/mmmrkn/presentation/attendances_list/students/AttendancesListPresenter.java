@@ -1,7 +1,6 @@
-package com.example.android.mmmrkn.presentation.attendances_list;
+package com.example.android.mmmrkn.presentation.attendances_list.students;
 
 import com.example.android.mmmrkn.infra.api.PartiesService;
-import com.example.android.mmmrkn.infra.api.StudentsService;
 import com.example.android.mmmrkn.infra.entity.Party;
 import com.example.android.mmmrkn.infra.entity.Student;
 import com.example.android.mmmrkn.presentation.Presenter;
@@ -22,12 +21,6 @@ import timber.log.Timber;
 public class AttendancesListPresenter extends Presenter{
     private final PartiesService partiesService;
     private final Contract contract;
-
-
-    //private AttendancesListRepository attendRepo;
-    //private PartyRepository partyRepo;
-    //Cookieを保持する
-    private SharedPrefsCookiePersistor persistor;
 
     @Inject
     public AttendancesListPresenter(Contract contract, PartiesService partiesService){
@@ -50,6 +43,11 @@ public class AttendancesListPresenter extends Presenter{
     }
 
     public  void fetchEntryList(String partyId){
+        try {
+            throw new IllegalThreadStateException ();
+        }catch ( Exception e ) {
+            Timber.e ( e );
+        }
         disposables.add (
                 partiesService.getEntryList(partyId)
                         .subscribeOn ( Schedulers.io () )
@@ -72,17 +70,6 @@ public class AttendancesListPresenter extends Presenter{
                             Timber.e ( e );
                             contract.onEntryListFetched ( null );
                         } ) );
-    }
-
-    /**
-     * クッキーを消去する
-     */
-    void clearCookies () {
-        Timber.d ( "started" );
-        for ( Cookie cookie : persistor.loadAll () ) {
-            Timber.d ( cookie.toString () );
-        }
-        persistor.clear ();
     }
 
     public  interface  Contract{

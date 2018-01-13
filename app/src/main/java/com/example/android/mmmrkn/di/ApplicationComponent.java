@@ -12,7 +12,6 @@ import com.example.android.mmmrkn.di.mode.ModeModule;
 import com.example.android.mmmrkn.di.start.StartComponent;
 import com.example.android.mmmrkn.di.teacher.TeacherComponent;
 import com.example.android.mmmrkn.di.teacher.TeacherModule;
-import com.example.android.mmmrkn.presentation.attendances_list.AttendancesDialog;
 
 import javax.inject.Singleton;
 
@@ -30,5 +29,4 @@ public interface ApplicationComponent {
     AttendancesListComponent plus(AttendancesListModule al);
     ModeComponent plus(ModeModule n);
     AttendancesComponent plus(AttendancesModule a);
-    void inject(AttendancesDialog d);
 }

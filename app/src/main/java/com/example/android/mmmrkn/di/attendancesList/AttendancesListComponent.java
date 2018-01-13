@@ -1,6 +1,7 @@
 package com.example.android.mmmrkn.di.attendancesList;
 
 import com.example.android.mmmrkn.presentation.attendances_list.AttendancesListActivity;
+import com.example.android.mmmrkn.presentation.attendances_list.students.AttendancesFragment;
 
 import dagger.Subcomponent;
 
@@ -10,5 +11,5 @@ import dagger.Subcomponent;
 
 @Subcomponent(modules = {AttendancesListModule.class})
 public interface AttendancesListComponent {
-    void inject(AttendancesListActivity a);
+    void inject(AttendancesFragment a);
 }

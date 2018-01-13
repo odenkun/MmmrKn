@@ -1,6 +1,6 @@
 package com.example.android.mmmrkn.di.attendancesList;
 
-import com.example.android.mmmrkn.presentation.attendances_list.AttendancesListPresenter;
+import com.example.android.mmmrkn.presentation.attendances_list.students.AttendancesListPresenter;
 
 import dagger.Module;
 import dagger.Provides;
