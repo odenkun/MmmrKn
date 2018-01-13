@@ -29,16 +29,18 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginLeft="140dp"
-        android:layout_marginRight="170dp"
-        android:layout_marginTop="140dp"
-        android:layout_weight="2">
+        android:layout_marginRight="150dp"
+        android:layout_weight="2"
+        android:paddingTop="160dp">
 
 
         <com.example.android.mmmrkn.presentation.teacher.TeacherCardRecyclerView
             android:id="@+id/teacher_recycle"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#FFFFFF"></com.example.android.mmmrkn.presentation.teacher.TeacherCardRecyclerView>
+            android:background="#F2F2F2"
+            android:paddingBottom="20dp"
+            android:paddingTop="25dp"></com.example.android.mmmrkn.presentation.teacher.TeacherCardRecyclerView>
     </LinearLayout>
 
 </LinearLayout>
