@@ -7,7 +7,7 @@ import dagger.Provides;
 
 @Module
 public class TeacherModule {
-    private SelectTeacherPresenter.Contract contract;
+    private final SelectTeacherPresenter.Contract contract;
     public TeacherModule ( SelectTeacherPresenter.Contract contract ) {
         this.contract = contract;
     }

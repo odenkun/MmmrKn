@@ -33,20 +33,16 @@ import javax.inject.Inject;
 public class AttendFragment extends Fragment implements AttendFragmentPresenter.Contract {
     @Inject
     AttendFragmentPresenter presenter;
-    ViewModel viewModel = new ViewModel ();
+    final ViewModel viewModel = new ViewModel ();
     Teacher teacher;
-    LinkedHashSet<String> families = new LinkedHashSet <> (  );
-    LinkedHashSet<String> times = new LinkedHashSet <> (  );
+    final LinkedHashSet<String> families = new LinkedHashSet <> (  );
+    final LinkedHashSet<String> times = new LinkedHashSet <> (  );
 
 
     public AttendFragment () {
         // Required empty public constructor
     }
 
-    @Override
-    public void onCreate ( Bundle savedInstanceState ) {
-        super.onCreate ( savedInstanceState );
-    }
 
     @Override
     public View onCreateView ( LayoutInflater inflater, ViewGroup container,

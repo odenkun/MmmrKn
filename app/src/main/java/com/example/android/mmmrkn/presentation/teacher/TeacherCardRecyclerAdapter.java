@@ -22,8 +22,8 @@ import timber.log.Timber;
 
 
 public class TeacherCardRecyclerAdapter extends RecyclerView.Adapter<TeacherCardRecyclerAdapter.ViewHolder>{
-    private Context context;
-    private List<Teacher> teachers;
+    private final Context context;
+    private final List<Teacher> teachers;
 
     //listの中にvaluesのstringsを挿入
     public TeacherCardRecyclerAdapter(Context context, List<Teacher> teacherArrayList) {
@@ -49,20 +49,19 @@ public class TeacherCardRecyclerAdapter extends RecyclerView.Adapter<TeacherCard
         //サイズ、nullチェック
         if (teachers != null && teachers.size() > position && teachers.get(position) != null) {
             vh.name.setText(teachers.get(position).getName());
+            // クリック時、モード選択画面に移動
+            vh.layout.setOnClickListener( v -> {
+                Intent intent=new Intent(context,ModeActivity.class);
+                App app;
+                if (context instanceof App) {
+                    app = (App) context;
+                }else{
+                    app = (App)context.getApplicationContext ();
+                }
+                app.setTeacher ( teachers.get(position) );
+                context.startActivity(intent);
+            } );
         }
-        // クリック時、モード選択画面に移動
-        vh.layout.setOnClickListener( v -> {
-            Intent intent=new Intent(context,ModeActivity.class);
-            App app;
-            if (context instanceof App) {
-                app = (App) context;
-            }else{
-                app = (App)context.getApplicationContext ();
-            }
-            app.setTeacher ( new Teacher (teachers.get(position).getTeacherId(),teachers.get(position).getName()) );
-            context.startActivity(intent);
-        } );
-
     }
     //Viewを纏めたフォルダの作成
     @Override
@@ -74,8 +73,8 @@ public class TeacherCardRecyclerAdapter extends RecyclerView.Adapter<TeacherCard
 
     //Viewフォルダの初期化設定
     static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView name;
-        LinearLayout layout;
+        final TextView name;
+        final LinearLayout layout;
 
         public ViewHolder(View v) {
             super(v);

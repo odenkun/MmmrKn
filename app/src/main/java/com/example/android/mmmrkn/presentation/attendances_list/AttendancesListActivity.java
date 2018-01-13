@@ -78,7 +78,7 @@ public class AttendancesListActivity extends AppCompatActivity implements Attend
 
     //タブレットかスマホの確認
     public static boolean isHoneycomb() {
-        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB;
+        return true;
     }
     public static boolean isTablet(Context context) {
         return (context.getResources().getConfiguration().screenLayout &

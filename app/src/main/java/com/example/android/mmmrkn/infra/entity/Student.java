@@ -122,8 +122,7 @@ public class Student implements Serializable {
     public String getHumanTime() {
         DateFormat format = new SimpleDateFormat("HH:mm:ss");
         long stringToValue = parseLong(this.attendance.getTime());
-        String time = format.format(new Date(stringToValue));
-        return  time;
+        return format.format(new Date(stringToValue));
 
     }
 }

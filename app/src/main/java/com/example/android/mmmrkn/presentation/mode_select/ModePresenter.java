@@ -17,10 +17,10 @@ import timber.log.Timber;
 public class ModePresenter extends Presenter {
     private Contract contract;
 
-    private LogoutService logoutService;
+    private final LogoutService logoutService;
 
     //cookieの削除をする？
-    private SharedPrefsCookiePersistor persistor;
+    private final SharedPrefsCookiePersistor persistor;
 
     @Inject
     public ModePresenter ( Contract contract, LogoutService logoutService, SharedPrefsCookiePersistor persistor ) {

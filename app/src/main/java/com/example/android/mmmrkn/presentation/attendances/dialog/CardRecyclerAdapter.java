@@ -15,8 +15,8 @@ import com.example.android.mmmrkn.presentation.attendances.AttendancesActivity;
 
 
 public class CardRecyclerAdapter extends RecyclerView.Adapter<CardRecyclerAdapter.ViewHolder>{
-    private String[] list;
-    private Context context;
+    private final String[] list;
+    private final Context context;
     
     
     public CardRecyclerAdapter(Context context, String[] stringArray) {
@@ -51,10 +51,10 @@ public class CardRecyclerAdapter extends RecyclerView.Adapter<CardRecyclerAdapte
     }
     //Viewフォルダの初期化設定
     static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView textView_main;
-        TextView textView_sub;
-        LinearLayout layout;
-        ImageView imageView;
+        final TextView textView_main;
+        final TextView textView_sub;
+        final LinearLayout layout;
+        final ImageView imageView;
 
         public ViewHolder(View v) {
             super(v);

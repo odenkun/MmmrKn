@@ -27,7 +27,7 @@
         android:gravity="center"
         android:text="生徒三郎"
         android:textColor="@color/colorBlack"
-        android:textSize="30dp"
+        android:textSize="30sp"
         app:layout_constraintStart_toEndOf="@+id/Text_Kumi"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -52,7 +52,7 @@
         android:layout_marginStart="204dp"
         android:gravity="center"
         android:text="ここには体調が入ります"
-        android:textSize="20dp"
+        android:textSize="20sp"
         android:textColor="@color/colorBlack"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -67,7 +67,7 @@
         android:gravity="center"
         android:text="うめ組"
         android:textColor="@color/colorBlack"
-        android:textSize="24dp"
+        android:textSize="24sp"
         app:layout_constraintStart_toEndOf="@+id/Image_Face"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -78,7 +78,7 @@
         android:layout_marginBottom="4dp"
         android:layout_marginRight="4dp"
         android:text="降園"
-        android:textSize="17dp"
+        android:textSize="17sp"
         android:textColor="@color/colorBlack"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent" />
@@ -91,7 +91,7 @@
         android:layout_marginStart="4dp"
         android:layout_marginTop="8dp"
         android:text="メニューへ戻る"
-        android:textSize="17dp"
+        android:textSize="17sp"
         android:textColor="@color/colorBlack"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"

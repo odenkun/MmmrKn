@@ -37,14 +37,14 @@ public class AttendFragmentPresenter extends Presenter
 
     private Contract contract;
 
-    private StudentsService studentsService;
+    private final StudentsService studentsService;
 
     private BTListener mBTListener;
     private VoiceRecorder mVoiceRecorder;
     private VoiceTransmitter mTransmitter;
 
     //苦肉の策
-    private OkHttpClient client;
+    private final OkHttpClient client;
 
     @Inject
     public AttendFragmentPresenter ( Contract contract, OkHttpClient client, StudentsService studentsService ) {

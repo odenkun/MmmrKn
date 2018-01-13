@@ -48,11 +48,11 @@ public class VoiceTransmitter extends WebSocketListener {
     private static final String SUB_PROTOCOL_HEADER = "Sec-WebSocket-Protocol";
     private static final int NORMAL_CLOSURE_STATUS = 1000;
     private WebSocket ws;
-    private int sampleRate;
+    private final int sampleRate;
     private static final String WS_URL = "http://192.168.1.3:6001";
     private WebSocketState mState = WebSocketState.PREPARATION;
 
-    private Callback callback;
+    private final Callback callback;
 
     public VoiceTransmitter ( int sampleRate, Callback callback, OkHttpClient client) {
         Timber.d("created");
@@ -188,7 +188,7 @@ public class VoiceTransmitter extends WebSocketListener {
     }
 
     public class SpeechRecognizeEvent {
-        Result result;
+        final Result result;
 
         public SpeechRecognizeEvent ( Result result ) {
             Timber.d(result.toString ());

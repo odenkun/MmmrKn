@@ -24,17 +24,14 @@ import java.util.List;
 
 public class AttendancesFragment extends Fragment {
 
-    private onFragmentListClickedListener listener;
-    private Activity mActivity = null;
-    private View mView;
+    private final Activity mActivity = null;
 
     // RecyclerViewとAdapter
     private RecyclerView mRecyclerView = null;
-    private AttendancesListCardRecyclerAdapter atteAda = null;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        mView = inflater.inflate(R.layout.attendances_viewbase, container, false);
+        View mView = inflater.inflate ( R.layout.attendances_viewbase, container, false );
 
         // RecyclerViewの参照を取得
         mRecyclerView = (RecyclerView) mView.findViewById(R.id.recycler_attendances);
@@ -51,19 +48,19 @@ public class AttendancesFragment extends Fragment {
         party.setName("test");
         party.setPartyId("test");
 
-        atteAda = new AttendancesListCardRecyclerAdapter(mActivity, studentTList, party);
-        mRecyclerView.setAdapter(atteAda);
+        AttendancesListCardRecyclerAdapter atteAda = new AttendancesListCardRecyclerAdapter ( mActivity, studentTList, party );
+        mRecyclerView.setAdapter( atteAda );
     }
 
     //ListのClick情報を通知するListener
     public interface onFragmentListClickedListener {
-        public void onFragmentListClick(String select);
+        void onFragmentListClick ( String select );
     }
 
     //Interfaceを登録する
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        listener = (onFragmentListClickedListener) activity;
+        onFragmentListClickedListener listener = (onFragmentListClickedListener) activity;
     }
 }

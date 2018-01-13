@@ -7,14 +7,12 @@ import com.example.android.mmmrkn.presentation.Presenter;
  */
 
 public class GoHomePresenter extends Presenter {
-	
-	private Contract contract;
-	
+
 	//参照の切断
 	@Override
 	public void dispose(){
 		super.dispose();
-		this.contract = null;
+		Contract contract = null;
 	}
 	public interface Contract{
 	

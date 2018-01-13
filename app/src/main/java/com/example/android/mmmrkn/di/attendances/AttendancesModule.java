@@ -10,7 +10,7 @@ import dagger.Provides;
  */
 @Module
 public class AttendancesModule {
-	private AttendFragmentPresenter.Contract contract;
+	private final AttendFragmentPresenter.Contract contract;
 	
 	public AttendancesModule (AttendFragmentPresenter.Contract contract){
 		this.contract = contract;

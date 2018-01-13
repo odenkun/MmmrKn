@@ -11,7 +11,7 @@ import dagger.Provides;
 @Module
 public class GoHomeModule {
 	
-	private GoHomePresenter.Contract contract;
+	private final GoHomePresenter.Contract contract;
 	
 	public GoHomeModule(GoHomePresenter.Contract contract){
 		this.contract = contract;

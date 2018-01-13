@@ -44,7 +44,7 @@
         android:layout_marginTop="8dp"
         android:background="@drawable/button_main_layout"
         android:letterSpacing="0.1"
-        android:lineSpacingExtra="10px"
+        android:lineSpacingExtra="10dp"
         android:paddingLeft="20dp"
         android:text="園児の降園を記録"
         android:textColor="#000000"
@@ -97,7 +97,7 @@
         android:shadowColor="#FFFFFF"
         android:text="ATTEND"
         android:textColor="#fff"
-        android:textSize="18dp"
+        android:textSize="18sp"
         android:translationZ="20dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -131,7 +131,7 @@
         android:shadowColor="#FFFFFF"
         android:text="LIST"
         android:textColor="#fff"
-        android:textSize="18dp"
+        android:textSize="18sp"
         android:translationZ="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

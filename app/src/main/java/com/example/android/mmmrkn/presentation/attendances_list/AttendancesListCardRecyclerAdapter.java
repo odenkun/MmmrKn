@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.app.Dialog;
 
 import android.content.res.ColorStateList;
+import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentManager;
 import android.content.Context;
 
@@ -36,10 +37,10 @@ import java.util.List;
 import timber.log.Timber;
 
 public class AttendancesListCardRecyclerAdapter extends RecyclerView.Adapter<AttendancesListCardRecyclerAdapter.ViewHolder> {
-    private Context context;
-    private List<Student> studentList;
+    private final Context context;
+    private final List<Student> studentList;
 //    private AttendancesFragment.onFragmentListClickedListener listener;
-    private Party party;
+    private final Party party;
 
 
     public AttendancesListCardRecyclerAdapter(Context context, List<Student> attendanceTArray, Party party) {
@@ -85,16 +86,15 @@ public class AttendancesListCardRecyclerAdapter extends RecyclerView.Adapter<Att
     }
 
     public static class AlertDialogFragment extends DialogFragment {
+        @NonNull
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
             // Use the Builder class for convenient dialog construction
             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
             builder.setMessage("登園児童は0人です")
-                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
-                            // FIRE ZE MISSILES!
-                        }
-                    });
+                    .setPositiveButton("OK", ( dialog, id ) -> {
+                        // FIRE ZE MISSILES!
+                    } );
             // Create the AlertDialog object and return it
             return builder.create();
         }
@@ -106,16 +106,15 @@ public class AttendancesListCardRecyclerAdapter extends RecyclerView.Adapter<Att
     public AttendancesListCardRecyclerAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(context);
         View v = layoutInflater.inflate(R.layout.student_recycler, parent, false);
-        AttendancesListCardRecyclerAdapter.ViewHolder viewHolder = new AttendancesListCardRecyclerAdapter.ViewHolder(v);
-        return viewHolder;
+        return new ViewHolder(v);
     }
 
     //Viewフォルダの初期化設定
     static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView name;
-        LinearLayout layout;
-        ImageView face;
-        ImageView condition;
+        final TextView name;
+        final LinearLayout layout;
+        final ImageView face;
+        final ImageView condition;
 
         public ViewHolder(View v) {
             super(v);

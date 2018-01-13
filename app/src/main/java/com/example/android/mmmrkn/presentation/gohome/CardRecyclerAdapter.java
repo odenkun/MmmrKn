@@ -14,13 +14,12 @@ import android.widget.TextView;
 
 import com.example.android.mmmrkn.R;
 
-/**
- * Created by 15110012 on 2017/11/21.
- */
+import timber.log.Timber;
+
 
 public class CardRecyclerAdapter extends RecyclerView.Adapter<CardRecyclerAdapter.ViewHolder>{
-    private String[] list;
-    private Context context;
+    private final String[] list;
+    private final Context context;
     //listの中にvaluesのstringsを挿入
     public CardRecyclerAdapter(Context context, String[] stringArray) {
         super();
@@ -54,20 +53,19 @@ public class CardRecyclerAdapter extends RecyclerView.Adapter<CardRecyclerAdapte
     public CardRecyclerAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(context);
         View v = layoutInflater.inflate(R.layout.recyclerview, parent, false);
-        ViewHolder viewHolder = new ViewHolder(v);
-        return viewHolder;
+        return new ViewHolder(v);
     }
     //Viewフォルダの初期化設定
     static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView textView_main;
-        TextView textView_sub;
-        LinearLayout layout;
-        ImageView imageView;
+        final TextView textView_main;
+        final TextView textView_sub;
+        final LinearLayout layout;
+        final ImageView imageView;
 
         public ViewHolder(View v) {
             super(v);
 
-            Log.d("vh","called");
+            Timber.d ( "called" );
 
             textView_main = v.findViewById(R.id.textView_main);
             textView_sub = v.findViewById(R.id.textView_sub);

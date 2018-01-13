@@ -16,7 +16,7 @@ public class Attendance implements Serializable{
         Condition(String name) {
             this.name = name;
         }
-        private String name;
+        private final String name;
 
         @Override
         public String toString () {

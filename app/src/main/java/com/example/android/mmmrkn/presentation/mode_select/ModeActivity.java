@@ -33,9 +33,7 @@ public class ModeActivity extends AppCompatActivity implements ModePresenter.Con
                 .inject(this);
 
         //職員選択ボタンを押された時の処理
-        findViewById(R.id.btn_selectTeacher).setOnClickListener(view ->{
-            startActivity( new Intent(this,SelectTeacherActivity.class) );
-        });
+        findViewById(R.id.btn_selectTeacher).setOnClickListener(view -> startActivity( new Intent(this,SelectTeacherActivity.class) ) );
         //ログアウトボタンを押された時の処理
         findViewById(R.id.btn_logout).setOnClickListener(view -> attemptLogout());
 

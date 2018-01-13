@@ -26,11 +26,11 @@ public class LoginPresenter extends Presenter {
     //Retrofitでは、APIに合わせてインタフェースを宣言し、
     //retrofit.create(LoginService.class)で、Retrofitがそのインタフェースを実装したクラスを生成する
     //ユーザはその自動生成されたクラスを利用する
-    private LoginService loginService;
+    private final LoginService loginService;
 
 
     //Cookieを保持する
-    private SharedPrefsCookiePersistor persistor;
+    private final SharedPrefsCookiePersistor persistor;
 
     /**
      *

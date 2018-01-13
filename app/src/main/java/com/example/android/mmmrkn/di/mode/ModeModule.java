@@ -10,7 +10,7 @@ import dagger.Provides;
  */
 @Module
 public class ModeModule {
-	private ModePresenter.Contract contract;
+	private final ModePresenter.Contract contract;
 	
 	public ModeModule(ModePresenter.Contract contract){this.contract = contract;}
 	

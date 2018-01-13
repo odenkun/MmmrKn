@@ -10,7 +10,7 @@ import dagger.Provides;
 public class LoginModule {
     //MVPにおけるビューとプレゼンターの結合度を低くするためのインタフェース
     //ビューであるLoginActivityが実装している
-    private LoginPresenter.Contract contract;
+    private final LoginPresenter.Contract contract;
 
     //LoginActivity内で new ProfileModule(this)のようにインスタンス化される
     public LoginModule ( LoginPresenter.Contract contract ) {

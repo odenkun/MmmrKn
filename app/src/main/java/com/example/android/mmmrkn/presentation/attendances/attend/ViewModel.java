@@ -20,7 +20,7 @@ import timber.log.Timber;
 
 public class ViewModel extends BaseObservable {
     private Student student;
-    public ObservableInt checkedBtn;
+    public final ObservableInt checkedBtn;
     public String provisional = "";
     public String finalized = "";
 
@@ -50,7 +50,7 @@ public class ViewModel extends BaseObservable {
             provisional = "";
             finalized = finalized + text;
         }
-        Timber.d(finalized + provisional);
+        Timber.d("%s%s", finalized, provisional);
         if (student != null ) {
             student.getAttendance ().setDetail ( finalized + provisional );
             notifyPropertyChanged ( BR.student );

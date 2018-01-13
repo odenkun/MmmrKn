@@ -61,12 +61,8 @@ public class LoginActivity extends AppCompatActivity implements LoginPresenter.C
         setContentView ( R.layout.activity_login );
 
         TextView loginLink = (TextView)findViewById(R.id.textvew_login_link);
-        Button blogLink = (Button)findViewById(R.id.button_account);
 
-        loginLink.setText("パスワードを忘れた場合");
-        blogLink.setText("みまもるくんアカウントを作成");
-
-        setSpannableString(loginLink);
+        setSpannableString(loginLink, getString ( R.string.forgotPass ),"https://www.google.co.jp/");
 
         //全ての親である、アプリケーションコンポーネントを持ってくる
         ApplicationComponent appComponent = ( (App) getApplication () ).getComponent ();
@@ -94,7 +90,6 @@ public class LoginActivity extends AppCompatActivity implements LoginPresenter.C
             ActivityCompat.requestPermissions ( this, PERMISSIONS , REQUEST_CODE );
         }
 
-
         findViewById(R.id.button_account).setOnClickListener(view -> {
             Uri uri = Uri.parse("https://www.google.co.jp/");
             Intent intent = new Intent(Intent.ACTION_VIEW, uri);
@@ -103,8 +98,6 @@ public class LoginActivity extends AppCompatActivity implements LoginPresenter.C
 
     }
 
-
-    }
     @Override
     public void onRequestPermissionsResult (
             int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults ) {
@@ -163,7 +156,7 @@ public class LoginActivity extends AppCompatActivity implements LoginPresenter.C
     public void onAuthFinish ( boolean result ) {
 
         showProgress ( result );
-        Timber.d("result is" + result);
+        Timber.d("result is%s", result);
         if (result) {
             Intent intent = new Intent ( this, SelectTeacherActivity.class );
             startActivity(intent);
@@ -224,55 +217,26 @@ public class LoginActivity extends AppCompatActivity implements LoginPresenter.C
         super.onDestroy ();
     }
     //ここからURL_Linkの動き
-    private void setSpannableString(View view) {
+    private void setSpannableString(View view,String message,String uriStr) {
 
-        String message = "パスワードを忘れた場合";
+        int start = 0;
+        int end = message.length ();
 
-        // リンク化対象の文字列、リンク先 URL を指定する
-        Map<String, String> map = new HashMap<String, String>();
-        map.put("パスワードを忘れた場合", "https://www.yahoo.co.jp/");
-
-        // SpannableString の取得
-        SpannableString ss = createSpannableString(message, map);
+        SpannableString ss = new SpannableString(message);
+        // SpannableString にクリックイベント、パラメータをセットする
+        ss.setSpan(new ClickableSpan() {
+            @Override
+            public void onClick(View textView) {
+                Uri uri = Uri.parse(uriStr);
+                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                startActivity(intent);
+            }
+        }, start, end, Spanned.SPAN_INCLUSIVE_INCLUSIVE);
 
         // SpannableString をセットし、リンクを有効化する
         TextView textView = (TextView) view.findViewById(R.id.textvew_login_link);
         textView.setText(ss);
         textView.setMovementMethod(LinkMovementMethod.getInstance());
-    }
-
-    private SpannableString createSpannableString(String message, Map<String, String> map) {
-
-        SpannableString ss = new SpannableString(message);
-
-        for (final Map.Entry<String, String> entry : map.entrySet()) {
-            int start = 0;
-            int end = 0;
-
-            // リンク化対象の文字列の start, end を算出する
-            Pattern pattern = Pattern.compile(entry.getKey());
-            Matcher matcher = pattern.matcher(message);
-            while (matcher.find()) {
-                start = matcher.start();
-                end = matcher.end();
-                break;
-            }
-
-
-
-            // SpannableString にクリックイベント、パラメータをセットする
-            ss.setSpan(new ClickableSpan() {
-                @Override
-                public void onClick(View textView) {
-                    String url = entry.getValue();
-                    Uri uri = Uri.parse(url);
-                    Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-                    startActivity(intent);
-                }
-            }, start, end, Spanned.SPAN_INCLUSIVE_INCLUSIVE);
-        }
-
-        return ss;
     }
 
 }

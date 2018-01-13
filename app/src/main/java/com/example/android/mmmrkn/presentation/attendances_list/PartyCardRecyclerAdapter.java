@@ -15,8 +15,8 @@ import java.util.List;
 
 
 public class PartyCardRecyclerAdapter extends RecyclerView.Adapter<PartyCardRecyclerAdapter.ViewHolder> {
-    private AttendancesDialog dialogFragment;
-    private List<Party> parties;
+    private final AttendancesDialog dialogFragment;
+    private final List<Party> parties;
 
     //listの中にvaluesのstringsを挿入
     public PartyCardRecyclerAdapter(AttendancesDialog dialogFragment, List<Party> partiesArrayList) {
@@ -41,23 +41,23 @@ public class PartyCardRecyclerAdapter extends RecyclerView.Adapter<PartyCardRecy
         //サイズ、nullチェック
         if (parties != null && parties.size() > position && parties.get(position) != null) {
             vh.name.setText(parties.get(position).getName());
-        }
-        // クリック時、モード選択画面に移動
-        vh.layout.setOnClickListener(new View.OnClickListener() {
-                    String partyId;
-                    String partyName;
-                    @Override
-                    public void onClick(View v) {
-                        dialogFragment.onSelectParty(partyId,partyName);
-                        dialogFragment.dismiss();
-                    }
+            // クリック時、モード選択画面に移動
+            vh.layout.setOnClickListener(new View.OnClickListener() {
+                String partyId;
+                String partyName;
+                @Override
+                public void onClick(View v) {
+                    dialogFragment.onSelectParty(partyId,partyName);
+                    dialogFragment.dismiss();
+                }
 
-                    public View.OnClickListener setPartyId(String partyId,String partyName) {
-                        this.partyName = partyName;
-                        this.partyId = partyId;
-                        return this;
-                    }
-        }.setPartyId(parties.get(position).getPartyId(),parties.get(position).getName()) );
+                public View.OnClickListener setPartyId(String partyId,String partyName) {
+                    this.partyName = partyName;
+                    this.partyId = partyId;
+                    return this;
+                }
+            }.setPartyId(parties.get(position).getPartyId(),parties.get(position).getName()) );
+        }
     }
 
     //Viewを纏めたフォルダの作成
@@ -70,8 +70,8 @@ public class PartyCardRecyclerAdapter extends RecyclerView.Adapter<PartyCardRecy
 
     //Viewフォルダの初期化設定
     static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView name;
-        LinearLayout layout;
+        final TextView name;
+        final LinearLayout layout;
 
         public ViewHolder(View v) {
             super(v);

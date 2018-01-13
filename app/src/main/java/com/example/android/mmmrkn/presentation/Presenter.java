@@ -6,7 +6,7 @@ import io.reactivex.disposables.CompositeDisposable;
 public abstract class Presenter {
 
     //通信のリスト
-    protected CompositeDisposable disposables = new CompositeDisposable ();
+    protected final CompositeDisposable disposables = new CompositeDisposable ();
     /**
      *  ログイン通信の結果通知を受け取らないようにする
      */

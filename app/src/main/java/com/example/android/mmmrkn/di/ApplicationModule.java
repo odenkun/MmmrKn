@@ -41,10 +41,10 @@ import timber.log.Timber;
 public class ApplicationModule {
 
     //実際にはAppクラスが代入される
-    private Context applicationContext;
+    private final Context applicationContext;
 
     //JSONとPOJOの相互変換を行うもの
-    private Gson gson = new GsonBuilder ()
+    private final Gson gson = new GsonBuilder ()
             //JSONのキーとPOJOの変数の表記の変換の仕方を指定する
             //今回はそのままで良いのでIDENTITYを設定
             //詳しくは https://qiita.com/yysk/items/e549ba40bc2accfdff35

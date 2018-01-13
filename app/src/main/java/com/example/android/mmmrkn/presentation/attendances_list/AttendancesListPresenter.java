@@ -21,7 +21,7 @@ import timber.log.Timber;
 
 public class AttendancesListPresenter extends Presenter{
     private final PartiesService partiesService;
-    private Contract contract;
+    private final Contract contract;
 
 
     //private AttendancesListRepository attendRepo;
