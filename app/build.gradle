@@ -5,10 +5,7 @@ ext {
     grpcVersion = '1.4.0'
 }
 android {
-    packagingOptions {
-        exclude 'META-INF/CONTRIBUTORS.md'
-        exclude 'META-INF/LICENSE.md'
-    }
+
     compileSdkVersion 26
     defaultConfig {
         applicationId "com.example.android.mmmrkn"

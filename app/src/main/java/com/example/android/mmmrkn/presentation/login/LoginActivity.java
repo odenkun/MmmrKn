@@ -9,16 +9,23 @@ import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 
 import android.os.Build;
 import android.os.Bundle;
+import android.text.SpannableString;
+import android.text.Spanned;
 import android.text.TextUtils;
+import android.text.method.LinkMovementMethod;
+import android.text.style.ClickableSpan;
 import android.view.View;
 import android.view.ViewPropertyAnimator;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.ScrollView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.android.mmmrkn.R;
@@ -26,9 +33,15 @@ import com.example.android.mmmrkn.di.ApplicationComponent;
 import com.example.android.mmmrkn.di.login.LoginComponent;
 import com.example.android.mmmrkn.di.login.LoginModule;
 import com.example.android.mmmrkn.presentation.App;
+import com.example.android.mmmrkn.presentation.attendances.AttendancesActivity;
 import com.example.android.mmmrkn.presentation.login.LoginPresenter;
 import com.example.android.mmmrkn.presentation.mode_select.ModeActivity;
 import com.example.android.mmmrkn.presentation.teacher.SelectTeacherActivity;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.inject.Inject;
 
@@ -46,6 +59,14 @@ public class LoginActivity extends AppCompatActivity implements LoginPresenter.C
 
         super.onCreate ( savedInstanceState );
         setContentView ( R.layout.activity_login );
+
+        TextView loginLink = (TextView)findViewById(R.id.textvew_login_link);
+        Button blogLink = (Button)findViewById(R.id.button_account);
+
+        loginLink.setText("パスワードを忘れた場合");
+        blogLink.setText("みまもるくんアカウントを作成");
+
+        setSpannableString(loginLink);
 
         //全ての親である、アプリケーションコンポーネントを持ってくる
         ApplicationComponent appComponent = ( (App) getApplication () ).getComponent ();
@@ -72,6 +93,16 @@ public class LoginActivity extends AppCompatActivity implements LoginPresenter.C
         if ( ! allGranted ) {
             ActivityCompat.requestPermissions ( this, PERMISSIONS , REQUEST_CODE );
         }
+
+
+        findViewById(R.id.button_account).setOnClickListener(view -> {
+            Uri uri = Uri.parse("https://www.google.co.jp/");
+            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+            startActivity(intent);
+        });
+
+    }
+
 
     }
     @Override
@@ -122,7 +153,7 @@ public class LoginActivity extends AppCompatActivity implements LoginPresenter.C
         //英数字で構成されることのチェック
         return password.matches ( "[0-9a-zA-Z]+" );
     }
-    
+
     @Override
     public void onAuthStart () {
         showProgress ( true );
@@ -192,5 +223,56 @@ public class LoginActivity extends AppCompatActivity implements LoginPresenter.C
         presenter.dispose ();
         super.onDestroy ();
     }
-    
+    //ここからURL_Linkの動き
+    private void setSpannableString(View view) {
+
+        String message = "パスワードを忘れた場合";
+
+        // リンク化対象の文字列、リンク先 URL を指定する
+        Map<String, String> map = new HashMap<String, String>();
+        map.put("パスワードを忘れた場合", "https://www.yahoo.co.jp/");
+
+        // SpannableString の取得
+        SpannableString ss = createSpannableString(message, map);
+
+        // SpannableString をセットし、リンクを有効化する
+        TextView textView = (TextView) view.findViewById(R.id.textvew_login_link);
+        textView.setText(ss);
+        textView.setMovementMethod(LinkMovementMethod.getInstance());
+    }
+
+    private SpannableString createSpannableString(String message, Map<String, String> map) {
+
+        SpannableString ss = new SpannableString(message);
+
+        for (final Map.Entry<String, String> entry : map.entrySet()) {
+            int start = 0;
+            int end = 0;
+
+            // リンク化対象の文字列の start, end を算出する
+            Pattern pattern = Pattern.compile(entry.getKey());
+            Matcher matcher = pattern.matcher(message);
+            while (matcher.find()) {
+                start = matcher.start();
+                end = matcher.end();
+                break;
+            }
+
+
+
+            // SpannableString にクリックイベント、パラメータをセットする
+            ss.setSpan(new ClickableSpan() {
+                @Override
+                public void onClick(View textView) {
+                    String url = entry.getValue();
+                    Uri uri = Uri.parse(url);
+                    Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                    startActivity(intent);
+                }
+            }, start, end, Spanned.SPAN_INCLUSIVE_INCLUSIVE);
+        }
+
+        return ss;
+    }
+
 }

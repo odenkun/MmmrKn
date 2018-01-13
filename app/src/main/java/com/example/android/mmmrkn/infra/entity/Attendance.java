@@ -4,7 +4,10 @@ package com.example.android.mmmrkn.infra.entity;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Attendance{
+import java.io.Serializable;
+
+
+public class Attendance implements Serializable{
 
     public enum Condition {
         GOOD("good"),
@@ -20,6 +23,13 @@ public class Attendance{
             return name;
         }
     }
+
+
+//    @PrimaryKey(auto = false)
+//    @SerializedName("attendanceId")
+//    @Expose
+//    private String attendanceId;
+
     @SerializedName("time")
     @Expose
     private String time;

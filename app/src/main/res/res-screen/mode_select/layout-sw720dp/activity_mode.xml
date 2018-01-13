@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.android.mmmrkn.presentation.mode_select.ModeActivity">
+
+
+    <Button
+        android:id="@+id/btn_attendancesList"
+        android:layout_width="900dp"
+        android:layout_height="170dp"
+        android:layout_marginBottom="32dp"
+        android:layout_marginStart="64dp"
+        android:background="@drawable/button_main_layout"
+        android:paddingLeft="20dp"
+        android:text="登園した生徒の一覧"
+        android:textSize="55sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/btn_attendances"
+        android:layout_width="900dp"
+        android:layout_height="170dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/button_main_layout"
+        android:gravity="center_vertical|center_horizontal"
+        android:letterSpacing="0.1"
+        android:paddingLeft="20dp"
+        android:text="生徒の登園を記録"
+        android:textSize="55sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btn_goHome"
+        android:layout_width="900dp"
+        android:layout_height="170dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/button_main_layout"
+        android:letterSpacing="0.1"
+        android:lineSpacingExtra="10px"
+        android:paddingLeft="20dp"
+        android:text="園児の降園を記録"
+        android:textColor="#000000"
+        android:textSize="55sp"
+        app:layout_constraintBottom_toTopOf="@+id/btn_attendancesList"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_attendances" />
+
+    <Button
+        android:id="@+id/btn_selectTeacher"
+        android:layout_width="240dp"
+        android:layout_height="60dp"
+        android:layout_marginBottom="32dp"
+        android:layout_marginEnd="48dp"
+        android:layout_marginStart="8dp"
+        android:layout_weight="1"
+        android:background="@drawable/button_sub_layout"
+        android:text="教員選択"
+        android:textColor="#FFFFFF"
+        android:textSize="35sp"
+        app:layout_constraintBottom_toTopOf="@+id/btn_logout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btn_attendancesList" />
+
+    <Button
+        android:id="@+id/btn_logout"
+        android:layout_width="240dp"
+        android:layout_height="60dp"
+        android:layout_marginBottom="32dp"
+        android:layout_marginEnd="48dp"
+        android:layout_marginStart="8dp"
+        android:layout_weight="1"
+        android:background="@drawable/button_sub_layout"
+        android:text="ログアウト"
+        android:textColor="#FFFFFF"
+        android:textSize="35sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btn_attendancesList" />
+
+    <TextView
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        android:layout_marginStart="88dp"
+        android:layout_marginTop="52dp"
+        android:background="@drawable/circle_button"
+        android:drawableTop="@drawable/school"
+        android:gravity="center_vertical|center"
+        android:paddingTop="20dp"
+        android:shadowColor="#FFFFFF"
+        android:text="ATTEND"
+        android:textColor="#fff"
+        android:textSize="18dp"
+        android:translationZ="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        android:layout_marginBottom="264dp"
+        android:layout_marginStart="88dp"
+        android:background="@drawable/circle_button"
+        android:drawableTop="@drawable/home"
+        android:gravity="center_vertical|center"
+        android:paddingTop="20dp"
+        android:shadowColor="#FFFFFF"
+        android:text="DROP"
+        android:textColor="#fff"
+        android:textSize="18sp"
+        android:translationZ="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        android:layout_marginBottom="52dp"
+        android:layout_marginStart="88dp"
+        android:background="@drawable/circle_button"
+        android:drawableTop="@drawable/list"
+        android:gravity="center_vertical|center"
+        android:paddingTop="30dp"
+        android:shadowColor="#FFFFFF"
+        android:text="LIST"
+        android:textColor="#fff"
+        android:textSize="18dp"
+        android:translationZ="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+</android.support.constraint.ConstraintLayout>

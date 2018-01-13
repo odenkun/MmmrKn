@@ -5,21 +5,30 @@ import com.example.android.mmmrkn.infra.api.StudentsService;
 import com.example.android.mmmrkn.infra.entity.Party;
 import com.example.android.mmmrkn.infra.entity.Student;
 import com.example.android.mmmrkn.presentation.Presenter;
+import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersistor;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
+import okhttp3.Cookie;
 import timber.log.Timber;
 
 
 public class AttendancesListPresenter extends Presenter{
     private final PartiesService partiesService;
     private Contract contract;
-    
+
+
+    //private AttendancesListRepository attendRepo;
+    //private PartyRepository partyRepo;
+    //Cookieを保持する
+    private SharedPrefsCookiePersistor persistor;
+
     @Inject
     public AttendancesListPresenter(Contract contract, PartiesService partiesService){
         this.contract = contract;
@@ -47,12 +56,33 @@ public class AttendancesListPresenter extends Presenter{
                         .observeOn ( AndroidSchedulers.mainThread () )
                         .subscribe ( studentList -> {
                             Timber.d ( "attend とれたよ" );
-                            contract.onEntryListFetched (studentList);
+                            List<Student> attendList = new ArrayList<>();
+                            for (Student student : studentList) {
+                                if (student.getAttendance() != null) {
+                                    attendList.add(student);
+                                }
+                            }
+                            if (attendList.size() > 0) {
+                                contract.onEntryListFetched(attendList);
+                            }else{
+                                contract.onEntryListFetched(null);
+                            }
                         }, e -> {
-                            
+
                             Timber.e ( e );
                             contract.onEntryListFetched ( null );
                         } ) );
+    }
+
+    /**
+     * クッキーを消去する
+     */
+    void clearCookies () {
+        Timber.d ( "started" );
+        for ( Cookie cookie : persistor.loadAll () ) {
+            Timber.d ( cookie.toString () );
+        }
+        persistor.clear ();
     }
 
     public  interface  Contract{

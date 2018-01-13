@@ -18,99 +18,115 @@ import com.makeramen.roundedimageview.RoundedTransformationBuilder;
 import com.squareup.picasso.Picasso;
 
 import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.util.Date;
 
 import io.reactivex.annotations.Nullable;
 import timber.log.Timber;
 
 
 
+import static java.lang.Long.parseLong;
+
 
 public class Student implements Serializable {
     private static final long serialVersionUID = 1L;
-    @SerializedName ("studentId")
+    @SerializedName("studentId")
     @Expose
     private String studentId;
-
-    @SerializedName ("name")
+    
+    @SerializedName("name")
     @Expose
     private String name;
-
-    @SerializedName ("picturePath")
+    
+    @SerializedName("picturePath")
     @Expose
     private String picturePath;
-
-    @SerializedName ("gender")
+    
+    @SerializedName("gender")
     @Expose
     private String gender;
-
-    @SerializedName ("party")
+    
+    @SerializedName("party")
     @Expose
     private Party party;
-
+    
     @Nullable
-    @SerializedName ("attendance")
+    @SerializedName("attendance")
     @Expose
     private Attendance attendance;
-
+    
     @Nullable
-    @SerializedName ("goHome")
+    @SerializedName("goHome")
     @Expose
     private GoHome gohome;
-
-    public String getStudentId () {
+    
+    public String getStudentId() {
         return studentId;
     }
-
-    public void setStudentId ( String studentId ) {
+    
+    public void setStudentId(String studentId) {
         this.studentId = studentId;
     }
-
-    public String getName () {
+    
+    public String getName() {
         return name;
     }
-
-    public void setName ( String name ) {
+    
+    public void setName(String name) {
         this.name = name;
     }
-
-    public String getPicturePath () {
+    
+    public String getPicturePath() {
         return picturePath;
     }
-
-    public void setPicturePath ( String picturePath ) {
+    
+    public void setPicturePath(String picturePath) {
         this.picturePath = picturePath;
     }
-
-    public String getGender () {
+    
+    public String getGender() {
         return gender;
     }
-
-    public void setGender ( String gender ) {
+    
+    public void setGender(String gender) {
         this.gender = gender;
     }
-
-    public Party getParty () {
+    
+    public Party getParty() {
         return party;
     }
-
-    public void setParty ( Party party ) {
+    
+    public void setParty(Party party) {
         this.party = party;
     }
-
-    public Attendance getAttendance () {
+    
+    public Attendance getAttendance() {
         return attendance;
     }
-
-    public void setAttendance ( Attendance attendance ) {
+    
+    public void setAttendance(Attendance attendance) {
         this.attendance = attendance;
     }
-
-    public GoHome getGohome () {
+    
+    public GoHome getGohome() {
         return gohome;
     }
-
-    public void setGohome ( GoHome gohome ) {
+    
+    public void setGohome(GoHome gohome) {
         this.gohome = gohome;
     }
 
+    public String getHumanTime() {
+        DateFormat format = new SimpleDateFormat("HH:mm:ss");
+        long stringToValue = parseLong(this.attendance.getTime());
+        String time = format.format(new Date(stringToValue));
+        return  time;
+
+    }
 }
+
+
+
