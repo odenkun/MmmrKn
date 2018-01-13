@@ -32,7 +32,7 @@ enum MicMode {
 public class AttendFragmentPresenter extends Presenter
         implements VoiceRecorder.Callback, VoiceTransmitter.Callback {
 
-    private static final boolean MIC_ENABLED = true;
+    private static final boolean MIC_ENABLED = false;
     private static final MicMode mMicMode = MicMode.BUILT_IN;
 
     private Contract contract;
@@ -169,8 +169,10 @@ public class AttendFragmentPresenter extends Presenter
                             List <Student> list = new ArrayList <> ();
                             list.add ( student );
                             contract.onNameRecognized ( list );
-                            endTransmit ();
-                            startTransmit ();
+                            if (MIC_ENABLED) {
+                                endTransmit ();
+                                startTransmit ();
+                            }
                         }, e -> {
                             Timber.e ( e );
                             contract.onNameRecognized ( null );
@@ -192,7 +194,9 @@ public class AttendFragmentPresenter extends Presenter
                         .subscribe ( () -> {
                             Timber.d ( "登録完了。" );
                             contract.onAttendRegistered ( true );
-                            endTransmit ();
+                            if (MIC_ENABLED) {
+                                endTransmit ();
+                            }
                         }, e -> {
                             Timber.e ( e );
                             contract.onAttendRegistered ( false );
