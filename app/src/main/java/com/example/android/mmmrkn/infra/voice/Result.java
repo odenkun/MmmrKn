@@ -1,21 +1,24 @@
 package com.example.android.mmmrkn.infra.voice;
 
-enum Type {
-    PROVISIONAL,
-    FINAL,
-    TIME,
-    FAMILY,
-    UNSPECIFIED
-}
+
+import java.util.Arrays;
 
 public class Result {
+    public enum Type {
+        PROVISIONAL,
+        FINAL,
+        TIME,
+        FAMILY,
+        UNSPECIFIED
+    }
     public String type;
-    public String content;
+    public String[] content;
+
     @Override
     public String toString () {
         return "Result{" +
                 "type='" + type + '\'' +
-                ", content='" + content + '\'' +
+                ", content=" + Arrays.toString ( content ) +
                 '}';
     }
 

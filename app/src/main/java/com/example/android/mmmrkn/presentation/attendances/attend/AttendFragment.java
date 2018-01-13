@@ -15,6 +15,7 @@ import com.example.android.mmmrkn.di.attendances.AttendancesModule;
 import com.example.android.mmmrkn.infra.entity.Attendance;
 import com.example.android.mmmrkn.infra.entity.Student;
 import com.example.android.mmmrkn.infra.entity.Teacher;
+import com.example.android.mmmrkn.infra.voice.Result;
 import com.example.android.mmmrkn.infra.voice.VoiceTransmitter;
 import com.example.android.mmmrkn.presentation.App;
 import com.example.android.mmmrkn.presentation.attendances.qr.QRFragment;
@@ -22,11 +23,11 @@ import com.example.android.mmmrkn.presentation.attendances.qr.QRFragment;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
+import java.util.Arrays;
+import java.util.LinkedHashSet;
 import java.util.List;
 
 import javax.inject.Inject;
-
-import timber.log.Timber;
 
 
 public class AttendFragment extends Fragment implements AttendFragmentPresenter.Contract {
@@ -34,6 +35,9 @@ public class AttendFragment extends Fragment implements AttendFragmentPresenter.
     AttendFragmentPresenter presenter;
     ViewModel viewModel = new ViewModel ();
     Teacher teacher;
+    LinkedHashSet<String> families = new LinkedHashSet <> (  );
+    LinkedHashSet<String> times = new LinkedHashSet <> (  );
+
 
     public AttendFragment () {
         // Required empty public constructor
@@ -96,15 +100,31 @@ public class AttendFragment extends Fragment implements AttendFragmentPresenter.
                 return;
             }
         }
-        Student student = new Student ();
-        student.setStudentId ( qrEvent.studentId );
-        viewModel.setStudent ( student );
+//        Student student = new Student ();
+//        student.setStudentId ( qrEvent.studentId );
+//        viewModel.setStudent ( student );
         // TODO: 2017/12/26 くるくるの表示
         presenter.fetchStudent ( qrEvent.studentId );
     }
+
     @Subscribe
     public void onSpeechRecognized ( VoiceTransmitter.SpeechRecognizeEvent event ) {
+        Result result = event.getResult ();
 
+        switch ( result.getEnumType () ) {
+            case PROVISIONAL:
+                viewModel.addDetail ( true, result.content[0] );
+                break;
+            case FINAL:
+                viewModel.addDetail ( false, result.content[0] );
+                break;
+            case TIME:
+                times.addAll ( Arrays.asList ( result.content ) );
+                break;
+            case FAMILY:
+                families.addAll ( Arrays.asList ( result.content ) );
+                break;
+        }
     }
 
     public void onClick ( boolean isAttend ) {

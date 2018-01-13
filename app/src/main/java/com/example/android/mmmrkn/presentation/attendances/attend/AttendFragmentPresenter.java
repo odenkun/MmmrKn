@@ -53,9 +53,9 @@ public class AttendFragmentPresenter extends Presenter
         this.studentsService = studentsService;
     }
 
-    void onStart (Activity activity) {
+    void onStart ( Activity activity ) {
         EventBus.getDefault ().register ( this );
-        if (MIC_ENABLED) {
+        if ( MIC_ENABLED ) {
             readyMic ( activity );
         }
     }
@@ -90,25 +90,57 @@ public class AttendFragmentPresenter extends Presenter
     //録音の開始
     private void startRec () {
         mVoiceRecorder = new VoiceRecorder ( this );
-        int sampleRate = mVoiceRecorder.start ();
-        mTransmitter = new VoiceTransmitter ( sampleRate, this, client );
+        mVoiceRecorder.start ();
     }
+
+    private void startTransmit() {
+        if (mTransmitter == null) {
+            mTransmitter = new VoiceTransmitter ( mVoiceRecorder.getmSampleRate (), this, client );
+        }
+    }
+
     //発話開始
     @Override
     public void onVoiceStart () {
-        mTransmitter.startRecognize ();
+        if (mTransmitter != null) {
+            try {
+                mTransmitter.startRecognize ();
+            }catch ( IllegalStateException e ) {
+                Timber.e(e);
+            }
+        }
     }
 
     //発話中
     @Override
     public void onVoice ( byte[] data, int size ) {
-        mTransmitter.sendVoice ( data );
+
+        if (mTransmitter != null) {
+            try {
+                mTransmitter.sendVoice ( data );
+            }catch ( IllegalStateException e ) {
+                Timber.e(e);
+            }
+        }
     }
 
     //発話の終了
     @Override
     public void onVoiceEnd () {
-        mTransmitter.stopRecognize ();
+        if (mTransmitter != null) {
+            try {
+                mTransmitter.stopRecognize ();
+            }catch ( IllegalStateException e ) {
+                Timber.e(e);
+            }
+        }
+    }
+
+    private void endTransmit() {
+        if (mTransmitter != null) {
+            mTransmitter.close ();
+            mTransmitter = null;
+        }
     }
 
     //園児リストの受信
@@ -137,6 +169,8 @@ public class AttendFragmentPresenter extends Presenter
                             List <Student> list = new ArrayList <> ();
                             list.add ( student );
                             contract.onNameRecognized ( list );
+                            endTransmit ();
+                            startTransmit ();
                         }, e -> {
                             Timber.e ( e );
                             contract.onNameRecognized ( null );
@@ -158,6 +192,7 @@ public class AttendFragmentPresenter extends Presenter
                         .subscribe ( () -> {
                             Timber.d ( "登録完了。" );
                             contract.onAttendRegistered ( true );
+                            endTransmit ();
                         }, e -> {
                             Timber.e ( e );
                             contract.onAttendRegistered ( false );

@@ -49,7 +49,7 @@ public class VoiceTransmitter extends WebSocketListener {
     private static final int NORMAL_CLOSURE_STATUS = 1000;
     private WebSocket ws;
     private int sampleRate;
-    private static final String WS_URL = "http://192.168.10.47:6001";
+    private static final String WS_URL = "http://192.168.1.3:6001";
     private WebSocketState mState = WebSocketState.PREPARATION;
 
     private Callback callback;

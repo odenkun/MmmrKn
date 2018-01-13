@@ -227,4 +227,8 @@ public class VoiceRecorder {
         return buffer.array ();
     }
 
+
+    public int getmSampleRate () {
+        return mSampleRate;
+    }
 }
