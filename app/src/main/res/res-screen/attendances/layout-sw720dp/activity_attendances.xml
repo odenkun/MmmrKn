@@ -12,14 +12,17 @@
             android:layout_height="237dp"
             android:layout_marginEnd="28dp"
             android:background="@drawable/scrool_border"
+            android:paddingBottom="3dp"
+            android:paddingLeft="3dp"
+            android:paddingTop="3dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/text_memo">
 
             <EditText
-                android:imeOptions="actionDone|flagNoFullscreen"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="#00000000"
+                android:imeOptions="actionDone|flagNoFullscreen"
                 android:text="あああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああいいい"
                 android:textSize="28sp" />
         </ScrollView>

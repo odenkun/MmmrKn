@@ -95,5 +95,6 @@ dependencies {
     //Libraries
     compile 'com.makeramen:roundedimageview:2.3.0'
 
+    compile 'com.pkmmte.view:circularimageview:1.1'
 
 }

@@ -9,5 +9,6 @@
     <color name="colorTrans">#00000000</color>
     <color name="colorUnderLine">#74FF29</color>
     <color name="manFrame">#80D7FF</color>
+
     <color name="womanFrame">#FFB3E7</color>
 </resources>

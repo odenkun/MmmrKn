@@ -8,9 +8,9 @@
 
     <ImageView
         android:id="@+id/image_teacher_icon"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_marginLeft="260dp"
+        android:layout_width="170dp"
+        android:layout_height="170dp"
+        android:layout_marginLeft="230dp"
         android:layout_marginTop="210dp"
         android:layout_weight="0"
         app:srcCompat="@drawable/ic_user" />
@@ -19,25 +19,26 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="323dp"
+        android:layout_marginTop="335dp"
         android:layout_weight="0"
         android:text="教員確認"
         android:textColor="#FFFFFF"
-        android:textSize="28sp" />
+        android:textSize="32sp" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginLeft="140dp"
         android:layout_marginRight="170dp"
-        android:layout_marginTop="200dp"
+        android:layout_marginTop="140dp"
         android:layout_weight="2">
 
 
         <com.example.android.mmmrkn.presentation.teacher.TeacherCardRecyclerView
             android:id="@+id/teacher_recycle"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"></com.example.android.mmmrkn.presentation.teacher.TeacherCardRecyclerView>
+            android:layout_height="match_parent"
+            android:background="#FFFFFF"></com.example.android.mmmrkn.presentation.teacher.TeacherCardRecyclerView>
     </LinearLayout>
 
 </LinearLayout>

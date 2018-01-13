@@ -50,7 +50,7 @@ public class GoHomeActivity extends AppCompatActivity {
         //TextView TextCondition = findViewById(R.id.Text_Condition);
         //体調について
 
-        Button back=findViewById(R.id.button_Back);
+
         //メニューに戻るor戻るボタン
         //Date NowDate = new Date();
         //当アクティビティが呼び出されたときの時間を日付型で取得。登園時刻の記入に使う？
@@ -73,18 +73,7 @@ public class GoHomeActivity extends AppCompatActivity {
         ImageFace.setImageResource(R.drawable.ic_launcher_background);
         //顔写真の挿入　消してよし。
 
-        back.setOnClickListener(view ->{
-            //空データ(=メニューに戻る状態)の時
-            if(TextName.getText()==""){
-                startActivity(new Intent(this,ModeActivity.class));
-                finish();
-            }
-            //データあるとき戻る
-            else{
-               TextName.setText("");
-               back.setText("メニューに戻る");
-            }
-        });
+
     }
     /**フラグメントダイアログを表示する。*/
     final int TEST_DIALOG = 0;

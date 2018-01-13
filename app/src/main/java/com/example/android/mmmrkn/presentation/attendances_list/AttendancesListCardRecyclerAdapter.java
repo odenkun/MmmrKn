@@ -4,6 +4,7 @@ package com.example.android.mmmrkn.presentation.attendances_list;
 import android.app.Activity;
 import android.app.Dialog;
 
+import android.content.res.ColorStateList;
 import android.support.v4.app.FragmentManager;
 import android.content.Context;
 
@@ -67,7 +68,6 @@ public class AttendancesListCardRecyclerAdapter extends RecyclerView.Adapter<Att
             //顔写真の挿入
             loadImage(vh.face, studentList.get(position).getPicturePath(), studentList.get(position).getGender());
             //体調の代入
-            Timber.d(studentList.get(position).getAttendance().getCondition());
             if (studentList.get(position).getAttendance().getCondition().equals("good")) {
                 vh.condition.setImageResource(R.drawable.smile);
             } else {
@@ -136,6 +136,8 @@ public class AttendancesListCardRecyclerAdapter extends RecyclerView.Adapter<Att
             frameColor = R.color.womanFrame;
             placeHolderID = R.drawable.back_color;
         }
+        ColorStateList mBorderColor = ColorStateList.valueOf(frameColor);
+
         Picasso.with(view.getContext()).setLoggingEnabled(true);
         Picasso.with(view.getContext())
                 .load("https://mmmr-mock-api.mybluemix.net/images/students/" + picturePath)
@@ -143,8 +145,9 @@ public class AttendancesListCardRecyclerAdapter extends RecyclerView.Adapter<Att
                 .fit()
                 .transform(new RoundedTransformationBuilder()
                         .borderWidthDp(3)
-                        .borderColor(R.color.manFrame)
                         .oval(true)
+                        .borderColor(frameColor)
+                        .borderColor(mBorderColor)
                         .build())
                 .into(view);
     }
