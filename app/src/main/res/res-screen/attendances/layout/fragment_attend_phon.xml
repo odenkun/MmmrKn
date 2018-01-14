@@ -76,7 +76,6 @@
             android:layout_height="36dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="52dp"
-            android:text="あああああ"
             android:textColor="@color/colorBlack"
             android:textSize="25sp"
             android:visibility="@{viewModel.student == null ? android.view.View.INVISIBLE : android.view.View.VISIBLE}"
