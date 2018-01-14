@@ -20,6 +20,7 @@
         android:name="com.example.android.mmmrkn.presentation.attendances.attend.AttendFragment"
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="0.5" />
+        android:layout_weight="0.5"
+        tools:layout="@layout/fragment_attend_phon" />
 
 </LinearLayout>

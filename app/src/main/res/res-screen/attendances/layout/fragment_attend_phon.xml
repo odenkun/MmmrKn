@@ -1,0 +1,194 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.android.mmmrkn.presentation.attendances.attend.AttendFragment">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.example.android.mmmrkn.presentation.attendances.attend.ViewModel" />
+    </data>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/attend_outer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RadioGroup
+            android:id="@+id/grp_state"
+            android:layout_width="99dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="28dp"
+            android:checkedButton="@={viewModel.checkedBtn}"
+            android:orientation="horizontal"
+            android:visibility="@{viewModel.student == null ? android.view.View.INVISIBLE : android.view.View.VISIBLE}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/scrollView">
+
+            <RadioButton
+                android:id="@+id/radio_healthy"
+                style="@style/GoodButton"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:checked="true" />
+
+            <RadioButton
+                android:id="@+id/radio_unhealthy"
+                style="@style/BadButton"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:checked="false" />
+
+        </RadioGroup>
+
+        <TextView
+            android:id="@+id/text_memo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:text="一言メモ"
+            android:textColor="@color/colorBlack"
+            android:textSize="20sp"
+            android:visibility="@{viewModel.student == null ? android.view.View.INVISIBLE : android.view.View.VISIBLE}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/img_person" />
+
+        <!--クラス名-->
+        <TextView
+            android:id="@+id/txt_class"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="16dp"
+            android:textColor="@color/colorBlack"
+            android:textSize="20sp"
+            android:visibility="@{viewModel.student == null ? android.view.View.INVISIBLE : android.view.View.VISIBLE}"
+            app:layout_constraintStart_toEndOf="@+id/img_person"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!--生徒名-->
+        <TextView
+            android:id="@+id/txt_name"
+            android:layout_width="182dp"
+            android:layout_height="37dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="52dp"
+            android:text="@{viewModel.student.name}"
+            android:textColor="@color/colorBlack"
+            android:textSize="80sp"
+            android:visibility="@{viewModel.student == null ? android.view.View.INVISIBLE : android.view.View.VISIBLE}"
+            app:layout_constraintStart_toEndOf="@+id/img_person"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!--生徒の写真-->
+        <ImageView
+            android:id="@+id/img_person"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginBottom="4dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="4dp"
+            android:visibility="@{viewModel.student == null ? android.view.View.INVISIBLE : android.view.View.VISIBLE}"
+            app:gender="@{viewModel.student.gender}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.047"
+            app:picturePath="@{viewModel.student.picturePath}"
+            app:srcCompat="@color/colorPrimary" />
+
+        <!--登園ボタン-->
+        <Button
+            android:id="@+id/btn_attend"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/button_sub_layout"
+            android:enabled="@{viewModel.student != null}"
+            android:text="登園"
+            android:textColor="@color/colorWhite"
+            android:textSize="15sp"
+            android:visibility="@{viewModel.student == null ? android.view.View.INVISIBLE : android.view.View.VISIBLE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/grp_state"
+            app:layout_constraintTop_toBottomOf="@+id/scrollView"
+            app:layout_constraintVertical_bias="0.38" />
+
+        <!--降園ボタン-->
+        <Button
+            android:id="@+id/btn_denial"
+            android:layout_width="90dp"
+            android:layout_height="50dp"
+            android:layout_marginBottom="16dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/button_sub_layout"
+            android:enabled="@{viewModel.student != null}"
+            android:text="拒否"
+            android:textColor="@color/colorWhite"
+            android:textSize="15sp"
+            android:visibility="@{viewModel.student == null ? android.view.View.INVISIBLE : android.view.View.VISIBLE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/btn_attend"
+            app:layout_constraintTop_toBottomOf="@+id/scrollView" />
+
+        <!--音声入力する内容-->
+        <ScrollView
+            android:id="@+id/scrollView"
+            android:layout_width="200dp"
+            android:layout_height="100dp"
+            android:layout_marginStart="4dp"
+            android:background="@drawable/scrool_border"
+            android:paddingBottom="3dp"
+            android:paddingLeft="3dp"
+            android:paddingTop="3dp"
+            android:visibility="@{viewModel.student == null ? android.view.View.INVISIBLE : android.view.View.VISIBLE}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_memo">
+
+            <EditText
+                android:layout_width="197dp"
+                android:layout_height="wrap_content"
+                android:imeOptions="actionDone|flagNoFullscreen"
+                android:text="@{viewModel.student.attendance.detail}"
+                android:textSize="28sp"
+                tools:layout_editor_absoluteX="179dp"
+                tools:layout_editor_absoluteY="125dp" />
+        </ScrollView>
+
+        <TextView
+            android:id="@+id/txt_caution"
+            android:layout_width="283dp"
+            android:layout_height="37dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="136dp"
+            android:text="QRを読み込んでください"
+            android:textColor="@color/colorBlack"
+            android:textSize="20sp"
+            android:visibility="@{viewModel.student != null ? android.view.View.INVISIBLE : android.view.View.VISIBLE}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <!--<android.support.constraint.Guideline-->
+        <!--android:id="@+id/gl_left"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="0dp"-->
+        <!--android:orientation="vertical"-->
+        <!--app:layout_constraintGuide_percent="0.05"/>-->
+
+        <!--<android.support.constraint.Guideline-->
+        <!--android:id="@+id/gl_right"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="0dp"-->
+        <!--android:orientation="vertical"-->
+        <!--app:layout_constraintGuide_end="20dp"/>-->
+
+        <!--体調-->
+    </android.support.constraint.ConstraintLayout>
+</layout>
