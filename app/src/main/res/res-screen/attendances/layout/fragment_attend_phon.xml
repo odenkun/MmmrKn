@@ -72,13 +72,13 @@
         <!--生徒名-->
         <TextView
             android:id="@+id/txt_name"
-            android:layout_width="182dp"
-            android:layout_height="37dp"
+            android:layout_width="183dp"
+            android:layout_height="36dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="52dp"
-            android:text="@{viewModel.student.name}"
+            android:text="あああああ"
             android:textColor="@color/colorBlack"
-            android:textSize="80sp"
+            android:textSize="25sp"
             android:visibility="@{viewModel.student == null ? android.view.View.INVISIBLE : android.view.View.VISIBLE}"
             app:layout_constraintStart_toEndOf="@+id/img_person"
             app:layout_constraintTop_toTopOf="parent" />
