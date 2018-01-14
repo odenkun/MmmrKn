@@ -6,3 +6,7 @@
 /build
 /captures
 .externalNativeBuild
+/app/src/main/res/drawable/boy_happy.png
+/app/src/main/res/drawable/boy_sad.png
+/app/src/main/res/drawable/girl_happy.png
+/app/src/main/res/drawable/girl_sad.png
