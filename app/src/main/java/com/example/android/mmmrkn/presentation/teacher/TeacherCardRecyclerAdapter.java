@@ -78,8 +78,8 @@ public class TeacherCardRecyclerAdapter extends RecyclerView.Adapter<TeacherCard
 
         public ViewHolder(View v) {
             super(v);
-            name = (TextView)v.findViewById(R.id.teacherName);
-            layout = (LinearLayout)v.findViewById(R.id.layout);
+            name = v.findViewById(R.id.teacherName);
+            layout = v.findViewById(R.id.layout);
         }
     }
 }

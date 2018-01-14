@@ -43,7 +43,7 @@ public class SelectTeacherActivity extends AppCompatActivity implements SelectTe
             finish ();
             return;
         }
-        TeacherCardRecyclerView cardRecyclerView = (TeacherCardRecyclerView)findViewById(R.id.teacher_recycle);
+        TeacherCardRecyclerView cardRecyclerView = findViewById(R.id.teacher_recycle);
         cardRecyclerView.onListFetch(this,teacherList);
 
         //データをlogとして出力

@@ -58,7 +58,7 @@ public class AttendancesFragment extends Fragment implements AttendancesListPres
 
         adapter = new ArrayAdapter<>(getContext (), android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        AppCompatSpinner spinner = (AppCompatSpinner) view.findViewById(R.id.spinner);
+        AppCompatSpinner spinner = view.findViewById(R.id.spinner);
         spinner.setAdapter(adapter);
 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {

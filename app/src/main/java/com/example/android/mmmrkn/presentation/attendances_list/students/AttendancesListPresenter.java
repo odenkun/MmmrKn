@@ -43,11 +43,11 @@ public class AttendancesListPresenter extends Presenter{
     }
 
     public  void fetchEntryList(String partyId){
-        try {
-            throw new IllegalThreadStateException ();
-        }catch ( Exception e ) {
-            Timber.e ( e );
-        }
+//        try {
+//            throw new IllegalThreadStateException ();
+//        }catch ( Exception e ) {
+//            Timber.e ( e );
+//        }
         disposables.add (
                 partiesService.getEntryList(partyId)
                         .subscribeOn ( Schedulers.io () )

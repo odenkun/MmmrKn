@@ -34,10 +34,6 @@
             android:screenOrientation="landscape" />
 
         <activity
-            android:screenOrientation="landscape"
-            android:name=".presentation.studentprofile.StudentProfileActivity" />
-
-        <activity
             android:name=".presentation.mode_select.ModeActivity"
             android:screenOrientation="landscape" />
 

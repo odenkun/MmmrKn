@@ -23,7 +23,6 @@ import android.widget.TextView;
 import com.example.android.mmmrkn.R;
 import com.example.android.mmmrkn.infra.entity.Party;
 import com.example.android.mmmrkn.infra.entity.Student;
-import com.example.android.mmmrkn.presentation.studentprofile.StudentProfileActivity;
 import com.makeramen.roundedimageview.RoundedTransformationBuilder;
 import com.squareup.picasso.Picasso;
 
@@ -52,12 +51,11 @@ public class AttendancesListCardRecyclerAdapter extends RecyclerView.Adapter<Att
 
     public void swap( List<Student> studentList, String party)
     {
-        this.studentList.clear ();
-        if(studentList == null ) {
-            return;
-        }
-        this.studentList.addAll(studentList);
         this.party = party;
+        this.studentList.clear ();
+        if(studentList != null ) {
+            this.studentList.addAll(studentList);
+        }
         notifyDataSetChanged();
     }
     //Cardの中身表示

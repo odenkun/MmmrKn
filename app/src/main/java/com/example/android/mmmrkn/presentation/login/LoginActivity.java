@@ -60,7 +60,7 @@ public class LoginActivity extends AppCompatActivity implements LoginPresenter.C
         super.onCreate ( savedInstanceState );
         setContentView ( R.layout.activity_login );
 
-        TextView loginLink = (TextView)findViewById(R.id.textvew_login_link);
+        TextView loginLink = findViewById(R.id.textvew_login_link);
 
         setSpannableString(loginLink, getString ( R.string.forgotPass ),"https://www.google.co.jp/");
 
@@ -234,7 +234,7 @@ public class LoginActivity extends AppCompatActivity implements LoginPresenter.C
         }, start, end, Spanned.SPAN_INCLUSIVE_INCLUSIVE);
 
         // SpannableString をセットし、リンクを有効化する
-        TextView textView = (TextView) view.findViewById(R.id.textvew_login_link);
+        TextView textView = view.findViewById(R.id.textvew_login_link);
         textView.setText(ss);
         textView.setMovementMethod(LinkMovementMethod.getInstance());
     }
