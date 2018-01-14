@@ -38,7 +38,6 @@ public class AttendancesListCardRecyclerAdapter extends RecyclerView.Adapter<Att
     private final List<Student> studentList = new ArrayList <> (  );
     private  String party;
 
-
     public AttendancesListCardRecyclerAdapter(Context context) {
         super();
         this.context = context;
@@ -68,12 +67,22 @@ public class AttendancesListCardRecyclerAdapter extends RecyclerView.Adapter<Att
             vh.name.setText(student.getName());
             //顔写真の挿入
             loadImage(vh.face, student.getPicturePath(), student.getGender());
+            int conditionId;
             //体調の代入
             if (student.getAttendance().getCondition().equals("good")) {
-                vh.condition.setImageResource(R.drawable.smile);
+                if ("woman".equals ( student.getGender () )) {
+                    conditionId = R.drawable.girl_happy;
+                }else{
+                    conditionId = R.drawable.boy_happy;
+                }
             } else {
-                vh.condition.setImageResource(R.drawable.cray);
+                if ("woman".equals ( student.getGender () )) {
+                    conditionId = R.drawable.girl_sad;
+                }else{
+                    conditionId = R.drawable.boy_sad;
+                }
             }
+            vh.condition.setImageResource(conditionId);
             // クリック時、モード選択画面に移動
             vh.layout.setOnClickListener((v) -> EventBus.getDefault ().post ( new StudentSelectedEvent ( student ) ) );
         }
