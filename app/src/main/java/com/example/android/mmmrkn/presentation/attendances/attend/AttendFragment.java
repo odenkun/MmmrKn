@@ -2,11 +2,14 @@ package com.example.android.mmmrkn.presentation.attendances.attend;
 
 import android.content.Context;
 import android.databinding.DataBindingUtil;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.android.mmmrkn.R;
@@ -28,6 +31,9 @@ import java.util.LinkedHashSet;
 import java.util.List;
 
 import javax.inject.Inject;
+
+import static android.view.View.INVISIBLE;
+import static android.view.View.VISIBLE;
 
 
 public class AttendFragment extends Fragment implements AttendFragmentPresenter.Contract {
@@ -58,6 +64,10 @@ public class AttendFragment extends Fragment implements AttendFragmentPresenter.
         binding.btnAttend.setOnClickListener ( view -> onClick ( true ) );
         binding.btnDenial.setOnClickListener ( view -> onClick ( false ) );
         return binding.getRoot ();
+
+
+
+
     }
 
 
@@ -179,6 +189,7 @@ public class AttendFragment extends Fragment implements AttendFragmentPresenter.
         //音声認識を実装したら
         if ( students.size () == 1 ) {
             viewModel.setStudent ( students.get ( 0 ) );
+
         }
     }
 }

@@ -133,10 +133,10 @@ public class AttendancesListCardRecyclerAdapter extends RecyclerView.Adapter<Att
     public static void loadImage(ImageView view, String picturePath, String gender) {
         Timber.d(gender);
         int frameColor = R.color.manFrame;
-        int placeHolderID = R.drawable.back_color;
+        int placeHolderID = R.drawable.boy_happy;
         if (gender != null && gender.equals("woman")) {
             frameColor = R.color.womanFrame;
-            placeHolderID = R.drawable.back_color;
+            placeHolderID = R.drawable.girl_happy;
         }
         ColorStateList mBorderColor = ColorStateList.valueOf(frameColor);
 
@@ -146,7 +146,7 @@ public class AttendancesListCardRecyclerAdapter extends RecyclerView.Adapter<Att
                 .placeholder(placeHolderID)
                 .fit()
                 .transform(new RoundedTransformationBuilder()
-                        .borderWidthDp(3)
+                        .borderWidthDp(6)
                         .oval(true)
                         .borderColor(frameColor)
                         .borderColor(mBorderColor)

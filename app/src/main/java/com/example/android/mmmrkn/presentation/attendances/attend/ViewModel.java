@@ -24,6 +24,9 @@ public class ViewModel extends BaseObservable {
     public String provisional = "";
     public String finalized = "";
 
+
+
+
     public ViewModel () {
         checkedBtn = new ObservableInt ( R.id.radio_healthy );
     }
@@ -34,6 +37,7 @@ public class ViewModel extends BaseObservable {
     }
 
     public void setStudent ( Student student ) {
+
         provisional = "";
         finalized = "";
         this.student = student;
@@ -82,7 +86,7 @@ public class ViewModel extends BaseObservable {
                 .fit ()
                 .transform ( new RoundedTransformationBuilder ()
                         .borderColor ( frameColor )
-                        .borderWidthDp ( 6 )
+                        .borderWidthDp ( 8 )
                         .oval ( true )
                         .build () )
                 .into ( view );

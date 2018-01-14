@@ -5,8 +5,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.example.android.mmmrkn.R;
-import com.example.android.mmmrkn.presentation.attendances.attend.AttendFragment;
-import com.example.android.mmmrkn.presentation.attendances.qr.QRFragment;
 
 
 /**
@@ -20,7 +18,7 @@ public class AttendancesActivity extends AppCompatActivity {
     @Override
     protected void onCreate ( @Nullable Bundle savedInstanceState ) {
         super.onCreate ( savedInstanceState );
-        setContentView(R.layout.activity_attendances);
+        setContentView(R.layout.activity_attendance);
     }
 
 }
