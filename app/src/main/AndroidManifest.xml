@@ -54,6 +54,7 @@
             android:name=".presentation.gohome.GoHomeActivity"
             android:screenOrientation="landscape" />
 
+
     </application>　　　　　　
 
 </manifest>
