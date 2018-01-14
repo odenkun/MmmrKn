@@ -10,7 +10,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="2"
-        tools:layout="@layout/attendances_viewbase"/>
+        tools:layout="@layout/attendances_viewbase"
+        />
 
     <fragment
         android:id="@+id/ft_student_profile"
@@ -18,5 +19,5 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        tools:layout="@layout/attendances_viewbase"/>
+        tools:layout="@layout/fragment_student_profile" />
 </LinearLayout>

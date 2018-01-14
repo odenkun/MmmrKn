@@ -56,9 +56,9 @@ public class AttendancesFragment extends Fragment implements AttendancesListPres
         // レイアウトマネージャを設定(ここで縦方向の標準リストであることを指定)
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity ()));
 
-        adapter = new ArrayAdapter<>(getContext (), android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        AppCompatSpinner spinner = view.findViewById(R.id.spinner);
+        adapter = new ArrayAdapter<>(getActivity (), R.layout.spinner_item);
+        adapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
+        AppCompatSpinner spinner = (AppCompatSpinner) view.findViewById(R.id.spinner);
         spinner.setAdapter(adapter);
 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
