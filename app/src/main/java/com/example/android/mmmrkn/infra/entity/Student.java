@@ -41,10 +41,6 @@ public class Student implements Serializable {
     @Expose
     private String name;
     
-    @SerializedName("picturePath")
-    @Expose
-    private String picturePath;
-    
     @SerializedName("gender")
     @Expose
     private String gender;
@@ -77,14 +73,6 @@ public class Student implements Serializable {
     
     public void setName(String name) {
         this.name = name;
-    }
-    
-    public String getPicturePath() {
-        return picturePath;
-    }
-    
-    public void setPicturePath(String picturePath) {
-        this.picturePath = picturePath;
     }
     
     public String getGender() {
@@ -131,7 +119,6 @@ public class Student implements Serializable {
         return "Student{" +
                 "studentId='" + studentId + '\'' +
                 ", name='" + name + '\'' +
-                ", picturePath='" + picturePath + '\'' +
                 ", gender='" + gender + '\'' +
                 ", party=" + party +
                 ", attendance=" + attendance +

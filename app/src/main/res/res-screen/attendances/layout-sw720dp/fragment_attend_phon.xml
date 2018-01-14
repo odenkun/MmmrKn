@@ -64,10 +64,10 @@
             android:layout_marginStart="24dp"
             android:layout_marginTop="16dp"
             android:textColor="@color/colorBlack"
-            android:textSize="18sp"
+            android:textSize="20sp"
             android:visibility="@{viewModel.student == null ? android.view.View.INVISIBLE : android.view.View.VISIBLE}"
             app:layout_constraintStart_toEndOf="@+id/img_person"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <!--生徒名-->
         <TextView
@@ -78,10 +78,10 @@
             android:layout_marginTop="52dp"
             android:text="@{viewModel.student.name}"
             android:textColor="@color/colorBlack"
-            android:textSize="18sp"
+            android:textSize="80sp"
             android:visibility="@{viewModel.student == null ? android.view.View.INVISIBLE : android.view.View.VISIBLE}"
             app:layout_constraintStart_toEndOf="@+id/img_person"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <!--生徒の写真-->
         <ImageView

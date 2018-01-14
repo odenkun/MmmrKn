@@ -66,7 +66,7 @@ public class AttendancesListCardRecyclerAdapter extends RecyclerView.Adapter<Att
             //値挿入
             vh.name.setText(student.getName());
             //顔写真の挿入
-            loadImage(vh.face, student.getPicturePath(), student.getGender());
+            loadImage(vh.face, student.getStudentId () , student.getGender());
             int conditionId;
             //体調の代入
             if (student.getAttendance().getCondition().equals("good")) {
@@ -129,7 +129,6 @@ public class AttendancesListCardRecyclerAdapter extends RecyclerView.Adapter<Att
     }
 
     //生徒の顔表示
-    @BindingAdapter({"picturePath", "gender"})
     public static void loadImage(ImageView view, String picturePath, String gender) {
         Timber.d(gender);
         int frameColor = R.color.manFrame;
@@ -139,10 +138,12 @@ public class AttendancesListCardRecyclerAdapter extends RecyclerView.Adapter<Att
             placeHolderID = R.drawable.girl_happy;
         }
         ColorStateList mBorderColor = ColorStateList.valueOf(frameColor);
+        String imageUrl = "https://mmmr-mock-api.mybluemix.net/images/students/" + picturePath + ".jpg";
+//        String imageUrl = "http://192.168.1.3:6001/images/students/" + picturePath + ".jpg";
 
         Picasso.with(view.getContext()).setLoggingEnabled(true);
         Picasso.with(view.getContext())
-                .load("https://mmmr-mock-api.mybluemix.net/images/students/" + picturePath)
+                .load( imageUrl)
                 .placeholder(placeHolderID)
                 .fit()
                 .transform(new RoundedTransformationBuilder()

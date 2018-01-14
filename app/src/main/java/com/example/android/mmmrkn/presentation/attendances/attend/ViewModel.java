@@ -77,7 +77,8 @@ public class ViewModel extends BaseObservable {
 
         String imageUrl = null;
         if (picturePath != null) {
-            imageUrl = "https://mmmr-mock-api.mybluemix.net/images/students/" + picturePath;
+            imageUrl = "https://mmmr-mock-api.mybluemix.net/images/students/" + picturePath + ".jpg";
+//            imageUrl = "http://192.168.1.3:6001/images/students/" + picturePath + ".jpg";
         }
 
         Picasso.with ( view.getContext () )
