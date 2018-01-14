@@ -51,7 +51,7 @@
             android:layout_marginTop="8dp"
             android:text="一言メモ"
             android:textColor="@color/colorBlack"
-            android:textSize="20sp"
+            android:textSize="14sp"
             android:visibility="@{viewModel.student == null ? android.view.View.INVISIBLE : android.view.View.VISIBLE}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/img_person" />
