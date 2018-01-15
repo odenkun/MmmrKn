@@ -2,6 +2,7 @@ package com.example.android.mmmrkn.presentation.attendances.attend;
 
 import android.content.Context;
 import android.databinding.DataBindingUtil;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -22,15 +23,19 @@ import com.example.android.mmmrkn.infra.voice.Result;
 import com.example.android.mmmrkn.infra.voice.VoiceTransmitter;
 import com.example.android.mmmrkn.presentation.App;
 import com.example.android.mmmrkn.presentation.attendances.qr.QRFragment;
+import com.github.sjnyag.AnimationWrapLayout;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.Arrays;
 import java.util.LinkedHashSet;
 import java.util.List;
 
 import javax.inject.Inject;
+
+import timber.log.Timber;
 
 import static android.view.View.INVISIBLE;
 import static android.view.View.VISIBLE;
@@ -44,6 +49,8 @@ public class AttendFragment extends Fragment implements AttendFragmentPresenter.
     final LinkedHashSet<String> families = new LinkedHashSet <> (  );
     final LinkedHashSet<String> times = new LinkedHashSet <> (  );
 
+    AnimationWrapLayout familyLayout;
+    AnimationWrapLayout timeLayout;
 
     public AttendFragment () {
         // Required empty public constructor
@@ -63,12 +70,11 @@ public class AttendFragment extends Fragment implements AttendFragmentPresenter.
 //        viewModel.setStudent ( profile );
         binding.btnAttend.setOnClickListener ( view -> onClick ( true ) );
         binding.btnDenial.setOnClickListener ( view -> onClick ( false ) );
+        familyLayout =  binding.getRoot ().findViewById(R.id.familyList);
+        timeLayout =  binding.getRoot ().findViewById(R.id.timeList);
         return binding.getRoot ();
-
-
-
-
     }
+
 
 
     @Override
@@ -113,7 +119,16 @@ public class AttendFragment extends Fragment implements AttendFragmentPresenter.
         presenter.fetchStudent ( qrEvent.studentId );
     }
 
-    @Subscribe
+    private Button addButton(String text) {
+        Button button = new Button ( getActivity () );
+        button.setText(text);
+        button.setTextSize ( 25 );
+        button.setTextColor ( Color.WHITE );
+        button.setBackgroundResource ( R.drawable.button_sub_layout );
+        return button;
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
     public void onSpeechRecognized ( VoiceTransmitter.SpeechRecognizeEvent event ) {
         Result result = event.getResult ();
 
@@ -125,9 +140,35 @@ public class AttendFragment extends Fragment implements AttendFragmentPresenter.
                 viewModel.addDetail ( false, result.content[0] );
                 break;
             case TIME:
+                for ( String received : result.content  ) {
+                    boolean notExists = true;
+                    for ( String time : times) {
+                        if (time.equals ( received )) {
+                            notExists = false;
+                            break;
+                       }
+                    }
+                    if (notExists) {
+                        Timber.d("add button time");
+                        timeLayout.addViewWithAnimation(addButton (received) , timeLayout.getChildCount ());
+                    }
+                }
                 times.addAll ( Arrays.asList ( result.content ) );
                 break;
             case FAMILY:
+                for ( String received : result.content  ) {
+                    boolean notExists = true;
+                    for ( String family : families) {
+                        if (family.equals ( received )) {
+                            notExists = false;
+                            break;
+                        }
+                    }
+                    if (notExists) {
+                        Timber.d("add button family");
+                        familyLayout.addViewWithAnimation(addButton (received) , familyLayout.getChildCount ());
+                    }
+                }
                 families.addAll ( Arrays.asList ( result.content ) );
                 break;
         }

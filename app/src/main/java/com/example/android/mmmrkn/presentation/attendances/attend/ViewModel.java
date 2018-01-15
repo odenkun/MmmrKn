@@ -37,11 +37,11 @@ public class ViewModel extends BaseObservable {
     }
 
     public void setStudent ( Student student ) {
-
         provisional = "";
         finalized = "";
         this.student = student;
         if ( student != null && student.getAttendance () == null ) {
+            Timber.d(student.getStudentId ());
             student.setAttendance ( new Attendance () );
         }
         notifyPropertyChanged ( BR.student );
@@ -77,8 +77,8 @@ public class ViewModel extends BaseObservable {
 
         String imageUrl = null;
         if (picturePath != null) {
-            imageUrl = "https://mmmr-mock-api.mybluemix.net/images/students/" + picturePath + ".jpg";
-//            imageUrl = "http://192.168.1.3:6001/images/students/" + picturePath + ".jpg";
+//            imageUrl = "https://mmmr-mock-api.mybluemix.net/images/students/" + picturePath + ".jpg";
+            imageUrl = "http://192.168.10.57:6001/images/students/" + picturePath + ".jpg";
         }
 
         Picasso.with ( view.getContext () )

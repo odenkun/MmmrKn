@@ -32,7 +32,7 @@ enum MicMode {
 public class AttendFragmentPresenter extends Presenter
         implements VoiceRecorder.Callback, VoiceTransmitter.Callback {
 
-    private static final boolean MIC_ENABLED = false;
+    private static final boolean MIC_ENABLED = true;
     private static final MicMode mMicMode = MicMode.BUILT_IN;
 
     private Contract contract;
@@ -182,11 +182,12 @@ public class AttendFragmentPresenter extends Presenter
     }
 
     void registerAttend ( Student student, String teacherId ) {
+        Timber.e(student.toString ());
         disposables.add (
                 studentsService.setStudentAttendance (
                         student.getStudentId (),
                         teacherId,
-                        new Date ().toString (),
+                        String.valueOf(new Date ().getTime ()),
                         student.getAttendance ().getCondition (),
                         student.getAttendance ().getDetail () )
                         .subscribeOn ( Schedulers.io () )
