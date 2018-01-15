@@ -2,10 +2,9 @@
 <TextView xmlns:android="http://schemas.android.com/apk/res/android"
     style="?android:attr/spinnerItemStyle"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@drawable/under_line"
+    android:layout_height="50dp"
+    android:background="@drawable/spinner_line"
     android:ellipsize="marquee"
-    android:gravity="top|center"
-    android:paddingBottom="3dp"
+    android:gravity="center"
     android:textAlignment="gravity"
     android:textSize="24sp" />

@@ -23,6 +23,7 @@
             android:layout_marginTop="16dp"
             android:gravity="center"
             android:text="体調："
+            android:visibility="@{viewmodel.selectedStudent == null ? android.view.View.INVISIBLE : android.view.View.VISIBLE}"
             android:textColor="@color/colorBlack"
             android:textSize="45sp"
             app:layout_constraintStart_toEndOf="@+id/image_picture"
@@ -33,12 +34,13 @@
             android:layout_width="811dp"
             android:layout_height="200dp"
             android:layout_marginBottom="16dp"
-            android:layout_marginStart="28dp"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             android:background="@drawable/scrool_border"
             android:paddingBottom="3dp"
             android:paddingLeft="3dp"
             android:paddingTop="3dp"
+            android:visibility="@{viewmodel.selectedStudent == null ? android.view.View.INVISIBLE : android.view.View.VISIBLE}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/grp_state"
@@ -64,9 +66,10 @@
             android:id="@+id/grp_state"
             android:layout_width="wrap_content"
             android:layout_height="94dp"
-            android:layout_marginStart="632dp"
-            android:layout_marginTop="4dp"
+            android:layout_marginStart="640dp"
+            android:layout_marginTop="16dp"
             android:orientation="horizontal"
+            android:visibility="@{viewmodel.selectedStudent == null ? android.view.View.INVISIBLE : android.view.View.VISIBLE}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/text_timer">
 
@@ -74,18 +77,18 @@
                 android:id="@+id/radio_healthy"
                 style="@style/GoodButton"
                 android:layout_width="80dp"
-                android:enabled="false"
                 android:layout_height="80dp"
-                android:checked="true" />
+                android:checked="@{viewmodel.selectedStudent.attendance.condition.equals(viewmodel.good) ? true : false}"
+                android:enabled="false" />
 
             <RadioButton
                 android:id="@+id/radio_unhealthy"
                 style="@style/BadButton"
                 android:layout_width="80dp"
-                android:enabled="false"
                 android:layout_height="80dp"
                 android:layout_marginLeft="24dp"
-                android:checked="false" />
+                android:checked="@{viewmodel.selectedStudent.attendance.condition.equals(viewmodel.bad) ? true : false}"
+                android:enabled="false" />
 
         </RadioGroup>
 
@@ -95,6 +98,9 @@
             android:layout_height="340dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
+            app:picturePath="@{viewmodel.selectedStudent.studentId}"
+            app:gender="@{viewmodel.selectedStudent.gender}"
+            android:visibility="@{viewmodel.selectedStudent == null ? android.view.View.INVISIBLE : android.view.View.VISIBLE}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@android:color/black" />
@@ -103,12 +109,13 @@
             android:id="@+id/text_party"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="28dp"
             android:gravity="center"
             android:text="さくら組"
             android:textColor="@color/colorBlack"
             android:textSize="55sp"
+            android:visibility="@{viewmodel.selectedStudent == null ? android.view.View.INVISIBLE : android.view.View.VISIBLE}"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintStart_toEndOf="@+id/image_picture"
             app:layout_constraintTop_toTopOf="parent" />
@@ -117,14 +124,16 @@
             android:id="@+id/text_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="36dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginStart="111dp"
+            android:layout_marginTop="16dp"
             android:gravity="center"
             android:text="@{viewmodel.selectedStudent.name}"
             android:textColor="@color/colorBlack"
             android:textSize="85sp"
+            android:visibility="@{viewmodel.selectedStudent == null ? android.view.View.INVISIBLE : android.view.View.VISIBLE}"
             app:layout_constraintStart_toEndOf="@+id/image_picture"
-            app:layout_constraintTop_toBottomOf="@+id/text_party" />
+            app:layout_constraintTop_toBottomOf="@+id/text_party"
+            tools:text="登園 太郎" />
 
         <TextView
             android:id="@+id/text_time"
@@ -134,6 +143,7 @@
             android:layout_marginTop="36dp"
             android:gravity="center"
             android:text="登園時間："
+            android:visibility="@{viewmodel.selectedStudent == null ? android.view.View.INVISIBLE : android.view.View.VISIBLE}"
             android:textColor="@color/colorBlack"
             android:textSize="45sp"
             app:layout_constraintStart_toEndOf="@+id/image_picture"
@@ -146,11 +156,13 @@
             android:layout_marginStart="28dp"
             android:layout_marginTop="32dp"
             android:gravity="center"
-            android:text="@{viewmodel.selectedStudent.attendance.time}"
+            android:text="@{viewmodel.selectedStudent.humanTime}"
             android:textColor="@color/colorBlack"
             android:textSize="46sp"
+            android:visibility="@{viewmodel.selectedStudent == null ? android.view.View.INVISIBLE : android.view.View.VISIBLE}"
             app:layout_constraintStart_toEndOf="@+id/text_time"
-            app:layout_constraintTop_toBottomOf="@+id/text_name" />
+            app:layout_constraintTop_toBottomOf="@+id/text_name"
+            tools:text="11時50分" />
 
         <TextView
             android:id="@+id/text_memo"
@@ -160,10 +172,24 @@
             android:layout_marginTop="28dp"
             android:gravity="center"
             android:text="一言メモ"
+            android:visibility="@{viewmodel.selectedStudent == null ? android.view.View.INVISIBLE : android.view.View.VISIBLE}"
             android:textColor="@color/colorBlack"
             android:textSize="45sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/image_picture" />
+
+        <TextView
+            android:id="@+id/txt_advice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="120dp"
+            android:layout_marginTop="248dp"
+            android:visibility="@{viewmodel.selectedStudent == null ? android.view.View.VISIBLE : android.view.View.INVISIBLE}"
+            android:text="児童を選択してください"
+            android:textColor="@color/colorBlack"
+            android:textSize="60sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </android.support.constraint.ConstraintLayout>
 </layout>

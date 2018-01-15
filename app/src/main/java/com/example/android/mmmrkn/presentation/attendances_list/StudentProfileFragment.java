@@ -40,9 +40,6 @@ public class StudentProfileFragment extends Fragment {
     public View onCreateView( LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         FragmentStudentProfileBinding binding = DataBindingUtil.inflate ( inflater, R.layout.fragment_student_profile, container, false );
         viewModel = new ViewModel ();
-        Student student = new Student ();
-        student.setName ( "naaaaaaaa" );
-        viewModel.setSelectedStudent ( student );
         binding.setViewmodel ( viewModel );
 
         return binding.getRoot ();
@@ -56,7 +53,9 @@ public class StudentProfileFragment extends Fragment {
     public static class ViewModel extends BaseObservable {
 
         private Student selectedStudent;
-
+        public  static  final  String good = "good";
+        public  static  final  String subtle = "subtle";
+        public  static  final  String bad = "bad";
         @Bindable
         public Student getSelectedStudent () {
             return selectedStudent;
