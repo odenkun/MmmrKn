@@ -6,6 +6,7 @@ import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -37,6 +38,7 @@ import com.example.android.mmmrkn.presentation.attendances.AttendancesActivity;
 import com.example.android.mmmrkn.presentation.login.LoginPresenter;
 import com.example.android.mmmrkn.presentation.mode_select.ModeActivity;
 import com.example.android.mmmrkn.presentation.teacher.SelectTeacherActivity;
+import com.github.sjnyag.AnimationWrapLayout;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -95,9 +97,15 @@ public class LoginActivity extends AppCompatActivity implements LoginPresenter.C
             Intent intent = new Intent(Intent.ACTION_VIEW, uri);
             startActivity(intent);
         });
-
     }
-
+    private Button addButton(String text) {
+        Button button = new Button ( this );
+        button.setText(text);
+        button.setTextSize ( 25 );
+        button.setTextColor ( Color.WHITE );
+        button.setBackgroundResource ( R.drawable.button_sub_layout );
+        return button;
+    }
     @Override
     public void onRequestPermissionsResult (
             int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults ) {

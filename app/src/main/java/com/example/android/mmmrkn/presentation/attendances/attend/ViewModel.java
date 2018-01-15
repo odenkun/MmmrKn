@@ -26,6 +26,9 @@ public class ViewModel extends BaseObservable {
 
 
 
+    String selectedFamily;
+    String selectedTime;
+
 
     public ViewModel () {
         checkedBtn = new ObservableInt ( R.id.radio_healthy );
@@ -56,9 +59,23 @@ public class ViewModel extends BaseObservable {
         }
         Timber.d("%s%s", finalized, provisional);
         if (student != null ) {
-            student.getAttendance ().setDetail ( finalized + provisional );
+            String head = "";
+            if (empChk ( selectedFamily ) || empChk ( selectedTime )) {
+                if (empChk ( selectedTime )) {
+                    head += selectedTime + "に";
+                }
+                if (empChk ( selectedFamily )) {
+                    head += selectedFamily + "が";
+                }
+                head += "迎えに来られます。\r\n";
+            }
+            student.getAttendance ().setDetail ( head + finalized + provisional );
             notifyPropertyChanged ( BR.student );
         }
+    }
+
+    boolean empChk ( String str ) {
+        return str != null && !str.equals ( "" );
     }
 
     public boolean getCondition () {
@@ -77,8 +94,8 @@ public class ViewModel extends BaseObservable {
 
         String imageUrl = null;
         if (picturePath != null) {
-//            imageUrl = "https://mmmr-mock-api.mybluemix.net/images/students/" + picturePath + ".jpg";
-            imageUrl = "http://192.168.10.57:6001/images/students/" + picturePath + ".jpg";
+            imageUrl = "https://mmmr-mock-api.mybluemix.net/images/students/" + picturePath + ".jpg";
+//            imageUrl = "http://192.168.1.3:6001/images/students/" + picturePath + ".jpg";
         }
 
         Picasso.with ( view.getContext () )

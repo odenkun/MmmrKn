@@ -3,14 +3,13 @@ package com.example.android.mmmrkn.presentation.attendances.attend;
 import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.android.mmmrkn.R;
@@ -29,6 +28,8 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -37,11 +38,8 @@ import javax.inject.Inject;
 
 import timber.log.Timber;
 
-import static android.view.View.INVISIBLE;
-import static android.view.View.VISIBLE;
 
-
-public class AttendFragment extends Fragment implements AttendFragmentPresenter.Contract {
+public class AttendFragment extends Fragment implements AttendFragmentPresenter.Contract, Async.Contract {
     @Inject
     AttendFragmentPresenter presenter;
     final ViewModel viewModel = new ViewModel ();
@@ -51,6 +49,7 @@ public class AttendFragment extends Fragment implements AttendFragmentPresenter.
 
     AnimationWrapLayout familyLayout;
     AnimationWrapLayout timeLayout;
+
 
     public AttendFragment () {
         // Required empty public constructor
@@ -99,6 +98,8 @@ public class AttendFragment extends Fragment implements AttendFragmentPresenter.
         if (result) {
             Toast.makeText ( this.getContext (), "登園を記録できました。", Toast.LENGTH_SHORT ).show ();
             viewModel.setStudent ( null );
+            timeLayout.removeAllViews ();
+            familyLayout.removeAllViews ();
         }else{
             Toast.makeText ( this.getContext (), "登園の記録に失敗しました。", Toast.LENGTH_SHORT ).show ();
         }
@@ -119,13 +120,41 @@ public class AttendFragment extends Fragment implements AttendFragmentPresenter.
         presenter.fetchStudent ( qrEvent.studentId );
     }
 
-    private Button addButton(String text) {
+    @Override
+    public void addButton ( Result.Type r, String s ) {
+        Button btn = generateButton ( s,r );
+        if (r == Result.Type.FAMILY) {
+            familyLayout.addViewWithAnimation( btn , 0);
+        }else if (r == Result.Type.TIME) {
+            timeLayout.addViewWithAnimation(btn , 0);
+        }
+    }
+
+    @Override
+    public void deleteButton ( Result.Type r ) {
+        if (r == Result.Type.FAMILY) {
+            familyLayout.removeViewWithAnimation ( familyLayout.getChildAt ( familyLayout.getChildCount () - 1 ) );
+        }else if (r == Result.Type.TIME) {
+            timeLayout.removeViewWithAnimation ( timeLayout.getChildAt ( timeLayout.getChildCount () - 1 ) );
+        }
+    }
+
+    private Button generateButton( final String text, final Result.Type type) {
         Button button = new Button ( getActivity () );
         button.setText(text);
         button.setTextSize ( 25 );
         button.setTextColor ( Color.WHITE );
         button.setBackgroundResource ( R.drawable.button_sub_layout );
+        button.setOnClickListener ( v -> candSelected ( text,type ) );
         return button;
+    }
+
+    void candSelected ( String str, Result.Type type) {
+        if (type == Result.Type.FAMILY) {
+            viewModel.selectedFamily = str;
+        }else if (type == Result.Type.TIME){
+            viewModel.selectedTime = str;
+        }
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
@@ -140,6 +169,7 @@ public class AttendFragment extends Fragment implements AttendFragmentPresenter.
                 viewModel.addDetail ( false, result.content[0] );
                 break;
             case TIME:
+                final ArrayList<String> timeQueue = new ArrayList <> (  );
                 for ( String received : result.content  ) {
                     boolean notExists = true;
                     for ( String time : times) {
@@ -150,12 +180,18 @@ public class AttendFragment extends Fragment implements AttendFragmentPresenter.
                     }
                     if (notExists) {
                         Timber.d("add button time");
-                        timeLayout.addViewWithAnimation(addButton (received) , timeLayout.getChildCount ());
+
+                        timeQueue.add ( received );
                     }
                 }
+                if ( timeQueue.isEmpty ()) {
+                    return;
+                }
+                new Async ( this, Result.Type.TIME, timeQueue ).execute ( ) ;
                 times.addAll ( Arrays.asList ( result.content ) );
                 break;
             case FAMILY:
+                final ArrayList<String> familyQueue = new ArrayList <> (  );
                 for ( String received : result.content  ) {
                     boolean notExists = true;
                     for ( String family : families) {
@@ -166,9 +202,13 @@ public class AttendFragment extends Fragment implements AttendFragmentPresenter.
                     }
                     if (notExists) {
                         Timber.d("add button family");
-                        familyLayout.addViewWithAnimation(addButton (received) , familyLayout.getChildCount ());
+                        familyQueue.add(received);
                     }
                 }
+                if ( familyQueue.isEmpty ()) {
+                    return;
+                }
+                new Async ( this, Result.Type.FAMILY, familyQueue ).execute ( ) ;
                 families.addAll ( Arrays.asList ( result.content ) );
                 break;
         }
@@ -230,7 +270,8 @@ public class AttendFragment extends Fragment implements AttendFragmentPresenter.
         //音声認識を実装したら
         if ( students.size () == 1 ) {
             viewModel.setStudent ( students.get ( 0 ) );
-
         }
     }
+
+
 }

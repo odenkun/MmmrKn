@@ -49,7 +49,8 @@ public class VoiceTransmitter extends WebSocketListener {
     private static final int NORMAL_CLOSURE_STATUS = 1000;
     private WebSocket ws;
     private final int sampleRate;
-    private static final String WS_URL = "http://192.168.10.57:6001";
+//    private static final String WS_URL = "http://192.168.1.3:6001";
+    private static final String WS_URL = "https://mmmr-mock-api.mybluemix.net";
     private WebSocketState mState = WebSocketState.PREPARATION;
 
     private final Callback callback;
