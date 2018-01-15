@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -40,7 +41,9 @@ public class AttendancesFragment extends Fragment implements AttendancesListPres
     @Inject
     AttendancesListPresenter presenter;
 
-
+    LinearLayout attendancesListLayout;
+    View attendancesNotFound;
+    View attendancesBaby;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate ( R.layout.attendances_viewbase, container, false );
@@ -49,6 +52,9 @@ public class AttendancesFragment extends Fragment implements AttendancesListPres
                 .plus(new AttendancesListModule (this))
                 .inject(this);
 
+        attendancesListLayout = view.findViewById(R.id.attendlist_linear);
+        attendancesNotFound = view.findViewById(R.id.attendlist_coution);
+        attendancesBaby = view.findViewById(R.id.sad_baby);
         presenter.fetchParties ();
 
         // RecyclerViewの参照を取得
@@ -56,8 +62,8 @@ public class AttendancesFragment extends Fragment implements AttendancesListPres
         // レイアウトマネージャを設定(ここで縦方向の標準リストであることを指定)
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity ()));
 
-        adapter = new ArrayAdapter<>(getActivity (), android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        adapter = new ArrayAdapter<>(getActivity (), R.layout.spinner_item);
+        adapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
         AppCompatSpinner spinner = (AppCompatSpinner) view.findViewById(R.id.spinner);
         spinner.setAdapter(adapter);
 
@@ -110,14 +116,17 @@ public class AttendancesFragment extends Fragment implements AttendancesListPres
     @Override
     public void onEntryListFetched(List<Student> attendancesList) {
         if (attendancesList == null) {
-            DialogFragment newFragment = new AttendancesListCardRecyclerAdapter.AlertDialogFragment();
-            FragmentManager manager = ((AttendancesListActivity)getActivity()).getSupportFragmentManager();
-            newFragment.show(manager,"該当児童は0人です");
             recyclerView.onStudentListIsEmpty ( selectedParty.getName () );
-            return;
+
+            attendancesNotFound.setVisibility(View.VISIBLE);
+            attendancesBaby.setVisibility(View.VISIBLE);
+        }else {
+            attendances = attendancesList;
+            recyclerView.onStudentListFetch(attendancesList, selectedParty.getName());
+            attendancesListLayout.setVisibility(View.VISIBLE);
+            attendancesNotFound.setVisibility(View.INVISIBLE);
+            attendancesBaby.setVisibility(View.INVISIBLE);
         }
-        attendances = attendancesList;
-        recyclerView.onStudentListFetch ( attendancesList, selectedParty.getName ());
     }
     @Override
     public void onSaveInstanceState(Bundle outState) {

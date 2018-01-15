@@ -12,8 +12,8 @@
         android:id="@+id/cardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="@dimen/view_cardview_margin_leftright"
+        android:layout_marginLeft="14dp"
+        android:layout_marginRight="14dp"
         card_view:cardCornerRadius="10dp"
         card_view:cardElevation="5dp"
         card_view:cardUseCompatPadding="true">
@@ -31,16 +31,17 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal"
-            android:paddingBottom="@dimen/view_cardview_padding_topbottom"
-            android:paddingTop="@dimen/view_cardview_padding_topbottom"
+            android:paddingBottom="5dp"
+            android:paddingTop="5dp"
             android:weightSum="1">
 
             <ImageView
                 android:id="@+id/imageview_picture"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:layout_marginLeft="@dimen/view_cardview_padding_leftright"
                 android:layout_marginRight="@dimen/view_cardview_padding_leftright"
+                android:layout_marginTop="7dp"
                 card_view:srcCompat="@drawable/ic_launcher_background" />
 
             <TextView
@@ -49,14 +50,16 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_weight="1"
+                android:paddingLeft="5dp"
                 android:textColor="@color/colorBlack"
-                android:textSize="20sp" />
+                android:textSize="30sp" />
 
             <ImageView
                 android:id="@+id/condition"
-                android:layout_width="60dp"
-                android:layout_height="match_parent"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
                 android:layout_weight="3"
+                android:paddingBottom="3dp"
                 card_view:srcCompat="@drawable/smile" />
 
         </LinearLayout>
