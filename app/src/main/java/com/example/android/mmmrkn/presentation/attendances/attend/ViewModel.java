@@ -21,13 +21,14 @@ import timber.log.Timber;
 public class ViewModel extends BaseObservable {
     private Student student;
     public final ObservableInt checkedBtn;
+    public String summary ="";
     public String provisional = "";
     public String finalized = "";
 
 
 
-    String selectedFamily;
-    String selectedTime;
+    private String selectedFamily;
+    private String selectedTime;
 
 
     public ViewModel () {
@@ -40,6 +41,9 @@ public class ViewModel extends BaseObservable {
     }
 
     public void setStudent ( Student student ) {
+        summary = "";
+        selectedFamily = "";
+        selectedTime = "";
         provisional = "";
         finalized = "";
         this.student = student;
@@ -59,19 +63,37 @@ public class ViewModel extends BaseObservable {
         }
         Timber.d("%s%s", finalized, provisional);
         if (student != null ) {
-            String head = "";
-            if (empChk ( selectedFamily ) || empChk ( selectedTime )) {
-                if (empChk ( selectedTime )) {
-                    head += selectedTime + "に";
-                }
-                if (empChk ( selectedFamily )) {
-                    head += selectedFamily + "が";
-                }
-                head += "迎えに来られます。\r\n";
-            }
-            student.getAttendance ().setDetail ( head + finalized + provisional );
+
+            student.getAttendance ().setDetail ( summary + finalized + provisional );
             notifyPropertyChanged ( BR.student );
         }
+    }
+
+    void setSelectedTime(String selectedTime) {
+        this.selectedTime = selectedTime;
+        summaryUpdate ();
+    }
+    void setSelectedFamily(String selectedFamily) {
+        this.selectedFamily = selectedFamily;
+        summaryUpdate ();
+    }
+    private void summaryUpdate() {
+        if (student == null) {
+            return;
+        }
+        if (empChk ( selectedFamily ) || empChk ( selectedTime )) {
+            summary = "";
+            if (empChk ( selectedTime )) {
+                summary += selectedTime + "に";
+            }
+            if (empChk ( selectedFamily )) {
+                summary += selectedFamily + "が";
+            }
+            summary += "迎えに来られます。\r\n";
+            student.getAttendance ().setDetail ( summary + finalized + provisional );
+            notifyPropertyChanged ( BR.student );
+        }
+
     }
 
     boolean empChk ( String str ) {

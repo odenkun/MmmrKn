@@ -151,9 +151,9 @@ public class AttendFragment extends Fragment implements AttendFragmentPresenter.
 
     void candSelected ( String str, Result.Type type) {
         if (type == Result.Type.FAMILY) {
-            viewModel.selectedFamily = str;
+            viewModel.setSelectedFamily ( str );
         }else if (type == Result.Type.TIME){
-            viewModel.selectedTime = str;
+            viewModel.setSelectedTime ( str );
         }
     }
 
