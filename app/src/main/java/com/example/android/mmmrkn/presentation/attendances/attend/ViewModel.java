@@ -41,6 +41,7 @@ public class ViewModel extends BaseObservable {
     }
 
     public void setStudent ( Student student ) {
+        checkedBtn.set ( R.id.radio_healthy );
         summary = "";
         selectedFamily = "";
         selectedTime = "";
