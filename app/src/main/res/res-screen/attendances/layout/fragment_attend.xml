@@ -19,7 +19,7 @@
             android:id="@+id/grp_state"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="60dp"
             android:checkedButton="@={viewModel.checkedBtn}"
             android:orientation="horizontal"
             android:visibility="@{viewModel.student == null ? android.view.View.INVISIBLE : android.view.View.VISIBLE}"
@@ -29,16 +29,17 @@
             <RadioButton
                 android:id="@+id/radio_healthy"
                 style="@style/GoodButton"
-                android:layout_width="50dp"
+                android:layout_width="47dp"
                 android:layout_height="50dp"
-                android:checked="true"/>
+                android:checked="true" />
 
             <RadioButton
                 android:id="@+id/radio_unhealthy"
                 style="@style/BadButton"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:checked="false"/>
+                android:layout_marginLeft="40dp"
+                android:checked="false" />
 
         </RadioGroup>
 
@@ -98,8 +99,8 @@
         <!--登園ボタン-->
         <Button
             android:id="@+id/btn_attend"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="80dp"
+            android:layout_height="36dp"
             android:layout_marginBottom="8dp"
             android:background="@drawable/button_sub_layout"
             android:enabled="@{viewModel.student != null}"
@@ -108,8 +109,7 @@
             android:textSize="15sp"
             android:visibility="@{viewModel.student == null ? android.view.View.INVISIBLE : android.view.View.VISIBLE}"
             app:layout_constraintBottom_toTopOf="@+id/btn_denial"
-            app:layout_constraintEnd_toEndOf="@+id/btn_denial"
-            />
+            app:layout_constraintEnd_toEndOf="@+id/btn_denial" />
 
         <!--降園ボタン-->
         <Button
