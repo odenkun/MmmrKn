@@ -106,8 +106,8 @@ public class ApplicationModule {
                 .client ( okHttpClient )
 
                 //WebAPIのFQDN
-                .baseUrl ( "https://mmmr-mock-api.mybluemix.net" )
-//                .baseUrl ( "http://192.168.1.3:6001" )
+//                .baseUrl ( "https://mmmr-mock-api.mybluemix.net" )
+                .baseUrl ( "http://192.168.1.3:6001" )
 
                 //JSONとPOJOの相互変換を行うものに、gsonを指定
                 .addConverterFactory ( GsonConverterFactory.create ( gson ) )

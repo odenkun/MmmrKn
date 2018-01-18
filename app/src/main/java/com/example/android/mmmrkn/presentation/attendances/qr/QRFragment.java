@@ -3,6 +3,7 @@ package com.example.android.mmmrkn.presentation.attendances.qr;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -60,10 +61,25 @@ public class QRFragment extends Fragment {
         } );
     }
 
+    public class TestQRTask extends AsyncTask<String, Integer, Integer> {
+        @Override
+        protected Integer doInBackground ( String... strings ) {
+            try {
+                Thread.sleep ( 3000 );
+                EventBus.getDefault().post(new QREvent (strings[0]));
+            }catch ( Exception e ) {
+
+            }
+            return null;
+        }
+    }
+
     @Override
     public void onResume () {
         super.onResume ();
         barcodeView.resume ();
+        new TestQRTask ().execute ( "bc332213-fcea-4ae5-97fe-4bb4f911c1d0" );
+
     }
     @Override
     public void onPause () {

@@ -82,8 +82,8 @@ public class LoginActivity extends AppCompatActivity implements LoginPresenter.C
 
         boolean allGranted = true;
         for ( String permission : PERMISSIONS ) {
-            if ( ContextCompat.checkSelfPermission (
-                    this, permission ) != PackageManager.PERMISSION_GRANTED) {
+            if ( ContextCompat.checkSelfPermission ( this, permission ) != PackageManager.PERMISSION_GRANTED) {
+                Timber.d("not granted %s", permission);
                 allGranted = false;
                 break;
             }

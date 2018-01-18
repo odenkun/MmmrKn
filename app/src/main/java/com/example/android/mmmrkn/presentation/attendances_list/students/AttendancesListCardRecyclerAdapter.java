@@ -138,8 +138,8 @@ public class AttendancesListCardRecyclerAdapter extends RecyclerView.Adapter<Att
             placeHolderID = R.drawable.girl_happy;
         }
         ColorStateList mBorderColor = ColorStateList.valueOf(frameColor);
-        String imageUrl = "https://mmmr-mock-api.mybluemix.net/images/students/" + picturePath + ".jpg";
-//        String imageUrl = "http://192.168.1.3:6001/images/students/" + picturePath + ".jpg";
+//        String imageUrl = "https://mmmr-mock-api.mybluemix.net/images/students/" + picturePath + ".jpg";
+        String imageUrl = "http://192.168.1.3:6001/images/students/" + picturePath + ".jpg";
 
         Picasso.with(view.getContext()).setLoggingEnabled(true);
         Picasso.with(view.getContext())

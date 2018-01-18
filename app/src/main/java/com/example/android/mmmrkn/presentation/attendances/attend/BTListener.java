@@ -21,19 +21,26 @@ public class BTListener implements BluetoothProfile.ServiceListener {
     private BluetoothHeadset mBluetoothHeadset;
 
     BTListener ( Activity activity) {
+
         if ( checkBTState ( activity ) ) {
             BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter ();
             bluetoothAdapter.getProfileProxy ( activity, this, BluetoothProfile.HEADSET );
+        }else{
+            Timber.e("bt_state is not acceptable");
         }
     }
+
+
 
     private boolean checkBTState ( Activity activity ) {
         BluetoothManager manager = (BluetoothManager) activity.getSystemService ( Context.BLUETOOTH_SERVICE );
         if ( manager == null ) {
+            Timber.e("manager is null");
             return false;
         }
         BluetoothAdapter mBluetoothAdapter = manager.getAdapter ();
         if ( mBluetoothAdapter == null || !mBluetoothAdapter.isEnabled () ) {
+            Timber.e("bt is disabled");
             Intent enableBtIntent = new Intent ( BluetoothAdapter.ACTION_REQUEST_ENABLE );
             activity.startActivityForResult ( enableBtIntent, REQUEST_ENABLE_BT );
             return false;
@@ -44,6 +51,7 @@ public class BTListener implements BluetoothProfile.ServiceListener {
     @Override
     public void onServiceConnected ( int profile, BluetoothProfile proxy ) {
         if ( profile != BluetoothProfile.HEADSET ) {
+            Timber.e("profile is not headset");
             return;
         }
         mBluetoothHeadset = (BluetoothHeadset) proxy;
@@ -51,10 +59,13 @@ public class BTListener implements BluetoothProfile.ServiceListener {
         for ( BluetoothDevice device : devices ) {
             if ( mBluetoothHeadset.startVoiceRecognition ( device ) ) {
                 EventBus.getDefault().post(new BTEvent (CONNECTED));
-                break;
+                Timber.e("BTEvent was posted");
+                return;
+            }else{
+                Timber.e("failed to startVoiceRecognition");
             }
         }
-
+        Timber.e("cannot startVoiceRecognition");
     }
 
     @Override
@@ -76,8 +87,15 @@ public class BTListener implements BluetoothProfile.ServiceListener {
         if ( devices == null ) {
             throw new RuntimeException ( "connected devices don't exist" );
         }
+        boolean isStopped = false;
         for ( BluetoothDevice device : devices ) {
-            mBluetoothHeadset.stopVoiceRecognition ( device );
+            if (mBluetoothHeadset.stopVoiceRecognition ( device )) {
+                Timber.e("device stopped %s", device.getName ());
+                isStopped = true;
+            }
+        }
+        if ( isStopped ) {
+            BluetoothAdapter.getDefaultAdapter().closeProfileProxy(BluetoothProfile.HEADSET, mBluetoothHeadset);
             mBluetoothHeadset = null;
             return;
         }

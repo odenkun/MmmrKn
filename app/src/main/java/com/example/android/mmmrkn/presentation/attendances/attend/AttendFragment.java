@@ -91,6 +91,7 @@ public class AttendFragment extends Fragment implements AttendFragmentPresenter.
         super.onStart ();
         EventBus.getDefault ().register ( this );
         presenter.onStart (getActivity ());
+
     }
 
     @Override
@@ -121,13 +122,14 @@ public class AttendFragment extends Fragment implements AttendFragmentPresenter.
     }
 
     @Override
-    public void addButton ( Result.Type r, String s ) {
+    public boolean addButton ( Result.Type r, String s ) {
         Button btn = generateButton ( s,r );
         if (r == Result.Type.FAMILY) {
-            familyLayout.addViewWithAnimation( btn , 0);
+            return familyLayout.addViewWithAnimation( btn , 0);
         }else if (r == Result.Type.TIME) {
-            timeLayout.addViewWithAnimation(btn , 0);
+            return timeLayout.addViewWithAnimation(btn , 0);
         }
+        return false;
     }
 
     @Override
@@ -142,8 +144,8 @@ public class AttendFragment extends Fragment implements AttendFragmentPresenter.
     private Button generateButton( final String text, final Result.Type type) {
         Button button = new Button ( getActivity () );
         button.setText(text);
-        button.setTextSize ( 25 );
         button.setTextColor ( Color.WHITE );
+
         button.setBackgroundResource ( R.drawable.button_sub_layout );
         button.setOnClickListener ( v -> candSelected ( text,type ) );
         return button;

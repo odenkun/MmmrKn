@@ -94,6 +94,7 @@ public class VoiceRecorder {
         //録音されたデータを処理するスレッドの生成
         mThread = new Thread ( new ProcessVoice () );
         mThread.start ();
+        Timber.e("start");
         return mSampleRate;
     }
 

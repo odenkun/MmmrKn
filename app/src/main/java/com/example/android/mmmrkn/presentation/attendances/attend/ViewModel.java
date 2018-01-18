@@ -117,8 +117,8 @@ public class ViewModel extends BaseObservable {
 
         String imageUrl = null;
         if (picturePath != null) {
-            imageUrl = "https://mmmr-mock-api.mybluemix.net/images/students/" + picturePath + ".jpg";
-//            imageUrl = "http://192.168.1.3:6001/images/students/" + picturePath + ".jpg";
+//            imageUrl = "https://mmmr-mock-api.mybluemix.net/images/students/" + picturePath + ".jpg";
+            imageUrl = "http://192.168.1.3:6001/images/students/" + picturePath + ".jpg";
         }
 
         Picasso.with ( view.getContext () )
@@ -127,7 +127,7 @@ public class ViewModel extends BaseObservable {
                 .fit ()
                 .transform ( new RoundedTransformationBuilder ()
                         .borderColor ( frameColor )
-                        .borderWidthDp ( 8 )
+                        .borderWidthDp ( 4 )
                         .oval ( true )
                         .build () )
                 .into ( view );

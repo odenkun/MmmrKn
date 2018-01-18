@@ -6,10 +6,14 @@ import com.example.android.mmmrkn.infra.voice.Result;
 
 import java.util.ArrayList;
 
+import timber.log.Timber;
+
 public class Async extends AsyncTask<String, String, Void> {
     private Contract contract;
     ArrayList<String> queue;
     Result.Type type;
+
+    int count = 0;
 
     public Async( Contract listener, Result.Type type, ArrayList<String> queue) {
         this.contract = listener;
@@ -20,11 +24,11 @@ public class Async extends AsyncTask<String, String, Void> {
     @Override
     protected Void doInBackground(String... arg) {
         while ( !queue.isEmpty () ) {
+            publishProgress ( queue.remove ( 0 ) );
             try {
                 Thread.sleep(600);
             } catch (InterruptedException e) {
             }
-            publishProgress ( queue.remove ( 0 ) );
         }
         return null;
     }
@@ -32,11 +36,17 @@ public class Async extends AsyncTask<String, String, Void> {
     @Override
     protected void onProgressUpdate ( String... values ) {
         super.onProgressUpdate ( values );
-        contract.addButton (type,values[0]);
+        if (!contract.addButton (type,values[0])) {
+            if ( ++count < 3) {
+                Timber.d("added" + values[0]);
+                queue.add ( values[ 0 ] );
+            }
+        }
+
     }
 
     public interface Contract {
-        void addButton(Result.Type r,String s);
+        boolean addButton(Result.Type r,String s);
         void deleteButton(Result.Type r);
     }
 }
