@@ -1,82 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                                             xmlns:app="http://schemas.android.com/apk/res-auto"
-                                             xmlns:tools="http://schemas.android.com/tools"
-                                             android:layout_width="match_parent"
-                                             android:layout_height="match_parent"
-                                             tools:context="com.example.android.mmmrkn.presentation.mode_select.ModeActivity">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.android.mmmrkn.presentation.mode_select.ModeActivity">
 
 
     <Button
         android:id="@+id/btn_attendancesList"
-        android:layout_width="350dp"
-        android:layout_height="70dp"
-        android:layout_marginBottom="16dp"
+        android:layout_width="410dp"
+        android:layout_height="90dp"
+        android:layout_marginBottom="8dp"
         android:background="@drawable/button_main_layout"
         android:paddingLeft="20dp"
         android:text="登園した生徒の一覧"
-        android:textSize="16sp"
+        android:textSize="27sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/btn_goHome"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/btn_goHome"/>
+        app:layout_constraintStart_toStartOf="@+id/btn_goHome" />
 
     <Button
         android:id="@+id/btn_attendances"
-        android:layout_width="350dp"
-        android:layout_height="70dp"
-        android:layout_marginTop="16dp"
+        android:layout_width="410dp"
+        android:layout_height="90dp"
+        android:layout_marginTop="8dp"
         android:background="@drawable/button_main_layout"
         android:gravity="center_vertical|center_horizontal"
         android:letterSpacing="0.1"
         android:paddingLeft="20dp"
         android:text="生徒の登園を記録"
-        android:textSize="16sp"
+        android:textSize="27sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.335"
+        app:layout_constraintHorizontal_bias="0.087"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/btn_goHome"
-        android:layout_width="350dp"
-        android:layout_height="70dp"
+        android:layout_width="410dp"
+        android:layout_height="90dp"
         android:background="@drawable/button_main_layout"
         android:letterSpacing="0.1"
         android:lineSpacingExtra="10dp"
         android:paddingLeft="20dp"
         android:text="園児の降園を記録"
         android:textColor="#000000"
-        android:textSize="16sp"
+        android:textSize="27sp"
         app:layout_constraintBottom_toTopOf="@+id/btn_attendancesList"
         app:layout_constraintEnd_toEndOf="@+id/btn_attendances"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/btn_attendances"
-        app:layout_constraintTop_toBottomOf="@+id/btn_attendances"/>
+        app:layout_constraintTop_toBottomOf="@+id/btn_attendances"
+        app:layout_constraintVertical_bias="0.484" />
 
     <Button
         android:id="@+id/btn_selectTeacher"
-        android:layout_width="140dp"
-        android:layout_height="40dp"
+        android:layout_width="130dp"
+        android:layout_height="35dp"
         android:layout_marginBottom="8dp"
-        android:layout_marginRight="16dp"
+        android:layout_marginStart="20dp"
         android:layout_weight="1"
         android:background="@drawable/button_sub_layout"
         android:text="教員選択"
         android:textColor="#FFFFFF"
         android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@+id/btn_logout"
-        app:layout_constraintRight_toRightOf="parent"/>
+        app:layout_constraintStart_toEndOf="@+id/btn_attendancesList" />
 
     <Button
         android:id="@+id/btn_logout"
-        android:layout_width="140dp"
-        android:layout_height="40dp"
-        android:layout_marginBottom="24dp"
+        android:layout_width="130dp"
+        android:layout_height="35dp"
+        android:layout_marginBottom="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
+        android:layout_marginStart="8dp"
         android:layout_weight="1"
         android:background="@drawable/button_sub_layout"
         android:text="ログアウト"
@@ -84,60 +86,65 @@
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintRight_toRightOf="parent"
-        />
+        app:layout_constraintStart_toEndOf="@+id/btn_attendancesList" />
 
     <TextView
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="16dp"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        android:layout_marginStart="12dp"
         android:background="@drawable/circle_button"
         android:gravity="center_vertical|center"
-        android:paddingTop="20dp"
+        android:paddingBottom="15dp"
+        android:paddingTop="15dp"
         android:shadowColor="#FFFFFF"
         android:text="ATTEND"
         android:textColor="#fff"
-        android:textSize="18sp"
+        android:textSize="10sp"
         android:translationZ="20dp"
         app:layout_constraintBottom_toBottomOf="@+id/btn_attendances"
         app:layout_constraintStart_toStartOf="@+id/btn_attendances"
-        app:layout_constraintTop_toTopOf="@+id/btn_attendances"/>
+        app:layout_constraintTop_toTopOf="@+id/btn_attendances" />
 
     <TextView
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="16dp"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        android:layout_marginStart="12dp"
         android:background="@drawable/circle_button"
         android:gravity="center_vertical|center"
-        android:paddingTop="20dp"
+        android:paddingBottom="10dp"
+        android:paddingTop="15dp"
         android:shadowColor="#FFFFFF"
         android:text="DROP"
         android:textColor="#fff"
-        android:textSize="18sp"
+        android:textSize="10sp"
         android:translationZ="10dp"
         app:layout_constraintBottom_toBottomOf="@+id/btn_goHome"
         app:layout_constraintStart_toStartOf="@+id/btn_goHome"
         app:layout_constraintTop_toTopOf="@+id/btn_goHome"
-        app:layout_constraintVertical_bias="0.466"/>
+        app:layout_constraintVertical_bias="0.466" />
 
     <TextView
         android:id="@+id/textView2"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
         android:layout_marginBottom="8dp"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="12dp"
         android:layout_marginTop="8dp"
         android:background="@drawable/circle_button"
         android:gravity="center_vertical|center"
-        android:paddingTop="40dp"
+        android:paddingBottom="14dp"
+        android:paddingTop="17dp"
         android:shadowColor="#FFFFFF"
         android:text="LIST"
         android:textColor="#fff"
-        android:textSize="18sp"
+        android:textSize="10sp"
         android:translationZ="10dp"
         app:layout_constraintBottom_toBottomOf="@+id/btn_attendancesList"
         app:layout_constraintStart_toStartOf="@+id/btn_attendancesList"
-        app:layout_constraintTop_toTopOf="@+id/btn_attendancesList"/>
+        app:layout_constraintTop_toTopOf="@+id/btn_attendancesList"
+        app:layout_constraintVertical_bias="0.0" />
 
 
 </android.support.constraint.ConstraintLayout>

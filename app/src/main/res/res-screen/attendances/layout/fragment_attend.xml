@@ -19,31 +19,54 @@
             android:id="@+id/grp_state"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="16dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="60dp"
             android:checkedButton="@={viewModel.checkedBtn}"
             android:orientation="horizontal"
             android:visibility="@{viewModel.student == null ? android.view.View.INVISIBLE : android.view.View.VISIBLE}"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintStart_toStartOf="@+id/scrollView"
+            app:layout_constraintTop_toBottomOf="@+id/scrollView">
 
             <RadioButton
                 android:id="@+id/radio_healthy"
                 style="@style/GoodButton"
-                android:layout_width="50dp"
+                android:layout_width="47dp"
                 android:layout_height="50dp"
-                android:checked="true"/>
+                android:checked="true" />
 
             <RadioButton
                 android:id="@+id/radio_unhealthy"
                 style="@style/BadButton"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:checked="false"/>
+                android:layout_marginLeft="40dp"
+                android:checked="false" />
 
         </RadioGroup>
 
+        <TextView
+            android:id="@+id/text_memo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="一言メモ"
+            android:textColor="@color/colorBlack"
+            android:textSize="20sp"
+            android:visibility="@{viewModel.student == null ? android.view.View.INVISIBLE : android.view.View.VISIBLE}"
+            app:layout_constraintStart_toStartOf="@+id/img_person"
+            app:layout_constraintTop_toBottomOf="@+id/img_person"/>
+
         <!--クラス名-->
+        <TextView
+            android:id="@+id/txt_class"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="16dp"
+            android:textColor="@color/colorBlack"
+            android:textSize="18sp"
+            android:visibility="@{viewModel.student == null ? android.view.View.INVISIBLE : android.view.View.VISIBLE}"
+            app:layout_constraintStart_toEndOf="@+id/img_person"
+            app:layout_constraintTop_toTopOf="parent"/>
 
         <!--生徒名-->
         <TextView
@@ -51,7 +74,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="52dp"
             android:text="@{viewModel.student.name}"
             android:textColor="@color/colorBlack"
             android:textSize="18sp"
@@ -62,10 +85,10 @@
         <!--生徒の写真-->
         <ImageView
             android:id="@+id/img_person"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_marginLeft="16dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="16dp"
             android:visibility="@{viewModel.student == null ? android.view.View.INVISIBLE : android.view.View.VISIBLE}"
             app:gender="@{viewModel.student.gender}"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -76,8 +99,8 @@
         <!--登園ボタン-->
         <Button
             android:id="@+id/btn_attend"
-            android:layout_width="70dp"
-            android:layout_height="30dp"
+            android:layout_width="80dp"
+            android:layout_height="36dp"
             android:layout_marginBottom="8dp"
             android:background="@drawable/button_sub_layout"
             android:enabled="@{viewModel.student != null}"
@@ -86,14 +109,13 @@
             android:textSize="15sp"
             android:visibility="@{viewModel.student == null ? android.view.View.INVISIBLE : android.view.View.VISIBLE}"
             app:layout_constraintBottom_toTopOf="@+id/btn_denial"
-            app:layout_constraintEnd_toEndOf="@+id/btn_denial"
-            />
+            app:layout_constraintEnd_toEndOf="@+id/btn_denial" />
 
         <!--降園ボタン-->
         <Button
             android:id="@+id/btn_denial"
-            android:layout_width="70dp"
-            android:layout_height="30dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:layout_marginEnd="8dp"
             android:background="@drawable/button_sub_layout"
@@ -110,23 +132,22 @@
         <ScrollView
             android:id="@+id/scrollView"
             android:layout_width="0dp"
-            android:layout_height="60dp"
-            android:layout_marginStart="8dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:background="@drawable/scrool_border"
             android:paddingBottom="3dp"
             android:paddingLeft="3dp"
             android:paddingTop="3dp"
             android:visibility="@{viewModel.student == null ? android.view.View.INVISIBLE : android.view.View.VISIBLE}"
-            app:layout_constraintStart_toStartOf="@+id/img_person"
-            app:layout_constraintTop_toBottomOf="@+id/img_person">
+            app:layout_constraintStart_toStartOf="@+id/text_memo"
+            app:layout_constraintTop_toBottomOf="@+id/text_memo">
 
             <EditText
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:imeOptions="actionDone|flagNoFullscreen"
                 android:text="@{viewModel.student.attendance.detail}"
-                android:textSize="12sp"
+                android:textSize="16sp"
                 tools:layout_editor_absoluteX="179dp"
                 tools:layout_editor_absoluteY="125dp"/>
         </ScrollView>

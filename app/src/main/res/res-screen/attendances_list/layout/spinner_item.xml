@@ -7,4 +7,4 @@
     android:ellipsize="marquee"
     android:gravity="center"
     android:textAlignment="gravity"
-    android:textSize="24sp" />
+    android:textSize="12sp" />
