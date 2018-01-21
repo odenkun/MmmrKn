@@ -1,8 +1,5 @@
-package com.example.android.mmmrkn.presentation.attendances.qr;
+package com.example.android.mmmrkn.presentation.qr;
 
-import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -13,14 +10,12 @@ import android.view.ViewGroup;
 
 import com.example.android.mmmrkn.R;
 import com.google.zxing.ResultPoint;
-import com.google.zxing.integration.android.IntentIntegrator;
 import com.journeyapps.barcodescanner.BarcodeCallback;
 import com.journeyapps.barcodescanner.BarcodeResult;
 import com.journeyapps.barcodescanner.DecoratedBarcodeView;
 
 import org.greenrobot.eventbus.EventBus;
 
-import java.util.Calendar;
 import java.util.List;
 
 import timber.log.Timber;

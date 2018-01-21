@@ -9,6 +9,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.widget.ImageView;
+import android.widget.RadioGroup;
 
 import com.example.android.mmmrkn.BR;
 import com.example.android.mmmrkn.R;
@@ -124,6 +125,47 @@ public class Student implements Serializable {
                 ", attendance=" + attendance +
                 ", gohome=" + gohome +
                 '}';
+    }
+
+
+    @BindingAdapter ( { "checkedButtonFromCondition", "goodButton", "badButton"})
+    public static void conditionToButton ( RadioGroup group, String condition, int goodButton, int badButton) {
+        if ( condition == null) {
+            return;
+        }
+        if (condition.equals ( "good" )) {
+            group.check ( goodButton );
+        }else{
+            group.check ( badButton );
+        }
+    }
+
+    @BindingAdapter ( { "picturePath", "gender" })
+    public static void loadImage ( ImageView view, String picturePath, String gender ) {
+
+        int frameColor = R.color.manFrame;
+        int placeHolderID = R.drawable.boy_happy;
+        if ( gender != null && gender.equals ( "woman" ) ) {
+            frameColor = R.color.womanFrame;
+            placeHolderID = R.drawable.girl_happy;
+        }
+
+        String imageUrl = null;
+        if (picturePath != null) {
+//            imageUrl = "https://mmmr-mock-api.mybluemix.net/images/students/" + picturePath + ".jpg";
+            imageUrl = "http://192.168.1.3:6001/images/students/" + picturePath + ".jpg";
+        }
+
+        Picasso.with ( view.getContext () )
+                .load ( imageUrl )
+                .placeholder ( placeHolderID )
+                .fit ()
+                .transform ( new RoundedTransformationBuilder ()
+                        .borderColor ( frameColor )
+                        .borderWidthDp ( 4 )
+                        .oval ( true )
+                        .build () )
+                .into ( view );
     }
 }
 

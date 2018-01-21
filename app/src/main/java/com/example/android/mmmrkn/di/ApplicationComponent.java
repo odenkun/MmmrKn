@@ -5,6 +5,8 @@ import com.example.android.mmmrkn.di.attendances.AttendancesComponent;
 import com.example.android.mmmrkn.di.attendances.AttendancesModule;
 import com.example.android.mmmrkn.di.attendancesList.AttendancesListComponent;
 import com.example.android.mmmrkn.di.attendancesList.AttendancesListModule;
+import com.example.android.mmmrkn.di.gohome.GoHomeComponent;
+import com.example.android.mmmrkn.di.gohome.GoHomeModule;
 import com.example.android.mmmrkn.di.login.LoginComponent;
 import com.example.android.mmmrkn.di.login.LoginModule;
 import com.example.android.mmmrkn.di.mode.ModeComponent;
@@ -29,4 +31,5 @@ public interface ApplicationComponent {
     AttendancesListComponent plus(AttendancesListModule al);
     ModeComponent plus(ModeModule n);
     AttendancesComponent plus(AttendancesModule a);
+    GoHomeComponent plus( GoHomeModule m);
 }

@@ -1,5 +1,7 @@
 package com.example.android.mmmrkn.di.gohome;
 
+import com.example.android.mmmrkn.presentation.gohome.GoHomeFragment;
+
 import dagger.Subcomponent;
 
 /**
@@ -7,5 +9,5 @@ import dagger.Subcomponent;
  */
 @Subcomponent(modules = {GoHomeModule.class})
 public interface GoHomeComponent {
-	//void inject(GoHomeActivity g);
+	void inject(GoHomeFragment g);
 }

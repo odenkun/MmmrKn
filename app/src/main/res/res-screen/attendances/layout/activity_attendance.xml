@@ -9,7 +9,7 @@
 
     <fragment
         android:id="@+id/qr_fragment"
-        android:name="com.example.android.mmmrkn.presentation.attendances.qr.QRFragment"
+        android:name="com.example.android.mmmrkn.presentation.qr.QRFragment"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="0.35"

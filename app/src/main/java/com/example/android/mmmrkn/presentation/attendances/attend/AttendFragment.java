@@ -3,7 +3,6 @@ package com.example.android.mmmrkn.presentation.attendances.attend;
 import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.graphics.Color;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -21,16 +20,14 @@ import com.example.android.mmmrkn.infra.entity.Teacher;
 import com.example.android.mmmrkn.infra.voice.Result;
 import com.example.android.mmmrkn.infra.voice.VoiceTransmitter;
 import com.example.android.mmmrkn.presentation.App;
-import com.example.android.mmmrkn.presentation.attendances.qr.QRFragment;
+import com.example.android.mmmrkn.presentation.qr.QRFragment;
 import com.github.sjnyag.AnimationWrapLayout;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.LinkedHashSet;
 import java.util.List;
 
@@ -173,45 +170,28 @@ public class AttendFragment extends Fragment implements AttendFragmentPresenter.
             case TIME:
                 final ArrayList<String> timeQueue = new ArrayList <> (  );
                 for ( String received : result.content  ) {
-                    boolean notExists = true;
-                    for ( String time : times) {
-                        if (time.equals ( received )) {
-                            notExists = false;
-                            break;
-                       }
-                    }
-                    if (notExists) {
-                        Timber.d("add button time");
-
+                    if (times.add ( received )) {
                         timeQueue.add ( received );
+                        Timber.d("add timeBtn %s", received);
                     }
                 }
                 if ( timeQueue.isEmpty ()) {
                     return;
                 }
                 new Async ( this, Result.Type.TIME, timeQueue ).execute ( ) ;
-                times.addAll ( Arrays.asList ( result.content ) );
                 break;
             case FAMILY:
                 final ArrayList<String> familyQueue = new ArrayList <> (  );
                 for ( String received : result.content  ) {
-                    boolean notExists = true;
-                    for ( String family : families) {
-                        if (family.equals ( received )) {
-                            notExists = false;
-                            break;
-                        }
-                    }
-                    if (notExists) {
-                        Timber.d("add button family");
-                        familyQueue.add(received);
+                    if (families.add ( received )) {
+                        familyQueue.add ( received );
+                        Timber.d("add famBtn %s", received);
                     }
                 }
                 if ( familyQueue.isEmpty ()) {
                     return;
                 }
                 new Async ( this, Result.Type.FAMILY, familyQueue ).execute ( ) ;
-                families.addAll ( Arrays.asList ( result.content ) );
                 break;
         }
     }
